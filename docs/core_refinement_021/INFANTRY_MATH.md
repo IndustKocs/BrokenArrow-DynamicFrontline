@@ -1,0 +1,11 @@
+# Пехота и стресс
+
+CF12 (#11030/#12600, B): Hper=CurrentArmor.MaxHealthPoints/SquadMembers.Count; desired=clamp(ceil(HP/Hper),0,Soldiers.Length). Initial count и slots — разные входы. Отрицательное конечное HP приводит к0 через исходный clamp; MaxHP и initial count должны быть положительными. Для 80HP/8: 80→8,20→2,20.01→3,0→0. В integration по-прежнему используется достоверный AliveSoldierCount; реконструкция его не подменяет.
+
+CF13 (#12602/#12601, B): SelectDeath дважды проходит span без временного списка; считает живых с максимальным DeathPriority, затем выбирает их индекс через внедрённый ICombatRandom.NextIndex. Порядок исходного span сохраняется. SelectHeal выбирает первый dead с минимальным приоритетом. -1 означает отсутствие кандидата; RNG не расходуется при пустом выборе. Методы не меняют массив, оружие, formation, collider, HP или ECS. Caller отвечает за eligibility/transport guards и последовательное применение нескольких изменений.
+
+P3-F01 (#12603, B): SoldierState.FirstAmmoId обозначает первый ammo ID уже выбранного primary/special weapon. Считаются только alive с matching ID. Max=p*n; current=min(old,Max); capacity=max(0,min(magazineSize,current)); magazine=max(0,min(oldMagazine,capacity)); reserved=magazine. В нормальном домене ammo/count неотрицательны, int overflow отклоняется. Функция не перебирает остальные контейнеры и не пополняет запас при восстановлении бойца.
+
+F02–F06 не изменены. Порог shock/panic вычисляется из явных параметров, equality относится к старшему состоянию, panic проверяется первым. F03 складывает HP loss/maxHP*maxStress и directStress; не cap к max. F05 при positive stress сначала увеличивает timeAfterDamage на1, затем восстанавливает 1+trunc(time)*multiplier. Реальная длительность timer не угадывается.
+
+CombatReadiness — Experimental: observed state сохраняется буквально, а не вычисляется из предполагаемого HP. Возвращаются count, casualty fraction, observed stress/max, потенциальная добавка и время до нулевого stress при заданном period и отсутствии новых попаданий. Явный maximumTicks ограничивает диагностическую работу; превышение даёт null recovery time и HorizonExceeded, а не ложный ответ. Никакого дебаффа и повторного начисления стресса в игре.
