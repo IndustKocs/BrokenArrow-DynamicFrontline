@@ -1,0 +1,299 @@
+{
+  "Mode": "Offline research examples; not active match configuration",
+  "Results": [
+    {
+      "Formula": "P4-F01",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Strict rejection is library policy; linear evaluator is not Unity AnimationCurve.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "SourceId": "identity-cdf",
+        "SourceVersion": "1",
+        "CDFKeys": [
+          {
+            "Time": 0,
+            "Value": 0
+          },
+          {
+            "Time": 1,
+            "Value": 1
+          }
+        ]
+      },
+      "Calculation": {
+        "Source": {
+          "SourceId": "identity-cdf",
+          "Version": "1",
+          "ContentHash": "92309CAB535D31712C58D857D5DE770FE82A0A3CAEBB994E844857C600F96D65"
+        },
+        "SourceEvaluator": "92309CAB535D31712C58D857D5DE770FE82A0A3CAEBB994E844857C600F96D65",
+        "InverseInterpolation": "Experimental piecewise linear; reject out-of-domain",
+        "KeyCount": 10001,
+        "TableLength": 1000,
+        "Selected": [
+          {
+            "Index": 0,
+            "Value": 0
+          },
+          {
+            "Index": 1,
+            "Value": 0.03162278
+          },
+          {
+            "Index": 250,
+            "Value": 0.5
+          },
+          {
+            "Index": 500,
+            "Value": 0.70710677
+          },
+          {
+            "Index": 999,
+            "Value": 0.99949986
+          }
+        ],
+        "Values": null,
+        "Keys": null
+      },
+      "SourceMethod": "GameController.BattleSystemConstantsLoad #21700",
+      "SupportedDomain": "Finite validated inputs; synthetic explicit configuration",
+      "EquivalenceStatus": "Verified Fragment \u002B Experimental interpolation",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "P4-F02",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Static fragment only, no game integration or native bit-exact claim.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Direction": [
+          0,
+          0,
+          1
+        ],
+        "DistanceDelta": 10,
+        "EffectiveRange": 1000,
+        "HorizontalRadius": 20,
+        "VerticalRadius": 40,
+        "U": 0.5,
+        "V": -0.5
+      },
+      "Calculation": {
+        "Direction": {
+          "X": -0.01,
+          "Y": 0,
+          "Z": 1
+        },
+        "DistanceDelta": 9.8,
+        "Normal": {
+          "X": -1,
+          "Y": 0,
+          "Z": 0
+        },
+        "HorizontalScale": 0.01,
+        "VerticalScale": 0.98,
+        "Applied": true
+      },
+      "SourceMethod": "ShootingSystem.AddTrajectoryDeviation #24223",
+      "SupportedDomain": "Finite nondegenerate cross for positive range; range\u003C=0 returns unchanged",
+      "EquivalenceStatus": "Verified Fragment",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "P4-F09",
+      "Evidence": "A",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Magnitude projection; no standard segment clipping, overlap resolution or opacity union.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Origin": [
+          0,
+          0,
+          0
+        ],
+        "Target": [
+          10,
+          0,
+          0
+        ],
+        "Center": [
+          5,
+          0,
+          0
+        ],
+        "Radius": 2
+      },
+      "Calculation": {
+        "HasInterval": true,
+        "Start": 3,
+        "End": 7,
+        "RayLength": 10,
+        "OriginDistance": 5,
+        "TargetDistance": 5,
+        "PerpendicularDistance": 0,
+        "HalfChord": 2,
+        "InsideOrigin": false,
+        "InsideTarget": false
+      },
+      "SourceMethod": "SmokeHelper.GetSmokeDistances #20415",
+      "SupportedDomain": "Finite nonzero ray and R\u003E=0",
+      "EquivalenceStatus": "Verified Fragment",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "P4-F07",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Static fragment only, no game integration or native bit-exact claim.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Speed": 150,
+        "Speeds": {
+          "MinSpeed": 100,
+          "MaxSpeed": 200,
+          "AfterburnSpeed": 300
+        },
+        "Yaw": {
+          "MinRate": 10,
+          "MaxRate": 20,
+          "AfterburnRate": 15
+        },
+        "Pitch": {
+          "MinRate": 2,
+          "MaxRate": 4,
+          "AfterburnRate": 1
+        }
+      },
+      "Calculation": {
+        "Yaw": {
+          "Rate": 15,
+          "Interpolation": 0.5,
+          "Denominator": 100,
+          "AfterburnBranch": false
+        },
+        "Pitch": {
+          "Rate": 3,
+          "Interpolation": 0.5,
+          "Denominator": 100,
+          "AfterburnBranch": false
+        }
+      },
+      "SourceMethod": "AircraftControl.SetManeuverability #11974",
+      "SupportedDomain": "Finite ordered speed presets; denominator\u003C=.001f uses t0",
+      "EquivalenceStatus": "Verified Fragment",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "P4-F05",
+      "Evidence": "A",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Single addition before double promotion; not a pathfinder, optimum guarantee or meters.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Dx": 3,
+        "Dy": 4,
+        "G": 10
+      },
+      "Calculation": {
+        "AbsoluteX": 3,
+        "AbsoluteY": 4,
+        "SingleSum": 7,
+        "Heuristic": 5.242640687119285,
+        "Priority": 16.553300858899107
+      },
+      "SourceMethod": "PathFinder.GetAstarPriority #26017",
+      "SupportedDomain": "Finite validated inputs; synthetic explicit configuration",
+      "EquivalenceStatus": "Verified Fragment",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "BuffPipeline",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Stress values supplied, not reconstructed producers; no movement/commands or dirty-component writes.",
+      "Profile": null,
+      "EffectiveInputs": {},
+      "Calculation": {
+        "Reset": {
+          "AimTime": 1,
+          "TimeBetweenBurstsStress": 1,
+          "MagazineReloadStress": 1,
+          "MagazineBurstReloadCritical": 1,
+          "Dispersion": 1,
+          "DamageReceived": 1,
+          "MovementSpeed": 1,
+          "RotateSpeed": 1,
+          "MissileAccuracy": 1,
+          "Optics": 1
+        },
+        "AfterStress": {
+          "AimTime": 1,
+          "TimeBetweenBurstsStress": 1,
+          "MagazineReloadStress": 1,
+          "MagazineBurstReloadCritical": 1,
+          "Dispersion": 1,
+          "DamageReceived": 1,
+          "MovementSpeed": 1,
+          "RotateSpeed": 1,
+          "MissileAccuracy": 1,
+          "Optics": 1
+        },
+        "AfterCritical": {
+          "AimTime": 1,
+          "TimeBetweenBurstsStress": 1,
+          "MagazineReloadStress": 1,
+          "MagazineBurstReloadCritical": 1,
+          "Dispersion": 1,
+          "DamageReceived": 1,
+          "MovementSpeed": 1,
+          "RotateSpeed": 1,
+          "MissileAccuracy": 1,
+          "Optics": 1
+        },
+        "Final": {
+          "AimTime": 1,
+          "TimeBetweenBurstsStress": 1,
+          "MagazineReloadStress": 1,
+          "MagazineBurstReloadCritical": 1,
+          "Dispersion": 1,
+          "DamageReceived": 1,
+          "MovementSpeed": 1,
+          "RotateSpeed": 1,
+          "MissileAccuracy": 1,
+          "Optics": 1
+        },
+        "StressProvenance": "No StressComponent supplied",
+        "PotentialMovementCommandReview": false,
+        "WouldDisableBuffUpdate": true
+      },
+      "SourceMethod": "BuffDebuffSystem #24106/#24109/#24110",
+      "SupportedDomain": "Finite validated inputs; synthetic explicit configuration",
+      "EquivalenceStatus": "Verified Fragment",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    },
+    {
+      "Formula": "P4-F08",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_04/COMBAT_FORMULAS_PASS04.md",
+      "Limitations": "Finite rational transcription; not native atan NaN/FMA/ULP contract; no CF19 solver wiring.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "X": 1
+      },
+      "Calculation": {
+        "Result": 0.7853982,
+        "AbsoluteInput": 1,
+        "BaseAngle": 0.7853981633974483,
+        "ReducedArgument": 0,
+        "Correction": 0,
+        "LargeInputHandler": false
+      },
+      "SourceMethod": "native 0x1867662D0 / 0x18677C900",
+      "SupportedDomain": "Finite validated inputs; synthetic explicit configuration",
+      "EquivalenceStatus": "Experimental",
+      "ParameterProfile": "Explicit synthetic inputs; runtime profile unknown"
+    }
+  ]
+}

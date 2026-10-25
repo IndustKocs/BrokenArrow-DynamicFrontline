@@ -1,0 +1,2313 @@
+[
+  {
+    "method_id": 190347,
+    "signature": "System.Void DefaultEcs.World::On(DefaultEcs.Internal.Messages.EntityDisposedMessage&)",
+    "original_token": "0x60001d6",
+    "va": "0x180a6d9d0",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "Обработчик EntityDisposedMessage очищает компонентные флаги, возвращает id в ConcurrentStack и увеличивает version.",
+        "review_scope": "ISIL798–868, generic1886DB2C8=ConcurrentStack.Push"
+      }
+    ],
+    "body_range": [
+      733,
+      868
+    ],
+    "path": "research/native_analysis/IsilDump/DefaultEcs/DefaultEcs/World.txt",
+    "source_sha256": "137874e08786a687521c54919662abe83ff9c22cab09be18066c02fe21f1cd99",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "DefaultEcs",
+    "native_range": [
+      736,
+      797
+    ],
+    "isil_range": [
+      799,
+      868
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 177784,
+        "caller_id": 190347,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 821,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 177784,
+        "caller_id": 190347,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 846,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 177784,
+        "caller_id": 190347,
+        "callee_id": null,
+        "label": "0x1815200E0",
+        "kind": "native-address",
+        "line": 853,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 177784,
+        "caller_id": 190347,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 865,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 177784,
+        "caller_id": 190347,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 867,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 20415,
+    "signature": "System.ValueTuple`2<System.Single,System.Single> BrokenArrow.Client.Ecs.FogOfWar.SmokeHelper::GetSmokeDistances(UnityEngine.Vector3&,UnityEngine.Vector3&,BrokenArrow.Client.Ecs.FogOfWar.Components.SmokeComponent&)",
+    "original_token": "0x6004fc0",
+    "va": "0x180684380",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "C",
+        "text": "Исходный статус Pass03: геометрия частична. Финальное уточнение Pass04 ниже закрывает finite single-sphere endpoints; zero-ray/overlap остаются частичными.",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      },
+      {
+        "confidence": "A",
+        "text": "Полная finite single-sphere ветвь восстановлена по native: два предварительных reject, строгие inside-tests и неотрицательная magnitude проекции вместо signed projection.",
+        "review_scope": "native2413–2633; helpers180018070–180018153 magnitude,18020BE70–18020BF86 projection"
+      },
+      {
+        "confidence": "A",
+        "text": "Источник P4-F09",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      2410,
+      2876
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/FogOfWar/SmokeHelper.txt",
+    "source_sha256": "e7b6dad31cf2a77b32ec24925cf4f311d800f990bf739ec45684f3dbccf03fa9",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      2413,
+      2636
+    ],
+    "isil_range": [
+      2638,
+      2876
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 205737,
+        "caller_id": 20414,
+        "callee_id": 20415,
+        "label": "SmokeHelper.GetSmokeDistances",
+        "kind": "Cpp2IL-label",
+        "line": 2198,
+        "candidates": "[20415]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 2658,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x186761A20",
+        "kind": "native-address",
+        "line": 2718,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 2747,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 2751,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 2755,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x186761A20",
+        "kind": "native-address",
+        "line": 2777,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x18020BE70",
+        "kind": "native-address",
+        "line": 2792,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 2799,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x18020BE70",
+        "kind": "native-address",
+        "line": 2819,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 2826,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x1807C1650",
+        "kind": "native-address",
+        "line": 2838,
+        "candidates": "[24112, 58570, 80090, 80385, 80386, 120297, 151105, 179085, 181120, 195365, 195448, 198559]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x1807C1650",
+        "kind": "native-address",
+        "line": 2873,
+        "candidates": "[24112, 58570, 80090, 80385, 80386, 120297, 151105, 179085, 181120, 195365, 195448, 198559]"
+      },
+      {
+        "body_id": 205738,
+        "caller_id": 20415,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 2875,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 12295,
+    "signature": "System.Boolean BrokenArrow.Client.Ecs.Navigation.Systems.SubGraphControlSystem::StatusIsValid(BrokenArrow.Core.Navigation.PathStatus)",
+    "original_token": "0x6003008",
+    "va": "0x1803c10c0",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "A",
+        "text": "StatusIsValid принимает только Complete1 и Line2. Ненулевой NavPath недостаточен.",
+        "review_scope": "native1885–1891"
+      }
+    ],
+    "body_range": [
+      1882,
+      1901
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/Navigation/Systems/SubGraphControlSystem.txt",
+    "source_sha256": "93d7986daa29a00f72fead86d1aa22b10f0d72b01dcebee84a31e0fd0d5b022e",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      1885,
+      1892
+    ],
+    "isil_range": [
+      1894,
+      1901
+    ],
+    "indexed_callers": [],
+    "indexed_callees": []
+  },
+  {
+    "method_id": 26017,
+    "signature": "System.Double BrokenArrow.Core.Navigation.NavigationGraph/PathFinder::GetAstarPriority(BrokenArrow.Core.Navigation.WorkNode&,BrokenArrow.Core.Navigation.NavigationGraph/PathFinder/SearchRequestData&,System.Double)",
+    "original_token": "0x60065a2",
+    "va": "0x18085ce10",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "A",
+        "text": "A* priority = g + 1.25*(|dx|+|dy| + (sqrt(2)-2)*min(|dx|,|dy|)). Константы прочитаны как double, не float.",
+        "review_scope": "native139–204; constants186797AD0/186797AC0"
+      },
+      {
+        "confidence": "A",
+        "text": "Источник P4-F05",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      136,
+      275
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Core/Navigation/NavigationGraph_NestedType_PathFinder.txt",
+    "source_sha256": "67b3cc1517c29c4042c1dfd21948cb7aa5b74a85c1f108999beb714da7570ab3",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      139,
+      205
+    ],
+    "isil_range": [
+      207,
+      275
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 220,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 228,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 234,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 243,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 249,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 255,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 202977,
+        "caller_id": 26017,
+        "callee_id": null,
+        "label": "Math.Min",
+        "kind": "Cpp2IL-label",
+        "line": 259,
+        "candidates": "[28433, 28434, 28435, 28436, 28437, 28438, 28439, 28440, 28441, 28442, 28443]"
+      }
+    ]
+  },
+  {
+    "method_id": 24442,
+    "signature": "System.Void BrokenArrow.Client.Ecs.BattleSystem.Components.RandomComponent::Init(System.Int32,BrokenArrow.Client.Ecs.GNetwork.Components.NetworkUnitComponent)",
+    "original_token": "0x6005f7b",
+    "va": "0x1807f4d20",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "Init(seed,netComponent) однократный: при Initialized возвращается; иначе System.Random(seed-NetEntity.NetID), создаёт100 значений 1-float(NextDouble()), затем Initialized=true.",
+        "review_scope": "ISIL156–242; NetworkEntityComponent+118→ClientNetEntity+34"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F04",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      69,
+      242
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Components/RandomComponent.txt",
+    "source_sha256": "7d633ea9109c76f7549bd44a7168c758f437cffbb6e38cf2ea49742c54172691",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      72,
+      155
+    ],
+    "isil_range": [
+      157,
+      242
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 168,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 170,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 172,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 174,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 189,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "Random..ctor",
+        "kind": "Cpp2IL-label",
+        "line": 195,
+        "candidates": "[28734, 28735, 123871]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 197,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "0x18201B580",
+        "kind": "native-address",
+        "line": 202,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "0x1866C7230",
+        "kind": "native-address",
+        "line": 206,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "0",
+        "kind": "Cpp2IL-label",
+        "line": 216,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "0x18201C040",
+        "kind": "native-address",
+        "line": 227,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218148,
+        "caller_id": 24442,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 241,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 24443,
+    "signature": "System.Single BrokenArrow.Client.Ecs.BattleSystem.Components.RandomComponent::NextFloat(System.Single,System.Single)",
+    "original_token": "0x6005f7c",
+    "va": "0x1807f4ea0",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "NextFloat(min,max): min>max→exception; min==max→min без расхода RNG; initialized→index=(index+1)%100 и min+(max-min)*values[index]; иначе общий System.Random fallback.",
+        "review_scope": "ISIL368–494; finite ordered inputs"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F04",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      243,
+      494
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Components/RandomComponent.txt",
+    "source_sha256": "7d633ea9109c76f7549bd44a7168c758f437cffbb6e38cf2ea49742c54172691",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      246,
+      367
+    ],
+    "isil_range": [
+      369,
+      494
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 198288,
+        "caller_id": 2797,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 918,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 204182,
+        "caller_id": 24075,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 3493,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218132,
+        "caller_id": 24426,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 323,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218134,
+        "caller_id": 24428,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 714,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218178,
+        "caller_id": 24472,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 291,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218182,
+        "caller_id": 24476,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 501,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218185,
+        "caller_id": 24479,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 730,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218187,
+        "caller_id": 24481,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 912,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218189,
+        "caller_id": 24483,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 1949,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218189,
+        "caller_id": 24483,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 2009,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218189,
+        "caller_id": 24483,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 2044,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218241,
+        "caller_id": 24089,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 1895,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218267,
+        "caller_id": 24115,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 739,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218267,
+        "caller_id": 24115,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 798,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218374,
+        "caller_id": 24222,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 7509,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218374,
+        "caller_id": 24222,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 7532,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 7982,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8005,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8120,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8126,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218511,
+        "caller_id": 24357,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8202,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218511,
+        "caller_id": 24357,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8232,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218512,
+        "caller_id": 24358,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8571,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218513,
+        "caller_id": 24359,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8824,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218513,
+        "caller_id": 24359,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8835,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218514,
+        "caller_id": 24360,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 9001,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218514,
+        "caller_id": 24360,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 9012,
+        "candidates": "[24443]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 380,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 382,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 402,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0",
+        "kind": "Cpp2IL-label",
+        "line": 410,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 426,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 461,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 463,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 466,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "ArgumentOutOfRangeException..ctor",
+        "kind": "Cpp2IL-label",
+        "line": 470,
+        "candidates": "[27124, 27125, 27126, 27127, 27128]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 472,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C82D0",
+        "kind": "native-address",
+        "line": 475,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 477,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 482,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 484,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "IndexOutOfRangeException..ctor",
+        "kind": "Cpp2IL-label",
+        "line": 488,
+        "candidates": "[28257, 28258, 28259]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C82D0",
+        "kind": "native-address",
+        "line": 491,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218149,
+        "caller_id": 24443,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 493,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 11974,
+    "signature": "System.Void BrokenArrow.Client.Ecs.Planes.AircraftControl::SetManeuverability()",
+    "original_token": "0x6002ec7",
+    "va": "0x180381460",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "SetManeuverability интерполирует yaw/pitch по текущей ForwardSpeed: MinSpeed→MaxSpeed либо MaxSpeed→AfterburnSpeed; CornerSpeed в данном методе не breakpoint.",
+        "review_scope": "ISIL2081–2174, PlaneFlyPreset offsets"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F07",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      1985,
+      2174
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/Planes/AircraftControl.txt",
+    "source_sha256": "30a83592605f5434ed8acb08a91ceca92793a777aa1b85a34ca88e75edcd9b4f",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      1988,
+      2080
+    ],
+    "isil_range": [
+      2082,
+      2174
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 206394,
+        "caller_id": 11970,
+        "callee_id": 11974,
+        "label": "AircraftControl.SetManeuverability",
+        "kind": "Cpp2IL-label",
+        "line": 668,
+        "candidates": "[11974]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 206398,
+        "caller_id": 11974,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 2173,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 21700,
+    "signature": "System.Void BrokenArrow.Client.Ecs.Controllers.GameController::BattleSystemConstantsLoad()",
+    "original_token": "0x60054c5",
+    "va": "0x1806ea770",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "BattleSystemConstantsLoad строит обратную AnimationCurve из CDF и заполняет ARTILLERY_DISPERSION_CORRECTION[1000].",
+        "review_scope": "ISIL8248–8341"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F01",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      7577,
+      8392
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/Controllers/GameController.txt",
+    "source_sha256": "ce7638add5e79f1ef111c2a65ccba522853f5a907968c09cebb505b386e58e68",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      7580,
+      7984
+    ],
+    "isil_range": [
+      7986,
+      8392
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 204892,
+        "caller_id": 21686,
+        "callee_id": 21700,
+        "label": "GameController.BattleSystemConstantsLoad",
+        "kind": "Cpp2IL-label",
+        "line": 3711,
+        "candidates": "[21700]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7993,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7995,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7997,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7999,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 8001,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8022,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"SzArrayNew\"",
+        "kind": "Cpp2IL-label",
+        "line": 8037,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1866C7230",
+        "kind": "native-address",
+        "line": 8045,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76096,
+        "label": "AnimationCurve.get_keys",
+        "kind": "Cpp2IL-label",
+        "line": 8056,
+        "candidates": "[76096]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1857F4570",
+        "kind": "native-address",
+        "line": 8063,
+        "candidates": "[76072, 79136, 79151, 84244, 180596, 220762, 220860, 220886, 220890]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76096,
+        "label": "AnimationCurve.get_keys",
+        "kind": "Cpp2IL-label",
+        "line": 8075,
+        "candidates": "[76096]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76105,
+        "label": "AnimationCurve.get_length",
+        "kind": "Cpp2IL-label",
+        "line": 8087,
+        "candidates": "[76105]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1857F4570",
+        "kind": "native-address",
+        "line": 8098,
+        "candidates": "[76072, 79136, 79151, 84244, 180596, 220762, 220860, 220886, 220890]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76095,
+        "label": "AnimationCurve.Evaluate",
+        "kind": "Cpp2IL-label",
+        "line": 8140,
+        "candidates": "[76095]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8146,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8163,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8177,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76096,
+        "label": "AnimationCurve.get_keys",
+        "kind": "Cpp2IL-label",
+        "line": 8192,
+        "candidates": "[76096]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76105,
+        "label": "AnimationCurve.get_length",
+        "kind": "Cpp2IL-label",
+        "line": 8204,
+        "candidates": "[76105]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1857BCC30",
+        "kind": "native-address",
+        "line": 8215,
+        "candidates": "[76074, 79137, 84246, 180597, 206255, 220763, 220862, 220888, 220892]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"SzArrayNew\"",
+        "kind": "Cpp2IL-label",
+        "line": 8224,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1866C7230",
+        "kind": "native-address",
+        "line": 8232,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "Array.CopyTo",
+        "kind": "Cpp2IL-label",
+        "line": 8247,
+        "candidates": "[29635, 29645]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"SzArrayNew\"",
+        "kind": "Cpp2IL-label",
+        "line": 8250,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1866C7230",
+        "kind": "native-address",
+        "line": 8258,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 8260,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "AnimationCurve..ctor",
+        "kind": "Cpp2IL-label",
+        "line": 8264,
+        "candidates": "[76116, 76117, 76118]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76095,
+        "label": "AnimationCurve.Evaluate",
+        "kind": "Cpp2IL-label",
+        "line": 8283,
+        "candidates": "[76095]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8290,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "Debug.LogError",
+        "kind": "Cpp2IL-label",
+        "line": 8293,
+        "candidates": "[76855, 76856]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76849,
+        "label": "Debug.Break",
+        "kind": "Cpp2IL-label",
+        "line": 8295,
+        "candidates": "[76849]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "AnimationCurve.AddKey",
+        "kind": "Cpp2IL-label",
+        "line": 8303,
+        "candidates": "[76098, 76099]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x186761A20",
+        "kind": "native-address",
+        "line": 8320,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": 76095,
+        "label": "AnimationCurve.Evaluate",
+        "kind": "Cpp2IL-label",
+        "line": 8324,
+        "candidates": "[76095]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8330,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8372,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 8389,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 204906,
+        "caller_id": 21700,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 8391,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 24225,
+    "signature": "System.ValueTuple`2<System.Single,System.Single> BrokenArrow.Client.Ecs.BattleSystem.Systems.ShootingSystem::CalculateDeviationPolar(BrokenArrow.Client.Ecs.BattleSystem.Components.RandomComponent&)",
+    "original_token": "0x6005ea2",
+    "va": "0x1807da730",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "CalculateDeviationPolar потребляет angle NextFloat(0,360) и index trunc(NextFloat(0,1000)), выбирает table radius и применяет два тригонометрических helper к angle*deg2rad.",
+        "review_scope": "ISIL8022–8169; helpers186763CD0/1867620F0 orientation not resolved"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F01",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      8022,
+      8169
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Systems/ShootingSystem.txt",
+    "source_sha256": "bdd1c0766fd02f68b3c71f1694dfaa4baa2a00128a3f916a3179c3b1b21ea604",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      8025,
+      8096
+    ],
+    "isil_range": [
+      8098,
+      8169
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 218372,
+        "caller_id": 24220,
+        "callee_id": 24225,
+        "label": "ShootingSystem.CalculateDeviationPolar",
+        "kind": "Cpp2IL-label",
+        "line": 5144,
+        "candidates": "[24225]"
+      },
+      {
+        "body_id": 218375,
+        "caller_id": 24223,
+        "callee_id": 24225,
+        "label": "ShootingSystem.CalculateDeviationPolar",
+        "kind": "Cpp2IL-label",
+        "line": 7811,
+        "candidates": "[24225]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 8106,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 8108,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 8110,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8115,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8120,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8126,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 8133,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "0x186763CD0",
+        "kind": "native-address",
+        "line": 8149,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "0x1867620F0",
+        "kind": "native-address",
+        "line": 8153,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "0x1807C1650",
+        "kind": "native-address",
+        "line": 8159,
+        "candidates": "[24112, 58570, 80090, 80385, 80386, 120297, 151105, 179085, 181120, 195365, 195448, 198559]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 8166,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218377,
+        "caller_id": 24225,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 8168,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 24223,
+    "signature": "System.Void BrokenArrow.Client.Ecs.BattleSystem.Systems.ShootingSystem::AddTrajectoryDeviation(UnityEngine.Vector3&,BrokenArrow.Client.Ecs.BattleSystem.Ballistics.TrajectoryStruct&,System.Single,System.Single,System.Single,BrokenArrow.Client.Ecs.BattleSystem.Components.RandomComponent&)",
+    "original_token": "0x6005ea0",
+    "va": "0x1807da3e0",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "AddTrajectoryDeviation при effectiveRange<=0 возвращается; иначе horizontal term меняет vectorToTarget, vertical term масштабирует TrajectoryStruct.DistanceDelta.",
+        "review_scope": "ISIL7674–7899; schema DistanceDelta offset0"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F02",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      7674,
+      7899
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Systems/ShootingSystem.txt",
+    "source_sha256": "bdd1c0766fd02f68b3c71f1694dfaa4baa2a00128a3f916a3179c3b1b21ea604",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      7677,
+      7786
+    ],
+    "isil_range": [
+      7788,
+      7899
+    ],
+    "indexed_callers": [
+      {
+        "body_id": 218372,
+        "caller_id": 24220,
+        "callee_id": 24223,
+        "label": "ShootingSystem.AddTrajectoryDeviation",
+        "kind": "Cpp2IL-label",
+        "line": 6137,
+        "candidates": "[24223]"
+      }
+    ],
+    "indexed_callees": [
+      {
+        "body_id": 218375,
+        "caller_id": 24223,
+        "callee_id": 24225,
+        "label": "ShootingSystem.CalculateDeviationPolar",
+        "kind": "Cpp2IL-label",
+        "line": 7811,
+        "candidates": "[24225]"
+      },
+      {
+        "body_id": 218375,
+        "caller_id": 24223,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7821,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218375,
+        "caller_id": 24223,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7849,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218375,
+        "caller_id": 24223,
+        "callee_id": null,
+        "label": "0x180018070",
+        "kind": "native-address",
+        "line": 7853,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 24224,
+    "signature": "System.ValueTuple`2<System.Single,System.Single> BrokenArrow.Client.Ecs.BattleSystem.Systems.ShootingSystem::CalculateDeviationFastDimond(BrokenArrow.Client.Ecs.BattleSystem.Components.RandomComponent&)",
+    "original_token": "0x6005ea1",
+    "va": "0x1807da620",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "FastDimond: x~NextFloat(-1000,1000), q=trunc(abs(x)), y~NextFloat(q-1000,1000-q), возвращает(x/1000,y/1000). Не uniform площадь ромба.",
+        "review_scope": "7900–8021"
+      },
+      {
+        "confidence": "B",
+        "text": "Источник P4-F03",
+        "review_scope": "bounded claim within body; not full-method recovery"
+      }
+    ],
+    "body_range": [
+      7900,
+      8021
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Systems/ShootingSystem.txt",
+    "source_sha256": "bdd1c0766fd02f68b3c71f1694dfaa4baa2a00128a3f916a3179c3b1b21ea604",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      7903,
+      7960
+    ],
+    "isil_range": [
+      7962,
+      8021
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7970,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7972,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 7977,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 7982,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 7987,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 7992,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": 24443,
+        "label": "RandomComponent.NextFloat",
+        "kind": "Cpp2IL-label",
+        "line": 8005,
+        "candidates": "[24443]"
+      },
+      {
+        "body_id": 218376,
+        "caller_id": 24224,
+        "callee_id": null,
+        "label": "0x1807C1650",
+        "kind": "native-address",
+        "line": 8014,
+        "candidates": "[24112, 58570, 80090, 80385, 80386, 120297, 151105, 179085, 181120, 195365, 195448, 198559]"
+      }
+    ]
+  },
+  {
+    "method_id": 24106,
+    "signature": "System.Void BrokenArrow.Client.Ecs.BattleSystem.Systems.BuffDebuffSystem::Update(System.Single,System.ReadOnlySpan`1<DefaultEcs.Entity>)",
+    "original_token": "0x6005e2b",
+    "va": "0x1807be450",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "Для каждого entity сначала все10 накопителей=1, затем при StressComponent SetStressModifiers, при CriticalEffect SetCriticalModifiers, затем ApplyBuffModifiers и Disable<BuffUpdateComponent>.",
+        "review_scope": "ISIL748–833; generic metadata resolved"
+      }
+    ],
+    "body_range": [
+      567,
+      864
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Systems/BuffDebuffSystem.txt",
+    "source_sha256": "e967fc6e3e7ad34c38c06d9d5bf9c5774c02dc57e4038b73ed715b5051c8f2fd",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      570,
+      713
+    ],
+    "isil_range": [
+      715,
+      864
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 729,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 731,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 733,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 735,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 763,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 765,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C57F0",
+        "kind": "native-address",
+        "line": 769,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": 190006,
+        "label": "Entity.get_IsAliveVersion",
+        "kind": "Cpp2IL-label",
+        "line": 776,
+        "candidates": "[190006]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C5770",
+        "kind": "native-address",
+        "line": 786,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_runtime_class_init_export\"",
+        "kind": "Cpp2IL-label",
+        "line": 790,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1800637A0",
+        "kind": "native-address",
+        "line": 794,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1807B7400",
+        "kind": "native-address",
+        "line": 815,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x185DBF710",
+        "kind": "native-address",
+        "line": 818,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1807B7210",
+        "kind": "native-address",
+        "line": 824,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1807B6F10",
+        "kind": "native-address",
+        "line": 828,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x180C800B0",
+        "kind": "native-address",
+        "line": 831,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 846,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 849,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_object_new\"",
+        "kind": "Cpp2IL-label",
+        "line": 851,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "InvalidOperationException..ctor",
+        "kind": "Cpp2IL-label",
+        "line": 856,
+        "candidates": "[28367, 28368, 28369, 28370]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C8040",
+        "kind": "native-address",
+        "line": 858,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C82D0",
+        "kind": "native-address",
+        "line": 861,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218258,
+        "caller_id": 24106,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 863,
+        "candidates": "[]"
+      }
+    ]
+  },
+  {
+    "method_id": 24110,
+    "signature": "System.Void BrokenArrow.Client.Ecs.BattleSystem.Systems.BuffDebuffSystem::ApplyBuffModifiers(DefaultEcs.Entity)",
+    "original_token": "0x6005e2f",
+    "va": "0x1807bdab0",
+    "binary_sha256": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "claims": [
+      {
+        "confidence": "B",
+        "text": "ApplyBuffModifiers записывает накопители в BuffComponent, а movement/rotate — также в соответствующие компоненты. Дополнительного универсального OtherBuffs вызова между critical и apply здесь нет.",
+        "review_scope": "ISIL1735–1797"
+      }
+    ],
+    "body_range": [
+      1521,
+      1892
+    ],
+    "path": "research/native_analysis/IsilDump/BrokenArrow/BrokenArrow/Client/Ecs/BattleSystem/Systems/BuffDebuffSystem.txt",
+    "source_sha256": "e967fc6e3e7ad34c38c06d9d5bf9c5774c02dc57e4038b73ed715b5051c8f2fd",
+    "callgraph_limit": "Indexed edges only; virtual dispatch, generic instantiations and inlining can be missing.",
+    "assembly": "BrokenArrow",
+    "native_range": [
+      1524,
+      1706
+    ],
+    "isil_range": [
+      1708,
+      1892
+    ],
+    "indexed_callers": [],
+    "indexed_callees": [
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1717,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1719,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1721,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1723,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1725,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1727,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1729,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1731,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "\"il2cpp_codegen_initialize_runtime_metadata\"",
+        "kind": "Cpp2IL-label",
+        "line": 1733,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x180307620",
+        "kind": "native-address",
+        "line": 1738,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1742,
+        "candidates": "[25925, 25926]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1746,
+        "candidates": "[25925, 25926]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1752,
+        "candidates": "[25925, 25926]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1756,
+        "candidates": "[25925, 25926]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GAFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1761,
+        "candidates": "[25936, 25937]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GAFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1773,
+        "candidates": "[25936, 25937]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "GFloat.op_Implicit",
+        "kind": "Cpp2IL-label",
+        "line": 1780,
+        "candidates": "[25925, 25926]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x1801C9C60",
+        "kind": "native-address",
+        "line": 1784,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x185DBF710",
+        "kind": "native-address",
+        "line": 1790,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x180003D70",
+        "kind": "native-address",
+        "line": 1795,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x180003D70",
+        "kind": "native-address",
+        "line": 1805,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": 24111,
+        "label": "BuffDebuffSystem.<ApplyBuffModifiers>g__moveCommandPredicate|19_0",
+        "kind": "Cpp2IL-label",
+        "line": 1815,
+        "candidates": "[24111]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x185DC0350",
+        "kind": "native-address",
+        "line": 1829,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": 9141,
+        "label": "CommandsComponent.set_CurrentCommand",
+        "kind": "Cpp2IL-label",
+        "line": 1835,
+        "candidates": "[9141]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "Queue`1<Object>.ToArray",
+        "kind": "Cpp2IL-label",
+        "line": 1843,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x182BBB590",
+        "kind": "native-address",
+        "line": 1852,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": 24111,
+        "label": "BuffDebuffSystem.<ApplyBuffModifiers>g__moveCommandPredicate|19_0",
+        "kind": "Cpp2IL-label",
+        "line": 1867,
+        "candidates": "[24111]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "Queue`1<Object>.Enqueue",
+        "kind": "Cpp2IL-label",
+        "line": 1878,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x1866C8300",
+        "kind": "native-address",
+        "line": 1889,
+        "candidates": "[]"
+      },
+      {
+        "body_id": 218262,
+        "caller_id": 24110,
+        "callee_id": null,
+        "label": "0x1866C8310",
+        "kind": "native-address",
+        "line": 1891,
+        "candidates": "[]"
+      }
+    ]
+  }
+]

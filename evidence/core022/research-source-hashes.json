@@ -1,0 +1,70 @@
+[
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\PASS04_REPORT.md",
+    "sha256": "9a322cebf224ff6ed10b2ff77235c7253ffc8525ab8ad98aea18ec28aaa3c2fa"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\COMBAT_FORMULAS_PASS04.md",
+    "sha256": "355e22821ad1e3ee24024309b0d3b21c5c058bf329ab8fcff63d52efe345c6f5"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\ARTILLERY_AND_DISPERSION.md",
+    "sha256": "1c5e18bb52a758d73ee9c8caac7a4b42cf7f0ca533eabafc23f3f13b52819418"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\CRITICAL_AND_BUFFS.md",
+    "sha256": "b9afd4ac417a04a5249fbc333e6a69140b45d8ae4f8216279adf250359ec7185"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\DETECTION_AND_SMOKE.md",
+    "sha256": "af23351ace4eb1e1bfc9e0f3ef938b87508bdaa816cbd0e4d0e2f72f2a1f1a85"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\AIRCRAFT_FLIGHT.md",
+    "sha256": "3ebda1812179cd76b24a1042731c80b30721930d3c1b25d7893aff0842846766"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\HELICOPTER_FLIGHT.md",
+    "sha256": "1f233996ce84d285f369baeec8ba789ea95a05b577469da6a1bf784ed82cd64b"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\NAVIGATION_DEEP.md",
+    "sha256": "c7c2863871322db5335ceda261d496715fdb36a3992b5a924f383ca0e521b345"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\DEATH_AND_ENTITY_LIFECYCLE.md",
+    "sha256": "2170ede369be593e6397a9eebdaaf932ca9eaf955daa1bbf4af5a66a252fcc3e"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\UNIT_LIFECYCLE_AND_SPATIAL.md",
+    "sha256": "de0c874b301c0c43fcacd9548d68a0c098a5e0f3e35f948aefeba5353faf62fb"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\MISSILE_RNG_AND_NETWORK.md",
+    "sha256": "1bb5f0291cf396a01f8b88373cc417817df9b339bc1fec30b6ebf78839d5012c"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\MISSILE_STATE_MACHINE.md",
+    "sha256": "5802706f8ef177aab3ac5f901b21fd9e77c716c3253e23607c6db4e54a742228"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\FOW_TEAM_INTELLIGENCE.md",
+    "sha256": "c1a1d1f2b19bbe876f29e1cf1b175bfe553fad5d5ba4cad1fbfe85f58d921b8d"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\FRONTLINE_DEVELOPMENT_HANDOFF_PASS04.md",
+    "sha256": "fce5cd1c339806ad8ae90fa7dca29162aad98ee3e2ec819ae0261a043eb3011d"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\UNRESOLVED_PASS04.md",
+    "sha256": "72b4411303777cdfad88e75df2dfec3f378bd9be0fd80925151a3d79ed4336ab"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\evidence\\findings.json",
+    "sha256": "156f7fc52da38d2be7de651c2fd034b5991f192678c98f13ab271652efd54278"
+  },
+  {
+    "source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\pass_04\\evidence\\dependencies.json",
+    "sha256": "28d70f86dd6858ee48c230a728373ece2ccab550e8a103b7602c7a8cd0d7bb3d"
+  }
+]
