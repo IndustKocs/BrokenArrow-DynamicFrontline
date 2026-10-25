@@ -1,0 +1,406 @@
+{
+  "total": 80,
+  "failed": 0,
+  "results": [
+    {
+      "name": "snapshot profile 1",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 2",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 3",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 4",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 5",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 6",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 7",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 8",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot profile 9",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state dead",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state loaded",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state loading",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state deserting",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state zero",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "snapshot state missing-infantry",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "unknown definition is diagnosed and excluded",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "UID reuse after absence receives a new generation",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "replacement lifecycle stamp differentiates same UID immediately",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "incomplete frame neither despawns nor advances identity",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "death repeated is stable and revival gets generation",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core position",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core team-missing",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core team-mismatch",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core hp",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core stress",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core duplicate",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core revision",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid input preserves stable core read-failure",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "provider copies visibility arrays",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "provider rejects worker thread before source inspection",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "assault capture needs explicit profile; role alone insufficient",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "scout cannot be granted capture or local area",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "different active scenario database cannot silently reuse profile",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "unknown active database is explicit failure",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "configuration digest and malformed JSON rejected",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "5v5 player roster maps separately from team and network identities",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "inconsistent team roster is rejected",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "world XZ coordinates round trip independently of world Y",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "map has symmetric roots and cannot be assumed available",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "protected spawn area cannot be contested or captured",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "symmetric teams advance equally with independent graphs",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "navigation result Reachable",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "navigation result Blocked",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "navigation result Unknown",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "partial path is Unknown, never Blocked",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "route timeout is Unknown and late response cannot revive it",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "expired cache is Stale before requery",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "removed endpoint invalidates pending route",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "new generation never reuses old endpoint response",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "dynamic bridge and navigation revision invalidate cached reachability",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "masks channels and movement types are separate cache keys",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "route budget limits submissions and pending queue",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "too long route is Unknown rather than physical Blocked",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "backend exception is Unknown",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Unknown navigation never confirms encirclement",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "per-profile channel and range affect links, not territory",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "default settings perform no collection and no mutation option exists",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "render updates do not repeat logical tick",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "provider loss preserves previous accepted snapshot",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "absent match context waits safely",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "scenario switch to unknown database clears old match result",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "new match starts tick and generations from scratch",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "navigation revision changes preserve territorial history",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "profile version change restarts cleanly",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "live source cannot be enabled by ordinary settings",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "disposed bridge never calls provider",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "hidden entities cannot change public DTO bytes or handles or counts",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "FOW evidence never silently authorizes public enemy export history",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "FOW evidence never silently authorizes public enemy export potential",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "FOW evidence never silently authorizes public enemy export shootable",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "FOW evidence never silently authorizes public enemy export marker",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "FOW evidence never silently authorizes public enemy export confirmed",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "team-safe diagnostic has no graph territory route or rejected-counter metadata",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "developer full export requires explicit offline flag",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "internal exceptions never appear in public status",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "moving hidden recon and special forces produces no territorial delta",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "mock ECS inspection copies audited fields without setters",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "mock transport flags and noninfantry absence handled independently",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "reflection provider thread gate prevents any feed access",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "recorded fixture is tagged and cannot pose as live",
+      "passed": true,
+      "error": ""
+    }
+  ]
+}

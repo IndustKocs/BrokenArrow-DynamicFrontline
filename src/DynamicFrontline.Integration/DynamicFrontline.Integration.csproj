@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../DynamicFrontline.Frontline/DynamicFrontline.Frontline.csproj"/><ProjectReference Include="../DynamicFrontline.GameAdapter/DynamicFrontline.GameAdapter.csproj"/></ItemGroup></Project>

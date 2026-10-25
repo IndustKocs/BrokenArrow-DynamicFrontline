@@ -13,7 +13,8 @@ public sealed class OperationalConnectivitySystem(ProfileCatalog profiles,Rules 
     private bool Eligible(FrontlineUnit u)
     {
         var p=profiles.Find(u.UnitId);
-        return p is {CanRelay:true}&&u.Alive&&!u.Loaded&&!u.Deserting&&u.AliveSoldierCount>0&&u.AliveSoldierCount>=p.MinimumRelaySoldiers&&
+        return p is {CanRelay:true}&&u.Alive&&!u.Loaded&&!u.Deserting&&
+            (u.HasInfantry?u.AliveSoldierCount>0&&u.AliveSoldierCount>=p.MinimumRelaySoldiers:u.OperationallyActive)&&
             u.StatusCoefficient>0&&(u.Stress!=Core.StressLevel.Shocked||rules.ShockCanRelay)&&
             (u.Stress!=Core.StressLevel.Panicked||rules.PanicCanRelay);
     }
@@ -26,11 +27,13 @@ public sealed class OperationalConnectivitySystem(ProfileCatalog profiles,Rules 
         {
             var u=units[i];foreach(int j in spatial.Near(u.Position))
             {
-                var v=units[j];if(u.Team==v.Team&&u.Position.DistanceSquared(v.Position)<=squared&&geometry.CanLink(u.Position,v.Position,u.Team))
+                var v=units[j];if(u.Team==v.Team&&u.Position.DistanceSquared(v.Position)<=squared&&
+                    (geometry is IUnitLinkGeometry typed?typed.CanLink(u,v):geometry.CanLink(u.Position,v.Position,u.Team)))
                 {edges[i].Add(j);edges[j].Add(i);}
             }
             spatial.Add(u.Position,i);
-            rootLinks[i]=roots.Any(r=>r.Team==u.Team&&r.Position.DistanceSquared(u.Position)<=squared&&geometry.CanLink(r.Position,u.Position,u.Team));
+            rootLinks[i]=roots.Any(r=>r.Team==u.Team&&r.Position.DistanceSquared(u.Position)<=squared&&
+                (geometry is IUnitLinkGeometry typed?typed.CanLink(r,u):geometry.CanLink(r.Position,u.Position,u.Team)));
         }
         return new(units,edges,rootLinks);
     }
@@ -85,7 +88,7 @@ public sealed class EncirclementEvaluator(Rules rules)
     {
         var support=operational.Nodes.Where(n=>n.Connected).Select(n=>n.Unit).ToHashSet();
         var output=new List<IsolationSnapshot>();var live=new HashSet<Core.UnitKey>();
-        foreach(var u in units.Where(u=>u.Alive&&u.AliveSoldierCount>0))
+        foreach(var u in units.Where(u=>u.Alive&&(u.HasInfantry?u.AliveSoldierCount>0:u.OperationallyActive)))
         {
             live.Add(u.Key);bool t=territory.IsConnected(u),o=support.Contains(u.Key),l=logistics.IsSupplied(u);
             RouteAccess path=routes.Get(u);bool connected=t&&o;

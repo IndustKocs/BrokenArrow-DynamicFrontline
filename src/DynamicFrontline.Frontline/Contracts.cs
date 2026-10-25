@@ -9,7 +9,7 @@ public readonly record struct Point2(double X, double Y)
 }
 public enum UnitRole { Line, Reserve, Airborne, SpecialForces, Recon, Sniper, Vehicle, Other }
 public sealed record UnitTerritoryProfile(int UnitId, UnitRole Role, bool CanCaptureTerritory,
-    bool CanRelay, double TypeCoefficient, double InfluenceRadius, uint MinimumRelaySoldiers = 1)
+    bool CanRelay, double TypeCoefficient, double InfluenceRadius, uint MinimumRelaySoldiers = 1,bool CanCreateLocalArea = true)
 {
     public void Validate()
     {
@@ -27,7 +27,8 @@ public sealed class ProfileCatalog
     public UnitTerritoryProfile? Find(int id)=>profiles.GetValueOrDefault(id);
 }
 public sealed record FrontlineUnit(UnitKey Key, int UnitId, int Team, Point2 Position, uint AliveSoldierCount,
-    bool Alive=true, bool Loaded=false, bool Deserting=false, StressLevel Stress=StressLevel.Calm, double StatusCoefficient=1);
+    bool Alive=true, bool Loaded=false, bool Deserting=false, StressLevel Stress=StressLevel.Calm, double StatusCoefficient=1,
+    bool HasInfantry=true,bool OperationallyActive=true);
 public sealed record TeamRoot(int Team, Point2 Position);
 public sealed record Rules
 {
@@ -81,6 +82,11 @@ public sealed record IsolationSnapshot(UnitKey Unit,int Team,IsolationState Stat
     long? IsolatedSinceTick,long? RecoverySinceTick,long? EncirclementSinceTick,double Severity,bool CanStartRecovery);
 public sealed record IsolationBatch(SnapshotHeader Header,IsolationSnapshot[] Units);
 public interface ILinkGeometry { bool CanLink(Point2 a,Point2 b,int team); }
+public interface IUnitLinkGeometry : ILinkGeometry
+{
+    bool CanLink(FrontlineUnit a,FrontlineUnit b);
+    bool CanLink(TeamRoot root,FrontlineUnit unit);
+}
 public interface IRetreatAccess { RouteAccess Get(FrontlineUnit unit); }
 public interface ILogisticsConnectivity { bool IsSupplied(FrontlineUnit unit); }
 public interface IIsolationEffectSink { void Observe(IsolationBatch state); }

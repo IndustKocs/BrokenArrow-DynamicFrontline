@@ -5,22 +5,26 @@ public sealed class TerritoryGrid
     public int Width {get;} public int Height {get;} public int Count=>owners.Length;
     public double CellSize {get;} public Point2 Origin {get;}
     private readonly bool[] mask;
+    private readonly int[] protectedOwners;
     private readonly int[] owners,challengers;
     private readonly long[] progress;
     private readonly bool[] contested;
     internal long OwnershipRevision {get;private set;}
-    public TerritoryGrid(int width,int height,double cellSize,bool[]? available=null,Point2 origin=default)
+    public TerritoryGrid(int width,int height,double cellSize,bool[]? available=null,Point2 origin=default,int[]? protectedOwners=null)
     {
         Rules.Positive(cellSize,nameof(cellSize));
         if(width<=0||height<=0||!origin.IsFinite|| (long)width*height>4_000_000)throw new ArgumentException("Invalid map");
         Width=width;Height=height;CellSize=cellSize;Origin=origin;
         if(available!=null&&available.Length!=width*height)throw new ArgumentException("Mask size mismatch");
         mask=available?.ToArray()??Enumerable.Repeat(true,width*height).ToArray();
+        this.protectedOwners=protectedOwners?.ToArray()??Enumerable.Repeat(-1,width*height).ToArray();
+        if(this.protectedOwners.Length!=width*height||this.protectedOwners.Any(t=>t is <-1 or >1))throw new ArgumentException("Invalid protection mask");
         owners=Enumerable.Repeat(-1,width*height).ToArray(); challengers=owners.ToArray();
         progress=new long[Count];contested=new bool[Count];
     }
     public bool Available(int i)=>i>=0&&i<Count&&mask[i];
     public int Owner(int i)=>Available(i)?owners[i]:-2;
+    public int ProtectedOwner(int i)=>protectedOwners[i];
     public int Index(Point2 p)
     {
         if(!p.IsFinite)return -1;
@@ -54,7 +58,7 @@ public sealed class TerritorialInfluenceCalculator(ProfileCatalog catalog,Rules 
     public double Calculate(FrontlineUnit unit)
     {
         var profile=catalog.Find(unit.UnitId);
-        if(profile is not {CanCaptureTerritory:true}||!unit.Alive||unit.Loaded||unit.Deserting||unit.AliveSoldierCount==0)return 0;
+        if(profile is not {CanCaptureTerritory:true}||!unit.HasInfantry||!unit.Alive||unit.Loaded||unit.Deserting||unit.AliveSoldierCount==0)return 0;
         double state=unit.Stress switch {Core.StressLevel.Calm=>rules.CalmCoefficient,Core.StressLevel.Shocked=>rules.ShockCoefficient,_=>rules.PanicCoefficient};
         double value=unit.AliveSoldierCount*profile.TypeCoefficient*state*unit.StatusCoefficient;
         Rules.Nonnegative(value,nameof(value));return value;
@@ -133,6 +137,7 @@ public sealed class TerritoryCaptureSystem
         {
             var old=grid.Cell(i);long a=influence[0][i],b=influence[1][i];
             bool contested=a>0&&b>0;
+            if(grid.ProtectedOwner(i)>=0){a=grid.ProtectedOwner(i)==0?a:0;b=grid.ProtectedOwner(i)==1?b:0;contested=false;}
             long difference=Math.Abs(a-b);int winner=difference>rules.DominanceMargin?(a>b?0:1):-1;
             int challenger=old.Challenger,owner=old.Owner;long progress=old.Progress;
             // Progress is influence-milliseconds; threshold is influence-seconds * 1000.
@@ -161,7 +166,7 @@ public sealed class LocalControlAreaSystem(ProfileCatalog profiles,Rules rules)
         foreach(var u in units)
         {
             double power=calculator.Calculate(u);
-            if(power<=0||!grid.Available(grid.Index(u.Position))||territory.CanAdvance(u))continue;
+            if(power<=0||profiles.Find(u.UnitId)?.CanCreateLocalArea!=true||!grid.Available(grid.Index(u.Position))||territory.CanAdvance(u))continue;
             double radius=Math.Min(rules.MaximumLocalRadius,Math.Sqrt(power)*rules.LocalRadiusPerSqrtInfluence);
             if(radius>0)areas.Add(new(u.Key,u.Team,u.Position,radius,areas.Count));
         }
