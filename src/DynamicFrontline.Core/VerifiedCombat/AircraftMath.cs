@@ -2,7 +2,7 @@ using System.Numerics;
 namespace DynamicFrontline.Core.VerifiedCombat;
 public readonly record struct HelicopterShift(Vector3 Result,float DistanceSquared,float Step,bool ReachedTarget);
 public readonly record struct RequestedFuel(float Old,float Requested,bool Applied=false);
-public static class AircraftMath
+public static partial class AircraftMath
 {
     // P3-F02 #12239 A. Negative finite inputs intentionally preserve the recovered direction.
     public static HelicopterShift ShiftFinite(Vector3 current,Vector3 target,float agility,float deltaTime)
