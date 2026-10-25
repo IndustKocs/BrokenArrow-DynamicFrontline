@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup>
+<ProjectReference Include="../DynamicFrontline.Integration/DynamicFrontline.Integration.csproj"/>
+<Reference Include="MelonLoader"><HintPath>../../tools/melonloader/MelonLoader/net6/MelonLoader.dll</HintPath><Private>false</Private></Reference>
+</ItemGroup><ItemGroup><EmbeddedResource Include="../../config/compatibility.json" LogicalName="DynamicFrontline.Poc02.compatibility.json"/></ItemGroup></Project>
