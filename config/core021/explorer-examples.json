@@ -1,0 +1,14 @@
+[
+  {"Formula":"F01","Profile":"buff-52469","Parameters":{"Incoming":1,"Alive":8}},
+  {"Formula":"F01","Profile":"buff-52552","Parameters":{"Incoming":1,"Alive":8}},
+  {"Formula":"F10","Profile":null,"Parameters":{"Damage":10,"Penetration":100,"Armor":100,"Effectiveness":1,"Curve":2}},
+  {"Formula":"F07","Profile":null,"Parameters":{"Damage":10,"Penetration":100,"Armor":100,"Effectiveness":1,"MinimumCoefficient":0.1}},
+  {"Formula":"CF03","Profile":"ammo-4","Parameters":{"Center":[25,0,0],"Hit":[0,0,0],"RoughRadius":2.5}},
+  {"Formula":"CF03","Profile":"ammo-4","Parameters":{"Center":[47.5,0,0],"Hit":[0,0,0],"RoughRadius":2.5}},
+  {"Formula":"CF12","Profile":null,"Parameters":{"HP":20,"ArmorMaxHealth":80,"InitialSquadMembers":8,"SoldierSlots":8}},
+  {"Formula":"CF12","Profile":null,"Parameters":{"HP":20.01,"ArmorMaxHealth":80,"InitialSquadMembers":8,"SoldierSlots":8}},
+  {"Formula":"F12","Profile":null,"Parameters":{"Accuracy":0.8,"ECM":0.9,"CM":1,"Stress":1,"Veterancy":1,"Critical":1}},
+  {"Formula":"F12","Profile":null,"Parameters":{"Accuracy":0.8,"ECM":0.9,"CM":0.16,"Stress":1,"Veterancy":1,"Critical":1}},
+  {"Formula":"P3-F02","Profile":null,"Parameters":{"Current":[0,0,0],"Target":[10,0,0],"Agility":8,"DeltaTime":1}},
+  {"Formula":"P3-F05","Profile":null,"Parameters":{"WeaponFlash":3,"FlashReduction":0.5,"Visible":true,"SpottedPenalty":4}}
+]

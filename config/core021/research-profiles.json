@@ -1,0 +1,127 @@
+[
+  {
+    "Id": "buff-52469",
+    "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\full_code_audit\\evidence\\buff_values.json",
+    "AssetId": "52469",
+    "Profile": "Extracted BuffConfig / Calm (active profile unknown)",
+    "ResearchVersion": "Combat Systems Audit Pass01-03",
+    "SourceTableSha256": "ab8db62dc7b4b91cb9de0af9a2eaafae58b1e43df893c941ee694551e07bc80e",
+    "AssetSha256": "c5faec43d04f9a35c623c7b3aaa8aae0c2f5022a2addf51b3f09f0c12b12cad7",
+    "RuntimeConfirmed": false,
+    "FormulaIds": [
+      "F01",
+      "F02",
+      "F03",
+      "F05",
+      "CF01"
+    ],
+    "Values": {
+      "MissileAccuracyMultiplier": 1.0,
+      "AimTimeMultiplier": 1.0,
+      "TimeBetweenBurstsMultiplier": 1.0,
+      "ReloadTimeMultiplier": 1.0,
+      "DispersionMultiplier": 1.0,
+      "AimTimeInfMultiplier": 1.0,
+      "TimeBetweenBurstsInfMultiplier": 1.0,
+      "ReloadTimeInfMultiplier": 1.0,
+      "DispersionInfMultiplier": 1.0,
+      "MissileAccuracyPlaneMult": 1.0,
+      "AimTimePlaneMult": 1.0,
+      "TimeBetweenBurstsPlaneMult": 1.0,
+      "ReloadTimePlaneMult": 1.0,
+      "DispersionPlaneMult": 1.0,
+      "InfantryDmgModFloor": 0.7200000286102295,
+      "InfantryDmgModPerSoldier": 0.019999999552965164,
+      "MovementSpeedMultiplier": 1.0,
+      "ShockedLevelMultiplier": 0.5,
+      "PanickedLevelMultiplier": 0.800000011920929,
+      "ShockedLevelMultiplierInfantry": 0.5,
+      "PanickedLevelMultiplierInfantry": 0.800000011920929,
+      "StressRecoveryMultiplier": 1.0,
+      "StressDamageModThreshold": 9999.0
+    }
+  },
+  {
+    "Id": "buff-52552",
+    "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\full_code_audit\\evidence\\buff_values.json",
+    "AssetId": "52552",
+    "Profile": "Extracted BuffConfig / Calm (active profile unknown)",
+    "ResearchVersion": "Combat Systems Audit Pass01-03",
+    "SourceTableSha256": "ab8db62dc7b4b91cb9de0af9a2eaafae58b1e43df893c941ee694551e07bc80e",
+    "AssetSha256": "abf20c57f8b644c0499e22db2200322a52b4baba4d23526d3e0d0513e05d845d",
+    "RuntimeConfirmed": false,
+    "FormulaIds": [
+      "F01",
+      "F02",
+      "F03",
+      "F05",
+      "CF01"
+    ],
+    "Values": {
+      "MissileAccuracyMultiplier": 1.0,
+      "AimTimeMultiplier": 1.0,
+      "TimeBetweenBurstsMultiplier": 1.0,
+      "ReloadTimeMultiplier": 1.0,
+      "DispersionMultiplier": 1.0,
+      "AimTimeInfMultiplier": 1.0,
+      "TimeBetweenBurstsInfMultiplier": 1.0,
+      "ReloadTimeInfMultiplier": 1.0,
+      "DispersionInfMultiplier": 1.0,
+      "MissileAccuracyPlaneMult": 1.0,
+      "AimTimePlaneMult": 1.0,
+      "TimeBetweenBurstsPlaneMult": 1.0,
+      "ReloadTimePlaneMult": 1.0,
+      "DispersionPlaneMult": 1.0,
+      "InfantryDmgModFloor": 0.36000001430511475,
+      "InfantryDmgModPerSoldier": 0.019999999552965164,
+      "MovementSpeedMultiplier": 1.0,
+      "ShockedLevelMultiplier": 0.5,
+      "PanickedLevelMultiplier": 0.800000011920929,
+      "ShockedLevelMultiplierInfantry": 0.4000000059604645,
+      "PanickedLevelMultiplierInfantry": 0.800000011920929,
+      "StressRecoveryMultiplier": 1.0,
+      "StressDamageModThreshold": 36.0
+    }
+  },
+  {
+    "Id": "ammo-4",
+    "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\evidence\\ammunition_examples.json",
+    "AssetId": "Ammunitions.Id=4",
+    "Profile": "Extracted table; active DB unknown",
+    "ResearchVersion": "Combat Systems Audit Pass01-03",
+    "SourceTableSha256": "782e123ace3376fb9b653cb4b4e8ecc96753e87c3a7467ad817841f2b9d57132",
+    "AssetSha256": null,
+    "RuntimeConfirmed": false,
+    "FormulaIds": [
+      "CF03"
+    ],
+    "Values": {
+      "Damage": 12.0,
+      "StressDamage": 310.0,
+      "HealthAOERadius": 45.0,
+      "StressAOERadius": 67.5
+    }
+  },
+  {
+    "Id": "fow-52558-forest",
+    "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\ба\\research\\combat_systems_audit\\evidence\\profiles_decoded.json",
+    "AssetId": "52558 / terrain type 2",
+    "Profile": "Extracted FOW; active profile unknown",
+    "ResearchVersion": "Combat Systems Audit Pass01-03",
+    "SourceTableSha256": "4c615109606f8e9981df02f33f66560dfa2758f23a110477beda4b1834035b1a",
+    "AssetSha256": "7872e4506644b72930df592dc1b8378cb6789e2d6020a1a101dbe45b53da0af9",
+    "RuntimeConfirmed": false,
+    "FormulaIds": [
+      "CF14",
+      "CF16",
+      "P3-F05"
+    ],
+    "Values": {
+      "ForestOpacity": -15.0,
+      "ForestMultiplier": 0.75,
+      "TerrainCover": 2.0,
+      "TerrainHeight": 15.0,
+      "FlashReduction": 0.15000000596046448
+    }
+  }
+]

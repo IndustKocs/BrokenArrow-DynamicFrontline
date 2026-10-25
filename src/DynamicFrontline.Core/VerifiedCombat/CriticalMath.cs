@@ -32,7 +32,7 @@ public static class CriticalMath
         FormulaDomain.Nonnegative(multiplier,nameof(multiplier));FormulaDomain.Nonnegative(hpLossRate,nameof(hpLossRate));FormulaDomain.Nonnegative(baseProbability,nameof(baseProbability));
         if(!double.IsFinite(roll)||roll<0||roll>=1)throw new ArgumentOutOfRangeException(nameof(roll));
         int q=checked((int)MathF.Floor(multiplier/100));
-        float p=FormulaDomain.Result((multiplier-100*q)*hpLossRate+baseProbability);
+        float p=FormulaDomain.Result((multiplier-100f*q)*hpLossRate+baseProbability);
         return new(q,p,checked(q+(p>=roll?1:0)));
     }
     public static CriticalSelection Select(CriticalLevels initial,int attempts,int redThreshold,ICombatRandom random,int maximumDraws=10000)
