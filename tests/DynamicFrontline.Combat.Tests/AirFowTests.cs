@@ -1,0 +1,23 @@
+using System.Numerics;
+using DynamicFrontline.Core.VerifiedCombat;
+static partial class Tests
+{
+    static partial void AirFow()
+    {
+        Test("Helicopter native step and arrival",()=>{var a=AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),8,1);Eq(a.Result.X,2);Check(!a.ReachedTarget);Check(AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),8,5).ReachedTarget);Eq(AircraftMath.ShiftTime(Vector3.Zero,new(10,0,0),8),5);});
+        Test("Helicopter zero distance time agility",()=>{Check(AircraftMath.ShiftFinite(Vector3.One,Vector3.One,0,0).ReachedTarget);Eq(AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),8,0).Result.X,0);Eq(AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),0,1).Result.X,0);Eq(AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),8,.01f).Result.X,.02);Reject(()=>AircraftMath.ShiftTime(Vector3.Zero,Vector3.One,0));});
+        Test("Helicopter negative step separate normal policy",()=>{Eq(AircraftMath.ShiftFinite(Vector3.Zero,new(10,0,0),8,-1).Result.X,-2);Reject(()=>AircraftMath.ValidateNormalUsage(8,-1));Reject(()=>AircraftMath.ShiftFinite(Vector3.Zero,Vector3.One,float.NaN,1));});
+        Test("Fuel requested only without clamp",()=>{var f=AircraftMath.Fuel(100,.5f,2);Eq(f.Requested,99);Check(!f.Applied);Eq(AircraftMath.Fuel(1,2,2).Requested,-3);Reject(()=>AircraftMath.Fuel(1,-1,2));});
+        Test("Ground vision cover sneak optics",()=>{var v=new GroundVisionInput(1000,1,1,1,2,false,1,false,false,2,.1f,2,null);Eq(VisibilityMath.Ground(v).Range,500);Eq(VisibilityMath.Ground(v with{SneakEnabled=true}).Range,250);Eq(VisibilityMath.Ground(v with{SneakEnabled=true,Airdrop=true}).Range,500);Eq(VisibilityMath.Ground(v with{InsideSmoke=true,SmokeCover=2,OpticsMultiplier=.5f}).Range,125);});
+        Test("Ground exact epsilon and flash floor",()=>{var v=new GroundVisionInput(1,.5f,.5f,0,1,false,1,false,false,1,0,1,null);Check(VisibilityMath.Ground(v).AntiVisibleFactor==float.Epsilon);Eq(VisibilityMath.Ground(v with{AntiVisible=1}).Range,1);Reject(()=>VisibilityMath.Ground(v with{MaxAntiVisible=0}));});
+        Test("Air no ground minimum or terrain clamp",()=>{Eq(VisibilityMath.Air(2000,1.5f,1,1,.8f),2400);Eq(VisibilityMath.Air(2000,1.5f,.5f,.5f,.8f),1200);Reject(()=>VisibilityMath.Air(2000,1,float.NaN,1,1));});
+        Test("Terrain forest 23 samples extracted example",()=>{var s=Enumerable.Repeat(new TerrainSample(2,0,0,15,-15,.75f),23).ToArray();Eq(VisibilityMath.Terrain(s,false,false,false,0,100).Cost,24.75);Check(VisibilityMath.InclusiveSampleCount(22)==23);});
+        Test("Terrain counts persist across separated types",()=>{var s=new[]{new TerrainSample(2,0,0,15,0,2),new(1,0,0,15,0,1),new(2,0,0,15,0,2)};Eq(VisibilityMath.Terrain(s,false,false,false,0,100).Cost,7);});
+        Test("Terrain flags not type and forced smoke exclusion",()=>{var s=new[]{new TerrainSample(2,0,0,15,5,1),new(1,2,0,15,5,1)};Eq(VisibilityMath.Terrain(s,false,false,true,99,100).Cost,7);Eq(VisibilityMath.Terrain(s,true,false,false,3,100).Cost,5);Eq(VisibilityMath.Terrain(s,false,true,false,0,100).Cost,7);});
+        Test("Terrain budget strictly exceeded and height",()=>{var s=new[]{new TerrainSample(2,0,16,15,100,1),new(2,0,0,15,1,0)};Check(VisibilityMath.Terrain(s,false,false,false,0,1).FirstBudgetExceededSample==1);Reject(()=>VisibilityMath.Terrain(new[]{new TerrainSample(16,0,0,1,1,1)},false,false,false,0,1));});
+        Test("Weapon flash timer marker floor",()=>{Eq(VisibilityMath.WeaponFlashTimer(3,.5f,true,4),4);Eq(VisibilityMath.WeaponFlashTimer(3,.5f,false,4),2.5);Eq(VisibilityMath.WeaponFlashTimer(1,10,false,0),1);Reject(()=>VisibilityMath.WeaponFlashTimer(3,-1,true,4));});
+        Test("Smoke sphere center tangent miss and zero ray",()=>{var s=VisibilityMath.Sphere(Vector3.Zero,new(10,0,0),new(5,0,0),2);Eq(s.HalfChord,2);Check(s.IntersectsInfiniteLine);Eq(VisibilityMath.Sphere(Vector3.Zero,new(10,0,0),new(5,2,0),2).HalfChord,0);Check(!VisibilityMath.Sphere(Vector3.Zero,new(10,0,0),new(5,3,0),2).IntersectsInfiniteLine);Reject(()=>VisibilityMath.Sphere(Vector3.Zero,Vector3.Zero,Vector3.One,1));});
+        Test("Smoke intervals shared sample index",()=>{var a=VisibilityMath.Smoke(new[]{new SmokeInterval(0,2,3)},.5f);Eq(a.Cost,12);Eq(a.RetainedLength,2);Check(a.Samples==3);a=VisibilityMath.Smoke(new[]{new SmokeInterval(0,1,3),new(2,3,3)},.5f);Eq(a.Cost,17);Check(a.Samples==4);});
+        Test("Smoke empty zero invalid overlap and budget",()=>{Eq(VisibilityMath.Smoke(new[]{new SmokeInterval(0,0,3)},.5f).Cost,0);Reject(()=>VisibilityMath.Smoke(new[]{new SmokeInterval(0,2,3),new(1,3,3)},.5f));Reject(()=>VisibilityMath.Smoke(new[]{new SmokeInterval(0,2,3)},.5f,2));});
+    }
+}
