@@ -4,13 +4,14 @@ using DynamicFrontline.Core.VerifiedCombat;
 using DynamicFrontline.Core.ExperimentalCombat;
 namespace DynamicFrontline.Core.Diagnostics;
 public sealed record ExplorerRequest(string Formula,string? Profile,Dictionary<string,JsonElement> Parameters);
-public sealed record ExplorerResult(string Formula,string Evidence,string Source,string Limitations,ResearchProfile? Profile,Dictionary<string,JsonElement> EffectiveInputs,object Calculation);
-public static class FormulaExplorer
+public sealed record ExplorerResult(string Formula,string Evidence,string Source,string Limitations,ResearchProfile? Profile,Dictionary<string,JsonElement> EffectiveInputs,object Calculation,string? SourceMethod=null,string? SupportedDomain=null,string? EquivalenceStatus=null,string? ParameterProfile=null);
+public static partial class FormulaExplorer
 {
     public static readonly JsonSerializerOptions JsonOptions=new(){WriteIndented=true,IncludeFields=true};
     public static ExplorerResult Evaluate(ExplorerRequest request,ResearchProfileCatalog catalog)
     {
         ArgumentNullException.ThrowIfNull(request);ArgumentNullException.ThrowIfNull(request.Parameters);
+        if(request.Formula.StartsWith("P4-",StringComparison.Ordinal)||request.Formula is "BuffPipeline" or "VersionAwareIdentity")return EvaluatePass04(request);
         var p=new Dictionary<string,JsonElement>();ResearchProfile? profile=null;
         if(request.Profile!=null){profile=catalog.Get(request.Profile);if(!profile.FormulaIds.Contains(request.Formula))throw new ArgumentException("Profile does not apply to this formula");foreach(var kv in profile.Values)p[kv.Key]=JsonSerializer.SerializeToElement(kv.Value);}
         foreach(var kv in request.Parameters)p[kv.Key]=kv.Value;

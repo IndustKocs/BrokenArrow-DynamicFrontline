@@ -10,4 +10,4 @@ try
     Console.WriteLine(JsonSerializer.Serialize(new{Mode="Offline research examples; not active match configuration",Results=results},FormulaExplorer.JsonOptions));
 }
 catch(Exception e)when(e is ArgumentException or ArithmeticException or JsonException or IOException or KeyNotFoundException or InvalidOperationException)
-{Console.Error.WriteLine(JsonSerializer.Serialize(new{Error=e.Message}));Environment.ExitCode=2;}
+{Console.Error.WriteLine(JsonSerializer.Serialize(new{Error=e.Message,Stage=e is DynamicFrontline.Core.VerifiedCombat.FormulaStageException f?f.Stage:"Input/validation",Complete=false}));Environment.ExitCode=2;}

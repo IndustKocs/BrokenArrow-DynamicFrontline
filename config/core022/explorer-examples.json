@@ -1,0 +1,9 @@
+[
+  {"Formula":"P4-F01","Profile":null,"Parameters":{"SourceId":"identity-cdf","SourceVersion":"1","CDFKeys":[{"Time":0,"Value":0},{"Time":1,"Value":1}]}},
+  {"Formula":"P4-F02","Profile":null,"Parameters":{"Direction":[0,0,1],"DistanceDelta":10,"EffectiveRange":1000,"HorizontalRadius":20,"VerticalRadius":40,"U":0.5,"V":-0.5}},
+  {"Formula":"P4-F09","Profile":null,"Parameters":{"Origin":[0,0,0],"Target":[10,0,0],"Center":[5,0,0],"Radius":2}},
+  {"Formula":"P4-F07","Profile":null,"Parameters":{"Speed":150,"Speeds":{"MinSpeed":100,"MaxSpeed":200,"AfterburnSpeed":300},"Yaw":{"MinRate":10,"MaxRate":20,"AfterburnRate":15},"Pitch":{"MinRate":2,"MaxRate":4,"AfterburnRate":1}}},
+  {"Formula":"P4-F05","Profile":null,"Parameters":{"Dx":3,"Dy":4,"G":10}},
+  {"Formula":"BuffPipeline","Profile":null,"Parameters":{}},
+  {"Formula":"P4-F08","Profile":null,"Parameters":{"X":1}}
+]
