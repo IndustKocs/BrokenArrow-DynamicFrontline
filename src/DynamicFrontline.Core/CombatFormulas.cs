@@ -6,7 +6,7 @@ public readonly record struct StressRecoveryStep(float Stress, float TimeAfterLa
 
 // Pure reference calculations from FORMULAS.md, not a replacement for the game's combat pipeline.
 // Guards define the prototype's supported domain; they are not claimed to exist in native code.
-public static class CombatFormulas
+public static partial class CombatFormulas
 {
     private static void Finite(float value, string name)
     { if (!float.IsFinite(value)) throw new ArgumentOutOfRangeException(name); }
