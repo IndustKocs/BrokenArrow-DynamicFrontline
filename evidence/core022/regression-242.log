@@ -1,0 +1,247 @@
+PASS baseline F07 F08 F09 preserved
+PASS HEAT equality and asymmetry
+PASS HEAT operation intermediates
+PASS HEAT finite supported domain
+PASS Kinetic positive minimum only
+PASS Threshold strict equality HEAT bypass
+PASS Range actual not offset
+PASS AoE ammunition 4 surface example
+PASS AoE zero radius and no falloff boundaries
+PASS Differential finite HEAT and AoE seeded 1000
+PASS Infantry count ceil boundaries
+PASS Infantry count slots distinct from initial
+PASS Death priority stable tie order injected RNG
+PASS Heal first minimum no RNG
+PASS Death empty and invalid random
+PASS Ammo selected first ID and no refill
+PASS Ammo zero and overflow guards
+PASS Stress boundaries recovery order no extra application
+PASS Readiness preserves observed state and explicit time model
+PASS Ammo invariant 500 seeded populations
+PASS F11 power and zero count
+PASS F12 direct product no cap
+PASS Probability equality separate policy
+PASS CF18 increments first and wraps
+PASS CF18 constant and invalid ranges do not advance
+PASS CF18 deterministic period and copied fixture
+PASS Seeker gate prefix no unconditional reroll
+PASS Differential missile composition seeded 1000
+PASS Critical remainder no hidden division or clamp
+PASS Critical comparison inclusive and zero remainder
+PASS Critical reroll does not consume attempt
+PASS Critical red removal preserves candidate ordering
+PASS Critical explicit budget reports incomplete not false success
+PASS Critical no candidates and invalid levels
+PASS Critical table nonlinear per type and level
+PASS Critical table no mobility override at zero
+PASS Helicopter native step and arrival
+PASS Helicopter zero distance time agility
+PASS Helicopter negative step separate normal policy
+PASS Fuel requested only without clamp
+PASS Ground vision cover sneak optics
+PASS Ground exact epsilon and flash floor
+PASS Air no ground minimum or terrain clamp
+PASS Terrain forest 23 samples extracted example
+PASS Terrain counts persist across separated types
+PASS Terrain flags not type and forced smoke exclusion
+PASS Terrain budget strictly exceeded and height
+PASS Weapon flash timer marker floor
+PASS Smoke sphere center tangent miss and zero ray
+PASS Smoke intervals shared sample index
+PASS Smoke empty zero invalid overlap and budget
+PASS Research profile provenance preserved
+PASS Research rejects hash unknown and mislabeled runtime
+PASS Explorer compares profiles no implicit global config
+PASS Explorer rejects incompatible profile and missing input
+PASS Integration territory graph isolation unchanged by combat calls
+PASS Mathematical assembly has no Unity loader or network references
+PASS Independent Python double reference fixtures finite domain
+TOTAL 58; FAILED 0
+Runtime: .NET 6.0.36
+PASS manual activation cancels once and issues one physical move
+PASS debug is disabled by default
+PASS team spawn planner and missing position
+PASS user rejected, controller movement allowed, group preserves others
+PASS death during retreat releases lock without issuing commands
+PASS unreachable path fails safely and does not retry
+PASS arrival then recovery restores same owner control
+PASS repeat activation rejected during and after recovery
+PASS second squad unchanged and activation cannot replace active squad
+PASS unknown path times out; no command loop
+PASS arrival status alone cannot fake safe position
+PASS movement rejection releases user lock
+PASS cancel failure never issues movement
+PASS adapter exception disables functionality and releases lock
+PASS owner changed during retreat is never reassigned
+PASS dead noninfantry and foreign units cannot activate
+PASS wrong match and recycled generation rejected
+PASS invalid destination and backwards clock rejected
+PASS diagnostics own units only
+PASS reflection reader rejects enemy before reading any coordinates or ECS
+PASS reflection reads fresh struct snapshots without writes
+PASS unsupported wrappers disable adapter without commands
+PASS compatibility accepts exact hash rejects mismatch version and traversal
+PASS disabled adapter prevents activation
+PASS leaving recovery area releases lock instead of silently recovering
+PASS F01 profiles, existing multiplier and saturation
+PASS F02 F06 exact boundaries and panic precedence
+PASS F03 no implicit stress cap; F04 never reduces stress
+PASS F05 one tick, truncation, exhaustion and inactive zero branch
+PASS F07 minimum damage does not revive zero or negative damage
+PASS F08 strict threshold and HEAT bypass
+PASS F09 raw distance with nonzero minimum range and armor branches
+PASS F13 independent overrides and absent ammunition
+PASS formula supported-domain guards
+PASS optional stress condition requires timer and observed calm; no stress writes
+PASS invalid observed stress waits then releases lock on recovery timeout
+TOTAL 36; PASSED 36; FAILED 0
+PASS neutral capture and regular advance require rooted territory
+PASS regular withdrawal retains last stable control
+PASS hysteresis requires accumulated capture and decays after death
+PASS capture after four equal ticks
+PASS equal opposing influence contested without ownership flicker
+PASS enemy capture changes stable owner only after threshold
+PASS soldier count and shock affect influence independently of HP
+PASS territory excludes dead
+PASS territory excludes zero
+PASS territory excludes panic
+PASS territory excludes deserting
+PASS territory excludes loaded
+PASS noncapture role 3 never changes grid even in rear
+PASS noncapture role 4 never changes grid even in rear
+PASS noncapture role 5 never changes grid even in rear
+PASS invalid capture role rejected and unknown IDs default deny
+PASS local area moves without territorial trail
+PASS separate autonomous groups and overlapping enclave union
+PASS local radius tracks soldiers and last soldier removes enclave
+PASS restoring territorial corridor absorbs local presence
+PASS out of map and masked units cannot capture or relay
+PASS only changed footprints are updated
+PASS direct and intermediate operational support
+PASS regular recon special regular chain supports without painting corridor
+PASS multiple reconnaissance relays connect to root
+PASS destroyed relay breaks chain and replacement restores it
+PASS too distant and unrooted chain remain disconnected
+PASS hop limit stops artificial long chains
+PASS relay exclusion panic
+PASS relay exclusion deserting
+PASS relay exclusion loaded
+PASS relay exclusion zero
+PASS shock participation configured independently of capture
+PASS opponent nodes never link across teams
+PASS terrain barrier blocks links including diagonal corner cutting
+PASS operational support does not imply logistics or territory
+PASS logistics can exist without territorial or operational continuity
+PASS distance and unknown retreat are not proof of encirclement
+PASS safe retreat without support remains autonomous
+PASS confirmed closed route waits then produces configured severity
+PASS physical closure with operational support lowers severity but opens no route
+PASS recovery before penalties and repeated isolation reset confirmation timer
+PASS recovery after penalties holds reconnecting then settles
+PASS reconnected territory and support wait before Connected
+PASS boundary extracts stable simplified straight front
+PASS boundary supports closed islands and concave contours
+PASS masked terrain boundary remains distinct from enemy front
+PASS input order does not change authoritative outputs
+PASS JSON snapshots and ordered deltas reconstruct authority
+PASS foreign duplicate reordered delta rejected
+PASS presentation default denies territory and every enemy coordinate or key
+PASS invalid tick duplicate UID match and nonfinite data fail before mutation
+PASS configuration rejects invalid domains
+PASS configuration file loads explicit synthetic profiles
+PASS synthetic retreat routing detects enclosing terrain and neutral escape
+PASS enemy territory retreat rule is independent configurable policy
+PASS desertion adapter suppresses territory relay and local area until restored
+PASS configurable panic coefficient and type multiplier apply
+PASS vehicle relay opt in does not enable territorial capture
+TOTAL 59; FAILED 0
+PASS snapshot profile 1
+PASS snapshot profile 2
+PASS snapshot profile 3
+PASS snapshot profile 4
+PASS snapshot profile 5
+PASS snapshot profile 6
+PASS snapshot profile 7
+PASS snapshot profile 8
+PASS snapshot profile 9
+PASS snapshot state dead
+PASS snapshot state loaded
+PASS snapshot state loading
+PASS snapshot state deserting
+PASS snapshot state zero
+PASS snapshot state missing-infantry
+PASS unknown definition is diagnosed and excluded
+PASS UID reuse after absence receives a new generation
+PASS replacement lifecycle stamp differentiates same UID immediately
+PASS incomplete frame neither despawns nor advances identity
+PASS death repeated is stable and revival gets generation
+PASS invalid input preserves stable core position
+PASS invalid input preserves stable core team-missing
+PASS invalid input preserves stable core team-mismatch
+PASS invalid input preserves stable core hp
+PASS invalid input preserves stable core stress
+PASS invalid input preserves stable core duplicate
+PASS invalid input preserves stable core revision
+PASS invalid input preserves stable core read-failure
+PASS provider copies visibility arrays
+PASS provider rejects worker thread before source inspection
+PASS assault capture needs explicit profile; role alone insufficient
+PASS scout cannot be granted capture or local area
+PASS different active scenario database cannot silently reuse profile
+PASS unknown active database is explicit failure
+PASS configuration digest and malformed JSON rejected
+PASS 5v5 player roster maps separately from team and network identities
+PASS inconsistent team roster is rejected
+PASS world XZ coordinates round trip independently of world Y
+PASS map has symmetric roots and cannot be assumed available
+PASS protected spawn area cannot be contested or captured
+PASS symmetric teams advance equally with independent graphs
+PASS navigation result Reachable
+PASS navigation result Blocked
+PASS navigation result Unknown
+PASS partial path is Unknown, never Blocked
+PASS route timeout is Unknown and late response cannot revive it
+PASS expired cache is Stale before requery
+PASS removed endpoint invalidates pending route
+PASS new generation never reuses old endpoint response
+PASS dynamic bridge and navigation revision invalidate cached reachability
+PASS masks channels and movement types are separate cache keys
+PASS route budget limits submissions and pending queue
+PASS too long route is Unknown rather than physical Blocked
+PASS backend exception is Unknown
+PASS Unknown navigation never confirms encirclement
+PASS per-profile channel and range affect links, not territory
+PASS default settings perform no collection and no mutation option exists
+PASS render updates do not repeat logical tick
+PASS provider loss preserves previous accepted snapshot
+PASS absent match context waits safely
+PASS scenario switch to unknown database clears old match result
+PASS new match starts tick and generations from scratch
+PASS navigation revision changes preserve territorial history
+PASS profile version change restarts cleanly
+PASS live source cannot be enabled by ordinary settings
+PASS disposed bridge never calls provider
+PASS hidden entities cannot change public DTO bytes or handles or counts
+PASS FOW evidence never silently authorizes public enemy export history
+PASS FOW evidence never silently authorizes public enemy export potential
+PASS FOW evidence never silently authorizes public enemy export shootable
+PASS FOW evidence never silently authorizes public enemy export marker
+PASS FOW evidence never silently authorizes public enemy export confirmed
+PASS team-safe diagnostic has no graph territory route or rejected-counter metadata
+PASS developer full export requires explicit offline flag
+PASS internal exceptions never appear in public status
+PASS moving hidden recon and special forces produces no territorial delta
+PASS mock ECS inspection copies audited fields without setters
+PASS mock transport flags and noninfantry absence handled independently
+PASS reflection provider thread gate prevents any feed access
+PASS recorded fixture is tagged and cannot pose as live
+PASS collection-only mode retains copied DTO without starting core
+PASS snapshot roster is not a borrowed mutable array
+PASS profile may disable local circles without disabling capture
+PASS vehicle relay has no fabricated soldiers and never captures
+PASS Pass03 unknown death lifecycle rejects complete-looking snapshot
+PASS Pass03 processing death is excluded before entity disposal
+PASS Pass03 one-way passage does not create an undirected relay edge
+PASS Pass03 native partial endpoint and entry-exit codes stay Unknown
+PASS ownership transfer invalidates an outstanding route
+TOTAL 89; FAILED 0

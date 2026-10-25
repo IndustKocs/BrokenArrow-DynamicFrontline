@@ -1,0 +1,174 @@
+{
+  "total": 42,
+  "failed": 0,
+  "results": [
+    {
+      "name": "CDF identity length keys endpoints",
+      "passed": true
+    },
+    {
+      "name": "CDF nonlinear monotone synthetic and repeatability",
+      "passed": true
+    },
+    {
+      "name": "CDF invalid strict monotonic rejects",
+      "passed": true
+    },
+    {
+      "name": "CDF explicit version cache and immutable table",
+      "passed": true
+    },
+    {
+      "name": "Polar ordered draws and truncation",
+      "passed": true
+    },
+    {
+      "name": "Polar endpoint1000 explicit failure consumes both draws",
+      "passed": true
+    },
+    {
+      "name": "FastDimond exact edge samples",
+      "passed": true
+    },
+    {
+      "name": "FastDimond fractional band not ideal diamond",
+      "passed": true
+    },
+    {
+      "name": "FastDimond CyclicRandom endpoint does not consume second",
+      "passed": true
+    },
+    {
+      "name": "Trajectory scale direction and native lower bound",
+      "passed": true
+    },
+    {
+      "name": "Zero effective range no draw and degenerate reject",
+      "passed": true
+    },
+    {
+      "name": "Buff reset ten accumulators order and final",
+      "passed": true
+    },
+    {
+      "name": "Buff assignment differs from multiply and reversed order",
+      "passed": true
+    },
+    {
+      "name": "Buff zero crit no added effect for identity zero rows",
+      "passed": true
+    },
+    {
+      "name": "Buff invalid table and stress provider reject",
+      "passed": true
+    },
+    {
+      "name": "Buff potential movement review no commands",
+      "passed": true
+    },
+    {
+      "name": "Single sphere six control intervals",
+      "passed": true
+    },
+    {
+      "name": "Smoke strict inside and endpoint surface",
+      "passed": true
+    },
+    {
+      "name": "Smoke magnitude projection not signed clipping",
+      "passed": true
+    },
+    {
+      "name": "Smoke zero radius tangent and unsupported zero ray",
+      "passed": true
+    },
+    {
+      "name": "Single sphere does not resolve multiple intervals",
+      "passed": true
+    },
+    {
+      "name": "Aircraft yaw two segments and max equality",
+      "passed": true
+    },
+    {
+      "name": "Aircraft pitch independent rates",
+      "passed": true
+    },
+    {
+      "name": "Aircraft denominator threshold zero equal presets",
+      "passed": true
+    },
+    {
+      "name": "Astar weighted priority example and single addition",
+      "passed": true
+    },
+    {
+      "name": "Navigation consumer valid not adapter proof",
+      "passed": true
+    },
+    {
+      "name": "CyclicRandom upper endpoint wrap counts no-draw",
+      "passed": true
+    },
+    {
+      "name": "CyclicRandom different initial indices",
+      "passed": true
+    },
+    {
+      "name": "Entity version reuse rejects old handle",
+      "passed": true
+    },
+    {
+      "name": "Entity stale snapshot world session and owner",
+      "passed": true
+    },
+    {
+      "name": "Lifecycle death remove fog and spatial distinct from disposal",
+      "passed": true
+    },
+    {
+      "name": "LastKnown diagnostic squared XZ boundaries no contact",
+      "passed": true
+    },
+    {
+      "name": "H1 finite experimental boundaries and invalid domain",
+      "passed": true
+    },
+    {
+      "name": "Explorer new metadata intermediates bounded CDF output",
+      "passed": true
+    },
+    {
+      "name": "Explorer full table opt-in and stageful error",
+      "passed": true
+    },
+    {
+      "name": "Explorer Polar FastDimond and identity support",
+      "passed": true
+    },
+    {
+      "name": "3000 independent Python reference computations",
+      "passed": true
+    },
+    {
+      "name": "CDF valid monotone property across 12 synthetic curves",
+      "passed": true
+    },
+    {
+      "name": "Pass04 twenty paired integration steps preserve all public and core outputs",
+      "passed": true
+    },
+    {
+      "name": "Identity Explorer serialization preserves lifecycle distinctions",
+      "passed": true
+    },
+    {
+      "name": "RNG finite domain errors and reproducible sequences",
+      "passed": true
+    },
+    {
+      "name": "Core assembly remains independent of game libraries",
+      "passed": true
+    }
+  ]
+}
