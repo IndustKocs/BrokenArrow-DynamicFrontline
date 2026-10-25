@@ -3,10 +3,11 @@ namespace DynamicFrontline.Core.ExperimentalCombat;
 
 // Autonomous CF18 reconstruction. System.Random compatibility with native runtime is NOT claimed.
 // Does not implement ICombatRandom: critical selection must receive a separate source.
-public sealed class CyclicRandom
+public sealed class CyclicRandom:IFloatRandom
 {
     private readonly float[] queue;
     public int Index {get;private set;}
+    public long ValuesConsumed {get;private set;}
     public int? Seed {get;}
     public int? NetId {get;}
     public CyclicRandom(int seed,int netId)
@@ -25,7 +26,7 @@ public sealed class CyclicRandom
         if(minimum>maximum)throw new ArgumentOutOfRangeException(nameof(minimum));
         if(minimum==maximum)return minimum;
         float range=FormulaDomain.Result(maximum-minimum);int next=(Index+1)%100;
-        float result=FormulaDomain.Result(minimum+range*queue[next]);Index=next;return result;
+        float result=FormulaDomain.Result(minimum+range*queue[next]);Index=next;ValuesConsumed++;return result;
     }
 }
 public enum SeekerGate { UnsupportedSeeker, MissingRandom, ResetNoTarget, KeepState, EligibleForFurtherChecks }
