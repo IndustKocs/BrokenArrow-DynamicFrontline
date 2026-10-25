@@ -1,0 +1,8 @@
+{
+  "UnityVersion": "6000.3.24f1",
+  "Hashes": {
+    "GameAssembly.dll": "da1668ac11bcdb036acc7807aec2aaf6f72e83921a05eaf0ae2255e7db005a26",
+    "UnityPlayer.dll": "79a54af1c83b5b3bfa34936be18899de49fa88eea6a33ba7351c2163f95f6613",
+    "BrokenArrow_Data/il2cpp_data/Metadata/global-metadata.dat": "644452dfe60eeac0a6f3285ec7430cc116c2d077f11c9b44c6b09389f024850f"
+  }
+}

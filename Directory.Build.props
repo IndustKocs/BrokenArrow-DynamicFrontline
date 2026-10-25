@@ -1,0 +1,8 @@
+<Project><PropertyGroup>
+  <TargetFramework>net6.0</TargetFramework>
+  <LangVersion>12</LangVersion><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings>
+  <TreatWarningsAsErrors>true</TreatWarningsAsErrors><CheckEolTargetFramework>false</CheckEolTargetFramework>
+  <Deterministic>true</Deterministic><DebugType>portable</DebugType>
+  <RestorePackagesPath>$(MSBuildThisFileDirectory).nuget</RestorePackagesPath>
+  <UseAppHost>false</UseAppHost>
+</PropertyGroup></Project>

@@ -1,0 +1,33 @@
+{
+  "melonloader": "0.7.3",
+  "sdk": "8.0.426",
+  "target": "net6.0",
+  "sdkOfficialSha512": "10261657109f1c62126f106a9ac966739b025b5f6b4a9f88ab7c6e73cacce9aec771895daa3267b8da933a83c32ee91bf458dc6704e1ddcd9bcf0d5edd036abb",
+  "files": [
+    {
+      "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.426/dotnet-sdk-8.0.426-win-x64.zip",
+      "path": "tools/dotnet-sdk.zip",
+      "sha256": "B2523F881C97E13234E9B3905FE9978831B84E52F8115BA397D31203D2E022CE"
+    },
+    {
+      "url": "https://github.com/LavaGang/MelonLoader/releases/download/v0.7.3/MelonLoader.x64.zip",
+      "path": "tools/MelonLoader.x64.zip",
+      "sha256": "5B2B2F3D1CD42B59EC886C5BDC2663EDAE87A0097A4F4A8F58C0965A99DDA416"
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg",
+      "path": "tools/feed/microsoft.netcore.app.ref.6.0.36.nupkg",
+      "sha256": "F4B66056820517CA8DC94BBC91D26B6062EEB4C17F70BD8AF361CDDB2C30971F"
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg",
+      "path": "tools/feed/microsoft.aspnetcore.app.ref.6.0.36.nupkg",
+      "sha256": "F630E459B8F0FE777CCAA7735536A00AEAABEA8C09FC350C8B80655194F88565"
+    },
+    {
+      "url": "https://api.nuget.org/v3-flatcontainer/microsoft.windowsdesktop.app.ref/6.0.36/microsoft.windowsdesktop.app.ref.6.0.36.nupkg",
+      "path": "tools/feed/microsoft.windowsdesktop.app.ref.6.0.36.nupkg",
+      "sha256": "2BC97651082B10E26DEB0DD0E09CBB749957008D601BAA3ED8D1018261BC746E"
+    }
+  ]
+}

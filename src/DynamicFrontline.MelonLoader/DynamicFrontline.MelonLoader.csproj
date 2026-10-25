@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup>
+<ProjectReference Include="../DynamicFrontline.GameAdapter/DynamicFrontline.GameAdapter.csproj"/>
+<Reference Include="MelonLoader"><HintPath>../../tools/melonloader/MelonLoader/net6/MelonLoader.dll</HintPath><Private>false</Private></Reference>
+<Reference Include="0Harmony"><HintPath>../../tools/melonloader/MelonLoader/net6/0Harmony.dll</HintPath><Private>false</Private></Reference>
+</ItemGroup><ItemGroup><EmbeddedResource Include="../../config/compatibility.json" LogicalName="DynamicFrontline.compatibility.json"/></ItemGroup></Project>
