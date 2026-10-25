@@ -1,0 +1,238 @@
+{
+  "total": 58,
+  "failed": 0,
+  "results": [
+    {
+      "name": "baseline F07 F08 F09 preserved",
+      "passed": true
+    },
+    {
+      "name": "HEAT equality and asymmetry",
+      "passed": true
+    },
+    {
+      "name": "HEAT operation intermediates",
+      "passed": true
+    },
+    {
+      "name": "HEAT finite supported domain",
+      "passed": true
+    },
+    {
+      "name": "Kinetic positive minimum only",
+      "passed": true
+    },
+    {
+      "name": "Threshold strict equality HEAT bypass",
+      "passed": true
+    },
+    {
+      "name": "Range actual not offset",
+      "passed": true
+    },
+    {
+      "name": "AoE ammunition 4 surface example",
+      "passed": true
+    },
+    {
+      "name": "AoE zero radius and no falloff boundaries",
+      "passed": true
+    },
+    {
+      "name": "Differential finite HEAT and AoE seeded 1000",
+      "passed": true
+    },
+    {
+      "name": "Infantry count ceil boundaries",
+      "passed": true
+    },
+    {
+      "name": "Infantry count slots distinct from initial",
+      "passed": true
+    },
+    {
+      "name": "Death priority stable tie order injected RNG",
+      "passed": true
+    },
+    {
+      "name": "Heal first minimum no RNG",
+      "passed": true
+    },
+    {
+      "name": "Death empty and invalid random",
+      "passed": true
+    },
+    {
+      "name": "Ammo selected first ID and no refill",
+      "passed": true
+    },
+    {
+      "name": "Ammo zero and overflow guards",
+      "passed": true
+    },
+    {
+      "name": "Stress boundaries recovery order no extra application",
+      "passed": true
+    },
+    {
+      "name": "Readiness preserves observed state and explicit time model",
+      "passed": true
+    },
+    {
+      "name": "Ammo invariant 500 seeded populations",
+      "passed": true
+    },
+    {
+      "name": "F11 power and zero count",
+      "passed": true
+    },
+    {
+      "name": "F12 direct product no cap",
+      "passed": true
+    },
+    {
+      "name": "Probability equality separate policy",
+      "passed": true
+    },
+    {
+      "name": "CF18 increments first and wraps",
+      "passed": true
+    },
+    {
+      "name": "CF18 constant and invalid ranges do not advance",
+      "passed": true
+    },
+    {
+      "name": "CF18 deterministic period and copied fixture",
+      "passed": true
+    },
+    {
+      "name": "Seeker gate prefix no unconditional reroll",
+      "passed": true
+    },
+    {
+      "name": "Differential missile composition seeded 1000",
+      "passed": true
+    },
+    {
+      "name": "Critical remainder no hidden division or clamp",
+      "passed": true
+    },
+    {
+      "name": "Critical comparison inclusive and zero remainder",
+      "passed": true
+    },
+    {
+      "name": "Critical reroll does not consume attempt",
+      "passed": true
+    },
+    {
+      "name": "Critical red removal preserves candidate ordering",
+      "passed": true
+    },
+    {
+      "name": "Critical explicit budget reports incomplete not false success",
+      "passed": true
+    },
+    {
+      "name": "Critical no candidates and invalid levels",
+      "passed": true
+    },
+    {
+      "name": "Critical table nonlinear per type and level",
+      "passed": true
+    },
+    {
+      "name": "Critical table no mobility override at zero",
+      "passed": true
+    },
+    {
+      "name": "Helicopter native step and arrival",
+      "passed": true
+    },
+    {
+      "name": "Helicopter zero distance time agility",
+      "passed": true
+    },
+    {
+      "name": "Helicopter negative step separate normal policy",
+      "passed": true
+    },
+    {
+      "name": "Fuel requested only without clamp",
+      "passed": true
+    },
+    {
+      "name": "Ground vision cover sneak optics",
+      "passed": true
+    },
+    {
+      "name": "Ground exact epsilon and flash floor",
+      "passed": true
+    },
+    {
+      "name": "Air no ground minimum or terrain clamp",
+      "passed": true
+    },
+    {
+      "name": "Terrain forest 23 samples extracted example",
+      "passed": true
+    },
+    {
+      "name": "Terrain counts persist across separated types",
+      "passed": true
+    },
+    {
+      "name": "Terrain flags not type and forced smoke exclusion",
+      "passed": true
+    },
+    {
+      "name": "Terrain budget strictly exceeded and height",
+      "passed": true
+    },
+    {
+      "name": "Weapon flash timer marker floor",
+      "passed": true
+    },
+    {
+      "name": "Smoke sphere center tangent miss and zero ray",
+      "passed": true
+    },
+    {
+      "name": "Smoke intervals shared sample index",
+      "passed": true
+    },
+    {
+      "name": "Smoke empty zero invalid overlap and budget",
+      "passed": true
+    },
+    {
+      "name": "Research profile provenance preserved",
+      "passed": true
+    },
+    {
+      "name": "Research rejects hash unknown and mislabeled runtime",
+      "passed": true
+    },
+    {
+      "name": "Explorer compares profiles no implicit global config",
+      "passed": true
+    },
+    {
+      "name": "Explorer rejects incompatible profile and missing input",
+      "passed": true
+    },
+    {
+      "name": "Integration territory graph isolation unchanged by combat calls",
+      "passed": true
+    },
+    {
+      "name": "Mathematical assembly has no Unity loader or network references",
+      "passed": true
+    },
+    {
+      "name": "Independent Python double reference fixtures finite domain",
+      "passed": true
+    }
+  ]
+}
