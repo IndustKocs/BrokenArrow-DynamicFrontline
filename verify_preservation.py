@@ -1,10 +1,12 @@
 """Read-only verification against the existing research baseline. Writes only artifacts/."""
 from pathlib import Path
-import csv, hashlib, json
+import csv, hashlib, json, argparse
 from datetime import datetime, timezone
 
 root=Path(__file__).resolve().parent
-baseline=root.parent/'research/evidence'
+parser=argparse.ArgumentParser()
+parser.add_argument('--baseline',type=Path,default=root.parent/'research/evidence')
+baseline=parser.parse_args().baseline
 game=Path(r'D:\steam\steamapps\common\broken_arrow')
 with (baseline/'inventory.csv').open(encoding='utf-8-sig') as f:
     old={x['path']:(int(x['bytes']),int(x['mtime_ns'])) for x in csv.DictReader(f)}

@@ -1,5 +1,7 @@
 # Dynamic Frontline — Proof of Concept 0.1
 
+ТЗ №6 реализовано в отдельной ветке `feature/frontline-connectivity`. Основной отчёт этого каталога: [FRONTLINE_PROTOTYPE_REPORT.md](FRONTLINE_PROTOTYPE_REPORT.md). Новые тесты и диагностику запускает `build-frontline.ps1`; старый `build.ps1` ниже относится к исходному прототипу.
+
 Экспериментальная кодовая база для Broken Arrow. Игровые команды **отключены в адаптере** до проверки IL2CPP-обёрток и полноты перехвата пользовательских приказов. Это не готовый к матчу мод.
 
 Подробные результаты: [PROTOTYPE_REPORT.md](PROTOTYPE_REPORT.md). Точки интеграции: [docs/GAME_INTEGRATION.md](docs/GAME_INTEGRATION.md). Сетевая архитектура: [docs/PVP_DESIGN.md](docs/PVP_DESIGN.md).

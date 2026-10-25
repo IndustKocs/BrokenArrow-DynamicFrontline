@@ -1,0 +1,12 @@
+[
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\frontline-connectivity\\artifacts\\DynamicFrontline.Core.dll",
+    "Algorithm": "SHA256",
+    "Hash": "F44C8C4A1CFF96794F1ED8CBE9E0C96D17DC143FF991B83963E049365EA151D2"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\frontline-connectivity\\artifacts\\DynamicFrontline.Frontline.dll",
+    "Algorithm": "SHA256",
+    "Hash": "502075E5B30C4CCA688C2E50E1EF8E4F3F875193C5D3DF888A940C61EE76FAAC"
+  }
+]

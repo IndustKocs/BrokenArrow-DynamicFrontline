@@ -1,0 +1,301 @@
+{
+  "total": 59,
+  "failed": 0,
+  "results": [
+    {
+      "name": "neutral capture and regular advance require rooted territory",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "regular withdrawal retains last stable control",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "hysteresis requires accumulated capture and decays after death",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "capture after four equal ticks",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "equal opposing influence contested without ownership flicker",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "enemy capture changes stable owner only after threshold",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "soldier count and shock affect influence independently of HP",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "territory excludes dead",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "territory excludes zero",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "territory excludes panic",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "territory excludes deserting",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "territory excludes loaded",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "noncapture role 3 never changes grid even in rear",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "noncapture role 4 never changes grid even in rear",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "noncapture role 5 never changes grid even in rear",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid capture role rejected and unknown IDs default deny",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "local area moves without territorial trail",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "separate autonomous groups and overlapping enclave union",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "local radius tracks soldiers and last soldier removes enclave",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "restoring territorial corridor absorbs local presence",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "out of map and masked units cannot capture or relay",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "only changed footprints are updated",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "direct and intermediate operational support",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "regular recon special regular chain supports without painting corridor",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "multiple reconnaissance relays connect to root",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "destroyed relay breaks chain and replacement restores it",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "too distant and unrooted chain remain disconnected",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "hop limit stops artificial long chains",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "relay exclusion panic",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "relay exclusion deserting",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "relay exclusion loaded",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "relay exclusion zero",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "shock participation configured independently of capture",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "opponent nodes never link across teams",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "terrain barrier blocks links including diagonal corner cutting",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "operational support does not imply logistics or territory",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "logistics can exist without territorial or operational continuity",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "distance and unknown retreat are not proof of encirclement",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "safe retreat without support remains autonomous",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "confirmed closed route waits then produces configured severity",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "physical closure with operational support lowers severity but opens no route",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "recovery before penalties and repeated isolation reset confirmation timer",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "recovery after penalties holds reconnecting then settles",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "reconnected territory and support wait before Connected",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "boundary extracts stable simplified straight front",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "boundary supports closed islands and concave contours",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "masked terrain boundary remains distinct from enemy front",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "input order does not change authoritative outputs",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "JSON snapshots and ordered deltas reconstruct authority",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "foreign duplicate reordered delta rejected",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "presentation default denies territory and every enemy coordinate or key",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "invalid tick duplicate UID match and nonfinite data fail before mutation",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "configuration rejects invalid domains",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "configuration file loads explicit synthetic profiles",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "synthetic retreat routing detects enclosing terrain and neutral escape",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "enemy territory retreat rule is independent configurable policy",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "desertion adapter suppresses territory relay and local area until restored",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "configurable panic coefficient and type multiplier apply",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "vehicle relay opt in does not enable territorial capture",
+      "passed": true,
+      "error": ""
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "Rules": {
+    "Version": "frontline-poc-0.1-synthetic",
+    "TickMilliseconds": 250,
+    "CalmCoefficient": 1.0,
+    "ShockCoefficient": 0.5,
+    "PanicCoefficient": 0.0,
+    "LocalRadiusPerSqrtInfluence": 4.0,
+    "MaximumLocalRadius": 30.0,
+    "CaptureThreshold": 16000,
+    "DominanceMargin": 1000,
+    "ProgressDecayPerSecond": 2000,
+    "LinkDistance": 60.0,
+    "MaximumHops": 8,
+    "ShockCanRelay": true,
+    "PanicCanRelay": false,
+    "IsolationDelayTicks": 12,
+    "RecoveryDelayTicks": 8,
+    "SeverityPerSecond": 0.03,
+    "SupportedSeverityMultiplier": 0.25,
+    "SuppliedSeverityMultiplier": 0.5
+  },
+  "Profiles": [
+    {"UnitId":1,"Role":"Line","CanCaptureTerritory":true,"CanRelay":true,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1},
+    {"UnitId":2,"Role":"Reserve","CanCaptureTerritory":true,"CanRelay":true,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1},
+    {"UnitId":3,"Role":"SpecialForces","CanCaptureTerritory":false,"CanRelay":true,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1},
+    {"UnitId":4,"Role":"Recon","CanCaptureTerritory":false,"CanRelay":true,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1},
+    {"UnitId":5,"Role":"Sniper","CanCaptureTerritory":false,"CanRelay":false,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1},
+    {"UnitId":6,"Role":"Vehicle","CanCaptureTerritory":false,"CanRelay":false,"TypeCoefficient":1,"InfluenceRadius":10,"MinimumRelaySoldiers":1}
+  ]
+}
