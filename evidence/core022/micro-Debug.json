@@ -1,0 +1,95 @@
+{
+  "configuration": "Debug",
+  "runtime": ".NET 6.0.36",
+  "rows": [
+    {
+      "name": "CDF build 10001 keys and 1000 samples",
+      "count": 10,
+      "batches": 15,
+      "medianNs": 1608800,
+      "maxBatchNs": 1708600,
+      "bytesPerCall": 1265042.72
+    },
+    {
+      "name": "CDF cache hit",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 172.7,
+      "maxBatchNs": 193.8,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Polar confirmed draw",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 66.23,
+      "maxBatchNs": 109.27,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "FastDimond",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 61.99,
+      "maxBatchNs": 63.4,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Trajectory deviation",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 91.42,
+      "maxBatchNs": 107.75,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Buff pipeline",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 507.07,
+      "maxBatchNs": 550.89,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Single sphere smoke",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 113.58,
+      "maxBatchNs": 131.63,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Aircraft interpolation",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 67.39,
+      "maxBatchNs": 83.28,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Astar priority",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 24.5,
+      "maxBatchNs": 24.77,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "Identity validation",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 59.65,
+      "maxBatchNs": 69.84,
+      "bytesPerCall": 0
+    },
+    {
+      "name": "H1 finite research",
+      "count": 10000,
+      "batches": 15,
+      "medianNs": 18.91,
+      "maxBatchNs": 20.34,
+      "bytesPerCall": 0
+    }
+  ],
+  "benchmarkSink": 1.5606956481933594
+}

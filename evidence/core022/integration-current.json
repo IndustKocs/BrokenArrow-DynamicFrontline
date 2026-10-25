@@ -1,0 +1,398 @@
+{
+  "seed": 82026,
+  "warmup": 10,
+  "samples": 60,
+  "gcScope": "60 measured iterations including own-only serialization between steps",
+  "hashes": {
+    "DynamicFrontline.Core.dll": "FFF79452DF05EB5955181066143E8654A0CB22E759FBF26815FA4B8F70F1F588",
+    "DynamicFrontline.Frontline.dll": "CD3AFC15600D106BDED35F493E7E1838131DFBB5A4732A48FE7AD121172B79F3",
+    "DynamicFrontline.GameAdapter.dll": "F9ECB050AA8A255BA85F0A549625C5B58C647A5DA3EFF23BEE70BE06B1489E43",
+    "DynamicFrontline.Integration.dll": "64FEB499F853315138A02A402DD77FD18398E0BB368A20C96878571DA124794F"
+  },
+  "rows": [
+    {
+      "size": 128,
+      "count": 100,
+      "period": 100,
+      "median": 0.3819,
+      "p95": 0.8935,
+      "p99": 1.9993,
+      "bytesPerTick": 325364,
+      "gc": [
+        2,
+        1,
+        0
+      ],
+      "workingSet": 41517056,
+      "managedHeap": 6240016
+    },
+    {
+      "size": 128,
+      "count": 100,
+      "period": 250,
+      "median": 0.3502,
+      "p95": 0.4253,
+      "p99": 1.2441,
+      "bytesPerTick": 325366,
+      "gc": [
+        2,
+        0,
+        0
+      ],
+      "workingSet": 43634688,
+      "managedHeap": 10350200
+    },
+    {
+      "size": 128,
+      "count": 100,
+      "period": 1000,
+      "median": 0.3383,
+      "p95": 0.4029,
+      "p99": 2.2608,
+      "bytesPerTick": 325364,
+      "gc": [
+        2,
+        1,
+        1
+      ],
+      "workingSet": 43962368,
+      "managedHeap": 9390648
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 100,
+      "median": 1.1117,
+      "p95": 1.6505,
+      "p99": 3.2063,
+      "bytesPerTick": 911680,
+      "gc": [
+        5,
+        2,
+        2
+      ],
+      "workingSet": 44208128,
+      "managedHeap": 5917040
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 250,
+      "median": 0.9711,
+      "p95": 1.9865,
+      "p99": 3.0761,
+      "bytesPerTick": 911693,
+      "gc": [
+        5,
+        2,
+        1
+      ],
+      "workingSet": 49127424,
+      "managedHeap": 12497400
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 1000,
+      "median": 0.8489,
+      "p95": 1.6876,
+      "p99": 2.8681,
+      "bytesPerTick": 911680,
+      "gc": [
+        5,
+        2,
+        2
+      ],
+      "workingSet": 50360320,
+      "managedHeap": 8776360
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 100,
+      "median": 1.3059,
+      "p95": 2.0452,
+      "p99": 3.1807,
+      "bytesPerTick": 1569981,
+      "gc": [
+        8,
+        3,
+        3
+      ],
+      "workingSet": 49479680,
+      "managedHeap": 8540896
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 250,
+      "median": 1.2902,
+      "p95": 2.0042,
+      "p99": 2.9746,
+      "bytesPerTick": 1536014,
+      "gc": [
+        9,
+        3,
+        2
+      ],
+      "workingSet": 48427008,
+      "managedHeap": 9496720
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 1000,
+      "median": 1.2115,
+      "p95": 1.8021,
+      "p99": 2.2559,
+      "bytesPerTick": 1496644,
+      "gc": [
+        7,
+        3,
+        2
+      ],
+      "workingSet": 48975872,
+      "managedHeap": 16099568
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 100,
+      "median": 2.6295,
+      "p95": 4.0095,
+      "p99": 5.5763,
+      "bytesPerTick": 3013244,
+      "gc": [
+        21,
+        16,
+        8
+      ],
+      "workingSet": 50966528,
+      "managedHeap": 15446064
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 250,
+      "median": 2.5565,
+      "p95": 3.4936,
+      "p99": 4.1446,
+      "bytesPerTick": 2990601,
+      "gc": [
+        21,
+        15,
+        8
+      ],
+      "workingSet": 50892800,
+      "managedHeap": 16224360
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 1000,
+      "median": 2.5094,
+      "p95": 3.6322,
+      "p99": 17.7257,
+      "bytesPerTick": 2935543,
+      "gc": [
+        20,
+        13,
+        7
+      ],
+      "workingSet": 51265536,
+      "managedHeap": 19314640
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 100,
+      "median": 0.1924,
+      "p95": 0.29,
+      "p99": 2.7456,
+      "bytesPerTick": 319152,
+      "gc": [
+        2,
+        1,
+        0
+      ],
+      "workingSet": 53669888,
+      "managedHeap": 9767440
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 250,
+      "median": 0.1931,
+      "p95": 0.2439,
+      "p99": 2.4481,
+      "bytesPerTick": 319152,
+      "gc": [
+        2,
+        1,
+        0
+      ],
+      "workingSet": 54620160,
+      "managedHeap": 12812896
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 1000,
+      "median": 0.1932,
+      "p95": 0.233,
+      "p99": 2.619,
+      "bytesPerTick": 319152,
+      "gc": [
+        2,
+        1,
+        0
+      ],
+      "workingSet": 51380224,
+      "managedHeap": 10786016
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 100,
+      "median": 0.6241,
+      "p95": 1.3131,
+      "p99": 11.8425,
+      "bytesPerTick": 894184,
+      "gc": [
+        5,
+        2,
+        1
+      ],
+      "workingSet": 57352192,
+      "managedHeap": 21368032
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 250,
+      "median": 0.623,
+      "p95": 1.3046,
+      "p99": 17.8488,
+      "bytesPerTick": 894179,
+      "gc": [
+        5,
+        2,
+        1
+      ],
+      "workingSet": 56504320,
+      "managedHeap": 18271736
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 1000,
+      "median": 0.622,
+      "p95": 1.0528,
+      "p99": 5.8804,
+      "bytesPerTick": 894167,
+      "gc": [
+        6,
+        2,
+        1
+      ],
+      "workingSet": 58482688,
+      "managedHeap": 15373552
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 100,
+      "median": 1.1093,
+      "p95": 3.0021,
+      "p99": 18.9325,
+      "bytesPerTick": 1771236,
+      "gc": [
+        13,
+        8,
+        6
+      ],
+      "workingSet": 60276736,
+      "managedHeap": 17871384
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 250,
+      "median": 1.1533,
+      "p95": 2.8962,
+      "p99": 16.8726,
+      "bytesPerTick": 1655095,
+      "gc": [
+        11,
+        7,
+        4
+      ],
+      "workingSet": 61116416,
+      "managedHeap": 15562752
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 1000,
+      "median": 1.0708,
+      "p95": 3.7595,
+      "p99": 12.8961,
+      "bytesPerTick": 1576563,
+      "gc": [
+        10,
+        7,
+        3
+      ],
+      "workingSet": 58609664,
+      "managedHeap": 18964312
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 100,
+      "median": 2.2765,
+      "p95": 7.9765,
+      "p99": 19.4076,
+      "bytesPerTick": 3476985,
+      "gc": [
+        25,
+        16,
+        12
+      ],
+      "workingSet": 58716160,
+      "managedHeap": 25701952
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 250,
+      "median": 2.1194,
+      "p95": 17.1602,
+      "p99": 19.7995,
+      "bytesPerTick": 3275944,
+      "gc": [
+        23,
+        16,
+        10
+      ],
+      "workingSet": 60006400,
+      "managedHeap": 19744952
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 1000,
+      "median": 2.0589,
+      "p95": 11.066,
+      "p99": 17.7693,
+      "bytesPerTick": 3057026,
+      "gc": [
+        21,
+        13,
+        7
+      ],
+      "workingSet": 58916864,
+      "managedHeap": 17680136
+    }
+  ]
+}
