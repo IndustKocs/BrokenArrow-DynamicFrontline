@@ -7,7 +7,7 @@ public readonly record struct TerrainCost(float Cost,int Samples,int FirstBudget
 public readonly record struct SmokeInterval(float Start,float End,float Opacity);
 public readonly record struct SmokeCost(float Cost,float RetainedLength,long Samples);
 public readonly record struct SmokeSphere(float PerpendicularDistance,bool IntersectsInfiniteLine,float HalfChord);
-public static class VisibilityMath
+public static partial class VisibilityMath
 {
     // CF14 #20385 B. Inputs already resolved from both components. Not a contact decision.
     public static VisionRange Ground(GroundVisionInput v)
