@@ -1,5 +1,5 @@
 {
-  "total": 84,
+  "total": 89,
   "failed": 0,
   "results": [
     {
@@ -419,6 +419,31 @@
     },
     {
       "name": "vehicle relay has no fabricated soldiers and never captures",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Pass03 unknown death lifecycle rejects complete-looking snapshot",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Pass03 processing death is excluded before entity disposal",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Pass03 one-way passage does not create an undirected relay edge",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "Pass03 native partial endpoint and entry-exit codes stay Unknown",
+      "passed": true,
+      "error": ""
+    },
+    {
+      "name": "ownership transfer invalidates an outstanding route",
       "passed": true,
       "error": ""
     }

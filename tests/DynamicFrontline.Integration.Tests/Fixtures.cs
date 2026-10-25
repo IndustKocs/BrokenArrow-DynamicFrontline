@@ -12,7 +12,8 @@ sealed class TestRoutes:IGameRouteBackend
 {
     public List<RouteRequest> Requests=new();public Queue<RouteAnswer> Answers=new();public bool AutoAnswer=true,Throw;
     public RouteState State=RouteState.Reachable;public double Cost=10;public bool Complete=true;
-    public void Submit(RouteRequest r){if(Throw)throw new Exception();Requests.Add(r);if(AutoAnswer)Answers.Enqueue(new(r.RequestId,State,Complete,Cost));}
+    public Func<RouteRequest,RouteState>? CustomAnswer;
+    public void Submit(RouteRequest r){if(Throw)throw new Exception();Requests.Add(r);if(AutoAnswer)Answers.Enqueue(new(r.RequestId,CustomAnswer?.Invoke(r)??State,Complete,Cost));}
     public IReadOnlyList<RouteAnswer> DrainAnswers(){var a=Answers.ToArray();Answers.Clear();return a;}
 }
 sealed class Fixture:IDisposable
@@ -39,7 +40,7 @@ sealed class Fixture:IDisposable
     {
         var p=Profiles.Document.Units.Single(p=>p.UnitDefinitionId==id);bool infantry=p.GameRole is >=30 and <=36;
         return new(uid,"spawn-"+uid,id,p.GameRole,team==0?10:20,team==0?42:87,team,new(x,3,z),true,infantry?8u:null,100,100,
-            infantry?0f:null,infantry?100f:null,infantry?StressLevel.Calm:null,false,false,false,1,new(false,false,false,false,Array.Empty<int>()));
+            infantry?0f:null,infantry?100f:null,infantry?StressLevel.Calm:null,false,false,false,1,new(false,false,false,false,Array.Empty<int>()),GameDeathState.None,"Synthetic direct fixture",0);
     }
     public BrokenArrowUnitSnapshotProvider Provider()=>new(Access,Profiles,Coordinates,GameTerritoryMapProvider.CreateGrid(Map),Context.Value!);
     public bool Step(params RawGameUnit[] units){Access.Units=units;bool ok=Bridge.Update(Time);Time+=250;return ok;}

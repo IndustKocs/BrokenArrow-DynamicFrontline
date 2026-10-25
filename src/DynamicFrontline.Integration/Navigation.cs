@@ -5,7 +5,7 @@ namespace DynamicFrontline.Integration;
 public enum RouteState { Reachable, Blocked, Unknown, Pending, Stale }
 public readonly record struct RouteEndpoint(UnitKey? Unit,string? Root,Point2 Position,int Team);
 public readonly record struct RouteQuery(Guid MatchId,RouteEndpoint A,RouteEndpoint B,NavigationChannel Channel,int MovementType,int Mask,long NavigationRevision,double MaximumCost);
-public sealed record RouteRequest(long RequestId,RouteQuery Query);
+public sealed record RouteRequest(long RequestId,RouteQuery Query,long SourceSnapshotSequence=0);
 public sealed record RouteAnswer(long RequestId,RouteState State,bool Complete,double Cost);
 public readonly record struct RouteResult(RouteState State,double? Cost=null);
 public interface IGameRouteBackend
@@ -23,15 +23,15 @@ public sealed class GameNavigationAdapter
     private readonly IGameRouteBackend backend;private readonly NavigationSettings settings;
     private readonly Dictionary<RouteQuery,Entry> cache=new();private readonly Dictionary<long,RouteQuery> requests=new();
     private Dictionary<UnitKey,(Point2 Position,int Team)> units=new();private Dictionary<string,RouteEndpoint> roots=new();
-    private long nextId,tick=-1,navRevision=-1;private Guid match;private int budget;
+    private long nextId,tick=-1,navRevision=-1,snapshotSequence;private Guid match;private int budget;
     public int PendingCount=>requests.Count;public int CachedCount=>cache.Count;public long Submitted {get;private set;}public long DiscardedAnswers {get;private set;}
     public GameNavigationAdapter(IGameRouteBackend backend,NavigationSettings settings){settings.Validate();this.backend=backend;this.settings=settings;}
     public static RouteEndpoint RootEndpoint(TeamRoot root)=>new(null,$"root:{root.Team}:{root.Position.X:R}:{root.Position.Y:R}",root.Position,root.Team);
-    public void BeginFrame(Guid matchId,long navigationRevision,long logicalTick,IEnumerable<FrontlineUnit> current,IEnumerable<TeamRoot> rootAreas)
+    public void BeginFrame(Guid matchId,long navigationRevision,long logicalTick,IEnumerable<FrontlineUnit> current,IEnumerable<TeamRoot> rootAreas,long? sourceSnapshotSequence=null)
     {
         if(matchId!=match||navigationRevision!=navRevision){cache.Clear();requests.Clear();tick=-1;}
         if(logicalTick<=tick)throw new ArgumentException("Navigation ticks must increase");
-        match=matchId;navRevision=navigationRevision;tick=logicalTick;budget=settings.MaximumQueriesPerTick;
+        match=matchId;navRevision=navigationRevision;tick=logicalTick;snapshotSequence=sourceSnapshotSequence??logicalTick;budget=settings.MaximumQueriesPerTick;
         units=current.Where(u=>u.Alive).ToDictionary(u=>u.Key,u=>(u.Position,u.Team));
         roots=rootAreas.Select(RootEndpoint).ToDictionary(r=>r.Root!);
         foreach(var pair in cache.ToArray())
@@ -58,7 +58,7 @@ public sealed class GameNavigationAdapter
         if(budget==0||requests.Count>=settings.MaximumPending)return new(stale?RouteState.Stale:RouteState.Pending);
         long id=++nextId;budget--;Submitted++;
         cache[query]=new(id,tick,new(RouteState.Pending),tick);requests[id]=query;
-        try{backend.Submit(new(id,query));}
+        try{backend.Submit(new(id,query,snapshotSequence));}
         catch{requests.Remove(id);cache[query]=new(0,tick,new(RouteState.Unknown),tick);return new(RouteState.Unknown);}
         return new(stale?RouteState.Stale:RouteState.Pending);
     }
@@ -93,12 +93,17 @@ public sealed class NavigationConnectivityAdapter(GameNavigationAdapter navigati
         if(!units.TryGetValue(a.Key,out var x)||!units.TryGetValue(b.Key,out var y)||x.Profile is not{} p||y.Profile is not{} q||
             p.ConnectivityChannel!=q.ConnectivityChannel||p.MovementType!=q.MovementType||p.NavigationMask!=q.NavigationMask)return false;
         double distance=Math.Min(p.ConnectivityRange,q.ConnectivityRange);
-        return a.Position.DistanceSquared(b.Position)<=distance*distance&&Query(Endpoint(x),Endpoint(y),p,p.ConnectivityChannel).State==RouteState.Reachable;
+        if(a.Position.DistanceSquared(b.Position)>distance*distance)return false;
+        var forward=Query(Endpoint(x),Endpoint(y),p,p.ConnectivityChannel);
+        var reverse=Query(Endpoint(y),Endpoint(x),q,q.ConnectivityChannel);
+        return forward.State==RouteState.Reachable&&reverse.State==RouteState.Reachable;
     }
     public bool CanLink(TeamRoot root,FrontlineUnit unit)
     {
         if(!units.TryGetValue(unit.Key,out var u)||u.Profile is not{} p||root.Position.DistanceSquared(u.Position)>p.ConnectivityRange*p.ConnectivityRange)return false;
-        return Query(GameNavigationAdapter.RootEndpoint(root),Endpoint(u),p,p.ConnectivityChannel).State==RouteState.Reachable;
+        var forward=Query(GameNavigationAdapter.RootEndpoint(root),Endpoint(u),p,p.ConnectivityChannel);
+        var reverse=Query(Endpoint(u),GameNavigationAdapter.RootEndpoint(root),p,p.ConnectivityChannel);
+        return forward.State==RouteState.Reachable&&reverse.State==RouteState.Reachable;
     }
     private RouteState ToRoot(FrontlineUnit unit,NavigationChannel channel)
     {

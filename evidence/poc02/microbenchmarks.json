@@ -2,25 +2,25 @@
   {
     "name": "profile-resolution",
     "iterations": 10000,
-    "totalMs": 0.061,
+    "totalMs": 0.0664,
     "bytes": 88
   },
   {
     "name": "single-unit-copy",
     "iterations": 1000,
-    "totalMs": 0.9923,
-    "bytes": 2392088
+    "totalMs": 1.0257,
+    "bytes": 2448088
   },
   {
     "name": "navigation-cache-hit",
     "iterations": 10000,
-    "totalMs": 3.6718,
+    "totalMs": 3.3927,
     "bytes": 88
   },
   {
     "name": "lifecycle-accept-and-cleanup",
     "iterations": 1000,
-    "totalMs": 1.2486,
+    "totalMs": 0.2164,
     "bytes": 1040088
   }
 ]

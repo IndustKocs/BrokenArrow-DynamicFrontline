@@ -34,6 +34,11 @@ static class Diagnostics
             html=html.Replace("Динамический фронт и оперативная связь","Dynamic Frontline · PoC 0.2");
             html=html.Replace("OFFLINE / AUTHORITATIVE DEBUG / SYNTHETIC DATA",teamSafe?"TEAM SAFE DIAGNOSTIC / OWN DATA ONLY":"DEVELOPER DEBUG / SYNTHETIC ADAPTER DATA");
             html=html.Replace("6: потеря спецназа-посредника · 9: открыт путь отхода из котла · 12: восстановление посредника","6: потеря посредника · 12: новая сущность с новой generation · обе команды симметричны");
+            if(teamSafe)
+            {
+                html=html.Replace("Реальные результаты C#-ядра. Это диагностический обзор обеих команд, не разрешённое игроку сетевое представление.","Synthetic-пример командной проекции: только собственные подразделения. Граф, территория и изоляция не передаются.");
+                html=html.Replace("6: потеря посредника · 12: новая сущность с новой generation · обе команды симметричны","Публичная шкала времени. Показаны только данные своей команды.");
+            }
             html=html.Replace("<pre id=\"stats\"></pre>","<pre id=\"metadata\"></pre><pre id=\"stats\"></pre>");
             string extension=teamSafe?
                 "const baseDraw=draw;draw=function(){baseDraw();document.getElementById('metadata').textContent='Team Safe Diagnostic: только свои подразделения. Территория, граф, изоляция и внутренние счётчики скрыты.';document.getElementById('stats').textContent='';};":

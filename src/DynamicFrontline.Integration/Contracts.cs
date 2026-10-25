@@ -10,6 +10,7 @@ public enum CaptureExclusion { None, UnknownProfile, NonCaptureRole, Loaded, Loa
 public enum StressPolicy { Standard, ExcludePanicked, ExcludeShockedAndPanicked }
 public enum UnknownUnitPolicy { Exclude, RejectSnapshot }
 public enum NavigationChannel { GroundPassage, OperationalRelay, LogisticsRoute }
+public enum GameDeathState { Unknown, None, DeathProcessing, Dead }
 public sealed record IntegrationSettings(bool EnableGameDataCollection=false,bool EnableFrontlineSimulation=false,
     bool EnableDebugExport=false,bool EnableGameStateModification=false)
 {
@@ -27,7 +28,8 @@ public sealed record RawVisibility(bool WasDetectedOnce,bool PotentialSee,bool S
 // LifecycleStamp is supplied by an explicit integration lifecycle registry, not a purported game generation.
 public sealed record RawGameUnit(long Uid,string LifecycleStamp,int DefinitionId,int GameRole,int PlayerUid,int? TeamUid,int TeamSide,
     WorldPoint WorldPosition,bool Alive,uint? AliveSoldierCount,float? Hp,float? MaxHp,float? Stress,float? MaxStress,
-    StressLevel? StressLevel,bool Loaded,bool Loading,bool Deserting,double StatusMultiplier,RawVisibility Visibility);
+    StressLevel? StressLevel,bool Loaded,bool Loading,bool Deserting,double StatusMultiplier,RawVisibility Visibility,
+    GameDeathState DeathState=GameDeathState.Unknown,string PositionSource="Unknown",long? PositionAgeMilliseconds=null);
 public sealed record RawGameFrame(long Revision,long CapturedMilliseconds,bool Complete,RawGameUnit[] Units);
 public interface IReadOnlyGameDataAccess { RawGameFrame Capture(GameMatchContext context); }
 public sealed record GameProfile(int UnitDefinitionId,int GameRole,bool CanCaptureTerritory,bool CanCreateLocalArea,
@@ -37,7 +39,8 @@ public sealed record GameProfile(int UnitDefinitionId,int GameRole,bool CanCaptu
 public sealed record ProfileDocument(DatabaseIdentity Database,string Version,UnknownUnitPolicy UnknownUnitPolicy,GameProfile[] Units);
 public sealed record AdaptedUnit(UnitKey Key,int DefinitionId,int GameRole,int PlayerUid,int Team,WorldPoint WorldPosition,
     Point2 Position,bool Alive,uint? AliveSoldierCount,float? Hp,float? MaxHp,float? Stress,float? MaxStress,StressLevel? StressLevel,
-    bool Loaded,bool Loading,bool Deserting,double StatusMultiplier,CaptureExclusion CaptureReason,GameProfile? Profile,RawVisibility Visibility);
+    bool Loaded,bool Loading,bool Deserting,double StatusMultiplier,CaptureExclusion CaptureReason,GameProfile? Profile,RawVisibility Visibility,
+    GameDeathState DeathState=GameDeathState.Unknown,string PositionSource="Unknown",long? PositionAgeMilliseconds=null);
 public sealed record InternalSimulationSnapshot(GameMatchContext Context,long SourceRevision,long CapturedMilliseconds,AdaptedUnit[] Units,
     FrontlineUnit[] CoreUnits,int UnknownProfiles);
 public sealed record SnapshotAttempt(InternalSimulationSnapshot? Snapshot,FailureCode Failure);

@@ -48,6 +48,8 @@ public sealed class BrokenArrowUnitSnapshotProvider
             {
                 if(string.IsNullOrWhiteSpace(u.LifecycleStamp)||!seen.Add(u.Uid)||u.Visibility==null||u.Visibility.ConfirmedVisibleTeams==null)throw new IntegrationValidationException(FailureCode.InvalidIdentity);
                 int? team=teams.Resolve(u);if(team==null)continue;
+                if(u.Alive&&u.DeathState==GameDeathState.Unknown||!Enum.IsDefined(typeof(GameDeathState),u.DeathState)||u.PositionAgeMilliseconds<0)
+                    throw new IntegrationValidationException(FailureCode.Incomplete);
                 var position=coordinates.ToPlane(u.WorldPosition);if(!grid.Available(grid.Index(position)))throw new IntegrationValidationException(FailureCode.InvalidPosition);
                 if((u.Hp.HasValue!=u.MaxHp.HasValue)||u.Hp is {} hp&&(!float.IsFinite(hp)||hp<0||!float.IsFinite(u.MaxHp!.Value)||u.MaxHp<=0||hp>u.MaxHp))throw new IntegrationValidationException(FailureCode.InvalidHealth);
                 if((u.Stress.HasValue!=u.MaxStress.HasValue)||u.Stress is {} stress&&(!float.IsFinite(stress)||stress<0||!float.IsFinite(u.MaxStress!.Value)||u.MaxStress<=0)||
@@ -60,9 +62,9 @@ public sealed class BrokenArrowUnitSnapshotProvider
             var keys=identity.AcceptComplete(context.MatchId,validated.Select(v=>v.Raw).ToArray());var values=new AdaptedUnit[validated.Count];var core=new FrontlineUnit[validated.Count];
             for(int i=0;i<validated.Count;i++)
             {
-                var v=validated[i];var u=v.Raw;bool alive=u.Alive&&u.Hp!=0;
+                var v=validated[i];var u=v.Raw;bool alive=u.Alive&&u.Hp!=0&&u.DeathState==GameDeathState.None;
                 values[i]=new(keys[u.Uid],u.DefinitionId,u.GameRole,u.PlayerUid,v.Team,u.WorldPosition,v.Position,alive,u.AliveSoldierCount,u.Hp,u.MaxHp,u.Stress,u.MaxStress,u.StressLevel,
-                    u.Loaded,u.Loading,u.Deserting,u.StatusMultiplier,v.Reason,v.Profile,u.Visibility with{ConfirmedVisibleTeams=u.Visibility.ConfirmedVisibleTeams.ToArray()});
+                    u.Loaded,u.Loading,u.Deserting,u.StatusMultiplier,v.Reason,v.Profile,u.Visibility with{ConfirmedVisibleTeams=u.Visibility.ConfirmedVisibleTeams.ToArray()},u.DeathState,u.PositionSource,u.PositionAgeMilliseconds);
                 bool excludedState=v.Reason is CaptureExclusion.StressPolicy||v.Profile==null;
                 core[i]=new(keys[u.Uid],u.DefinitionId,v.Team,v.Position,u.AliveSoldierCount??0,alive,
                     u.Loaded||(u.Loading&&v.Profile?.AllowLoading!=true),u.Deserting,u.StressLevel??StressLevel.Calm,excludedState?0:u.StatusMultiplier,
@@ -78,7 +80,7 @@ public sealed class BrokenArrowUnitSnapshotProvider
     private static CaptureExclusion Exclusion(RawGameUnit u,GameProfile? p)
     {
         if(p==null)return CaptureExclusion.UnknownProfile;
-        if(!u.Alive||u.Hp==0)return CaptureExclusion.Dead;
+        if(!u.Alive||u.Hp==0||u.DeathState is GameDeathState.DeathProcessing or GameDeathState.Dead)return CaptureExclusion.Dead;
         if(u.Loaded)return CaptureExclusion.Loaded;if(u.Loading&&!p.AllowLoading)return CaptureExclusion.Loading;if(u.Deserting)return CaptureExclusion.Deserting;
         if(p.StressPolicy==StressPolicy.ExcludePanicked&&u.StressLevel==Core.StressLevel.Panicked||
             p.StressPolicy==StressPolicy.ExcludeShockedAndPanicked&&u.StressLevel is Core.StressLevel.Shocked or Core.StressLevel.Panicked)return CaptureExclusion.StressPolicy;

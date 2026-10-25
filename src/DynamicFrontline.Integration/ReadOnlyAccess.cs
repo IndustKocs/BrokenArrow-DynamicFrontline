@@ -8,7 +8,7 @@ public interface IGameObjectFeed { GameObjectBatch ReadObjects(); }
 // Generic Has/Get reflection is an experimental binding; all names below are audited signatures.
 // The source owns enumeration/lifecycle. No pointer arithmetic, member writes or gameplay commands.
 public sealed class ReadOnlyComponentInspector(Func<string,Type?> typeResolver,Func<object,RawVisibility> visibility,
-    Func<long,bool>? isDeserting=null)
+    Func<long,bool>? isDeserting=null,Func<object,GameDeathState>? deathState=null)
 {
     public const string UnitType="Il2CppBrokenArrow.Shared.Ecs.Components.UnitComponent";
     public const string InfantryType="Il2CppBrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent";
@@ -57,7 +57,7 @@ public sealed class ReadOnlyComponentInspector(Func<string,Type?> typeResolver,F
             stress==null?null:Convert.ToSingle(Required(stress,"CurrentStressValue")),stress==null?null:Convert.ToSingle(Required(stress,"MaxStress")),
             stress==null?null:Enum.Parse<StressLevel>(Required(stress,"CurrentStressLevel").ToString()!,false),
             Component(entity,LoadedType)!=null,Component(entity,LoadingType)!=null,isDeserting?.Invoke(handle.CanonicalUid)??false,1,
-            visibility(entity));
+            visibility(entity),deathState?.Invoke(entity)??GameDeathState.Unknown,"LuaUnit.GetPosition (runtime unverified)",0);
     }
 }
 public sealed class ReflectionGameDataAccess(IGameObjectFeed source,ReadOnlyComponentInspector inspector):IReadOnlyGameDataAccess

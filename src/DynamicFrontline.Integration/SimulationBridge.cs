@@ -55,7 +55,7 @@ public sealed class FrontlineSimulationBridge:IDisposable
             if(attempt.Snapshot is not{} snapshot){Health.Reject(attempt.Failure);Health.State=IntegrationState.Unavailable;return false;}
             LastInspection=snapshot;
             if(!settings.EnableFrontlineSimulation){Health.Accept();Health.State=IntegrationState.DiagnosticsOnly;return true;}
-            navigation.BeginFrame(context.MatchId,context.NavigationRevision,logicalTick,snapshot.CoreUnits,roots);navLinks.SetFrame(snapshot,roots);
+            navigation.BeginFrame(context.MatchId,context.NavigationRevision,logicalTick,snapshot.CoreUnits,roots,snapshot.SourceRevision);navLinks.SetFrame(snapshot,roots);
             watch.Restart();AuthoritativeFrame result;
             try{result=simulation!.Step(logicalTick,snapshot.CoreUnits);}catch{coreFaulted=true;throw new IntegrationValidationException(FailureCode.CoreFailed);}
             logicalTick++;double coreTime=watch.Elapsed.TotalMilliseconds;

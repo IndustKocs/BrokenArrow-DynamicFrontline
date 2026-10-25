@@ -1,0 +1,97 @@
+# Результаты PoC 0.2
+
+Интеграционные тесты: **89**, ошибок **0**. Прежние тесты: **36 + 59 = 95**, все прошли. Итого **184**. Release, .NET 6.0.36, 25 октября 2026.
+
+Сборка обеих MelonLoader DLL успешна, без предупреждений. Проверка выполнена автономно, без запуска игры. Старые тесты не изменены. Полные build/test logs остаются в artifacts/poc02; итоговый JSON и hashes сохранены в evidence/poc02. Первые неуспешные итерации сохранены в append-only build.log и не выдаются за финальный прогон.
+
+| Тест | Результат |
+|---|---|
+| snapshot profile 1 | PASS |
+| snapshot profile 2 | PASS |
+| snapshot profile 3 | PASS |
+| snapshot profile 4 | PASS |
+| snapshot profile 5 | PASS |
+| snapshot profile 6 | PASS |
+| snapshot profile 7 | PASS |
+| snapshot profile 8 | PASS |
+| snapshot profile 9 | PASS |
+| snapshot state dead | PASS |
+| snapshot state loaded | PASS |
+| snapshot state loading | PASS |
+| snapshot state deserting | PASS |
+| snapshot state zero | PASS |
+| snapshot state missing-infantry | PASS |
+| unknown definition is diagnosed and excluded | PASS |
+| UID reuse after absence receives a new generation | PASS |
+| replacement lifecycle stamp differentiates same UID immediately | PASS |
+| incomplete frame neither despawns nor advances identity | PASS |
+| death repeated is stable and revival gets generation | PASS |
+| invalid input preserves stable core position | PASS |
+| invalid input preserves stable core team-missing | PASS |
+| invalid input preserves stable core team-mismatch | PASS |
+| invalid input preserves stable core hp | PASS |
+| invalid input preserves stable core stress | PASS |
+| invalid input preserves stable core duplicate | PASS |
+| invalid input preserves stable core revision | PASS |
+| invalid input preserves stable core read-failure | PASS |
+| provider copies visibility arrays | PASS |
+| provider rejects worker thread before source inspection | PASS |
+| assault capture needs explicit profile; role alone insufficient | PASS |
+| scout cannot be granted capture or local area | PASS |
+| different active scenario database cannot silently reuse profile | PASS |
+| unknown active database is explicit failure | PASS |
+| configuration digest and malformed JSON rejected | PASS |
+| 5v5 player roster maps separately from team and network identities | PASS |
+| inconsistent team roster is rejected | PASS |
+| world XZ coordinates round trip independently of world Y | PASS |
+| map has symmetric roots and cannot be assumed available | PASS |
+| protected spawn area cannot be contested or captured | PASS |
+| symmetric teams advance equally with independent graphs | PASS |
+| navigation result Reachable | PASS |
+| navigation result Blocked | PASS |
+| navigation result Unknown | PASS |
+| partial path is Unknown, never Blocked | PASS |
+| route timeout is Unknown and late response cannot revive it | PASS |
+| expired cache is Stale before requery | PASS |
+| removed endpoint invalidates pending route | PASS |
+| new generation never reuses old endpoint response | PASS |
+| dynamic bridge and navigation revision invalidate cached reachability | PASS |
+| masks channels and movement types are separate cache keys | PASS |
+| route budget limits submissions and pending queue | PASS |
+| too long route is Unknown rather than physical Blocked | PASS |
+| backend exception is Unknown | PASS |
+| Unknown navigation never confirms encirclement | PASS |
+| per-profile channel and range affect links, not territory | PASS |
+| default settings perform no collection and no mutation option exists | PASS |
+| render updates do not repeat logical tick | PASS |
+| provider loss preserves previous accepted snapshot | PASS |
+| absent match context waits safely | PASS |
+| scenario switch to unknown database clears old match result | PASS |
+| new match starts tick and generations from scratch | PASS |
+| navigation revision changes preserve territorial history | PASS |
+| profile version change restarts cleanly | PASS |
+| live source cannot be enabled by ordinary settings | PASS |
+| disposed bridge never calls provider | PASS |
+| hidden entities cannot change public DTO bytes or handles or counts | PASS |
+| FOW evidence never silently authorizes public enemy export history | PASS |
+| FOW evidence never silently authorizes public enemy export potential | PASS |
+| FOW evidence never silently authorizes public enemy export shootable | PASS |
+| FOW evidence never silently authorizes public enemy export marker | PASS |
+| FOW evidence never silently authorizes public enemy export confirmed | PASS |
+| team-safe diagnostic has no graph territory route or rejected-counter metadata | PASS |
+| developer full export requires explicit offline flag | PASS |
+| internal exceptions never appear in public status | PASS |
+| moving hidden recon and special forces produces no territorial delta | PASS |
+| mock ECS inspection copies audited fields without setters | PASS |
+| mock transport flags and noninfantry absence handled independently | PASS |
+| reflection provider thread gate prevents any feed access | PASS |
+| recorded fixture is tagged and cannot pose as live | PASS |
+| collection-only mode retains copied DTO without starting core | PASS |
+| snapshot roster is not a borrowed mutable array | PASS |
+| profile may disable local circles without disabling capture | PASS |
+| vehicle relay has no fabricated soldiers and never captures | PASS |
+| Pass03 unknown death lifecycle rejects complete-looking snapshot | PASS |
+| Pass03 processing death is excluded before entity disposal | PASS |
+| Pass03 one-way passage does not create an undirected relay edge | PASS |
+| Pass03 native partial endpoint and entry-exit codes stay Unknown | PASS |
+| ownership transfer invalidates an outstanding route | PASS |

@@ -1,0 +1,47 @@
+{
+  "Database": {
+    "ScenarioId": "synthetic-example",
+    "ProfileId": "synthetic",
+    "ProfileVersion": "1",
+    "GameRulesVersion": "synthetic-only",
+    "Source": "Synthetic",
+    "Sha256": null,
+    "ActiveVerified": true
+  },
+  "Version": "poc02-synthetic-example-v1",
+  "UnknownUnitPolicy": "Exclude",
+  "Units": [
+    {
+      "UnitDefinitionId": 1,
+      "GameRole": 30,
+      "CanCaptureTerritory": true,
+      "CanCreateLocalArea": true,
+      "CanRelayConnectivity": true,
+      "CaptureTypeMultiplier": 1,
+      "InfluenceRadius": 20,
+      "ConnectivityRange": 80,
+      "ConnectivityChannel": "OperationalRelay",
+      "MovementType": 0,
+      "NavigationMask": 1,
+      "StressPolicy": "Standard",
+      "AllowLoading": false,
+      "AllowNonInfantryRelay": false
+    },
+    {
+      "UnitDefinitionId": 2,
+      "GameRole": 36,
+      "CanCaptureTerritory": false,
+      "CanCreateLocalArea": false,
+      "CanRelayConnectivity": true,
+      "CaptureTypeMultiplier": 0,
+      "InfluenceRadius": 20,
+      "ConnectivityRange": 120,
+      "ConnectivityChannel": "OperationalRelay",
+      "MovementType": 0,
+      "NavigationMask": 1,
+      "StressPolicy": "Standard",
+      "AllowLoading": false,
+      "AllowNonInfantryRelay": false
+    }
+  ]
+}

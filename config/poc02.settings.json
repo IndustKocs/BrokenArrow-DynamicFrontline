@@ -1,0 +1,6 @@
+{
+  "EnableGameDataCollection": false,
+  "EnableFrontlineSimulation": false,
+  "EnableDebugExport": false,
+  "EnableGameStateModification": false
+}

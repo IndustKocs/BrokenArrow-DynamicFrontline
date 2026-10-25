@@ -1,0 +1,27 @@
+[
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\game-integration-poc02\\artifacts\\poc02\\assemblies\\DynamicFrontline.Core.dll",
+    "Algorithm": "SHA256",
+    "Hash": "8F382CD3F6480A27DEB8F041BF3C9D48FF13E85A5369D8669BA2742AC068919C"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\game-integration-poc02\\artifacts\\poc02\\assemblies\\DynamicFrontline.Frontline.dll",
+    "Algorithm": "SHA256",
+    "Hash": "8F74A5447ED2ABF3FF1CCF8CDBA78AF445D10E46A33240386B409A4A1CF88147"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\game-integration-poc02\\artifacts\\poc02\\assemblies\\DynamicFrontline.GameAdapter.dll",
+    "Algorithm": "SHA256",
+    "Hash": "DFF61DE4E7201621024CE150225B2826ECBD47764930A71E7A66EC3C4FBA5217"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\game-integration-poc02\\artifacts\\poc02\\assemblies\\DynamicFrontline.Integration.dll",
+    "Algorithm": "SHA256",
+    "Hash": "CBA960B07966D306612CE3A952CD6904938A095DDE87B6C6198AD12E663C7819"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\game-integration-poc02\\artifacts\\poc02\\assemblies\\DynamicFrontline.Integration.MelonLoader.dll",
+    "Algorithm": "SHA256",
+    "Hash": "D993BB50FF50B9EB635A4964AB6D4DE081AE68AFF902A10791774E454D1E5523"
+  }
+]
