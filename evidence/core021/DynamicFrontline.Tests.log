@@ -1,0 +1,38 @@
+Runtime: .NET 6.0.36
+PASS manual activation cancels once and issues one physical move
+PASS debug is disabled by default
+PASS team spawn planner and missing position
+PASS user rejected, controller movement allowed, group preserves others
+PASS death during retreat releases lock without issuing commands
+PASS unreachable path fails safely and does not retry
+PASS arrival then recovery restores same owner control
+PASS repeat activation rejected during and after recovery
+PASS second squad unchanged and activation cannot replace active squad
+PASS unknown path times out; no command loop
+PASS arrival status alone cannot fake safe position
+PASS movement rejection releases user lock
+PASS cancel failure never issues movement
+PASS adapter exception disables functionality and releases lock
+PASS owner changed during retreat is never reassigned
+PASS dead noninfantry and foreign units cannot activate
+PASS wrong match and recycled generation rejected
+PASS invalid destination and backwards clock rejected
+PASS diagnostics own units only
+PASS reflection reader rejects enemy before reading any coordinates or ECS
+PASS reflection reads fresh struct snapshots without writes
+PASS unsupported wrappers disable adapter without commands
+PASS compatibility accepts exact hash rejects mismatch version and traversal
+PASS disabled adapter prevents activation
+PASS leaving recovery area releases lock instead of silently recovering
+PASS F01 profiles, existing multiplier and saturation
+PASS F02 F06 exact boundaries and panic precedence
+PASS F03 no implicit stress cap; F04 never reduces stress
+PASS F05 one tick, truncation, exhaustion and inactive zero branch
+PASS F07 minimum damage does not revive zero or negative damage
+PASS F08 strict threshold and HEAT bypass
+PASS F09 raw distance with nonzero minimum range and armor branches
+PASS F13 independent overrides and absent ammunition
+PASS formula supported-domain guards
+PASS optional stress condition requires timer and observed calm; no stress writes
+PASS invalid observed stress waits then releases lock on recovery timeout
+TOTAL 36; PASSED 36; FAILED 0

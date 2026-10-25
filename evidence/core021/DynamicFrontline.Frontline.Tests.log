@@ -1,0 +1,60 @@
+PASS neutral capture and regular advance require rooted territory
+PASS regular withdrawal retains last stable control
+PASS hysteresis requires accumulated capture and decays after death
+PASS capture after four equal ticks
+PASS equal opposing influence contested without ownership flicker
+PASS enemy capture changes stable owner only after threshold
+PASS soldier count and shock affect influence independently of HP
+PASS territory excludes dead
+PASS territory excludes zero
+PASS territory excludes panic
+PASS territory excludes deserting
+PASS territory excludes loaded
+PASS noncapture role 3 never changes grid even in rear
+PASS noncapture role 4 never changes grid even in rear
+PASS noncapture role 5 never changes grid even in rear
+PASS invalid capture role rejected and unknown IDs default deny
+PASS local area moves without territorial trail
+PASS separate autonomous groups and overlapping enclave union
+PASS local radius tracks soldiers and last soldier removes enclave
+PASS restoring territorial corridor absorbs local presence
+PASS out of map and masked units cannot capture or relay
+PASS only changed footprints are updated
+PASS direct and intermediate operational support
+PASS regular recon special regular chain supports without painting corridor
+PASS multiple reconnaissance relays connect to root
+PASS destroyed relay breaks chain and replacement restores it
+PASS too distant and unrooted chain remain disconnected
+PASS hop limit stops artificial long chains
+PASS relay exclusion panic
+PASS relay exclusion deserting
+PASS relay exclusion loaded
+PASS relay exclusion zero
+PASS shock participation configured independently of capture
+PASS opponent nodes never link across teams
+PASS terrain barrier blocks links including diagonal corner cutting
+PASS operational support does not imply logistics or territory
+PASS logistics can exist without territorial or operational continuity
+PASS distance and unknown retreat are not proof of encirclement
+PASS safe retreat without support remains autonomous
+PASS confirmed closed route waits then produces configured severity
+PASS physical closure with operational support lowers severity but opens no route
+PASS recovery before penalties and repeated isolation reset confirmation timer
+PASS recovery after penalties holds reconnecting then settles
+PASS reconnected territory and support wait before Connected
+PASS boundary extracts stable simplified straight front
+PASS boundary supports closed islands and concave contours
+PASS masked terrain boundary remains distinct from enemy front
+PASS input order does not change authoritative outputs
+PASS JSON snapshots and ordered deltas reconstruct authority
+PASS foreign duplicate reordered delta rejected
+PASS presentation default denies territory and every enemy coordinate or key
+PASS invalid tick duplicate UID match and nonfinite data fail before mutation
+PASS configuration rejects invalid domains
+PASS configuration file loads explicit synthetic profiles
+PASS synthetic retreat routing detects enclosing terrain and neutral escape
+PASS enemy territory retreat rule is independent configurable policy
+PASS desertion adapter suppresses territory relay and local area until restored
+PASS configurable panic coefficient and type multiplier apply
+PASS vehicle relay opt in does not enable territorial capture
+TOTAL 59; FAILED 0

@@ -1,0 +1,128 @@
+{
+  "configuration": "Debug",
+  "runtime": ".NET 6.0.36",
+  "microbenchmarks": [
+    {
+      "name": "HEAT",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 70.06,
+      "p95BatchNanoseconds": 99.21,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Kinetic",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 32.79,
+      "p95BatchNanoseconds": 45.96,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "AoE",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 13.66,
+      "p95BatchNanoseconds": 14.01,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Infantry count",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 25.88,
+      "p95BatchNanoseconds": 37.33,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Countermeasures",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 17.85,
+      "p95BatchNanoseconds": 23.59,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Missile composition",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 32.99,
+      "p95BatchNanoseconds": 36.59,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Ammunition",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 84.96,
+      "p95BatchNanoseconds": 122.73,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Critical attempts",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 29.28,
+      "p95BatchNanoseconds": 29.78,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "CF18 next",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 18.59,
+      "p95BatchNanoseconds": 29.84,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Helicopter",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 71.15,
+      "p95BatchNanoseconds": 78.38,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Fuel requested",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 23.04,
+      "p95BatchNanoseconds": 26.69,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Air range",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 32.3,
+      "p95BatchNanoseconds": 35.01,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Smoke intervals",
+      "iterations": 10000,
+      "batches": 15,
+      "medianNanoseconds": 193.9,
+      "p95BatchNanoseconds": 211.91,
+      "allocatedBytesPerCall": 0
+    },
+    {
+      "name": "Critical selection with trace",
+      "iterations": 1000,
+      "batches": 15,
+      "medianNanoseconds": 272.8,
+      "p95BatchNanoseconds": 284.2,
+      "allocatedBytesPerCall": 192
+    }
+  ],
+  "integration": {
+    "size": 256,
+    "count": 1000,
+    "period": 250,
+    "median": 4.6966,
+    "p95": 6.1303,
+    "p99": 7.5873,
+    "allocatedBytesPerTick": 3290579
+  },
+  "sink": 2
+}

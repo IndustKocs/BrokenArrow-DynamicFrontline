@@ -1,0 +1,402 @@
+{
+  "Mode": "Offline research examples; not active match configuration",
+  "Results": [
+    {
+      "Formula": "F01",
+      "Evidence": "A",
+      "Source": "full_code_audit/FORMULAS.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": {
+        "Id": "buff-52469",
+        "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\research\\full_code_audit\\evidence\\buff_values.json",
+        "AssetId": "52469",
+        "Profile": "Extracted BuffConfig / Calm (active profile unknown)",
+        "ResearchVersion": "Combat Systems Audit Pass01-03",
+        "SourceTableSha256": "ab8db62dc7b4b91cb9de0af9a2eaafae58b1e43df893c941ee694551e07bc80e",
+        "AssetSha256": "c5faec43d04f9a35c623c7b3aaa8aae0c2f5022a2addf51b3f09f0c12b12cad7",
+        "RuntimeConfirmed": false,
+        "FormulaIds": [
+          "F01",
+          "F02",
+          "F03",
+          "F05",
+          "CF01"
+        ],
+        "Values": {
+          "MissileAccuracyMultiplier": 1,
+          "AimTimeMultiplier": 1,
+          "TimeBetweenBurstsMultiplier": 1,
+          "ReloadTimeMultiplier": 1,
+          "DispersionMultiplier": 1,
+          "AimTimeInfMultiplier": 1,
+          "TimeBetweenBurstsInfMultiplier": 1,
+          "ReloadTimeInfMultiplier": 1,
+          "DispersionInfMultiplier": 1,
+          "MissileAccuracyPlaneMult": 1,
+          "AimTimePlaneMult": 1,
+          "TimeBetweenBurstsPlaneMult": 1,
+          "ReloadTimePlaneMult": 1,
+          "DispersionPlaneMult": 1,
+          "InfantryDmgModFloor": 0.72,
+          "InfantryDmgModPerSoldier": 0.02,
+          "MovementSpeedMultiplier": 1,
+          "ShockedLevelMultiplier": 0.5,
+          "PanickedLevelMultiplier": 0.8,
+          "ShockedLevelMultiplierInfantry": 0.5,
+          "PanickedLevelMultiplierInfantry": 0.8,
+          "StressRecoveryMultiplier": 1,
+          "StressDamageModThreshold": 9999
+        }
+      },
+      "EffectiveInputs": {
+        "MissileAccuracyMultiplier": 1,
+        "AimTimeMultiplier": 1,
+        "TimeBetweenBurstsMultiplier": 1,
+        "ReloadTimeMultiplier": 1,
+        "DispersionMultiplier": 1,
+        "AimTimeInfMultiplier": 1,
+        "TimeBetweenBurstsInfMultiplier": 1,
+        "ReloadTimeInfMultiplier": 1,
+        "DispersionInfMultiplier": 1,
+        "MissileAccuracyPlaneMult": 1,
+        "AimTimePlaneMult": 1,
+        "TimeBetweenBurstsPlaneMult": 1,
+        "ReloadTimePlaneMult": 1,
+        "DispersionPlaneMult": 1,
+        "InfantryDmgModFloor": 0.72,
+        "InfantryDmgModPerSoldier": 0.02,
+        "MovementSpeedMultiplier": 1,
+        "ShockedLevelMultiplier": 0.5,
+        "PanickedLevelMultiplier": 0.8,
+        "ShockedLevelMultiplierInfantry": 0.5,
+        "PanickedLevelMultiplierInfantry": 0.8,
+        "StressRecoveryMultiplier": 1,
+        "StressDamageModThreshold": 9999,
+        "Incoming": 1,
+        "Alive": 8
+      },
+      "Calculation": 0.88
+    },
+    {
+      "Formula": "F01",
+      "Evidence": "A",
+      "Source": "full_code_audit/FORMULAS.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": {
+        "Id": "buff-52552",
+        "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\research\\full_code_audit\\evidence\\buff_values.json",
+        "AssetId": "52552",
+        "Profile": "Extracted BuffConfig / Calm (active profile unknown)",
+        "ResearchVersion": "Combat Systems Audit Pass01-03",
+        "SourceTableSha256": "ab8db62dc7b4b91cb9de0af9a2eaafae58b1e43df893c941ee694551e07bc80e",
+        "AssetSha256": "abf20c57f8b644c0499e22db2200322a52b4baba4d23526d3e0d0513e05d845d",
+        "RuntimeConfirmed": false,
+        "FormulaIds": [
+          "F01",
+          "F02",
+          "F03",
+          "F05",
+          "CF01"
+        ],
+        "Values": {
+          "MissileAccuracyMultiplier": 1,
+          "AimTimeMultiplier": 1,
+          "TimeBetweenBurstsMultiplier": 1,
+          "ReloadTimeMultiplier": 1,
+          "DispersionMultiplier": 1,
+          "AimTimeInfMultiplier": 1,
+          "TimeBetweenBurstsInfMultiplier": 1,
+          "ReloadTimeInfMultiplier": 1,
+          "DispersionInfMultiplier": 1,
+          "MissileAccuracyPlaneMult": 1,
+          "AimTimePlaneMult": 1,
+          "TimeBetweenBurstsPlaneMult": 1,
+          "ReloadTimePlaneMult": 1,
+          "DispersionPlaneMult": 1,
+          "InfantryDmgModFloor": 0.36,
+          "InfantryDmgModPerSoldier": 0.02,
+          "MovementSpeedMultiplier": 1,
+          "ShockedLevelMultiplier": 0.5,
+          "PanickedLevelMultiplier": 0.8,
+          "ShockedLevelMultiplierInfantry": 0.4,
+          "PanickedLevelMultiplierInfantry": 0.8,
+          "StressRecoveryMultiplier": 1,
+          "StressDamageModThreshold": 36
+        }
+      },
+      "EffectiveInputs": {
+        "MissileAccuracyMultiplier": 1,
+        "AimTimeMultiplier": 1,
+        "TimeBetweenBurstsMultiplier": 1,
+        "ReloadTimeMultiplier": 1,
+        "DispersionMultiplier": 1,
+        "AimTimeInfMultiplier": 1,
+        "TimeBetweenBurstsInfMultiplier": 1,
+        "ReloadTimeInfMultiplier": 1,
+        "DispersionInfMultiplier": 1,
+        "MissileAccuracyPlaneMult": 1,
+        "AimTimePlaneMult": 1,
+        "TimeBetweenBurstsPlaneMult": 1,
+        "ReloadTimePlaneMult": 1,
+        "DispersionPlaneMult": 1,
+        "InfantryDmgModFloor": 0.36,
+        "InfantryDmgModPerSoldier": 0.02,
+        "MovementSpeedMultiplier": 1,
+        "ShockedLevelMultiplier": 0.5,
+        "PanickedLevelMultiplier": 0.8,
+        "ShockedLevelMultiplierInfantry": 0.4,
+        "PanickedLevelMultiplierInfantry": 0.8,
+        "StressRecoveryMultiplier": 1,
+        "StressDamageModThreshold": 36,
+        "Incoming": 1,
+        "Alive": 8
+      },
+      "Calculation": 0.52
+    },
+    {
+      "Formula": "F10",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_02/COMBAT_FORMULAS_PASS02.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Damage": 10,
+        "Penetration": 100,
+        "Armor": 100,
+        "Effectiveness": 1,
+        "Curve": 2
+      },
+      "Calculation": {
+        "PenetrationPower": 10000,
+        "ArmorPower": 10000,
+        "Numerator": 100000,
+        "Denominator": 20000,
+        "Damage": 5
+      }
+    },
+    {
+      "Formula": "F07",
+      "Evidence": "A",
+      "Source": "full_code_audit/FORMULAS.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Damage": 10,
+        "Penetration": 100,
+        "Armor": 100,
+        "Effectiveness": 1,
+        "MinimumCoefficient": 0.1
+      },
+      "Calculation": 10
+    },
+    {
+      "Formula": "CF03",
+      "Evidence": "A",
+      "Source": "combat_systems_audit/COMBAT_FORMULAS.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": {
+        "Id": "ammo-4",
+        "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\research\\combat_systems_audit\\evidence\\ammunition_examples.json",
+        "AssetId": "Ammunitions.Id=4",
+        "Profile": "Extracted table; active DB unknown",
+        "ResearchVersion": "Combat Systems Audit Pass01-03",
+        "SourceTableSha256": "782e123ace3376fb9b653cb4b4e8ecc96753e87c3a7467ad817841f2b9d57132",
+        "AssetSha256": null,
+        "RuntimeConfirmed": false,
+        "FormulaIds": [
+          "CF03"
+        ],
+        "Values": {
+          "Damage": 12,
+          "StressDamage": 310,
+          "HealthAOERadius": 45,
+          "StressAOERadius": 67.5
+        }
+      },
+      "EffectiveInputs": {
+        "Damage": 12,
+        "StressDamage": 310,
+        "HealthAOERadius": 45,
+        "StressAOERadius": 67.5,
+        "Center": [
+          25,
+          0,
+          0
+        ],
+        "Hit": [
+          0,
+          0,
+          0
+        ],
+        "RoughRadius": 2.5
+      },
+      "Calculation": {
+        "SurfaceDistance": 22.5,
+        "HealthAOE": 0.5,
+        "StressAOE": 0.6666666,
+        "HealthBeforeOtherModifiers": 6,
+        "DirectStressBeforeOtherModifiers": 206.66666
+      }
+    },
+    {
+      "Formula": "CF03",
+      "Evidence": "A",
+      "Source": "combat_systems_audit/COMBAT_FORMULAS.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": {
+        "Id": "ammo-4",
+        "Source": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\research\\combat_systems_audit\\evidence\\ammunition_examples.json",
+        "AssetId": "Ammunitions.Id=4",
+        "Profile": "Extracted table; active DB unknown",
+        "ResearchVersion": "Combat Systems Audit Pass01-03",
+        "SourceTableSha256": "782e123ace3376fb9b653cb4b4e8ecc96753e87c3a7467ad817841f2b9d57132",
+        "AssetSha256": null,
+        "RuntimeConfirmed": false,
+        "FormulaIds": [
+          "CF03"
+        ],
+        "Values": {
+          "Damage": 12,
+          "StressDamage": 310,
+          "HealthAOERadius": 45,
+          "StressAOERadius": 67.5
+        }
+      },
+      "EffectiveInputs": {
+        "Damage": 12,
+        "StressDamage": 310,
+        "HealthAOERadius": 45,
+        "StressAOERadius": 67.5,
+        "Center": [
+          47.5,
+          0,
+          0
+        ],
+        "Hit": [
+          0,
+          0,
+          0
+        ],
+        "RoughRadius": 2.5
+      },
+      "Calculation": {
+        "SurfaceDistance": 45,
+        "HealthAOE": 0,
+        "StressAOE": 0.3333333,
+        "HealthBeforeOtherModifiers": 0,
+        "DirectStressBeforeOtherModifiers": 103.33333
+      }
+    },
+    {
+      "Formula": "CF12",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_02/COMBAT_FORMULAS_PASS02.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "HP": 20,
+        "ArmorMaxHealth": 80,
+        "InitialSquadMembers": 8,
+        "SoldierSlots": 8
+      },
+      "Calculation": {
+        "HealthPerSoldier": 10,
+        "Desired": 2
+      }
+    },
+    {
+      "Formula": "CF12",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_02/COMBAT_FORMULAS_PASS02.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "HP": 20.01,
+        "ArmorMaxHealth": 80,
+        "InitialSquadMembers": 8,
+        "SoldierSlots": 8
+      },
+      "Calculation": {
+        "HealthPerSoldier": 10,
+        "Desired": 3
+      }
+    },
+    {
+      "Formula": "F12",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_02/COMBAT_FORMULAS_PASS02.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Accuracy": 0.8,
+        "ECM": 0.9,
+        "CM": 1,
+        "Stress": 1,
+        "Veterancy": 1,
+        "Critical": 1
+      },
+      "Calculation": 0.71999997
+    },
+    {
+      "Formula": "F12",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_02/COMBAT_FORMULAS_PASS02.md",
+      "Limitations": "Finite supported domain only; static reconstruction, not runtime validation. No implicit application to frontline or game state.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Accuracy": 0.8,
+        "ECM": 0.9,
+        "CM": 0.16,
+        "Stress": 1,
+        "Veterancy": 1,
+        "Critical": 1
+      },
+      "Calculation": 0.11519999
+    },
+    {
+      "Formula": "P3-F02",
+      "Evidence": "A",
+      "Source": "combat_systems_audit/pass_03/COMBAT_FORMULAS_PASS03.md",
+      "Limitations": "Recovered fragment only; no ECS writes, endpoint clipping, interval resolution or full flight model.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "Current": [
+          0,
+          0,
+          0
+        ],
+        "Target": [
+          10,
+          0,
+          0
+        ],
+        "Agility": 8,
+        "DeltaTime": 1
+      },
+      "Calculation": {
+        "Result": {
+          "X": 2,
+          "Y": 0,
+          "Z": 0
+        },
+        "DistanceSquared": 100,
+        "Step": 2,
+        "ReachedTarget": false
+      }
+    },
+    {
+      "Formula": "P3-F05",
+      "Evidence": "B",
+      "Source": "combat_systems_audit/pass_03/COMBAT_FORMULAS_PASS03.md",
+      "Limitations": "Recovered fragment only; no ECS writes, endpoint clipping, interval resolution or full flight model.",
+      "Profile": null,
+      "EffectiveInputs": {
+        "WeaponFlash": 3,
+        "FlashReduction": 0.5,
+        "Visible": true,
+        "SpottedPenalty": 4
+      },
+      "Calculation": 4
+    }
+  ]
+}

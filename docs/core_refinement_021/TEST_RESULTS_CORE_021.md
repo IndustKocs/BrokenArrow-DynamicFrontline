@@ -1,0 +1,66 @@
+# Тесты Core Refinement 0.2.1
+
+Release и Debug: 58 новых групп, ошибок 0. Прежние 36+59+89=184 теста прошли без изменений. Итого 242 групп. В одну новую дифференциальную группу входят 5000 Python double reference cases; ещё 2500 seeded property/differential итераций проверяют HEAT/AoE, ammo и missile helpers.
+
+Это сравнение с математическими эталонами, не с runtime игры. float сравнивается с double при относительном допуске 2e-5; границы ceil/threshold/index отдельно проверяются точно. Тест isolation использует два одинаковых integration fixture: между шагами второго вызывается новая математика; territory, graph, isolation и прочие frame данные совпадают после исключения только таймингов. Старые тестовые файлы и правила фронта не изменялись.
+
+| Группа | Результат |
+|---|---|
+| baseline F07 F08 F09 preserved | PASS |
+| HEAT equality and asymmetry | PASS |
+| HEAT operation intermediates | PASS |
+| HEAT finite supported domain | PASS |
+| Kinetic positive minimum only | PASS |
+| Threshold strict equality HEAT bypass | PASS |
+| Range actual not offset | PASS |
+| AoE ammunition 4 surface example | PASS |
+| AoE zero radius and no falloff boundaries | PASS |
+| Differential finite HEAT and AoE seeded 1000 | PASS |
+| Infantry count ceil boundaries | PASS |
+| Infantry count slots distinct from initial | PASS |
+| Death priority stable tie order injected RNG | PASS |
+| Heal first minimum no RNG | PASS |
+| Death empty and invalid random | PASS |
+| Ammo selected first ID and no refill | PASS |
+| Ammo zero and overflow guards | PASS |
+| Stress boundaries recovery order no extra application | PASS |
+| Readiness preserves observed state and explicit time model | PASS |
+| Ammo invariant 500 seeded populations | PASS |
+| F11 power and zero count | PASS |
+| F12 direct product no cap | PASS |
+| Probability equality separate policy | PASS |
+| CF18 increments first and wraps | PASS |
+| CF18 constant and invalid ranges do not advance | PASS |
+| CF18 deterministic period and copied fixture | PASS |
+| Seeker gate prefix no unconditional reroll | PASS |
+| Differential missile composition seeded 1000 | PASS |
+| Critical remainder no hidden division or clamp | PASS |
+| Critical comparison inclusive and zero remainder | PASS |
+| Critical reroll does not consume attempt | PASS |
+| Critical red removal preserves candidate ordering | PASS |
+| Critical explicit budget reports incomplete not false success | PASS |
+| Critical no candidates and invalid levels | PASS |
+| Critical table nonlinear per type and level | PASS |
+| Critical table no mobility override at zero | PASS |
+| Helicopter native step and arrival | PASS |
+| Helicopter zero distance time agility | PASS |
+| Helicopter negative step separate normal policy | PASS |
+| Fuel requested only without clamp | PASS |
+| Ground vision cover sneak optics | PASS |
+| Ground exact epsilon and flash floor | PASS |
+| Air no ground minimum or terrain clamp | PASS |
+| Terrain forest 23 samples extracted example | PASS |
+| Terrain counts persist across separated types | PASS |
+| Terrain flags not type and forced smoke exclusion | PASS |
+| Terrain budget strictly exceeded and height | PASS |
+| Weapon flash timer marker floor | PASS |
+| Smoke sphere center tangent miss and zero ray | PASS |
+| Smoke intervals shared sample index | PASS |
+| Smoke empty zero invalid overlap and budget | PASS |
+| Research profile provenance preserved | PASS |
+| Research rejects hash unknown and mislabeled runtime | PASS |
+| Explorer compares profiles no implicit global config | PASS |
+| Explorer rejects incompatible profile and missing input | PASS |
+| Integration territory graph isolation unchanged by combat calls | PASS |
+| Mathematical assembly has no Unity loader or network references | PASS |
+| Independent Python double reference fixtures finite domain | PASS |
