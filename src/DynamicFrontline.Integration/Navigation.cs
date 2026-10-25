@@ -3,11 +3,11 @@ using DynamicFrontline.Frontline;
 namespace DynamicFrontline.Integration;
 
 public enum RouteState { Reachable, Blocked, Unknown, Pending, Stale }
-public sealed record RouteEndpoint(UnitKey? Unit,string? Root,Point2 Position,int Team);
-public sealed record RouteQuery(Guid MatchId,RouteEndpoint A,RouteEndpoint B,NavigationChannel Channel,int MovementType,int Mask,long NavigationRevision,double MaximumCost);
+public readonly record struct RouteEndpoint(UnitKey? Unit,string? Root,Point2 Position,int Team);
+public readonly record struct RouteQuery(Guid MatchId,RouteEndpoint A,RouteEndpoint B,NavigationChannel Channel,int MovementType,int Mask,long NavigationRevision,double MaximumCost);
 public sealed record RouteRequest(long RequestId,RouteQuery Query);
 public sealed record RouteAnswer(long RequestId,RouteState State,bool Complete,double Cost);
-public sealed record RouteResult(RouteState State,double? Cost=null);
+public readonly record struct RouteResult(RouteState State,double? Cost=null);
 public interface IGameRouteBackend
 {
     void Submit(RouteRequest request);

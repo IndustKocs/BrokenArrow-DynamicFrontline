@@ -69,7 +69,8 @@ public sealed class BrokenArrowUnitSnapshotProvider
                     u.AliveSoldierCount.HasValue,v.Profile?.AllowNonInfantryRelay==true);
             }
             lastRevision=raw.Revision;lastTime=raw.CapturedMilliseconds;
-            return new(new(context,raw.Revision,raw.CapturedMilliseconds,values,core,unknown),FailureCode.None);
+            var copiedContext=context with{Teams=context.Teams.Select(t=>t with{PlayerUids=t.PlayerUids.ToArray()}).ToArray()};
+            return new(new(copiedContext,raw.Revision,raw.CapturedMilliseconds,values,core,unknown),FailureCode.None);
         }
         catch(IntegrationValidationException e){return new(null,e.Code);}
         catch(Exception){return new(null,FailureCode.ReadFailed);}

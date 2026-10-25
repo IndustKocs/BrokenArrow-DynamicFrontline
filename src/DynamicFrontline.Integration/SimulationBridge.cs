@@ -12,8 +12,10 @@ public sealed class FrontlineSimulationBridge:IDisposable
     private readonly Func<DatabaseIdentity,GameUnitProfileResolver?> profileFactory;private readonly GameNavigationAdapter navigation;
     private readonly NavigationConnectivityAdapter navLinks;private readonly bool runtimeAuthorized;
     private BrokenArrowUnitSnapshotProvider? provider;private FrontlineSimulation? simulation;private TeamRoot[] roots=Array.Empty<TeamRoot>();
+    private TerritoryStateSnapshot? territory;
     private string? signature,contextSignature;private long logicalTick,nextDue,lastUpdate=-1;private bool coreFaulted;
     public GameIntegrationHealthMonitor Health {get;}=new();public BridgeFrame? LastGood {get;private set;}
+    public InternalSimulationSnapshot? LastInspection {get;private set;}
     public FrontlineSimulationBridge(IntegrationSettings settings,Rules rules,IGameMatchContextProvider contexts,IReadOnlyGameDataAccess access,
         IGameTerritoryMapProvider maps,CoordinateTransform coordinates,Func<DatabaseIdentity,GameUnitProfileResolver?> profileFactory,
         GameNavigationAdapter navigation,NavigationSettings navigationSettings,bool runtimeAuthorized=false)
@@ -51,18 +53,27 @@ public sealed class FrontlineSimulationBridge:IDisposable
             Health.State=IntegrationState.CollectingData;var watch=Stopwatch.StartNew();var attempt=provider!.Capture(context);
             double snapshotTime=watch.Elapsed.TotalMilliseconds;
             if(attempt.Snapshot is not{} snapshot){Health.Reject(attempt.Failure);Health.State=IntegrationState.Unavailable;return false;}
+            LastInspection=snapshot;
             if(!settings.EnableFrontlineSimulation){Health.Accept();Health.State=IntegrationState.DiagnosticsOnly;return true;}
             navigation.BeginFrame(context.MatchId,context.NavigationRevision,logicalTick,snapshot.CoreUnits,roots);navLinks.SetFrame(snapshot,roots);
             watch.Restart();AuthoritativeFrame result;
             try{result=simulation!.Step(logicalTick,snapshot.CoreUnits);}catch{coreFaulted=true;throw new IntegrationValidationException(FailureCode.CoreFailed);}
             logicalTick++;double coreTime=watch.Elapsed.TotalMilliseconds;
             Health.Accept();Health.State=IntegrationState.SimulationReady;
-            LastGood=new(snapshot,result,simulation!.Snapshot(),snapshotTime,coreTime,navigation.PendingCount,navigation.CachedCount,Health.Snapshot());
+            if(territory==null)territory=simulation!.Snapshot();
+            else
+            {
+                // CellState records are immutable; share unchanged cells across published versions.
+                var cells=territory.Cells;
+                if(result.Delta.Cells.Length>0){cells=cells.ToArray();foreach(var changed in result.Delta.Cells)cells[changed.Index]=changed;}
+                territory=territory with{Header=result.Header,Cells=cells};
+            }
+            LastGood=new(snapshot,result,territory,snapshotTime,coreTime,navigation.PendingCount,navigation.CachedCount,Health.Snapshot());
             return true;
         }
         catch(IntegrationValidationException e){Health.Reject(e.Code);Health.State=IntegrationState.Unavailable;return false;}
         catch{Health.Reject(FailureCode.ProviderUnavailable);Health.State=IntegrationState.Unavailable;return false;}
     }
-    public void ResetSession(){navigation.Reset();provider=null;simulation=null;signature=null;contextSignature=null;roots=Array.Empty<TeamRoot>();logicalTick=0;coreFaulted=false;LastGood=null;}
+    public void ResetSession(){navigation.Reset();provider=null;simulation=null;territory=null;signature=null;contextSignature=null;roots=Array.Empty<TeamRoot>();logicalTick=0;coreFaulted=false;LastGood=null;LastInspection=null;}
     public void Dispose(){ResetSession();Health.State=IntegrationState.Disposed;}
 }

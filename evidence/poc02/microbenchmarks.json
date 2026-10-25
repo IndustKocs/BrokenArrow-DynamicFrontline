@@ -1,0 +1,26 @@
+[
+  {
+    "name": "profile-resolution",
+    "iterations": 10000,
+    "totalMs": 0.061,
+    "bytes": 88
+  },
+  {
+    "name": "single-unit-copy",
+    "iterations": 1000,
+    "totalMs": 0.9923,
+    "bytes": 2392088
+  },
+  {
+    "name": "navigation-cache-hit",
+    "iterations": 10000,
+    "totalMs": 3.6718,
+    "bytes": 88
+  },
+  {
+    "name": "lifecycle-accept-and-cleanup",
+    "iterations": 1000,
+    "totalMs": 1.2486,
+    "bytes": 1040088
+  }
+]

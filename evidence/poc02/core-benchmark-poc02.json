@@ -1,0 +1,1058 @@
+{
+  "seed": 62026,
+  "runtime": ".NET 6.0.36",
+  "operatingSystem": "Microsoft Windows NT 10.0.19045.0",
+  "processorCount": 20,
+  "results": [
+    {
+      "size": 128,
+      "units": 100,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0176,
+        "p95": 0.0229,
+        "p99": 0.0467
+      },
+      "capture": {
+        "median": 0.0145,
+        "p95": 0.3875,
+        "p99": 0.3905
+      },
+      "connectivity": {
+        "median": 0.0622,
+        "p95": 0.0758,
+        "p99": 0.0845
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.6313,
+        "p99": 0.7142
+      },
+      "other": {
+        "median": 0.0477,
+        "p95": 0.0655,
+        "p99": 0.6391
+      },
+      "total": {
+        "median": 0.1676,
+        "p95": 1.1725,
+        "p99": 1.2649
+      },
+      "allocatedBytesPerTick": 181058,
+      "managedHeapBytes": 3938712,
+      "workingSetBytes": 35622912,
+      "gen0": 1,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 2.752833333333334
+    },
+    {
+      "size": 128,
+      "units": 100,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0156,
+        "p95": 0.0195,
+        "p99": 0.0213
+      },
+      "capture": {
+        "median": 0.011,
+        "p95": 0.3848,
+        "p99": 0.398
+      },
+      "connectivity": {
+        "median": 0.0461,
+        "p95": 0.063,
+        "p99": 0.5626
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.6219,
+        "p99": 0.7084
+      },
+      "other": {
+        "median": 0.0354,
+        "p95": 0.0488,
+        "p99": 0.0877
+      },
+      "total": {
+        "median": 0.1267,
+        "p95": 1.1219,
+        "p99": 1.2217
+      },
+      "allocatedBytesPerTick": 189713,
+      "managedHeapBytes": 6299664,
+      "workingSetBytes": 37621760,
+      "gen0": 1,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 1.0841933333333331
+    },
+    {
+      "size": 128,
+      "units": 100,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0158,
+        "p95": 0.0186,
+        "p99": 0.0294
+      },
+      "capture": {
+        "median": 0.0113,
+        "p95": 0.387,
+        "p99": 0.4244
+      },
+      "connectivity": {
+        "median": 0.0465,
+        "p95": 0.0552,
+        "p99": 0.2789
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.5748,
+        "p99": 0.6073
+      },
+      "other": {
+        "median": 0.0353,
+        "p95": 0.0397,
+        "p99": 0.0529
+      },
+      "total": {
+        "median": 0.1276,
+        "p95": 1.091,
+        "p99": 1.1541
+      },
+      "allocatedBytesPerTick": 189675,
+      "managedHeapBytes": 8739712,
+      "workingSetBytes": 37982208,
+      "gen0": 1,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.26219166666666666
+    },
+    {
+      "size": 128,
+      "units": 300,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0447,
+        "p95": 0.0507,
+        "p99": 0.0528
+      },
+      "capture": {
+        "median": 0.0312,
+        "p95": 0.418,
+        "p99": 0.4452
+      },
+      "connectivity": {
+        "median": 0.1656,
+        "p95": 0.1963,
+        "p99": 0.2138
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.6359,
+        "p99": 0.9509
+      },
+      "other": {
+        "median": 0.1194,
+        "p95": 0.1419,
+        "p99": 0.2039
+      },
+      "total": {
+        "median": 0.4202,
+        "p95": 1.5204,
+        "p99": 1.8037
+      },
+      "allocatedBytesPerTick": 526904,
+      "managedHeapBytes": 9831072,
+      "workingSetBytes": 39374848,
+      "gen0": 3,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 7.745433333333332
+    },
+    {
+      "size": 128,
+      "units": 300,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0436,
+        "p95": 0.0586,
+        "p99": 0.4689
+      },
+      "capture": {
+        "median": 0.0308,
+        "p95": 0.4221,
+        "p99": 0.488
+      },
+      "connectivity": {
+        "median": 0.1617,
+        "p95": 0.2584,
+        "p99": 0.4887
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.5915,
+        "p99": 2.2873
+      },
+      "other": {
+        "median": 0.1166,
+        "p95": 0.1591,
+        "p99": 0.2342
+      },
+      "total": {
+        "median": 0.4245,
+        "p95": 1.5342,
+        "p99": 3.0843
+      },
+      "allocatedBytesPerTick": 531350,
+      "managedHeapBytes": 11536824,
+      "workingSetBytes": 40222720,
+      "gen0": 3,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 3.2568799999999993
+    },
+    {
+      "size": 128,
+      "units": 300,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0439,
+        "p95": 0.0663,
+        "p99": 0.082
+      },
+      "capture": {
+        "median": 0.0317,
+        "p95": 0.4725,
+        "p99": 0.797
+      },
+      "connectivity": {
+        "median": 0.1574,
+        "p95": 0.2746,
+        "p99": 0.4744
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.6244,
+        "p99": 0.7266
+      },
+      "other": {
+        "median": 0.1126,
+        "p95": 0.1965,
+        "p99": 0.4468
+      },
+      "total": {
+        "median": 0.5001,
+        "p95": 1.5982,
+        "p99": 1.8559
+      },
+      "allocatedBytesPerTick": 535459,
+      "managedHeapBytes": 13078440,
+      "workingSetBytes": 40730624,
+      "gen0": 3,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.8207799999999997
+    },
+    {
+      "size": 128,
+      "units": 500,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0634,
+        "p95": 0.0754,
+        "p99": 0.1105
+      },
+      "capture": {
+        "median": 0.0499,
+        "p95": 0.2477,
+        "p99": 0.4494
+      },
+      "connectivity": {
+        "median": 0.2775,
+        "p95": 0.4023,
+        "p99": 0.7179
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.6057,
+        "p99": 0.725
+      },
+      "other": {
+        "median": 0.168,
+        "p95": 0.1887,
+        "p99": 0.3251
+      },
+      "total": {
+        "median": 0.7266,
+        "p95": 1.7976,
+        "p99": 2.0329
+      },
+      "allocatedBytesPerTick": 823203,
+      "managedHeapBytes": 9308584,
+      "workingSetBytes": 41283584,
+      "gen0": 5,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 10.143733333333333
+    },
+    {
+      "size": 128,
+      "units": 500,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0617,
+        "p95": 0.0701,
+        "p99": 0.0871
+      },
+      "capture": {
+        "median": 0.0474,
+        "p95": 0.249,
+        "p99": 0.3228
+      },
+      "connectivity": {
+        "median": 0.2677,
+        "p95": 0.3112,
+        "p99": 0.7332
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.59,
+        "p99": 0.7191
+      },
+      "other": {
+        "median": 0.1636,
+        "p95": 0.1783,
+        "p99": 0.2817
+      },
+      "total": {
+        "median": 0.6528,
+        "p95": 1.6074,
+        "p99": 1.6794
+      },
+      "allocatedBytesPerTick": 827696,
+      "managedHeapBytes": 10947488,
+      "workingSetBytes": 41451520,
+      "gen0": 4,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 3.8905400000000006
+    },
+    {
+      "size": 128,
+      "units": 500,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0629,
+        "p95": 0.1361,
+        "p99": 0.2004
+      },
+      "capture": {
+        "median": 0.0481,
+        "p95": 0.289,
+        "p99": 0.7437
+      },
+      "connectivity": {
+        "median": 0.269,
+        "p95": 0.4852,
+        "p99": 0.5538
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 0.6041,
+        "p99": 1.2628
+      },
+      "other": {
+        "median": 0.1623,
+        "p95": 0.369,
+        "p99": 0.991
+      },
+      "total": {
+        "median": 0.8796,
+        "p95": 1.9076,
+        "p99": 5.2162
+      },
+      "allocatedBytesPerTick": 831900,
+      "managedHeapBytes": 8370400,
+      "workingSetBytes": 41517056,
+      "gen0": 5,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 1.1384450000000006
+    },
+    {
+      "size": 128,
+      "units": 1000,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.1663,
+        "p95": 0.2894,
+        "p99": 2.3761
+      },
+      "capture": {
+        "median": 0.316,
+        "p95": 0.6159,
+        "p99": 0.746
+      },
+      "connectivity": {
+        "median": 0.6594,
+        "p95": 1.2493,
+        "p99": 2.8613
+      },
+      "boundary": {
+        "median": 0.5736,
+        "p95": 0.7745,
+        "p99": 1.1535
+      },
+      "other": {
+        "median": 0.3908,
+        "p95": 0.7175,
+        "p99": 1.2407
+      },
+      "total": {
+        "median": 2.2781,
+        "p95": 3.7255,
+        "p99": 4.8153
+      },
+      "allocatedBytesPerTick": 1686955,
+      "managedHeapBytes": 14938640,
+      "workingSetBytes": 40316928,
+      "gen0": 9,
+      "gen1": 1,
+      "gen2": 1,
+      "meanCpuMillisecondsPerSimulatedSecond": 24.6098
+    },
+    {
+      "size": 128,
+      "units": 1000,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.108,
+        "p95": 0.1456,
+        "p99": 0.1529
+      },
+      "capture": {
+        "median": 0.2714,
+        "p95": 0.3139,
+        "p99": 0.6574
+      },
+      "connectivity": {
+        "median": 0.5889,
+        "p95": 0.6996,
+        "p99": 1.1303
+      },
+      "boundary": {
+        "median": 0.5302,
+        "p95": 0.6094,
+        "p99": 1.5851
+      },
+      "other": {
+        "median": 0.2828,
+        "p95": 0.3705,
+        "p99": 0.7019
+      },
+      "total": {
+        "median": 1.9334,
+        "p95": 2.4733,
+        "p99": 3.2519
+      },
+      "allocatedBytesPerTick": 1698156,
+      "managedHeapBytes": 10710256,
+      "workingSetBytes": 40939520,
+      "gen0": 9,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 7.429060000000002
+    },
+    {
+      "size": 128,
+      "units": 1000,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0915,
+        "p95": 0.119,
+        "p99": 0.5576
+      },
+      "capture": {
+        "median": 0.2193,
+        "p95": 0.268,
+        "p99": 0.2893
+      },
+      "connectivity": {
+        "median": 0.566,
+        "p95": 0.6951,
+        "p99": 1.2048
+      },
+      "boundary": {
+        "median": 0.4972,
+        "p95": 0.5505,
+        "p99": 0.9824
+      },
+      "other": {
+        "median": 0.2712,
+        "p95": 0.3557,
+        "p99": 1.4929
+      },
+      "total": {
+        "median": 1.7418,
+        "p95": 2.36,
+        "p99": 3.3915
+      },
+      "allocatedBytesPerTick": 1698013,
+      "managedHeapBytes": 6983632,
+      "workingSetBytes": 42393600,
+      "gen0": 10,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 1.6810133333333335
+    },
+    {
+      "size": 256,
+      "units": 100,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0084,
+        "p95": 0.0105,
+        "p99": 0.011
+      },
+      "capture": {
+        "median": 0.0044,
+        "p95": 0.0094,
+        "p99": 0.7555
+      },
+      "connectivity": {
+        "median": 0.0269,
+        "p95": 0.0308,
+        "p99": 1.9242
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.0001,
+        "p99": 1.753
+      },
+      "other": {
+        "median": 0.0205,
+        "p95": 0.0231,
+        "p99": 0.0262
+      },
+      "total": {
+        "median": 0.0722,
+        "p95": 0.0976,
+        "p99": 2.5835
+      },
+      "allocatedBytesPerTick": 171764,
+      "managedHeapBytes": 7570768,
+      "workingSetBytes": 44183552,
+      "gen0": 1,
+      "gen1": 1,
+      "gen2": 1,
+      "meanCpuMillisecondsPerSimulatedSecond": 1.87605
+    },
+    {
+      "size": 256,
+      "units": 100,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0085,
+        "p95": 0.0104,
+        "p99": 0.011
+      },
+      "capture": {
+        "median": 0.0042,
+        "p95": 0.0096,
+        "p99": 0.7546
+      },
+      "connectivity": {
+        "median": 0.0263,
+        "p95": 0.0297,
+        "p99": 0.2825
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.0001,
+        "p99": 1.7529
+      },
+      "other": {
+        "median": 0.0203,
+        "p95": 0.023,
+        "p99": 0.0253
+      },
+      "total": {
+        "median": 0.0708,
+        "p95": 0.3316,
+        "p99": 2.583
+      },
+      "allocatedBytesPerTick": 180329,
+      "managedHeapBytes": 13616312,
+      "workingSetBytes": 44187648,
+      "gen0": 1,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.7948266666666667
+    },
+    {
+      "size": 256,
+      "units": 100,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0082,
+        "p95": 0.0098,
+        "p99": 0.0132
+      },
+      "capture": {
+        "median": 0.0041,
+        "p95": 0.0096,
+        "p99": 0.7136
+      },
+      "connectivity": {
+        "median": 0.0259,
+        "p95": 0.0298,
+        "p99": 0.0356
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 0.0001,
+        "p99": 1.8682
+      },
+      "other": {
+        "median": 0.0195,
+        "p95": 0.0226,
+        "p99": 0.0442
+      },
+      "total": {
+        "median": 0.069,
+        "p95": 0.1046,
+        "p99": 2.6596
+      },
+      "allocatedBytesPerTick": 180315,
+      "managedHeapBytes": 14204888,
+      "workingSetBytes": 45465600,
+      "gen0": 1,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.19057333333333334
+    },
+    {
+      "size": 256,
+      "units": 300,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0244,
+        "p95": 0.0288,
+        "p99": 0.0527
+      },
+      "capture": {
+        "median": 0.0127,
+        "p95": 0.7217,
+        "p99": 0.7272
+      },
+      "connectivity": {
+        "median": 0.0919,
+        "p95": 0.1328,
+        "p99": 0.3535
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.7308,
+        "p99": 1.7888
+      },
+      "other": {
+        "median": 0.0727,
+        "p95": 0.1054,
+        "p99": 0.2501
+      },
+      "total": {
+        "median": 0.2384,
+        "p95": 2.6932,
+        "p99": 2.8466
+      },
+      "allocatedBytesPerTick": 496242,
+      "managedHeapBytes": 17240680,
+      "workingSetBytes": 44568576,
+      "gen0": 2,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 5.82855
+    },
+    {
+      "size": 256,
+      "units": 300,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0246,
+        "p95": 0.0294,
+        "p99": 0.0749
+      },
+      "capture": {
+        "median": 0.0126,
+        "p95": 0.7289,
+        "p99": 0.7659
+      },
+      "connectivity": {
+        "median": 0.0892,
+        "p95": 0.1148,
+        "p99": 0.3387
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.723,
+        "p99": 1.7963
+      },
+      "other": {
+        "median": 0.0699,
+        "p95": 0.0802,
+        "p99": 0.2553
+      },
+      "total": {
+        "median": 0.2323,
+        "p95": 2.688,
+        "p99": 2.7928
+      },
+      "allocatedBytesPerTick": 513705,
+      "managedHeapBytes": 15793856,
+      "workingSetBytes": 43450368,
+      "gen0": 2,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 2.5936266666666663
+    },
+    {
+      "size": 256,
+      "units": 300,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0248,
+        "p95": 0.0292,
+        "p99": 0.0308
+      },
+      "capture": {
+        "median": 0.0129,
+        "p95": 0.7158,
+        "p99": 0.7457
+      },
+      "connectivity": {
+        "median": 0.0918,
+        "p95": 0.1071,
+        "p99": 0.1898
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.7008,
+        "p99": 1.7842
+      },
+      "other": {
+        "median": 0.0722,
+        "p95": 0.077,
+        "p99": 0.8425
+      },
+      "total": {
+        "median": 0.241,
+        "p95": 2.7089,
+        "p99": 2.7191
+      },
+      "allocatedBytesPerTick": 513671,
+      "managedHeapBytes": 6501784,
+      "workingSetBytes": 43261952,
+      "gen0": 3,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.6540466666666664
+    },
+    {
+      "size": 256,
+      "units": 500,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0417,
+        "p95": 0.0631,
+        "p99": 0.0821
+      },
+      "capture": {
+        "median": 0.0239,
+        "p95": 0.7715,
+        "p99": 1.2818
+      },
+      "connectivity": {
+        "median": 0.1672,
+        "p95": 0.2925,
+        "p99": 0.4693
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.7258,
+        "p99": 1.8728
+      },
+      "other": {
+        "median": 0.1154,
+        "p95": 0.2144,
+        "p99": 0.3922
+      },
+      "total": {
+        "median": 0.412,
+        "p95": 2.9944,
+        "p99": 3.5426
+      },
+      "allocatedBytesPerTick": 828337,
+      "managedHeapBytes": 15622624,
+      "workingSetBytes": 46034944,
+      "gen0": 4,
+      "gen1": 2,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 9.13485
+    },
+    {
+      "size": 256,
+      "units": 500,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0422,
+        "p95": 0.0482,
+        "p99": 0.2112
+      },
+      "capture": {
+        "median": 0.0236,
+        "p95": 0.7536,
+        "p99": 0.9534
+      },
+      "connectivity": {
+        "median": 0.1646,
+        "p95": 0.2018,
+        "p99": 0.5143
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.7451,
+        "p99": 1.988
+      },
+      "other": {
+        "median": 0.1162,
+        "p95": 0.1399,
+        "p99": 1.0845
+      },
+      "total": {
+        "median": 0.4153,
+        "p95": 2.9111,
+        "p99": 3.4743
+      },
+      "allocatedBytesPerTick": 846109,
+      "managedHeapBytes": 15962328,
+      "workingSetBytes": 41705472,
+      "gen0": 5,
+      "gen1": 1,
+      "gen2": 1,
+      "meanCpuMillisecondsPerSimulatedSecond": 3.939880000000001
+    },
+    {
+      "size": 256,
+      "units": 500,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0409,
+        "p95": 0.0507,
+        "p99": 0.4213
+      },
+      "capture": {
+        "median": 0.0266,
+        "p95": 0.7747,
+        "p99": 0.8389
+      },
+      "connectivity": {
+        "median": 0.1715,
+        "p95": 0.1806,
+        "p99": 0.6232
+      },
+      "boundary": {
+        "median": 0,
+        "p95": 1.7725,
+        "p99": 2.2005
+      },
+      "other": {
+        "median": 0.1218,
+        "p95": 0.133,
+        "p99": 0.1729
+      },
+      "total": {
+        "median": 0.4239,
+        "p95": 2.9417,
+        "p99": 3.3944
+      },
+      "allocatedBytesPerTick": 846004,
+      "managedHeapBytes": 18792536,
+      "workingSetBytes": 44371968,
+      "gen0": 4,
+      "gen1": 0,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 0.9836149999999998
+    },
+    {
+      "size": 256,
+      "units": 1000,
+      "tickMilliseconds": 100,
+      "samples": 60,
+      "influence": {
+        "median": 0.0895,
+        "p95": 0.1089,
+        "p99": 0.111
+      },
+      "capture": {
+        "median": 0.0603,
+        "p95": 0.883,
+        "p99": 1.0812
+      },
+      "connectivity": {
+        "median": 0.3851,
+        "p95": 0.6088,
+        "p99": 0.8688
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 1.9104,
+        "p99": 2.1782
+      },
+      "other": {
+        "median": 0.2476,
+        "p95": 0.3946,
+        "p99": 1.5277
+      },
+      "total": {
+        "median": 1.1123,
+        "p95": 3.827,
+        "p99": 4.633
+      },
+      "allocatedBytesPerTick": 1641615,
+      "managedHeapBytes": 9416496,
+      "workingSetBytes": 44978176,
+      "gen0": 9,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 19.575899999999997
+    },
+    {
+      "size": 256,
+      "units": 1000,
+      "tickMilliseconds": 250,
+      "samples": 60,
+      "influence": {
+        "median": 0.0896,
+        "p95": 0.1025,
+        "p99": 0.4579
+      },
+      "capture": {
+        "median": 0.0614,
+        "p95": 0.862,
+        "p99": 1.3044
+      },
+      "connectivity": {
+        "median": 0.3868,
+        "p95": 0.48,
+        "p99": 0.9808
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 1.9404,
+        "p99": 2.3864
+      },
+      "other": {
+        "median": 0.2429,
+        "p95": 0.2745,
+        "p99": 0.7351
+      },
+      "total": {
+        "median": 0.9312,
+        "p95": 3.8209,
+        "p99": 4.1474
+      },
+      "allocatedBytesPerTick": 1659785,
+      "managedHeapBytes": 16019600,
+      "workingSetBytes": 43610112,
+      "gen0": 9,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 8.024520000000003
+    },
+    {
+      "size": 256,
+      "units": 1000,
+      "tickMilliseconds": 1000,
+      "samples": 60,
+      "influence": {
+        "median": 0.0908,
+        "p95": 0.1041,
+        "p99": 0.1115
+      },
+      "capture": {
+        "median": 0.0514,
+        "p95": 0.8257,
+        "p99": 1.1393
+      },
+      "connectivity": {
+        "median": 0.3773,
+        "p95": 0.5933,
+        "p99": 0.9233
+      },
+      "boundary": {
+        "median": 0.0001,
+        "p95": 1.7937,
+        "p99": 2.1514
+      },
+      "other": {
+        "median": 0.2403,
+        "p95": 0.3523,
+        "p99": 0.7196
+      },
+      "total": {
+        "median": 0.9285,
+        "p95": 3.8035,
+        "p99": 3.8839
+      },
+      "allocatedBytesPerTick": 1660178,
+      "managedHeapBytes": 13459208,
+      "workingSetBytes": 45088768,
+      "gen0": 9,
+      "gen1": 1,
+      "gen2": 0,
+      "meanCpuMillisecondsPerSimulatedSecond": 1.9768599999999998
+    }
+  ],
+  "boundaryCases": [
+    {
+      "size": 128,
+      "paths": 540,
+      "median": 1.3558,
+      "p95": 4.849,
+      "p99": 7.9951,
+      "allocatedBytesPerBuild": 1500706
+    },
+    {
+      "size": 256,
+      "paths": 2108,
+      "median": 5.6209,
+      "p95": 21.7827,
+      "p99": 22.9879,
+      "allocatedBytesPerBuild": 5810083
+    }
+  ]
+}

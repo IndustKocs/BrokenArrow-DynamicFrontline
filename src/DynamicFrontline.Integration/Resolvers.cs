@@ -79,7 +79,7 @@ public sealed class GameUnitProfileResolver
 }
 public sealed class GameUnitIdentityResolver
 {
-    private sealed record Entry(string Stamp,int Generation,bool Present,bool Alive);
+    private readonly record struct Entry(string Stamp,int Generation,bool Present,bool Alive);
     private Dictionary<long,Entry> entries=new();
     public IReadOnlyDictionary<long,UnitKey> AcceptComplete(Guid match,IReadOnlyList<RawGameUnit> units)
     {

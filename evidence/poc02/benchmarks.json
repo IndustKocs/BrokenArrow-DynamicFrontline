@@ -1,0 +1,894 @@
+{
+  "seed": 82026,
+  "runtime": ".NET 6.0.36",
+  "results": [
+    {
+      "size": 128,
+      "count": 100,
+      "period": 100,
+      "total": {
+        "median": 0.3194,
+        "p95": 0.4217,
+        "p99": 2.5752
+      },
+      "snapshot": {
+        "median": 0.047,
+        "p95": 0.0636,
+        "p99": 0.1071
+      },
+      "core": {
+        "median": 0.2203,
+        "p95": 0.276,
+        "p99": 2.4564
+      },
+      "graph": {
+        "median": 0.0542,
+        "p95": 0.0699,
+        "p99": 0.1117
+      },
+      "teamSerialization": {
+        "median": 0.0616,
+        "p95": 0.0716,
+        "p99": 0.0889
+      },
+      "allocatedBytesPerTick": 316485,
+      "serializationBytesPerTick": 22546,
+      "managedHeapBytes": 5586272,
+      "workingSetBytes": 42151936,
+      "gen0": 2,
+      "navigationSubmitted": 927,
+      "navigationCached": 111
+    },
+    {
+      "size": 128,
+      "count": 100,
+      "period": 250,
+      "total": {
+        "median": 0.3092,
+        "p95": 0.4124,
+        "p99": 0.5872
+      },
+      "snapshot": {
+        "median": 0.0449,
+        "p95": 0.0695,
+        "p99": 0.3121
+      },
+      "core": {
+        "median": 0.2142,
+        "p95": 0.2702,
+        "p99": 0.4516
+      },
+      "graph": {
+        "median": 0.0524,
+        "p95": 0.0719,
+        "p99": 0.0887
+      },
+      "teamSerialization": {
+        "median": 0.0592,
+        "p95": 0.0735,
+        "p99": 0.8502
+      },
+      "allocatedBytesPerTick": 316469,
+      "serializationBytesPerTick": 22272,
+      "managedHeapBytes": 8996344,
+      "workingSetBytes": 44421120,
+      "gen0": 2,
+      "navigationSubmitted": 927,
+      "navigationCached": 111
+    },
+    {
+      "size": 128,
+      "count": 100,
+      "period": 1000,
+      "total": {
+        "median": 0.3024,
+        "p95": 0.3597,
+        "p99": 2.189
+      },
+      "snapshot": {
+        "median": 0.0439,
+        "p95": 0.0473,
+        "p99": 1.9008
+      },
+      "core": {
+        "median": 0.2091,
+        "p95": 0.2333,
+        "p99": 0.2651
+      },
+      "graph": {
+        "median": 0.0509,
+        "p95": 0.0679,
+        "p99": 0.0755
+      },
+      "teamSerialization": {
+        "median": 0.0586,
+        "p95": 0.0652,
+        "p99": 0.0685
+      },
+      "allocatedBytesPerTick": 316476,
+      "serializationBytesPerTick": 22546,
+      "managedHeapBytes": 7545752,
+      "workingSetBytes": 44748800,
+      "gen0": 2,
+      "navigationSubmitted": 927,
+      "navigationCached": 111
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 100,
+      "total": {
+        "median": 1.0122,
+        "p95": 1.5288,
+        "p99": 3.062
+      },
+      "snapshot": {
+        "median": 0.1337,
+        "p95": 0.1522,
+        "p99": 0.2418
+      },
+      "core": {
+        "median": 0.7082,
+        "p95": 1.2315,
+        "p99": 2.776
+      },
+      "graph": {
+        "median": 0.2049,
+        "p95": 0.2249,
+        "p99": 0.2322
+      },
+      "teamSerialization": {
+        "median": 0.1791,
+        "p95": 0.2505,
+        "p99": 0.555
+      },
+      "allocatedBytesPerTick": 873709,
+      "serializationBytesPerTick": 66277,
+      "managedHeapBytes": 15356952,
+      "workingSetBytes": 44789760,
+      "gen0": 5,
+      "navigationSubmitted": 3119,
+      "navigationCached": 369
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 250,
+      "total": {
+        "median": 0.9982,
+        "p95": 1.432,
+        "p99": 2.8429
+      },
+      "snapshot": {
+        "median": 0.1313,
+        "p95": 0.5491,
+        "p99": 1.4877
+      },
+      "core": {
+        "median": 0.7034,
+        "p95": 0.8237,
+        "p99": 1.1883
+      },
+      "graph": {
+        "median": 0.201,
+        "p95": 0.2255,
+        "p99": 0.2539
+      },
+      "teamSerialization": {
+        "median": 0.177,
+        "p95": 0.1967,
+        "p99": 0.3763
+      },
+      "allocatedBytesPerTick": 873704,
+      "serializationBytesPerTick": 65457,
+      "managedHeapBytes": 12295392,
+      "workingSetBytes": 47607808,
+      "gen0": 6,
+      "navigationSubmitted": 3119,
+      "navigationCached": 369
+    },
+    {
+      "size": 128,
+      "count": 300,
+      "period": 1000,
+      "total": {
+        "median": 0.9892,
+        "p95": 2.0064,
+        "p99": 3.9059
+      },
+      "snapshot": {
+        "median": 0.1268,
+        "p95": 0.1507,
+        "p99": 0.2169
+      },
+      "core": {
+        "median": 0.6941,
+        "p95": 1.4664,
+        "p99": 3.2976
+      },
+      "graph": {
+        "median": 0.2006,
+        "p95": 0.4205,
+        "p99": 1.1564
+      },
+      "teamSerialization": {
+        "median": 0.1731,
+        "p95": 0.1988,
+        "p99": 0.5846
+      },
+      "allocatedBytesPerTick": 873740,
+      "serializationBytesPerTick": 66277,
+      "managedHeapBytes": 15439152,
+      "workingSetBytes": 50475008,
+      "gen0": 6,
+      "navigationSubmitted": 3119,
+      "navigationCached": 369
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 100,
+      "total": {
+        "median": 1.6848,
+        "p95": 2.7235,
+        "p99": 4.4987
+      },
+      "snapshot": {
+        "median": 0.211,
+        "p95": 0.2295,
+        "p99": 0.963
+      },
+      "core": {
+        "median": 1.2176,
+        "p95": 2.1127,
+        "p99": 2.3493
+      },
+      "graph": {
+        "median": 0.4105,
+        "p95": 0.5254,
+        "p99": 1.5311
+      },
+      "teamSerialization": {
+        "median": 0.2924,
+        "p95": 0.5976,
+        "p99": 2.1005
+      },
+      "allocatedBytesPerTick": 1570149,
+      "serializationBytesPerTick": 118050,
+      "managedHeapBytes": 18882080,
+      "workingSetBytes": 51163136,
+      "gen0": 11,
+      "navigationSubmitted": 4480,
+      "navigationCached": 497
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 250,
+      "total": {
+        "median": 1.6072,
+        "p95": 2.9888,
+        "p99": 3.5599
+      },
+      "snapshot": {
+        "median": 0.2008,
+        "p95": 0.2292,
+        "p99": 0.9582
+      },
+      "core": {
+        "median": 1.1789,
+        "p95": 1.9851,
+        "p99": 3.1491
+      },
+      "graph": {
+        "median": 0.3935,
+        "p95": 0.8464,
+        "p99": 2.3206
+      },
+      "teamSerialization": {
+        "median": 0.2863,
+        "p95": 0.3164,
+        "p99": 1.7679
+      },
+      "allocatedBytesPerTick": 1536165,
+      "serializationBytesPerTick": 116411,
+      "managedHeapBytes": 8428096,
+      "workingSetBytes": 50286592,
+      "gen0": 12,
+      "navigationSubmitted": 4480,
+      "navigationCached": 497
+    },
+    {
+      "size": 128,
+      "count": 500,
+      "period": 1000,
+      "total": {
+        "median": 1.2726,
+        "p95": 2.3721,
+        "p99": 3.1001
+      },
+      "snapshot": {
+        "median": 0.1848,
+        "p95": 0.2782,
+        "p99": 0.894
+      },
+      "core": {
+        "median": 0.9032,
+        "p95": 1.7078,
+        "p99": 2.4352
+      },
+      "graph": {
+        "median": 0.2864,
+        "p95": 0.615,
+        "p99": 1.8151
+      },
+      "teamSerialization": {
+        "median": 0.2901,
+        "p95": 0.5711,
+        "p99": 2.58
+      },
+      "allocatedBytesPerTick": 1496798,
+      "serializationBytesPerTick": 114225,
+      "managedHeapBytes": 12914368,
+      "workingSetBytes": 48939008,
+      "gen0": 9,
+      "navigationSubmitted": 4480,
+      "navigationCached": 497
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 100,
+      "total": {
+        "median": 2.6487,
+        "p95": 4.1441,
+        "p99": 4.7125
+      },
+      "snapshot": {
+        "median": 0.3252,
+        "p95": 0.4099,
+        "p99": 1.1096
+      },
+      "core": {
+        "median": 2.1057,
+        "p95": 3.4195,
+        "p99": 4.0906
+      },
+      "graph": {
+        "median": 0.7898,
+        "p95": 1.6477,
+        "p99": 1.9714
+      },
+      "teamSerialization": {
+        "median": 0.377,
+        "p95": 0.5313,
+        "p99": 1.0477
+      },
+      "allocatedBytesPerTick": 2981707,
+      "serializationBytesPerTick": 239920,
+      "managedHeapBytes": 7233824,
+      "workingSetBytes": 51179520,
+      "gen0": 27,
+      "navigationSubmitted": 4480,
+      "navigationCached": 368
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 250,
+      "total": {
+        "median": 2.5385,
+        "p95": 3.6676,
+        "p99": 10.698
+      },
+      "snapshot": {
+        "median": 0.3079,
+        "p95": 0.9648,
+        "p99": 1.1873
+      },
+      "core": {
+        "median": 2.0163,
+        "p95": 3.0973,
+        "p99": 10.1199
+      },
+      "graph": {
+        "median": 0.7699,
+        "p95": 1.5926,
+        "p99": 8.8382
+      },
+      "teamSerialization": {
+        "median": 0.3501,
+        "p95": 0.3758,
+        "p99": 0.9972
+      },
+      "allocatedBytesPerTick": 2958649,
+      "serializationBytesPerTick": 229822,
+      "managedHeapBytes": 13828792,
+      "workingSetBytes": 51630080,
+      "gen0": 25,
+      "navigationSubmitted": 4480,
+      "navigationCached": 368
+    },
+    {
+      "size": 128,
+      "count": 1000,
+      "period": 1000,
+      "total": {
+        "median": 2.5465,
+        "p95": 3.8702,
+        "p99": 4.5363
+      },
+      "snapshot": {
+        "median": 0.3056,
+        "p95": 0.9048,
+        "p99": 0.9399
+      },
+      "core": {
+        "median": 2.0376,
+        "p95": 2.9933,
+        "p99": 3.1721
+      },
+      "graph": {
+        "median": 0.7642,
+        "p95": 1.4991,
+        "p99": 1.9082
+      },
+      "teamSerialization": {
+        "median": 0.3486,
+        "p95": 0.5155,
+        "p99": 1.0224
+      },
+      "allocatedBytesPerTick": 2903870,
+      "serializationBytesPerTick": 221627,
+      "managedHeapBytes": 20908856,
+      "workingSetBytes": 52637696,
+      "gen0": 24,
+      "navigationSubmitted": 4480,
+      "navigationCached": 368
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 100,
+      "total": {
+        "median": 0.2058,
+        "p95": 0.2675,
+        "p99": 2.2702
+      },
+      "snapshot": {
+        "median": 0.0307,
+        "p95": 0.0491,
+        "p99": 2.0776
+      },
+      "core": {
+        "median": 0.141,
+        "p95": 0.1565,
+        "p99": 0.3522
+      },
+      "graph": {
+        "median": 0.0305,
+        "p95": 0.0334,
+        "p99": 0.0853
+      },
+      "teamSerialization": {
+        "median": 0.034,
+        "p95": 0.0374,
+        "p99": 3.5278
+      },
+      "allocatedBytesPerTick": 312941,
+      "serializationBytesPerTick": 19927,
+      "managedHeapBytes": 10549432,
+      "workingSetBytes": 54611968,
+      "gen0": 3,
+      "navigationSubmitted": 810,
+      "navigationCached": 102
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 250,
+      "total": {
+        "median": 0.2101,
+        "p95": 0.3167,
+        "p99": 4.4568
+      },
+      "snapshot": {
+        "median": 0.0308,
+        "p95": 0.0493,
+        "p99": 0.2249
+      },
+      "core": {
+        "median": 0.1438,
+        "p95": 0.2178,
+        "p99": 4.3468
+      },
+      "graph": {
+        "median": 0.0312,
+        "p95": 0.0452,
+        "p99": 0.487
+      },
+      "teamSerialization": {
+        "median": 0.0342,
+        "p95": 0.0466,
+        "p99": 0.0653
+      },
+      "allocatedBytesPerTick": 312941,
+      "serializationBytesPerTick": 19927,
+      "managedHeapBytes": 13165696,
+      "workingSetBytes": 55681024,
+      "gen0": 2,
+      "navigationSubmitted": 810,
+      "navigationCached": 102
+    },
+    {
+      "size": 256,
+      "count": 100,
+      "period": 1000,
+      "total": {
+        "median": 0.213,
+        "p95": 0.4445,
+        "p99": 4.1769
+      },
+      "snapshot": {
+        "median": 0.0324,
+        "p95": 0.0503,
+        "p99": 0.0707
+      },
+      "core": {
+        "median": 0.1463,
+        "p95": 0.2847,
+        "p99": 4.1084
+      },
+      "graph": {
+        "median": 0.0314,
+        "p95": 0.0522,
+        "p99": 3.8923
+      },
+      "teamSerialization": {
+        "median": 0.0347,
+        "p95": 0.0549,
+        "p99": 0.0747
+      },
+      "allocatedBytesPerTick": 312941,
+      "serializationBytesPerTick": 19927,
+      "managedHeapBytes": 9408096,
+      "workingSetBytes": 51355648,
+      "gen0": 3,
+      "navigationSubmitted": 810,
+      "navigationCached": 102
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 100,
+      "total": {
+        "median": 0.6403,
+        "p95": 1.2334,
+        "p99": 10.4381
+      },
+      "snapshot": {
+        "median": 0.088,
+        "p95": 0.1423,
+        "p99": 0.6465
+      },
+      "core": {
+        "median": 0.449,
+        "p95": 0.651,
+        "p99": 10.2326
+      },
+      "graph": {
+        "median": 0.1054,
+        "p95": 0.1455,
+        "p99": 0.4909
+      },
+      "teamSerialization": {
+        "median": 0.1002,
+        "p95": 0.1222,
+        "p99": 0.1269
+      },
+      "allocatedBytesPerTick": 872744,
+      "serializationBytesPerTick": 59240,
+      "managedHeapBytes": 18586400,
+      "workingSetBytes": 57393152,
+      "gen0": 6,
+      "navigationSubmitted": 2516,
+      "navigationCached": 316
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 250,
+      "total": {
+        "median": 0.6234,
+        "p95": 1.2326,
+        "p99": 3.4081
+      },
+      "snapshot": {
+        "median": 0.0865,
+        "p95": 0.1547,
+        "p99": 2.8635
+      },
+      "core": {
+        "median": 0.4371,
+        "p95": 0.5839,
+        "p99": 1.802
+      },
+      "graph": {
+        "median": 0.1018,
+        "p95": 0.1193,
+        "p99": 0.1491
+      },
+      "teamSerialization": {
+        "median": 0.0967,
+        "p95": 0.1223,
+        "p99": 0.268
+      },
+      "allocatedBytesPerTick": 872746,
+      "serializationBytesPerTick": 59240,
+      "managedHeapBytes": 13936376,
+      "workingSetBytes": 59711488,
+      "gen0": 7,
+      "navigationSubmitted": 2516,
+      "navigationCached": 316
+    },
+    {
+      "size": 256,
+      "count": 300,
+      "period": 1000,
+      "total": {
+        "median": 0.6158,
+        "p95": 1.0842,
+        "p99": 5.404
+      },
+      "snapshot": {
+        "median": 0.0837,
+        "p95": 0.0974,
+        "p99": 2.4237
+      },
+      "core": {
+        "median": 0.4332,
+        "p95": 0.4675,
+        "p99": 5.2133
+      },
+      "graph": {
+        "median": 0.0991,
+        "p95": 0.1143,
+        "p99": 0.4128
+      },
+      "teamSerialization": {
+        "median": 0.0965,
+        "p95": 0.1066,
+        "p99": 0.7119
+      },
+      "allocatedBytesPerTick": 872705,
+      "serializationBytesPerTick": 59240,
+      "managedHeapBytes": 21614936,
+      "workingSetBytes": 60174336,
+      "gen0": 6,
+      "navigationSubmitted": 2516,
+      "navigationCached": 316
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 100,
+      "total": {
+        "median": 1.0708,
+        "p95": 2.0825,
+        "p99": 2.3192
+      },
+      "snapshot": {
+        "median": 0.1409,
+        "p95": 0.3044,
+        "p99": 1.2126
+      },
+      "core": {
+        "median": 0.7387,
+        "p95": 1.5536,
+        "p99": 1.8868
+      },
+      "graph": {
+        "median": 0.1843,
+        "p95": 0.7069,
+        "p99": 1.0168
+      },
+      "teamSerialization": {
+        "median": 0.1609,
+        "p95": 0.3135,
+        "p99": 17.7307
+      },
+      "allocatedBytesPerTick": 1742532,
+      "serializationBytesPerTick": 108494,
+      "managedHeapBytes": 17847984,
+      "workingSetBytes": 57901056,
+      "gen0": 16,
+      "navigationSubmitted": 4229,
+      "navigationCached": 547
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 250,
+      "total": {
+        "median": 1.0941,
+        "p95": 2.1068,
+        "p99": 17.6176
+      },
+      "snapshot": {
+        "median": 0.1445,
+        "p95": 0.1756,
+        "p99": 0.9586
+      },
+      "core": {
+        "median": 0.7646,
+        "p95": 1.6554,
+        "p99": 17.2035
+      },
+      "graph": {
+        "median": 0.1923,
+        "p95": 0.7455,
+        "p99": 3.1743
+      },
+      "teamSerialization": {
+        "median": 0.1662,
+        "p95": 0.2918,
+        "p99": 16.1553
+      },
+      "allocatedBytesPerTick": 1626318,
+      "serializationBytesPerTick": 106581,
+      "managedHeapBytes": 17443768,
+      "workingSetBytes": 60538880,
+      "gen0": 14,
+      "navigationSubmitted": 4229,
+      "navigationCached": 547
+    },
+    {
+      "size": 256,
+      "count": 500,
+      "period": 1000,
+      "total": {
+        "median": 1.044,
+        "p95": 1.9992,
+        "p99": 13.8209
+      },
+      "snapshot": {
+        "median": 0.1352,
+        "p95": 0.1789,
+        "p99": 0.9306
+      },
+      "core": {
+        "median": 0.7296,
+        "p95": 1.5922,
+        "p99": 13.4897
+      },
+      "graph": {
+        "median": 0.186,
+        "p95": 0.3188,
+        "p99": 0.9196
+      },
+      "teamSerialization": {
+        "median": 0.1618,
+        "p95": 0.1796,
+        "p99": 0.3176
+      },
+      "allocatedBytesPerTick": 1547465,
+      "serializationBytesPerTick": 102756,
+      "managedHeapBytes": 16683960,
+      "workingSetBytes": 59502592,
+      "gen0": 13,
+      "navigationSubmitted": 4229,
+      "navigationCached": 547
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 100,
+      "total": {
+        "median": 2.2024,
+        "p95": 9.3545,
+        "p99": 21.4633
+      },
+      "snapshot": {
+        "median": 0.287,
+        "p95": 0.3765,
+        "p99": 1.5445
+      },
+      "core": {
+        "median": 1.5709,
+        "p95": 8.7824,
+        "p99": 20.5654
+      },
+      "graph": {
+        "median": 0.4381,
+        "p95": 6.0165,
+        "p99": 17.3223
+      },
+      "teamSerialization": {
+        "median": 0.3273,
+        "p95": 0.468,
+        "p99": 0.5309
+      },
+      "allocatedBytesPerTick": 3449430,
+      "serializationBytesPerTick": 242675,
+      "managedHeapBytes": 24817072,
+      "workingSetBytes": 58568704,
+      "gen0": 28,
+      "navigationSubmitted": 4480,
+      "navigationCached": 471
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 250,
+      "total": {
+        "median": 2.2163,
+        "p95": 10.008,
+        "p99": 20.1647
+      },
+      "snapshot": {
+        "median": 0.2965,
+        "p95": 1.2734,
+        "p99": 6.6742
+      },
+      "core": {
+        "median": 1.551,
+        "p95": 9.4064,
+        "p99": 19.6685
+      },
+      "graph": {
+        "median": 0.46,
+        "p95": 3.383,
+        "p99": 18.5159
+      },
+      "teamSerialization": {
+        "median": 0.3448,
+        "p95": 0.4442,
+        "p99": 1.1654
+      },
+      "allocatedBytesPerTick": 3248456,
+      "serializationBytesPerTick": 234480,
+      "managedHeapBytes": 15867592,
+      "workingSetBytes": 67358720,
+      "gen0": 26,
+      "navigationSubmitted": 4480,
+      "navigationCached": 471
+    },
+    {
+      "size": 256,
+      "count": 1000,
+      "period": 1000,
+      "total": {
+        "median": 2.2787,
+        "p95": 13.0101,
+        "p99": 19.9046
+      },
+      "snapshot": {
+        "median": 0.3,
+        "p95": 0.8176,
+        "p99": 1.3357
+      },
+      "core": {
+        "median": 1.6251,
+        "p95": 11.6249,
+        "p99": 19.1904
+      },
+      "graph": {
+        "median": 0.4682,
+        "p95": 3.5469,
+        "p99": 13.3256
+      },
+      "teamSerialization": {
+        "median": 0.3428,
+        "p95": 0.424,
+        "p99": 0.5571
+      },
+      "allocatedBytesPerTick": 3029670,
+      "serializationBytesPerTick": 226285,
+      "managedHeapBytes": 22249200,
+      "workingSetBytes": 62390272,
+      "gen0": 24,
+      "navigationSubmitted": 4480,
+      "navigationCached": 471
+    }
+  ]
+}

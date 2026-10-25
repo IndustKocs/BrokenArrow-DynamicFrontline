@@ -99,6 +99,10 @@ Test("internal exceptions never appear in public status",()=>{using var f=new Fi
 Test("moving hidden recon and special forces produces no territorial delta",()=>{using var f=new Fixture();for(int i=0;i<5;i++){f.Step(f.Unit(1,2,1,205+i*10,105),f.Unit(2,3,1,205,125+i*10));Check(f.Bridge.LastGood!.Result.Delta.Cells.Length==0);}});
 
 ReflectionTests.Run(Test,Check);
+Test("collection-only mode retains copied DTO without starting core",()=>{using var f=new Fixture(settings:new(true,false));Check(f.Step(f.Unit()));Check(f.Bridge.LastGood==null&&f.Bridge.LastInspection!.Units.Length==1&&f.Bridge.Health.State==IntegrationState.DiagnosticsOnly);});
+Test("snapshot roster is not a borrowed mutable array",()=>{using var f=new Fixture();f.Step(f.Unit());var snapshot=f.Bridge.LastInspection!;f.Context.Value!.Teams[0].PlayerUids[0]=999;Check(snapshot.Context.Teams[0].PlayerUids[0]==10);});
+Test("profile may disable local circles without disabling capture",()=>{using var f=new Fixture();f.Profiles=new(f.Profiles.Document with{Units=f.Profiles.Document.Units.Select(p=>p.UnitDefinitionId==1?p with{CanCreateLocalArea=false}:p).ToArray()});f.Step(f.Unit(x:155));Check(f.Bridge.LastGood!.Result.LocalAreas.Length==0);});
+Test("vehicle relay has no fabricated soldiers and never captures",()=>{using var f=new Fixture();for(int i=0;i<3;i++)f.Step(f.Unit(id:4));var s=f.Bridge.LastGood!;Check(s.Input.Units.Single().AliveSoldierCount==null&&s.Result.Operational.Nodes.Single().Connected&&s.Result.Delta.Cells.Length==0);});
 File.WriteAllText("artifacts/poc02/integration-tests.json",JsonSerializer.Serialize(new{total=results.Count,failed=failures,results},new JsonSerializerOptions{WriteIndented=true}));
 Console.WriteLine($"TOTAL {results.Count}; FAILED {failures}");
 if(failures==0)Diagnostics.Build();
