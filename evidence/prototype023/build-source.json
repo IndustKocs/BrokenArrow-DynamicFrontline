@@ -1,0 +1,254 @@
+{
+  "sourceCommit": "2f085f62d172b0e7bb97d8750d77ee05ce328697",
+  "benchmarkSourceCommit": "d49e46f",
+  "sdk": "8.0.426",
+  "target": "net6.0",
+  "configuration": "Release",
+  "testGroups": {
+    "legacy": 284,
+    "prototype023": 72
+  },
+  "sources": [
+    {
+      "path": "src\\DynamicFrontline.Combat.Explorer\\Program.cs",
+      "sha256": "66f30dc7c8f2c1afa55db13832d3317a4f1dcbe82158db45fe809892ea437235"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\CombatFormulas.cs",
+      "sha256": "9bb453271160a868a3f357883f71502cdd089e8c94470270d59a45a5c5e07383"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\CombatFormulas.Heat.cs",
+      "sha256": "4ca893145d9d4415fbb9ed2854f40eac83f1fba193b316b4572e1711d57928b3"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\CombatFormulas.Missiles.cs",
+      "sha256": "3bc03d10886cdb9b5079f3f2d119533296999fde34d5ce2cab3d121a3d8bb88f"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\Contracts.cs",
+      "sha256": "0cd18e30760edbd8edf5b00e97cdd711c5ae5fd28f252c564327402131fac481"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\DesertionController.cs",
+      "sha256": "e93caf9d5f1fc0205c9b16fc51d5686e4f893d426dcd2d087b168aa59205f782"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\UnitInspector.cs",
+      "sha256": "a6fe1b017a2fad13ba7e1a4305721c1421d21978a46d2a90c3b928b168d08181"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\UserCommandGate.cs",
+      "sha256": "3a628b9d090148129515a5781e24eaf334ff647eb48f52a698c8720eb037b408"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Boundary.cs",
+      "sha256": "9dc7b82647fdb79c133adf91072d862dd4519d464f3881bb4fd170288899f858"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Configuration.cs",
+      "sha256": "9aa823bfeff2085ab9e3a0a2786636e67ede50cbe3714a86c15de4169b1d45f8"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Connectivity.cs",
+      "sha256": "7ef3d1fca8b4c96996633670af5b7c11a93d348873f88d9a007f08289528b034"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Contracts.cs",
+      "sha256": "9e9a7ea327f423e42e730444f620968d55b408e954f9b12915176b19bf4671c5"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\GridRetreatAccess.cs",
+      "sha256": "d273b4bea7520163f0674a51c1c48b7a393da80d9a4c16e28805e1be5e9f386d"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Simulation.cs",
+      "sha256": "51138ae7e5655abee40b573ba4b9d4de5a15425e8536505ba3483c77895b4695"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Territory.cs",
+      "sha256": "a4aa60d37a75fe3e4dad8ae9930cfb67029815ae9692dd2a62edd4743cd7b2ac"
+    },
+    {
+      "path": "src\\DynamicFrontline.GameAdapter\\Compatibility.cs",
+      "sha256": "d11ad0b2fc06cf26985b4b7b4a82705d1c42c96486ec63cfcb87a7245f1ceb38"
+    },
+    {
+      "path": "src\\DynamicFrontline.GameAdapter\\ExperimentalGamePort.cs",
+      "sha256": "3698055390e05fc0eeb81b696ab1c952952234bdb82aa68df49ae3c879ffd65f"
+    },
+    {
+      "path": "src\\DynamicFrontline.GameAdapter\\ReflectionUnitReader.cs",
+      "sha256": "6d6f339514e3aaefeaf87941e05075f8032aa8885296fbb16f79e45645d6ee10"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\Contracts.cs",
+      "sha256": "0c881e266c5857d254e4e7f9779cf2a0327596423700ba33994dd894efa37b07"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\MapAndSnapshots.cs",
+      "sha256": "7b216c1cd79677785dfcfc7339ce46a650f52a81499e70cdbb923e3bf5f221fa"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\NativeNavigationStatusPolicy.cs",
+      "sha256": "5cb4ac326ff61ac00ec8f2a495b90b3fea3eb7d1b335ff2025235fc0fdfc0150"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\Navigation.cs",
+      "sha256": "e64c26f4cd66dc4ab65b7a05960c49d74b505ef48c114d3406560df235d8ef16"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\Presentation.cs",
+      "sha256": "1de27b69d111f41ef6edc8e4fdb2156449681074a1b21c7d75838a66c8c3c0d0"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\ReadOnlyAccess.cs",
+      "sha256": "8cbd83d68a2f9213dea7810bc7618d7e0c7e5b976b0695ddb2900e43664e14d4"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\Resolvers.cs",
+      "sha256": "ccb92625a88bf7474dd576da5eafbf516106d0f7dbaf964725efb29ee51e7456"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration\\SimulationBridge.cs",
+      "sha256": "7bd8fcec3342ace23302f41b089c66079ca7c48f392535cd64e50bb36a3acd8f"
+    },
+    {
+      "path": "src\\DynamicFrontline.Integration.MelonLoader\\ReadOnlyMod.cs",
+      "sha256": "673c99e33664fddbc6fa264074d85faeb5eec7572b36e04fed4e9cb9e3f8aeac"
+    },
+    {
+      "path": "src\\DynamicFrontline.MelonLoader\\CandidateOrderHook.cs",
+      "sha256": "dec8509b4dc58a2466de22540ad419a1b60bafae99d2dcf1b2794999949780c6"
+    },
+    {
+      "path": "src\\DynamicFrontline.MelonLoader\\Mod.cs",
+      "sha256": "d0061635e3e6b7e0c1b1da4e8d7d8e9473728cdae47dcf9a27fbbab2d32c26e3"
+    },
+    {
+      "path": "src\\DynamicFrontline.Prototype023.Runner\\Benchmarks.cs",
+      "sha256": "db9200fc435aaaf7b958e7d32355546e21faf2bb9cbf49984c1112e77914215c"
+    },
+    {
+      "path": "src\\DynamicFrontline.Prototype023.Runner\\Preview.cs",
+      "sha256": "9e800d47342bca95fd1ef9511699bc73a9b1fa66f6c381a45fdf0de48e6e52cb"
+    },
+    {
+      "path": "src\\DynamicFrontline.Prototype023.Runner\\Program.cs",
+      "sha256": "3a097e17e79f47bb938ac00c88d1cc781d00b0dadbe35926fe721658360b70fc"
+    },
+    {
+      "path": "src\\DynamicFrontline.Prototype023.Runner\\Replay.cs",
+      "sha256": "691e434152b8e9011dd14a9252bdd43761c1fc1a930ca618a332f13d5e3781c9"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\Contracts.cs",
+      "sha256": "a5048e131ce93cb132f8e2f18fa4218bf67a0777124111f82d0fd0e5e62a364f"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\Geometry.cs",
+      "sha256": "2866823b63a886c41956510efad9a9032e09797eac7054b98bf10bac79b8251d"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\Simulation023.cs",
+      "sha256": "edd3706a2949dc2814419c2ac60b150ca89e71b762b103c819206d242b805a2b"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\Stress.cs",
+      "sha256": "7670b158e7f3f065edf685d0582c8e2f549b959fc291d4d7b7656696f8d67444"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\Victory.cs",
+      "sha256": "95ef44021e861a5334c14fe80089dd62ef353075c79b1825c3ebb3febbe50410"
+    },
+    {
+      "path": "src\\DynamicFrontline.Frontline\\Rules023\\ZocField.cs",
+      "sha256": "8ce9e87139aa9ac6bf2bee45420fba86d2a37e4feb317d56e9a9c289b9b613cb"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\Diagnostics\\FormulaExplorer.cs",
+      "sha256": "4176e760b9656ae66e0c4027390d72359d51c7a3ff8c8c3106428c7feb1ea041"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\Diagnostics\\FormulaExplorer.Pass04.cs",
+      "sha256": "91db3576349e73d701ea17de6b1eb533b964a1554ff427d8c8fb16267d3a4397"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\Diagnostics\\ResearchProfiles.cs",
+      "sha256": "b0fca74f630a3ba49b6958dc628089c0eb4504ffe4bb958fdeb056e52de9a031"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\ExperimentalCombat\\CombatReadiness.cs",
+      "sha256": "c6518d7197c64eec4674a5af6d57c7317922086bfe4aa4f26d438e0e2e6d0ccf"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\ExperimentalCombat\\CyclicRandom.cs",
+      "sha256": "fe50266581971c086383bbac1b1586e2b3bac33933a3b712dee16aa453746990"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\ExperimentalCombat\\H1FiniteResearch.cs",
+      "sha256": "53ec21b8bc9e32d0a6197e13a36c7cedfdd4ce89b0a57c2819626cd999831788"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\ExperimentalCombat\\TestCurves.cs",
+      "sha256": "2ea895c30ebd14715716d38448b64746bfdc6e62efbd4b5956d3e30e8c9f3e2d"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\ExperimentalCombat\\VersionAwareIdentity.cs",
+      "sha256": "9a1ef1580916bc8ee112c24cbc5c907f6d53a269c0731ea316db13fd06d03c35"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\AircraftMath.cs",
+      "sha256": "53f62d443c5ed40ee9df14a32a0b5b73ce7c6119d8637e1b2fb2c07a8b69f167"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\AircraftMath.Maneuverability.cs",
+      "sha256": "95acd0724ea314e1fec8bc96f82f513263241638568498e26e3cb34f61bf36be"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\ArtilleryDispersionMath.cs",
+      "sha256": "7e56234ef2b9b64479dc5ba08455c13fc05aba34b26d103d8343f823fdf0e900"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\BuffEvaluationPipeline.cs",
+      "sha256": "5af71138439eef3808104271b30b7d55d9def6df0f079a68a755e746d257b16c"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\CriticalMath.cs",
+      "sha256": "a6239cb506684679a09bf5c817eb778a29a2f4636179044faa01b85a0f5139d0"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\ExplosionMath.cs",
+      "sha256": "422368acd78a72f4e5ff1a736e76b8bef44ad8505c20975a40fafca8da4f2368"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\FormulaDomain.cs",
+      "sha256": "4eb4687b5090d5dc985b04469da47db2259435fad176e876ff79294361ad26a9"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\InfantryMath.cs",
+      "sha256": "b0edb17c5e798528af1e5605a9c62381b498cac7df0bbfdb6fb6ad84a6c84ee0"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\NavigationMath.cs",
+      "sha256": "ca066b053fa98fd1c45af0ff4187596cae0d26979c6188f92c065196c00fdd15"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\VisibilityMath.cs",
+      "sha256": "5e76df305b6d25b5cf212621c104e4c76d95894aa67f0f0300df6d73557a9171"
+    },
+    {
+      "path": "src\\DynamicFrontline.Core\\VerifiedCombat\\VisibilityMath.SingleSmoke.cs",
+      "sha256": "e8bdf608da6f7555e7879a7f2432df7ba99c12d1529b1cc6ac01cc74e6bc6abc"
+    },
+    {
+      "path": "tests\\DynamicFrontline.Prototype023.Tests\\Fixtures023.cs",
+      "sha256": "b5c9b702b4fb57ca61e0139cbe16326a6d15b394867e54989f3a61fbd8a450e8"
+    },
+    {
+      "path": "tests\\DynamicFrontline.Prototype023.Tests\\Program.cs",
+      "sha256": "656b8c0948fe5391066b1d9b2928cad2ec14a56acc9f9ed69d2ff652660caf30"
+    }
+  ],
+  "scope": "Compiled before committing the identical source tree; generated evidence commit follows separately."
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "collapse-420",
+  "steps": 1680,
+  "checkpointResumeEqual": true,
+  "Time": 420,
+  "End": {
+    "Session": "62b88734-f7c0-4000-8000-000000000023",
+    "RulesVersion": "Zoc_023/1.2",
+    "EffectiveTime": 420,
+    "Winner": 0,
+    "Reasons": [
+      "ArmyCollapse"
+    ],
+    "Status": "SyntheticEnded"
+  },
+  "weighted": [
+    210,
+    105
+  ],
+  "rulesHash": "2642826ED57BDD9699B9144A3C7F9E09FBDF1390EC0F10EF13FC92C048120FA9",
+  "provenance": "TZ13 v1.2 synthetic fixture; experimental balance; no native game input"
+}

@@ -1,0 +1,13 @@
+{
+  "Name": "ring-supply-release",
+  "steps": 560,
+  "checkpointResumeEqual": true,
+  "Time": 140,
+  "End": null,
+  "weighted": [
+    0.0341796875,
+    0
+  ],
+  "rulesHash": "2642826ED57BDD9699B9144A3C7F9E09FBDF1390EC0F10EF13FC92C048120FA9",
+  "provenance": "TZ13 v1.2 synthetic fixture; experimental balance; no native game input"
+}

@@ -1,0 +1,294 @@
+{
+  "count": 72,
+  "failed": 0,
+  "results": [
+    {
+      "name": "configuration finite validation and immutable rules hash",
+      "passed": true
+    },
+    {
+      "name": "combined arms distance 99,99",
+      "passed": true
+    },
+    {
+      "name": "combined arms distance 100",
+      "passed": true
+    },
+    {
+      "name": "combined arms distance 100,01",
+      "passed": true
+    },
+    {
+      "name": "no tank pair enemy pair embarked pair stacking or chain bonus",
+      "passed": true
+    },
+    {
+      "name": "one soldier recon multiple infantry same IFV and partner death",
+      "passed": true
+    },
+    {
+      "name": "blocked and unknown partnership geometry",
+      "passed": true
+    },
+    {
+      "name": "strength falloff casualties tank HP state and desertion",
+      "passed": true
+    },
+    {
+      "name": "incremental field equals independent full evaluator after movement radius death terrain",
+      "passed": true
+    },
+    {
+      "name": "incomplete roster preserves field but marks unknown",
+      "passed": true
+    },
+    {
+      "name": "single tank overlapping start is not an encirclement",
+      "passed": true
+    },
+    {
+      "name": "enemies on one side and intersecting circles do not enclose",
+      "passed": true
+    },
+    {
+      "name": "ring spatially encloses uncovered centre with certificate",
+      "passed": true
+    },
+    {
+      "name": "filled ring does not release centre",
+      "passed": true
+    },
+    {
+      "name": "large physical gap restores ground corridor",
+      "passed": true
+    },
+    {
+      "name": "unknown nav and exhausted budget are not blocked proofs",
+      "passed": true
+    },
+    {
+      "name": "geographic island no enemy is not combat pocket",
+      "passed": true
+    },
+    {
+      "name": "explicit portal infantry vs vehicle block and reopen",
+      "passed": true
+    },
+    {
+      "name": "experimental open-gap width 99 100 101",
+      "passed": true
+    },
+    {
+      "name": "penalty integral 30s",
+      "passed": true
+    },
+    {
+      "name": "penalty integral 60s",
+      "passed": true
+    },
+    {
+      "name": "penalty integral 90s",
+      "passed": true
+    },
+    {
+      "name": "penalty integral 120s",
+      "passed": true
+    },
+    {
+      "name": "pending warning and exact ten second confirmation",
+      "passed": true
+    },
+    {
+      "name": "FPS independent supply and integral dt=0,1",
+      "passed": true
+    },
+    {
+      "name": "FPS independent supply and integral dt=0,25",
+      "passed": true
+    },
+    {
+      "name": "FPS independent supply and integral dt=1",
+      "passed": true
+    },
+    {
+      "name": "FPS independent supply and integral dt=200",
+      "passed": true
+    },
+    {
+      "name": "service union grace no duplication and invalid proximity",
+      "passed": true
+    },
+    {
+      "name": "short release preserves age and five seconds resets only history",
+      "passed": true
+    },
+    {
+      "name": "alternative release policy keeps penalty until confirmation",
+      "passed": true
+    },
+    {
+      "name": "embarkation uncertainty and region IDs preserve confirmed history",
+      "passed": true
+    },
+    {
+      "name": "class composition Reserve",
+      "passed": true
+    },
+    {
+      "name": "class composition Regular",
+      "passed": true
+    },
+    {
+      "name": "class composition Special",
+      "passed": true
+    },
+    {
+      "name": "single combat application provenance and original impact dedup no HP write",
+      "passed": true
+    },
+    {
+      "name": "F02 F04 F05 F06 retained and no catch-up recovery",
+      "passed": true
+    },
+    {
+      "name": "persistent territory local scoring union conflicts and no trail",
+      "passed": true
+    },
+    {
+      "name": "phase boundaries exact weights and neutral area",
+      "passed": true
+    },
+    {
+      "name": "full phase match configured synthetic final policy",
+      "passed": true
+    },
+    {
+      "name": "ledger step invariance duplicate revision pause missing session",
+      "passed": true
+    },
+    {
+      "name": "native absolute revision and delta are separate once-only channels",
+      "passed": true
+    },
+    {
+      "name": "territorial breakthrough depth 0,75 width and disconnected local island",
+      "passed": true
+    },
+    {
+      "name": "territorial breakthrough depth 0,8 width and disconnected local island",
+      "passed": true
+    },
+    {
+      "name": "119.999 vs120 breakthrough only one finish no later scoring",
+      "passed": true
+    },
+    {
+      "name": "breakthrough continuity false unknown reset and simultaneous no ID priority",
+      "passed": true
+    },
+    {
+      "name": "collapse minimum 1999",
+      "passed": true
+    },
+    {
+      "name": "collapse minimum 2000",
+      "passed": true
+    },
+    {
+      "name": "collapse minimum 2001",
+      "passed": true
+    },
+    {
+      "name": "collapse 419.999/420 strict territory leader zero armies and unknown",
+      "passed": true
+    },
+    {
+      "name": "active army full nominal roster excludes death ignores HP visibility sortie",
+      "passed": true
+    },
+    {
+      "name": "victory replay ledgers timers incompatible version",
+      "passed": true
+    },
+    {
+      "name": "own projection hidden enemy radius no leaks and notices not every tick",
+      "passed": true
+    },
+    {
+      "name": "full replay checkpoint resumes FSM stress ledgers without duplicate",
+      "passed": true
+    },
+    {
+      "name": "F04 independent unscaled target and unknown-source rejection",
+      "passed": true
+    },
+    {
+      "name": "recon explicit permissions override legacy catalog",
+      "passed": true
+    },
+    {
+      "name": "visible enemy hidden partner remains 400 then lost contact disappears",
+      "passed": true
+    },
+    {
+      "name": "native invalid feed rejection is atomic",
+      "passed": true
+    },
+    {
+      "name": "mirrored collapse and phase crossing preserve hold",
+      "passed": true
+    },
+    {
+      "name": "first breakthrough clips later collapse and native events",
+      "passed": true
+    },
+    {
+      "name": "checkpoint rejects same cell count different physical map",
+      "passed": true
+    },
+    {
+      "name": "long stress intervals use watermark not growing per-tick history",
+      "passed": true
+    },
+    {
+      "name": "supply grace preserves older deadline and combat still adds",
+      "passed": true
+    },
+    {
+      "name": "team switch and new generation do not inherit encirclement age",
+      "passed": true
+    },
+    {
+      "name": "offline aircraft and embarked infantry cannot create territory",
+      "passed": true
+    },
+    {
+      "name": "line captures then death leaves persistent ownership",
+      "passed": true
+    },
+    {
+      "name": "surviving second partner preserves 600 and no bonus chain",
+      "passed": true
+    },
+    {
+      "name": "enemy-owned ground permits terrain corridor",
+      "passed": true
+    },
+    {
+      "name": "hidden unrelated movements do not alter permitted projection",
+      "passed": true
+    },
+    {
+      "name": "fractional phase boundaries and exact second-phase 12K 6K",
+      "passed": true
+    },
+    {
+      "name": "same-team simultaneous grounds emit one end with both reasons",
+      "passed": true
+    },
+    {
+      "name": "many moving local areas match full union and cell-size tolerance",
+      "passed": true
+    }
+  ]
+}

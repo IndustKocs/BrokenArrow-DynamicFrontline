@@ -1,0 +1,22 @@
+[
+  {
+    "scenario": "ring-supply-release",
+    "repeatedCsvIdentical": true,
+    "sha256": "fe8ee02aabd9c8114caff7b8309a86f0b14f7003b47e524559ea4b799434bf8c"
+  },
+  {
+    "scenario": "three-phases-local-area",
+    "repeatedCsvIdentical": true,
+    "sha256": "f8aca34eb9178e823060a7e40324c2fb86d215e566c4cc71cf5f33201f0c5456"
+  },
+  {
+    "scenario": "breakthrough-120",
+    "repeatedCsvIdentical": true,
+    "sha256": "ae70a7778e52d8c7f6e8afe1ebac64617690a02510828c17be3af76f0c06d7a4"
+  },
+  {
+    "scenario": "collapse-420",
+    "repeatedCsvIdentical": true,
+    "sha256": "629b654db7c016c63ff04d72160b6b7f300294075056f8ba4d7580359df9b18c"
+  }
+]

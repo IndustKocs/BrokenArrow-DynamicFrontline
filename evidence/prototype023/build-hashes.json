@@ -1,0 +1,98 @@
+[
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Combat.Explorer\\bin\\Release\\net6.0\\DynamicFrontline.Combat.Explorer.dll",
+    "Hash": "0919E9A0B10D08A4F1AC0BB8C3F03ED9297A8C7A3861B14A55B2278704E4D066"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Combat.Explorer\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Core\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Frontline\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Frontline\\bin\\Release\\net6.0\\DynamicFrontline.Frontline.dll",
+    "Hash": "FACD6C9F4A1CA06D26CC409FE3F07BB57F9D883FFB3C5DDB1187980FA877B783"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.GameAdapter\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.GameAdapter\\bin\\Release\\net6.0\\DynamicFrontline.GameAdapter.dll",
+    "Hash": "CB62075353D4241327132277C3B7E12F221621879596B86974182913ADAACB30"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration\\bin\\Release\\net6.0\\DynamicFrontline.Frontline.dll",
+    "Hash": "FACD6C9F4A1CA06D26CC409FE3F07BB57F9D883FFB3C5DDB1187980FA877B783"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration\\bin\\Release\\net6.0\\DynamicFrontline.GameAdapter.dll",
+    "Hash": "CB62075353D4241327132277C3B7E12F221621879596B86974182913ADAACB30"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration\\bin\\Release\\net6.0\\DynamicFrontline.Integration.dll",
+    "Hash": "6E60781DDE3FC75E6CA2D5FB5AE4B95181D79846EA343387B5E6A26D0941AD5F"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.Frontline.dll",
+    "Hash": "FACD6C9F4A1CA06D26CC409FE3F07BB57F9D883FFB3C5DDB1187980FA877B783"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.GameAdapter.dll",
+    "Hash": "CB62075353D4241327132277C3B7E12F221621879596B86974182913ADAACB30"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.Integration.dll",
+    "Hash": "6E60781DDE3FC75E6CA2D5FB5AE4B95181D79846EA343387B5E6A26D0941AD5F"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Integration.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.Integration.MelonLoader.dll",
+    "Hash": "3BF8B42C0F9ACD6427A0E92E928E7B5B0B81D3E931C099F9FCE8945BBA36B92B"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.GameAdapter.dll",
+    "Hash": "CB62075353D4241327132277C3B7E12F221621879596B86974182913ADAACB30"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.MelonLoader\\bin\\Release\\net6.0\\DynamicFrontline.MelonLoader.dll",
+    "Hash": "3440D129F0026B2865EA6B11E566A7FC27F4A69128EF94554AD9F512F995B652"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Prototype023.Runner\\bin\\Release\\net6.0\\DynamicFrontline.Core.dll",
+    "Hash": "BEF054E0DFE1014CB85DF80682FC3E1D84B59F0E228C88801E2F1D01E7395BC4"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Prototype023.Runner\\bin\\Release\\net6.0\\DynamicFrontline.Frontline.dll",
+    "Hash": "FACD6C9F4A1CA06D26CC409FE3F07BB57F9D883FFB3C5DDB1187980FA877B783"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Prototype023.Runner\\bin\\Release\\net6.0\\DynamicFrontline.GameAdapter.dll",
+    "Hash": "CB62075353D4241327132277C3B7E12F221621879596B86974182913ADAACB30"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Prototype023.Runner\\bin\\Release\\net6.0\\DynamicFrontline.Integration.dll",
+    "Hash": "6E60781DDE3FC75E6CA2D5FB5AE4B95181D79846EA343387B5E6A26D0941AD5F"
+  },
+  {
+    "Path": "D:\\!Razrabotki\\Broken Arrow Dynamic Frontline\\prototype-023-zoc-encirclement\\src\\DynamicFrontline.Prototype023.Runner\\bin\\Release\\net6.0\\DynamicFrontline.Prototype023.Runner.dll",
+    "Hash": "5D7CFAB5F7E279763C547AC68378CD79E6431F2D916C0EA2B8A7EE572F6BCC82"
+  }
+]
