@@ -6,8 +6,8 @@ public static class Preview
     public static void Write(string output,Scenario scenario,List<DisplayFrame> frames,List<Public023> publics)
     {
         var html="""
-<!doctype html><meta charset="utf-8"><title>Dynamic Frontline 0.2.3 Х Offline</title>
-<style>body{background:#101822;color:#e0e8ef;font:16px system-ui;margin:24px;max-width:1200px}h1{font-size:24px}main{display:flex;gap:24px}svg{background:#182632;width:65%;border:1px solid #506070}pre{white-space:pre-wrap}input[type=range]{width:70%}label{display:block;margin:12px 0}.note{color:#b5c6d7}aside{flex:1}</style>
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dynamic Frontline 0.2.3 Х Offline</title>
+<style>body{background:#101822;color:#e0e8ef;font:16px system-ui;margin:24px;max-width:1200px}h1{font-size:24px}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px}svg{background:#182632;width:100%;aspect-ratio:1;border:1px solid #506070}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px} @media(max-width:700px){main{grid-template-columns:1fr}body{margin:16px}}input[type=range]{width:70%}label{display:block;margin:12px 0}.note{color:#b5c6d7}aside{flex:1}</style>
 <h1>Dynamic Frontline 0.2.3 Ч автономна€ диагностика</h1><p class="note">Synthetic / Experimental. ќтладочный файл содержит полный состав. —лой ZOC выключен по умолчанию. ƒанные кадров рассчитаны C# €дром; браузер только отображает их.</p>
 <input id="time" type="range" min="0" value="0"><span id="stamp"></span><label><input id="circles" type="checkbox"> ѕоказать ZOC (только отладка)</label>
 <main><svg id="map"></svg><aside><pre id="info"></pre></aside></main>
@@ -17,9 +17,9 @@ const map=document.getElementById('map');map.setAttribute('viewBox',`0 0 ${size*
 function draw(){const f=frames[+slider.value];document.getElementById('stamp').textContent=f.Time+' с';let shapes='';
 f.Owners.forEach((o,i)=>{if(o>=0)shapes+=`<rect x="${i%size*cell}" y="${Math.floor(i/size)*cell}" width="${cell}" height="${cell}" fill="${o?'#8b3d47':'#245d8c'}"/>`});
 f.Units.forEach(u=>{if(document.getElementById('circles').checked&&u.Power>0)shapes+=`<circle cx="${u.X}" cy="${u.Y}" r="${u.Radius}" fill="none" stroke="${u.Team?'#ed7b7b':'#7bc3ed'}" stroke-width="6" opacity=".4"/>`;shapes+=`<circle cx="${u.X}" cy="${u.Y}" r="25" fill="${u.Team?'#ed7b7b':'#7bc3ed'}"/>`});map.innerHTML=shapes;
-document.getElementById('info').textContent=JSON.stringify({time:f.Time,own:f.Own,fractions:f.Fractions,phaseIntegrals:f.U,native:f.Native,geometry:f.Geometry,notices:f.Notices,end:f.End},null,2)}slider.oninput=draw;document.getElementById('circles').onchange=draw;draw();</script>
+document.getElementById('info').textContent=JSON.stringify({time:f.Time,own:f.Own.map(u=>({unit:u.Key.Uid,state:u.State,relief:u.Relief,tau:u.Tau,stress:Math.round(u.Stress),maximum:u.Maximum})),fractions:f.Fractions,phaseIntegrals:f.U,native:f.Native,ownGeometry:f.Geometry[0],notices:f.Notices,end:f.End},null,2)}slider.oninput=draw;document.getElementById('circles').onchange=draw;draw();</script>
 """;
-        html=html.Replace("__FRAMES__",JsonSerializer.Serialize(frames)).Replace("__SIZE__",scenario.Size.ToString()).Replace("__CELL__",scenario.CellSize.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        html=html.Replace("__FRAMES__",JsonSerializer.Serialize(frames,Formats.Json)).Replace("__SIZE__",scenario.Size.ToString()).Replace("__CELL__",scenario.CellSize.ToString(System.Globalization.CultureInfo.InvariantCulture));
         File.WriteAllText(Path.Combine(output,"preview-debug.html"),html);
         // Separate export: no hidden IDs/positions/certificates are embedded in this document.
         File.WriteAllText(Path.Combine(output,"preview-player.html"),"<!doctype html><meta charset='utf-8'><title>Own state Х Offline</title><h1>—осто€ние своих подразделений</h1><p>Synthetic. »грова€ прив€зка отсутствует.</p><pre>"+System.Net.WebUtility.HtmlEncode(JsonSerializer.Serialize(publics,Formats.Json))+"</pre>");

@@ -121,9 +121,9 @@ public sealed class InMemoryStressBackend
     }
     public bool Apply(Unit023 u, StressEffectIntent intent, float recoveryMultiplier = 1)
     {
-        var s = Get(u); var id = intent.Source + "/" + intent.EventId;
+        var s = Get(u);
         Check.That(intent.Source == "Encirclement" && intent.Unit == u.Key && intent.RulesVersion == "Zoc_023/1.2", "Foreign intent");
-        if (seen[u.Key].Contains(id)) return false;
+        if (intent.End <= s.Time && intent.Start < intent.End) return false; // monotonic watermark: no per-tick event history
         Check.That(Math.Abs(intent.Start - s.Time) < 1e-8 && intent.End >= intent.Start, "Nonconsecutive effect interval"); Check.Nonnegative(intent.Delta);
         double stress = Math.Min(s.Maximum, s.Stress + intent.Delta); float timer = intent.Delta > 0 ? 0 : s.NativeRecoveryTime; double next = s.NextRecovery;
         while (next <= intent.End + 1e-9)
@@ -131,7 +131,7 @@ public sealed class InMemoryStressBackend
             if (!intent.BlockRecovery) { var r = CombatFormulas.RecoverStressTick((float)stress, timer, recoveryMultiplier); stress = r.Stress; timer = r.TimeAfterLastDamage; }
             next += 1; // skipped ticks never become a catch-up recovery burst
         }
-        seen[u.Key].Add(id); states[u.Key] = s with { Stress = stress, NativeRecoveryTime = timer, Time = intent.End, NextRecovery = next }; return true;
+        states[u.Key] = s with { Stress = stress, NativeRecoveryTime = timer, Time = intent.End, NextRecovery = next }; return true;
     }
     public StressLevel Level(Unit023 u) { var s = Get(u); return CombatFormulas.Level((float)s.Stress, CombatFormulas.Thresholds((float)s.Maximum, u.Profile.ShockRatio, u.Profile.PanicRatio)); }
     public StressMemory[] Current() => states.Values.OrderBy(s => s.Key.Uid).ToArray();

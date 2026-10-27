@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dynamic Frontline 0.2.3 synthetic scenario",
+  "type": "object",
+  "required": [
+    "Name",
+    "Provenance",
+    "Session",
+    "Size",
+    "CellSize",
+    "Duration",
+    "Rules",
+    "Victory",
+    "TerritoryProfiles",
+    "Units",
+    "Seeds",
+    "Changes",
+    "Services",
+    "NativeEvents"
+  ],
+  "properties": {
+    "Name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Provenance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Session": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "Size": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "CellSize": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "Duration": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 2700,
+      "multipleOf": 0.25
+    },
+    "Rules": {
+      "type": "object",
+      "properties": {
+        "Version": {
+          "const": "Zoc_023/1.2"
+        },
+        "Release": {
+          "enum": [
+            "PausePenalty",
+            "KeepPenaltyUntilConfirmed"
+          ]
+        },
+        "GeometryBudget": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "Victory": {
+      "type": "object",
+      "properties": {
+        "DepthThreshold": {
+          "enum": [
+            0.75,
+            0.8
+          ]
+        },
+        "RequiredWidth": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "TerritoryScale": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "FinalPolicy": {
+          "enum": [
+            null,
+            "SyntheticSum"
+          ]
+        },
+        "AirPolicy": {
+          "enum": [
+            "GroundOnlyExperimental",
+            "StableAliveRosterExperimental"
+          ]
+        }
+      }
+    },
+    "TerritoryProfiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "Units": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "Seeds": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "Changes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "Services": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "NativeEvents": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ if(Test-Path tools/melonloader/MelonLoader/net6/MelonLoader.dll) {
 if($Regression){
  $reg=Join-Path $out 'regression'
  New-Item -ItemType Directory -Force "$reg/config","$reg/artifacts/poc02/legacy/artifacts" | Out-Null
- Copy-Item config/frontline.example.json "$reg/config"
+ Copy-Item config/* "$reg/config" -Recurse -Force
  foreach($name in @('DynamicFrontline.Tests','DynamicFrontline.Frontline.Tests','DynamicFrontline.Integration.Tests','DynamicFrontline.Combat.Tests','DynamicFrontline.Pass04.Tests')){
   Build "tests/$name"
   Push-Location $reg
@@ -43,3 +43,4 @@ if($Regression){
 if($Benchmarks){Run 'src/DynamicFrontline.Prototype023.Runner' @('benchmark',"$out/benchmarks",'10000','3')}
 Get-ChildItem src -Recurse -File -Filter *.dll | Where-Object {$_.FullName -like "*\bin\$Configuration\*"} | Get-FileHash -Algorithm SHA256 | Select-Object Path,Hash | ConvertTo-Json -Depth 3 | Set-Content "$out/build-hashes.json"
 & git rev-parse HEAD | Set-Content "$out/source-commit.txt"
+

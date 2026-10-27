@@ -36,7 +36,7 @@ public sealed record Unit023(UnitKey Key, int Team, int Owner, int TerritoryProf
         Profile.Validate(); Check.That(Key.MatchId == session && Key.Generation >= 0 && Team is 0 or 1 && Position.IsFinite && !string.IsNullOrWhiteSpace(PositionProvenance), "Invalid unit identity/position");
         Check.Positive(MaxHp); Check.Nonnegative(Hp); Check.That(Hp <= MaxHp && NominalValue >= 0, "Invalid health/value"); Check.Nonnegative(Stress); Check.Nonnegative(PositionAge);
     }
-    public FrontlineUnit TerritoryUnit => new(Key, TerritoryProfileId, Team, Position, Soldiers, Alive, Loaded, Deserting, Level, 1, Profile.IsInfantry && Profile.CanCaptureTerritory, Active);
+    public FrontlineUnit TerritoryUnit => new(Key, TerritoryProfileId, Team, Position, Soldiers, Alive, Loaded, Deserting, Level, Active ? 1 : 0, Profile.IsInfantry && Profile.CanCaptureTerritory, Active);
 }
 public sealed record Rules023Config
 {

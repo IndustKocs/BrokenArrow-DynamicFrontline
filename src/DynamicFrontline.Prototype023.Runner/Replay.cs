@@ -20,6 +20,7 @@ public static class Replay
     public static void Run(Scenario s,string output)
     {
         Check.That(!string.IsNullOrWhiteSpace(s.Provenance)&&s.Duration>0&&s.Duration<=2700&&s.Duration*4==Math.Floor(s.Duration*4),"Invalid scenario");
+        Check.That(s.Changes.All(c=>c.Time>=0 && c.Time<s.Duration && c.Time*4==Math.Floor(c.Time*4)) && s.Services.All(e=>e.Start>=0 && e.Start<s.Duration && e.Start*4==Math.Floor(e.Start*4)) && s.NativeEvents.All(e=>e.Time>=0 && e.Time<=s.Duration),"Replay event outside supported cadence/range");
         Directory.CreateDirectory(output); var (sim,terrain)=Create(s);var units=s.Units.ToArray();
         var frames=new List<DisplayFrame>();var publics=new List<Public023>();var log=new StringBuilder("time,ownState,relief,tau,stress,fraction0,fraction1,weighted0,weighted1,end\n");
         Simulation023? resumed=null; Checkpoint023? checkpoint=null;int steps=0;
@@ -27,7 +28,7 @@ public static class Replay
         {
             double start=i*.25,end=start+.25;
             foreach(var c in s.Changes.Where(c=>c.Time==start)){int index=Array.FindIndex(units,u=>u.Key.Uid==c.Uid);Check.That(index>=0,"Unknown change unit");var u=units[index];units[index]=u with{Position=c.Position??u.Position,Alive=c.Alive??u.Alive,Visible=c.Visible??u.Visible};}
-            var input=new Input023(s.Session,s.Rules.Version,s.Rules.Hash,i,start,end,units,true,s.Services.Where(e=>e.Start==start).ToArray(),[],s.NativeEvents.Where(e=>e.Time>=start&&e.Time<end).ToArray());
+            var input=new Input023(s.Session,s.Rules.Version,s.Rules.Hash,i,start,end,units,true,s.Services.Where(e=>e.Start==start).ToArray(),[],s.NativeEvents.Where(e=>e.Time>start&&e.Time<=end || start==0&&e.Time==0).ToArray());
             var frame=sim.Step(input);steps++;
             if(resumed!=null)resumed.Step(input);
             if(i==(int)(s.Duration*2)-1&&frame.Victory.End==null){checkpoint=JsonSerializer.Deserialize<Checkpoint023>(JsonSerializer.Serialize(sim.Checkpoint(),Formats.Json),Formats.Json)!;resumed=Create(s).Sim;resumed.Restore(checkpoint);}
