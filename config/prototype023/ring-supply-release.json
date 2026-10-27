@@ -1,0 +1,579 @@
+{
+  "Name": "ring-supply-release",
+  "Provenance": "TZ13 v1.2 synthetic fixture; experimental balance; no native game input",
+  "Session": "62b88734-f7c0-4000-8000-000000000023",
+  "Size": 64,
+  "CellSize": 50,
+  "Duration": 140,
+  "Rules": {},
+  "Victory": {},
+  "TerritoryProfiles": [
+    {
+      "UnitId": 1,
+      "Role": "Line",
+      "CanCaptureTerritory": true,
+      "CanRelay": false,
+      "TypeCoefficient": 1,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": true
+    },
+    {
+      "UnitId": 2,
+      "Role": "Vehicle",
+      "CanCaptureTerritory": false,
+      "CanRelay": false,
+      "TypeCoefficient": 0,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": false
+    }
+  ],
+  "Units": [
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 1,
+        "Generation": 0
+      },
+      "Team": 0,
+      "Owner": 0,
+      "TerritoryProfileId": 1,
+      "Profile": {
+        "Id": "line",
+        "CanCaptureTerritory": true,
+        "CanCreateLocalArea": true,
+        "CanProjectZoc": false,
+        "IsInfantry": true,
+        "IsApcOrIfv": false,
+        "Mobility": "Infantry",
+        "Strength": 1,
+        "Morale": "Regular",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1625,
+        "Y": 1625
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": true,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 100,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 2275.0,
+        "Y": 1625.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 101,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 2187.9165124598853,
+        "Y": 1950.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 102,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1950.0,
+        "Y": 2187.916512459885
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 103,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1625.0,
+        "Y": 2275.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 104,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1300.0000000000002,
+        "Y": 2187.9165124598853
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 105,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1062.0834875401147,
+        "Y": 1950.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 106,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 975.0,
+        "Y": 1625.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 107,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1062.0834875401147,
+        "Y": 1300.0000000000002
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 108,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1299.9999999999998,
+        "Y": 1062.0834875401151
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 109,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1624.9999999999998,
+        "Y": 975.0
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 110,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1950.0,
+        "Y": 1062.083487540115
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 111,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 2187.916512459885,
+        "Y": 1299.9999999999998
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    }
+  ],
+  "Seeds": [
+    {
+      "Team": 0,
+      "X": 32,
+      "Y": 32,
+      "Width": 1,
+      "Height": 1
+    }
+  ],
+  "Changes": [
+    {
+      "Time": 110,
+      "Uid": 104,
+      "Alive": false
+    },
+    {
+      "Time": 110,
+      "Uid": 105,
+      "Alive": false
+    },
+    {
+      "Time": 110,
+      "Uid": 106,
+      "Alive": false
+    },
+    {
+      "Time": 110,
+      "Uid": 107,
+      "Alive": false
+    },
+    {
+      "Time": 110,
+      "Uid": 108,
+      "Alive": false
+    }
+  ],
+  "Services": [
+    {
+      "Recipient": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 1,
+        "Generation": 0
+      },
+      "EventId": "confirmed-service-1",
+      "ServiceId": "synthetic-truck",
+      "Start": 60,
+      "End": 70,
+      "Amount": 1,
+      "Kind": "Ammo",
+      "Provenance": "Synthetic confirmed nonzero delivery interval"
+    }
+  ],
+  "NativeEvents": []
+}

@@ -1,0 +1,116 @@
+{
+  "Name": "three-phases-local-area",
+  "Provenance": "TZ13 v1.2 synthetic fixture; experimental balance; no native game input",
+  "Session": "62b88734-f7c0-4000-8000-000000000023",
+  "Size": 32,
+  "CellSize": 50,
+  "Duration": 2700,
+  "Rules": {},
+  "Victory": {},
+  "TerritoryProfiles": [
+    {
+      "UnitId": 1,
+      "Role": "Line",
+      "CanCaptureTerritory": true,
+      "CanRelay": false,
+      "TypeCoefficient": 1,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": true
+    },
+    {
+      "UnitId": 2,
+      "Role": "Vehicle",
+      "CanCaptureTerritory": false,
+      "CanRelay": false,
+      "TypeCoefficient": 0,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": false
+    }
+  ],
+  "Units": [
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 1,
+        "Generation": 0
+      },
+      "Team": 0,
+      "Owner": 0,
+      "TerritoryProfileId": 1,
+      "Profile": {
+        "Id": "line",
+        "CanCaptureTerritory": true,
+        "CanCreateLocalArea": true,
+        "CanProjectZoc": true,
+        "IsInfantry": true,
+        "IsApcOrIfv": false,
+        "Mobility": "Infantry",
+        "Strength": 1,
+        "Morale": "Regular",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 825,
+        "Y": 825
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": true,
+      "OnMap": true,
+      "NominalValue": 0,
+      "PositionProvenance": "Synthetic"
+    }
+  ],
+  "Seeds": [
+    {
+      "Team": 0,
+      "X": 0,
+      "Y": 0,
+      "Width": 12,
+      "Height": 32
+    },
+    {
+      "Team": 1,
+      "X": 23,
+      "Y": 0,
+      "Width": 9,
+      "Height": 32
+    }
+  ],
+  "Changes": [
+    {
+      "Time": 900,
+      "Uid": 1,
+      "Position": {
+        "X": 925,
+        "Y": 925
+      }
+    },
+    {
+      "Time": 1800,
+      "Uid": 1,
+      "Position": {
+        "X": 1025,
+        "Y": 825
+      }
+    }
+  ],
+  "Services": [],
+  "NativeEvents": [
+    {
+      "Id": "native-1",
+      "Team": 1,
+      "Time": 900,
+      "Value": 25,
+      "Revision": 1,
+      "Mode": "Delta",
+      "Provenance": "Synthetic external destruction feed"
+    }
+  ]
+}

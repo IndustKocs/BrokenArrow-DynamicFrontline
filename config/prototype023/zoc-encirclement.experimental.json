@@ -1,0 +1,9 @@
+{
+  "Version": "Zoc_023/1.2",
+  "MinimumStrength": 2,
+  "Dominance": 1.25,
+  "CorridorWidth": 100,
+  "GeometryBudget": 2000000,
+  "Release": "PausePenalty",
+  "Provenance": "TZ13 v1.2 / Synthetic experimental parameters"
+}

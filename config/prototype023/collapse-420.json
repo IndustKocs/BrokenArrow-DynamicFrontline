@@ -1,0 +1,127 @@
+{
+  "Name": "collapse-420",
+  "Provenance": "TZ13 v1.2 synthetic fixture; experimental balance; no native game input",
+  "Session": "62b88734-f7c0-4000-8000-000000000023",
+  "Size": 32,
+  "CellSize": 50,
+  "Duration": 450,
+  "Rules": {},
+  "Victory": {},
+  "TerritoryProfiles": [
+    {
+      "UnitId": 1,
+      "Role": "Line",
+      "CanCaptureTerritory": true,
+      "CanRelay": false,
+      "TypeCoefficient": 1,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": true
+    },
+    {
+      "UnitId": 2,
+      "Role": "Vehicle",
+      "CanCaptureTerritory": false,
+      "CanRelay": false,
+      "TypeCoefficient": 0,
+      "InfluenceRadius": 100,
+      "CanCreateLocalArea": false
+    }
+  ],
+  "Units": [
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 1,
+        "Generation": 0
+      },
+      "Team": 0,
+      "Owner": 0,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 25,
+        "Y": 825
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": true,
+      "OnMap": true,
+      "NominalValue": 2000,
+      "PositionProvenance": "Synthetic"
+    },
+    {
+      "Key": {
+        "MatchId": "62b88734-f7c0-4000-8000-000000000023",
+        "Uid": 2,
+        "Generation": 0
+      },
+      "Team": 1,
+      "Owner": 1,
+      "TerritoryProfileId": 2,
+      "Profile": {
+        "Id": "tank",
+        "CanCaptureTerritory": false,
+        "CanCreateLocalArea": false,
+        "CanProjectZoc": true,
+        "IsInfantry": false,
+        "IsApcOrIfv": false,
+        "Mobility": "GroundVehicle",
+        "Strength": 10,
+        "Morale": "NativePassthrough",
+        "CanReceiveEncirclementPenalty": true,
+        "BaseMaxStress": 1000,
+        "ShockRatio": 0.5,
+        "PanicRatio": 0.8,
+        "Provenance": "Synthetic explicit S0; not a game profile"
+      },
+      "Position": {
+        "X": 1575,
+        "Y": 825
+      },
+      "Soldiers": 8,
+      "Hp": 100,
+      "MaxHp": 100,
+      "Alive": true,
+      "Visible": false,
+      "OnMap": true,
+      "NominalValue": 500,
+      "PositionProvenance": "Synthetic"
+    }
+  ],
+  "Seeds": [
+    {
+      "Team": 0,
+      "X": 0,
+      "Y": 0,
+      "Width": 16,
+      "Height": 32
+    },
+    {
+      "Team": 1,
+      "X": 24,
+      "Y": 0,
+      "Width": 8,
+      "Height": 32
+    }
+  ],
+  "Changes": [],
+  "Services": [],
+  "NativeEvents": []
+}

@@ -1,0 +1,12 @@
+{
+  "Version": "Zoc_023/1.2",
+  "TerritoryScale": 1,
+  "DepthThreshold": 0.75,
+  "RequiredWidth": 200,
+  "FinalPolicy": null,
+  "AirPolicy": "StableAliveRosterExperimental",
+  "ValuationPolicy": "NominalActiveValueExperimental",
+  "ConflictPolicy": "NeutralConflictsExperimental",
+  "SimultaneousPolicy": "OutcomePendingPolicy",
+  "Provenance": "Synthetic / Experimental balance"
+}
