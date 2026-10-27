@@ -1,6 +1,6 @@
 # Фактические проверки
 
-Финальный журнал: evidence/prototype023/tests-final.json; baseline-after-*.log. 284/284 прежних и64/72 новых групп прошли. Проверяются поля/пары, геометрические контрпримеры, временные границы, снабжение, классы, исходы, private projection, checkpoints и watermark10000stress-интервалов.
+Финальный журнал: evidence/prototype023/tests-final.json; baseline-after-*.log. 284/284 прежних и72/72 новых групп прошли. Проверяются поля/пары, геометрические контрпримеры, временные границы, снабжение, классы, исходы, private projection, checkpoints и watermark10000stress-интервалов.
 
 Четыре обязательных replay прошли, сериализованное продолжение равно исходному final checkpoint. Три независимых результата победы описаны в VICTORY_SCENARIO_RESULTS.md. Диагностика проверена в браузере; PNG evidence/prototype023/preview-verified.png. Разрешение панели узкое, поэтому адаптивная карта располагается над деталями.
 
