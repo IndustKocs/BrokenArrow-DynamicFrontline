@@ -10,7 +10,7 @@ public static class InteropGate
         if(root.GetProperty("GameAssembly").GetString()!=descriptor.Files["GameAssembly.dll"]||root.GetProperty("Metadata").GetString()!=descriptor.Files["BrokenArrow_Data/il2cpp_data/Metadata/global-metadata.dat"])throw new InvalidDataException("InteropPairMismatch");
         var loaded=AppDomain.CurrentDomain.GetAssemblies();var wrappers=root.GetProperty("Wrappers");
         foreach(string required in new[]{"BrokenArrow","DefaultEcs","UnityEngine.CoreModule","UnityEngine.IMGUIModule","Il2Cppmscorlib"})
-        {if(!loaded.Any(a=>a.GetName().Name==required))throw new InvalidDataException("InteropNotLoaded:"+required);}
+        {if(!wrappers.TryGetProperty(required+".dll",out _))throw new InvalidDataException("MissingWrapperProvenance:"+required);if(!loaded.Any(a=>a.GetName().Name==required))throw new InvalidDataException("InteropNotLoaded:"+required);}
         foreach(var a in loaded)
         {
             var name=a.GetName().Name+".dll";

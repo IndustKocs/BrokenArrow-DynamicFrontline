@@ -7,7 +7,7 @@ using System.Text.Json;
 namespace DynamicFrontline.Poc030;
 // Status-only dev channel. It has no player/world coordinates, identity claims, or game RPCs.
 public sealed record Hello(string Protocol,string Session,string Role,string Compatibility,string Payload,string Rules,string Profile,string Map,string Abi,string Capabilities,string Connection="");
-public sealed record StatusFrame(long Sequence,long Revision,long BindingEpoch,string Quality,int OwnedCount,string ObservationHash);
+public sealed record StatusFrame(long Sequence,long Revision,long BindingEpoch,string Quality,int OwnedCount,string ObservationHash, SourceHealth? Health = null);
 public sealed record WireMessage(Hello Hello,StatusFrame Status,string Mac);
 public static class Protocol
 {
@@ -36,19 +36,22 @@ public static class Protocol
         var body=new byte[length];await Exact(body);return JsonSerializer.Deserialize<WireMessage>(body)??throw new InvalidDataException("EmptyMessage");
     }
 }
-public sealed class DevChannel : IDisposable
+public sealed partial class DevChannel : IDisposable
 {
     readonly CancellationTokenSource stop=new(); readonly Hello hello; readonly byte[] secret; readonly ProbeConfig config;
+    readonly SourceHealthTracker health=new(); readonly System.Diagnostics.Stopwatch sourceClock=System.Diagnostics.Stopwatch.StartNew();
     StatusFrame latest=new(0,0,0,"WaitingForRealSession",0,"");
     public string State {get;private set;}="Disabled";
     public StatusFrame? Peer {get;private set;}
     public DevChannel(ProbeConfig config,Hello hello,byte[] secret){if(secret.Length<32)throw new InvalidDataException("SecretTooShort");this.config=config;this.hello=hello;this.secret=secret;}
     public void Publish(Observation observation)
     {
+        health.Success(observation,sourceClock.Elapsed.TotalSeconds);
         // Hash is opaque evidence of local sampling, NEVER asserted equal across independent frames.
         var digest=Convert.ToHexString(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(observation)));
-        Interlocked.Exchange(ref latest,new(0,observation.Revision,observation.BindingEpoch,observation.Quality,observation.Owned.Length,digest));
+        Interlocked.Exchange(ref latest,new(0,observation.Revision,observation.BindingEpoch,observation.Quality,observation.Owned.Length,digest,health.At(sourceClock.Elapsed.TotalSeconds)));
     }
+    public void PublishFailure(SourceState state,string reason){health.Failure(state,reason);var old=Volatile.Read(ref latest);Interlocked.Exchange(ref latest,old with{Quality=state+":"+reason,Health=health.At(sourceClock.Elapsed.TotalSeconds)});}
     public async Task Run()
     {
         TcpListener? listener=null;
@@ -77,7 +80,7 @@ public sealed class DevChannel : IDisposable
             while(!stop.IsCancellationRequested)
             {
                 using var frameTimeout=CancellationTokenSource.CreateLinkedTokenSource(stop.Token);frameTimeout.CancelAfter(TimeSpan.FromSeconds(5));
-                var frame=Volatile.Read(ref latest) with {Sequence=++seq};
+                var frame=Volatile.Read(ref latest) with {Sequence=++seq,Health=health.At(sourceClock.Elapsed.TotalSeconds)};
                 await Protocol.Write(stream,Protocol.Sign(connectedHello,frame,secret),frameTimeout.Token);
                 var peer=await Protocol.Read(stream,frameTimeout.Token);Protocol.Verify(peer,connectedHello,secret,received);received=peer.Status.Sequence;Peer=peer.Status;State="AuthenticatedStatusOnly";
                 await Task.Delay(250,stop.Token);

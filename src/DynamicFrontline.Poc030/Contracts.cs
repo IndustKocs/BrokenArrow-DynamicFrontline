@@ -27,6 +27,7 @@ public static class Gates
     public static bool CaptureEligible(int role,int id,IReadOnlySet<int> reviewed) => (role==30 || role==31) && reviewed.Contains(id) && id is not (710 or 711 or 713);
 }
 public sealed record LocalIdentity(int WorldId,int EntityId,int Version);
-public sealed record OwnedSample(LocalIdentity Local,int? NetworkId,int? SpawnGeneration,int Owner,int Definition,float Hp,float MaxHp,float Stress,float MaxStress,int Role,float LoadedDatabaseMaxStress,float X,float Y,float Z,uint? Soldiers);
-public sealed record Observation(long Revision,long BindingEpoch,double GameTime,bool Paused,int Owner,int Players,string Map,string Phase,bool Complete,string Quality,OwnedSample[] Owned);
-public sealed record ProbeConfig(bool RuntimeReadAuthorized,bool PrivateSessionConfirmed,string Mode,string SessionId,string Role,bool NetworkEnabled,string Host,int Port,string SecretFile);
+public sealed record OwnedSample(LocalIdentity Local,int? NetworkId,int? SpawnGeneration,int Owner,int Definition,float Hp,float MaxHp,float Stress,float MaxStress,int Role,float LoadedDatabaseMaxStress,float X,float Y,float Z,uint? Soldiers,int TeamUid = -1,int? ObservedLevel = null,bool Alive = true,bool Loaded = false,bool Loading = false,bool Unloading = false,bool FieldsComplete = true,float? ShockThreshold = null,float? PanicThreshold = null);
+public sealed record Observation(long Revision,long BindingEpoch,double GameTime,bool Paused,int Owner,int Players,string Map,string Phase,bool Complete,string Quality,OwnedSample[] Owned,long FightId = 0,int Seed = 0,Participant[]? Participants = null);
+public sealed record Participant(int Owner,int TeamUid,int NetworkId,bool Bot);
+public sealed record ProbeConfig(bool RuntimeReadAuthorized,bool PrivateSessionConfirmed,string Mode,string SessionId,string Role,bool NetworkEnabled,string Host,int Port,string SecretFile,string CertificateFile = "",string CertificatePin = "",string Replication = "TeamSafe",bool TrustedReplicaConsent = false,string BindingFile = "",string MapFile = "",string ProfilesFile = "",bool RosterContractConfirmed = false,string CircleKey = "F8",string SelectOwnKey = "F9");

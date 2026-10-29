@@ -1,0 +1,20 @@
+{
+  "Status": "DevelopmentCheckpoint_NotReadyForGameInstall",
+  "PreparedLoadReadProbe": false,
+  "PreparedObserveTwoClient": false,
+  "OfflineCanonicalTwoProcessValidated": true,
+  "SandboxRecoveryValidated": true,
+  "RuntimeValidated": false,
+  "InteropLoadedValidated": false,
+  "RosterValidated": false,
+  "MapGeometryValidated": false,
+  "ProfilesRuntimeValidated": false,
+  "SupplyValidated": false,
+  "VisibilityValidated": false,
+  "ResyncRuntimeValidated": false,
+  "PerformanceValidated": false,
+  "SoakValidated": false,
+  "NativeEffectsEnabled": false,
+  "GameInstallApproved": false,
+  "GameLaunchApproved": false
+}

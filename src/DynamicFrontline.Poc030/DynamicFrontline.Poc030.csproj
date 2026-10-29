@@ -1,1 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk" />
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../DynamicFrontline.Integration/DynamicFrontline.Integration.csproj"/></ItemGroup></Project>

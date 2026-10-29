@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text.Json;
 namespace DynamicFrontline.Frontline.Rules023;
 
+public enum SimulationLane { Autonomous, Observe }
 public enum RulesMode { Legacy_022, Zoc_023 }
 public enum Evidence { Unknown, False, True }
 public enum Mobility { Infantry, GroundVehicle }
@@ -28,7 +29,7 @@ public sealed record Profile023(string Id, bool CanCaptureTerritory, bool CanCre
 public sealed record Unit023(UnitKey Key, int Team, int Owner, int TerritoryProfileId, Profile023 Profile,
     Point2 Position, uint Soldiers, float Hp, float MaxHp, float Stress = 0, StressLevel Level = StressLevel.Calm,
     bool Alive = true, bool Loaded = false, bool Deserting = false, bool Visible = true, bool OnMap = true,
-    bool Air = false, decimal NominalValue = 0, string PositionProvenance = "Synthetic", double PositionAge = 0)
+    bool Air = false, decimal NominalValue = 0, string PositionProvenance = "Synthetic", double PositionAge = 0, float? ObservedMaxStress = null)
 {
     public bool Active => Alive && !Loaded && !Deserting && OnMap && !Air && (!Profile.IsInfantry || Soldiers > 0);
     public void Validate(Guid session)

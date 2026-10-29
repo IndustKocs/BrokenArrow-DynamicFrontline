@@ -6,17 +6,17 @@ static class BindingInspector
     public static void Run(string directory,string output)
     {
         var requirements=new Dictionary<string,string[]>{
-            ["BrokenArrow.Client.Ecs.Controllers.GameController"]=["get_Instance","get_IsInstanceAlive","get_GameContext","get_GameSession","get_GameTime","get_LoadStatus","get_CurrentMapName"],
-            ["BrokenArrow.Client.Ecs.Configs.GameSessionContext"]=["get_CurrentPlayer","get_IsPaused","get_PlayersCount"],
+            ["BrokenArrow.Client.Ecs.Controllers.GameController"]=["get_Instance","get_IsInstanceAlive","get_GameContext","get_GameSession","get_GameTime","get_LoadStatus","get_CurrentMapName","_networkRoomService"],
+            ["BrokenArrow.Client.Ecs.Configs.GameSessionContext"]=["get_CurrentPlayer","get_IsPaused","get_PlayersCount","GetPlayers"],
             ["DefaultEcs.World"]=["GetEnumerator"],
             ["GalaxyCoreLib.NetEntity.ClientNetEntity"]=["get_NetID"],
             ["DefaultEcs.Entity"]=["get_IsAliveVersion","Has","Get","Version","WorldId","EntityId"],
             ["DefaultEcs.World+Enumerator"]=["MoveNext","get_Current"],
-            ["BrokenArrow.Client.Ecs.Utils.PlayerInfo"]=["get_UID","get_TeamUid"],
+            ["BrokenArrow.Client.Ecs.Utils.PlayerInfo"]=["get_UID","get_TeamUid","get_NetID","get_IsBot"],
             ["BrokenArrow.Shared.Ecs.Components.UnitComponent"]=["Owner","UnitData"],
             ["BrokenArrow.Shared.Ecs.Components.TransformComponent"]=["get_Position"],
             ["BrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent"]=["get_CurrentHealth","MaxHealth"],
-            ["BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent"]=["CurrentStressValue","MaxStress"],
+            ["BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent"]=["CurrentStressValue","MaxStress","CurrentStressLevel","ShockedStressValue","PanickedStressValue"],
             ["BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent"]=["AliveSoldierCount"],
             ["BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent"]=["get_NetEntity"],
             ["BrokenArrow.DataBase.Models.Units"]=["get_Id","get_Role","get_MaxStress"]

@@ -45,7 +45,7 @@ public sealed class UnitEncirclementStateMachine
     public UnitEncirclementStateMachine(UnitKey key, int team, Rules023Config config, double start = 0) { this.config = config; Memory = new(key, team, false, 0, 0, 0, start, EncirclementState.NotEncircled, ReliefState.NoRelief); }
     public void Restore(UnitEncirclementMemory memory) { Check.That(memory.Key == Memory.Key, "Foreign state"); Memory = memory; }
     public static double H(double tau, Rules023Config c) { var u = Math.Min(tau, c.Ramp); return c.A * u + (c.B - c.A) * u * u / (2 * c.Ramp) + c.B * Math.Max(0, tau - c.Ramp); }
-    public StressEffectIntent[] Advance(Unit023 unit, GeometryResult geometry, double end, SupplyReliefEvaluator supply)
+    public StressEffectIntent[] Advance(Unit023 unit, GeometryResult geometry, double end, SupplyReliefEvaluator supply, bool penaltyKnown = true)
     {
         var m = Memory; Check.That(unit.Key == m.Key && end >= m.Time && double.IsFinite(end), "Stale or foreign state");
         if (unit.Team != m.Team) m = new(unit.Key, unit.Team, false, 0, 0, 0, m.Time, EncirclementState.NotEncircled, ReliefState.NoRelief);
@@ -79,7 +79,7 @@ public sealed class UnitEncirclementStateMachine
                 m = m with { Pending = m.Pending + dt, State = EncirclementState.EncirclementPending };
             }
             else m = m with { Pending = 0, State = EncirclementState.NotEncircled };
-            active &= relief == ReliefState.NoRelief;
+            active &= relief == ReliefState.NoRelief && penaltyKnown;
             var delta = active ? ClassStressPolicy.Maximum(unit.Profile) * (H(m.Tau + dt, config) - H(m.Tau, config)) : 0;
             if (active) m = m with { Tau = m.Tau + dt };
             effects.Add(new(unit.Key, $"encirclement/{start:R}/{stop:R}", start, stop, delta, active, "Encirclement", config.Version));

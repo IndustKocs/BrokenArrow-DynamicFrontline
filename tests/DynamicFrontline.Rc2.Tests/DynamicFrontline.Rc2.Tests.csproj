@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><ProjectReference Include="../../src/DynamicFrontline.Poc030/DynamicFrontline.Poc030.csproj"/><Compile Include="../DynamicFrontline.Prototype023.Tests/Fixtures023.cs" Link="Fixtures023.cs"/></ItemGroup></Project>
