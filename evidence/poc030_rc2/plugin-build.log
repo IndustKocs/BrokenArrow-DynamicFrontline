@@ -1,0 +1,15 @@
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+  DynamicFrontline.Core -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.Core\bin\Release\net6.0\DynamicFrontline.Core.dll
+  DynamicFrontline.GameAdapter -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.GameAdapter\bin\Release\net6.0\DynamicFrontline.GameAdapter.dll
+  DynamicFrontline.Frontline -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.Frontline\bin\Release\net6.0\DynamicFrontline.Frontline.dll
+  DynamicFrontline.Integration -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.Integration\bin\Release\net6.0\DynamicFrontline.Integration.dll
+  DynamicFrontline.Poc030 -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.Poc030\bin\Release\net6.0\DynamicFrontline.Poc030.dll
+  DynamicFrontline.Poc030.MelonLoader -> <USER>\Documents\ChatGPT\ба\poc030-rc2-two-client-integration\src\DynamicFrontline.Poc030.MelonLoader\bin\Release\net6.0\DynamicFrontline.Poc030.MelonLoader.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:01.21
+

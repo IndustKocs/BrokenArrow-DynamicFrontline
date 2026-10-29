@@ -1,0 +1,186 @@
+{
+  "SourceCommit": "56411ec968daf2bdd3e4a2cccc754c4753b50cf5",
+  "BaseCommit": "7251635",
+  "SourceDiff": null,
+  "Sdk": "8.0.426",
+  "Target": "net6.0",
+  "BuildExitCodes": {
+    "DevTools": 0,
+    "Plugin": 0,
+    "Rc2Tests": 0
+  },
+  "Rc2Tests": 15,
+  "PreviousRegressionGroups": 400,
+  "TwoProcessPipelineExit": 0,
+  "GameRun": "NotRun",
+  "RuntimeValidated": false,
+  "PackageStatus": "NotPrepared",
+  "Payload": [
+    {
+      "File": "DynamicFrontline.Core.dll",
+      "Sha256": "CF3DA2CDE8A94D1B005FE5C0481A37FF1B6703DEBC4B3EBC1642A5FA87A03952"
+    },
+    {
+      "File": "DynamicFrontline.Frontline.dll",
+      "Sha256": "421BDEA1868EE78054C3B1FD3D4CD01A829BC56A2BD0546B5AF08E3A67767F6F"
+    },
+    {
+      "File": "DynamicFrontline.GameAdapter.dll",
+      "Sha256": "C1ADE632242D6D2A7E51A64D572E6E30201250F0BA9483863221905CAB2E918C"
+    },
+    {
+      "File": "DynamicFrontline.Integration.dll",
+      "Sha256": "1B015F89F525CCA99FC800E762F61C58ADC3E62CEFC691C899C1FC0ABC426B77"
+    },
+    {
+      "File": "DynamicFrontline.Poc030.dll",
+      "Sha256": "C299A881C876FAD31AC87B20A3E4586B03B3E735075AD0892D0A2B62CFFFC0C7"
+    },
+    {
+      "File": "DynamicFrontline.Poc030.MelonLoader.dll",
+      "Sha256": "10FA81B7ED6489F51B3C40FBD8A22BE4B3C221B7922A6D143D51940D281A7832"
+    }
+  ],
+  "Evidence": [
+    {
+      "File": "A.json",
+      "Sha256": "889BBD13C55AA7768580A5B075E0DD88CADB4951B49CC7D1CCFB9D79A86B8C00",
+      "Bytes": 5789
+    },
+    {
+      "File": "airport-source.json",
+      "Sha256": "E79268441BF4E1A845E284D3A266D1D3123AD004C6A46E8D8547E567CE667D8D",
+      "Bytes": 1938
+    },
+    {
+      "File": "B.json",
+      "Sha256": "3229495ED37A9152DEF5F194C977C99469EB5AADD1E88F043B2FB29E57FA8FBB",
+      "Bytes": 694
+    },
+    {
+      "File": "baseline356.log",
+      "Sha256": "314B5E49A4A9C89F8750CDCA2EADD72C7F4B58D8A46CA1683A08B9E1D80366C7",
+      "Bytes": 19842
+    },
+    {
+      "File": "baseline44.log",
+      "Sha256": "8080F291755226F99825619625710D5B67620D47BCD244BB6991A9D7DBB62222",
+      "Bytes": 5719
+    },
+    {
+      "File": "crash-1.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-10.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-11.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-12.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-2.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-3.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-4.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-5.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-6.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-7.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-8.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "crash-9.log",
+      "Sha256": "4816F65695878DBEA84E962149EF408A543A80CB272D65DF91D72B0ADAF1FC72",
+      "Bytes": 895
+    },
+    {
+      "File": "dev-tools-build.log",
+      "Sha256": "7A07DCBD8E7D18162E87BDA8D521796CD031B79B0E1614D59FA61831ABE62BE1",
+      "Bytes": 1337
+    },
+    {
+      "File": "interop-bindings.json",
+      "Sha256": "A683266D43B8DAF18D2C145CCCCDCE8BCD8156F122A0C7BD47FE1EDCD711E91A",
+      "Bytes": 5557
+    },
+    {
+      "File": "pipeline-A.json",
+      "Sha256": "E88BFC5DBCEB070834B0C1F73F0EF5B934BACA8AC02218D5CAC48996B939B2C5",
+      "Bytes": 322
+    },
+    {
+      "File": "pipeline-B.json",
+      "Sha256": "F72F1195C3A0E60114E848DA368FC6D68234FF142E32CC52B5014005CB832BCD",
+      "Bytes": 5412
+    },
+    {
+      "File": "plugin-build.log",
+      "Sha256": "8039E67C8C1F9156E10A2E78F889091BBD7A70C36E140CC1F86A908764FB003D",
+      "Bytes": 1400
+    },
+    {
+      "File": "preflight.json",
+      "Sha256": "7115DC676A325C5D71F532BAC0B4298D196B401A38189C098C33F551E32A6B14",
+      "Bytes": 970
+    },
+    {
+      "File": "regression356.log",
+      "Sha256": "314B5E49A4A9C89F8750CDCA2EADD72C7F4B58D8A46CA1683A08B9E1D80366C7",
+      "Bytes": 19842
+    },
+    {
+      "File": "regression44.log",
+      "Sha256": "3297A82A7C11A218C908EE5FB942DE847264416C3B348617F2ED32E3759BF2DE",
+      "Bytes": 6431
+    },
+    {
+      "File": "results.json",
+      "Sha256": "8C8CB47DA92FB0E3502435C1886223169EA6B4D0FA66BF8DEDA7B48B4E6BFE2D",
+      "Bytes": 1795
+    },
+    {
+      "File": "tests-build.log",
+      "Sha256": "BFA50761FC074E55D40FE7DBCCF4F5BD3EB95AAE3EB5160FEB3646A14B671F8D",
+      "Bytes": 1375
+    },
+    {
+      "File": "tests-dev.log",
+      "Sha256": "A393BDEACF9863D6DEFD278186C5B2ABAB99106DB0D6402DF025E257C837E8EE",
+      "Bytes": 1026
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "Scope": "GeneratedAssemblyMetadata_NotRuntimeInvocation",
+  "Passed": true,
+  "Results": [
+    {
+      "Type": "BrokenArrow.Client.Ecs.Controllers.GameController",
+      "ActualType": "BrokenArrow.Client.Ecs.Controllers.GameController",
+      "Missing": [],
+      "Methods": [
+        "DefaultEcs.World BrokenArrow.Client.Ecs.Controllers.GameController::get_GameContext()",
+        "BrokenArrow.Client.Ecs.Configs.GameSessionContext BrokenArrow.Client.Ecs.Controllers.GameController::get_GameSession()",
+        "System.Single BrokenArrow.Client.Ecs.Controllers.GameController::get_GameTime()",
+        "BrokenArrow.Client.Ecs.Utils.IPrefabLoader\u002BStatus BrokenArrow.Client.Ecs.Controllers.GameController::get_LoadStatus()",
+        "BrokenArrow.Client.Ecs.Controllers.GameController BrokenArrow.Client.Ecs.Controllers.GameController::get_Instance()",
+        "System.Boolean BrokenArrow.Client.Ecs.Controllers.GameController::get_IsInstanceAlive()",
+        "System.String BrokenArrow.Client.Ecs.Controllers.GameController::get_CurrentMapName()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Configs.GameSessionContext",
+      "ActualType": "BrokenArrow.Client.Ecs.Configs.GameSessionContext",
+      "Missing": [],
+      "Methods": [
+        "BrokenArrow.Client.Ecs.Utils.PlayerInfo BrokenArrow.Client.Ecs.Configs.GameSessionContext::get_CurrentPlayer()",
+        "System.Int32 BrokenArrow.Client.Ecs.Configs.GameSessionContext::get_PlayersCount()",
+        "System.Boolean BrokenArrow.Client.Ecs.Configs.GameSessionContext::get_IsPaused()",
+        "Il2CppSystem.Collections.Generic.IReadOnlyDictionary\u00602\u003CSystem.Int32, BrokenArrow.Client.Ecs.Utils.PlayerInfo\u003E BrokenArrow.Client.Ecs.Configs.GameSessionContext::GetPlayers()"
+      ]
+    },
+    {
+      "Type": "DefaultEcs.World",
+      "ActualType": "DefaultEcs.World",
+      "Missing": [],
+      "Methods": [
+        "DefaultEcs.World\u002BEnumerator DefaultEcs.World::GetEnumerator()"
+      ]
+    },
+    {
+      "Type": "GalaxyCoreLib.NetEntity.ClientNetEntity",
+      "ActualType": "GalaxyCoreLib.NetEntity.ClientNetEntity",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 GalaxyCoreLib.NetEntity.ClientNetEntity::get_NetID()"
+      ]
+    },
+    {
+      "Type": "DefaultEcs.Entity",
+      "ActualType": "DefaultEcs.Entity",
+      "Missing": [],
+      "Methods": [
+        "System.Boolean DefaultEcs.Entity::get_IsAliveVersion()",
+        "System.Boolean DefaultEcs.Entity::Has\u003CT\u003E()",
+        "!!0\u0026 DefaultEcs.Entity::Get\u003CT\u003E()"
+      ]
+    },
+    {
+      "Type": "DefaultEcs.World\u002BEnumerator",
+      "ActualType": "DefaultEcs.World\u002BEnumerator",
+      "Missing": [],
+      "Methods": [
+        "DefaultEcs.Entity DefaultEcs.World\u002BEnumerator::get_Current()",
+        "System.Boolean DefaultEcs.World\u002BEnumerator::MoveNext()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Utils.PlayerInfo",
+      "ActualType": "BrokenArrow.Client.Ecs.Utils.PlayerInfo",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 BrokenArrow.Client.Ecs.Utils.PlayerInfo::get_UID()",
+        "System.Int32 BrokenArrow.Client.Ecs.Utils.PlayerInfo::get_NetID()",
+        "System.Boolean BrokenArrow.Client.Ecs.Utils.PlayerInfo::get_IsBot()",
+        "System.Int32 BrokenArrow.Client.Ecs.Utils.PlayerInfo::get_TeamUid()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.UnitComponent",
+      "ActualType": "BrokenArrow.Shared.Ecs.Components.UnitComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.TransformComponent",
+      "ActualType": "BrokenArrow.Shared.Ecs.Components.TransformComponent",
+      "Missing": [],
+      "Methods": [
+        "UnityEngine.Vector3 BrokenArrow.Shared.Ecs.Components.TransformComponent::get_Position()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent",
+      "ActualType": "BrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent",
+      "Missing": [],
+      "Methods": [
+        "System.Single BrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent::get_CurrentHealth()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent",
+      "ActualType": "BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent",
+      "ActualType": "BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent",
+      "ActualType": "BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent",
+      "Missing": [],
+      "Methods": [
+        "GalaxyCoreLib.NetEntity.ClientNetEntity BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent::get_NetEntity()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.DataBase.Models.Units",
+      "ActualType": "BrokenArrow.DataBase.Models.Units",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 BrokenArrow.DataBase.Models.Units::get_Id()",
+        "NetworkCommon.Enums.Common.UnitRole BrokenArrow.DataBase.Models.Units::get_Role()",
+        "System.Single BrokenArrow.DataBase.Models.Units::get_MaxStress()"
+      ]
+    }
+  ]
+}

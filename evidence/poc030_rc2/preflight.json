@@ -1,0 +1,34 @@
+{
+  "Files": [
+    {
+      "File": "GameAssembly.dll",
+      "Sha256": "12E7088369539B029A7BF0064062CE030A53B5189E7067420903F47B4281FDDF",
+      "Length": 153969664,
+      "Verified": true
+    },
+    {
+      "File": "BrokenArrow_Data/il2cpp_data/Metadata/global-metadata.dat",
+      "Sha256": "A4EDE1B29664378A2FB9F952F65330A73DBFA115B205065D1831F420540AFE01",
+      "Length": 27528220,
+      "Verified": true
+    },
+    {
+      "File": "UnityPlayer.dll",
+      "Sha256": "79A54AF1C83B5B3BFA34936BE18899DE49FA88EEA6A33BA7351C2163F95F6613",
+      "Length": 36684208,
+      "Verified": true
+    },
+    {
+      "File": "BrokenArrow.exe",
+      "Sha256": "A0A2D82854AF8FB1718D70EC0BE0F4028A1332B13BAE89051EC8B368187F34B4",
+      "Length": 667136,
+      "Verified": true
+    }
+  ],
+  "ExpectedBuildId": "26273833",
+  "SteamManifestVerified": false,
+  "RuntimeValidated": false,
+  "InteropPairValidated": false,
+  "InstallApproved": false
+}
+

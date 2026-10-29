@@ -1,0 +1,84 @@
+{
+  "selectedMap": "Airport",
+  "selectedScenario": "Airport_network",
+  "nativeEffects": false,
+  "runtimeValidated": false,
+  "geometryValidated": false,
+  "graphs": [
+    {
+      "file": "Airport.ng",
+      "sha256": "3c61de14f71f3b8ce8ae861cbc1208ad5d71949e504e45d444b1b5d12f10a68d",
+      "protobufFields": {
+        "1": "Airport",
+        "2": 1,
+        "3": 23,
+        "5": 393,
+        "6": 392
+      },
+      "nodes": 154056,
+      "links": 1202471,
+      "linkMasks": {
+        "8": 105922,
+        "9": 111720,
+        "1": 721783,
+        "17": 100959,
+        "16": 136471,
+        "25": 16769,
+        "513": 2011,
+        "521": 30,
+        "529": 405,
+        "512": 6397,
+        "528": 4
+      },
+      "nodeCoordinateExtents": [
+        0.0,
+        0.0,
+        9004.5,
+        9004.5
+      ],
+      "extentsArePlayableBounds": false
+    },
+    {
+      "file": "Airport_roads.ng",
+      "sha256": "fab5482c58423d612772370012e279079482c9ff22b9f4ef73b71b9afcdc9037",
+      "protobufFields": {
+        "1": "Airport",
+        "3": 23,
+        "5": 12927,
+        "6": 1
+      },
+      "nodes": 12927,
+      "links": 28377,
+      "linkMasks": {
+        "8": 28377
+      },
+      "nodeCoordinateExtents": [
+        1.786520004272461,
+        8.125109672546387,
+        8999.7998046875,
+        8999.7900390625
+      ],
+      "extentsArePlayableBounds": false
+    }
+  ],
+  "scenarioSha256": "5aa1e3d132bbb55880686129c07446fdadb4929c67b6183fd78a9628a55331f1",
+  "scenarioEntries": [
+    {
+      "name": "head.bam",
+      "bytes": 808
+    },
+    {
+      "name": "objects.bam",
+      "bytes": 20536
+    },
+    {
+      "name": "nodes.bam",
+      "bytes": 67736
+    }
+  ],
+  "blockers": [
+    "Playable polygon and team roots not decoded",
+    "Static graph is not dynamic navigation revision",
+    "Layer mask semantics need validation"
+  ]
+}

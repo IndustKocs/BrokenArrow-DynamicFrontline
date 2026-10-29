@@ -1,0 +1,66 @@
+{
+  "count": 15,
+  "failed": 0,
+  "results": [
+    {
+      "name": "R1 configure remove preserve reinstall",
+      "passed": true
+    },
+    {
+      "name": "R1 RC1 receipt migration preserves configured role without manual editing",
+      "passed": true
+    },
+    {
+      "name": "R1 changed DLL conflict retained independently",
+      "passed": true
+    },
+    {
+      "name": "R2 injected exception all apply boundaries recover twice",
+      "passed": true
+    },
+    {
+      "name": "R2 fresh process recovery after fail-fast at every apply boundary",
+      "passed": true
+    },
+    {
+      "name": "R2 interrupted upgrade and removal preserve original receipt and bytes",
+      "passed": true
+    },
+    {
+      "name": "R2 wrong package hash foreign same name and concurrent operations",
+      "passed": true
+    },
+    {
+      "name": "R3 heartbeat cannot freshen failed source and pause is live",
+      "passed": true
+    },
+    {
+      "name": "R5 observed 80 20 80 follows actual state and no backend feedback",
+      "passed": true
+    },
+    {
+      "name": "R6 independent core same canonical input no local handle hash",
+      "passed": true
+    },
+    {
+      "name": "R6 world partial stale wrong owner delta gap and conflict reject",
+      "passed": true
+    },
+    {
+      "name": "R6 duplicate delta is idempotent and conflicting duplicate rejected",
+      "passed": true
+    },
+    {
+      "name": "R6 checkpoint restore preserves core and next canonical id",
+      "passed": true
+    },
+    {
+      "name": "R6 authenticated chunk roundtrip truncated and oversized reject",
+      "passed": true
+    },
+    {
+      "name": "R5 live observer survives projected terminal time",
+      "passed": true
+    }
+  ]
+}
