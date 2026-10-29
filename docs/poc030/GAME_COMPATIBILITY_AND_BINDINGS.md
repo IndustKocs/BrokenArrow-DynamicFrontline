@@ -1,0 +1,13 @@
+# Сборка, привязки и interop
+
+Авторитетный полный fingerprint: config/poc030/compatibility.json. Fresh read: evidence/poc030/current-files.json. BuildID26273833, Unity6000.3.24f1, metadata39, binding schema ua01-member-v1. Префиксы хешей не используются как допуск.
+
+Новая пара обработана Cpp2IL 2022.1.0-pre-release.21, затем Il2CppInterop.Generator1.5.1.0. Выходы находятся только в artifacts/poc030/interop/new-pair и wrappers. 168 wrapper DLL. NoXrefCache=true, Parallel=false, UnityBaseLibs не предоставлялись: unstripping/совместимость с фактическим способом загрузки MelonLoader не подтверждены. Generated-binding-check.json проверяет члены в 14 типах, включая DefaultEcs.Entity.Get<T> с ref return; это **метаданные сгенерированной обёртки, не вызов IL2CPP**.
+
+В plugin сначала сверяются все четыре файла с дескриптором и встроенной audited pair, затем хеши загруженных wrapper DLL и loader/runtime с interop-provenance.json. Только после этого разрешено чтение GameController. Missing member/null/ref invocation failure дают ReadUnavailable; нет fallback на старые адреса, dummy DLL или синтетическую сессию. Неподдержанный cache отключает плагин до первого native getter.
+
+Перегенерация: scripts/poc030/generate-interop.ps1 принимает пути к SDK, Cpp2IL, loader dependencies, GameRoot и НОВОМУ output вне игры. Проверяет хеши до/после, pinned tools и создаёт новый manifest. Драйвер scripts/poc030/interop-generator собирается с параметром LoaderDirectory. No automatic loader updates. Генератор ничего не устанавливает. Если повторная генерация меняет MVID/хеши, нужен новый проверенный manifest, а не ослабление сравнения.
+
+Runtime-кэш и его фактический путь/настройки необходимо проверить при отдельно разрешённой подготовке loader. Текущий installer не копирует и не перезаписывает cache. Это явный blocker комплекта «распаковал и запустил». Перенос всех новых wrappers требует отдельного reviewable плана с конфликтами; не смешивать их с прежними сборками. Ключ происхождения задаётся полной парой, SHA Cpp2IL/Generator/Runtime/Loader и Options из interop-provenance.json.
+
+Reader paths: GameController.Instance → GameSession.CurrentPlayer.UID / IsPaused / PlayersCount; GameTime/CurrentMapName/LoadStatus; GameContext.GetEnumerator → Entity.IsAliveVersion → Has/Get<UnitComponent> → Owner.UID. Только затем Transform.Position, Health.CurrentHealth/MaxHealth, Stress.CurrentStressValue/MaxStress, UnitData.Id/Role/MaxStress, Infantry.AliveSoldierCount, NetworkUnitComponent.NetEntity.NetID. World/Entity/Version локальны; NetID без spawn generation не становится canonical key. Данные UnitData действительно берутся из живого объекта, но идентификатор активного DB/Buff-профиля ещё не доказан.

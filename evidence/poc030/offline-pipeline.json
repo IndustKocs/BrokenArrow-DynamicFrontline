@@ -1,0 +1,156 @@
+{
+  "Results": [
+    {
+      "count": 100,
+      "cell": 50,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 10.9582,
+      "p95": 14.0756,
+      "p99": 15.1332,
+      "max": 134.625,
+      "allocatedBytes": 183096432,
+      "retainedBytes": 1436464,
+      "gc": [
+        16,
+        6,
+        3
+      ],
+      "maxProjectionBytes": 51496,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    },
+    {
+      "count": 100,
+      "cell": 100,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 3.4083,
+      "p95": 4.955,
+      "p99": 5.3511,
+      "max": 5.7621,
+      "allocatedBytes": 67334792,
+      "retainedBytes": 1488056,
+      "gc": [
+        7,
+        4,
+        3
+      ],
+      "maxProjectionBytes": 51496,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    },
+    {
+      "count": 500,
+      "cell": 50,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 23.6724,
+      "p95": 39.7844,
+      "p99": 40.2773,
+      "max": 44.4627,
+      "allocatedBytes": 674092744,
+      "retainedBytes": 2516520,
+      "gc": [
+        59,
+        24,
+        11
+      ],
+      "maxProjectionBytes": 257896,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    },
+    {
+      "count": 500,
+      "cell": 100,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 12.8189,
+      "p95": 13.9345,
+      "p99": 14.7734,
+      "max": 17.0857,
+      "allocatedBytes": 340588960,
+      "retainedBytes": 2519008,
+      "gc": [
+        34,
+        21,
+        9
+      ],
+      "maxProjectionBytes": 257896,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    },
+    {
+      "count": 1000,
+      "cell": 50,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 47.9479,
+      "p95": 60.2788,
+      "p99": 61.1022,
+      "max": 63.9458,
+      "allocatedBytes": 1373805984,
+      "retainedBytes": 3782080,
+      "gc": [
+        128,
+        55,
+        23
+      ],
+      "maxProjectionBytes": 516159,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    },
+    {
+      "count": 1000,
+      "cell": 100,
+      "physicalWidth": 3200,
+      "physicalHeight": 3200,
+      "samples": 32,
+      "p50": 29.3393,
+      "p95": 43.7798,
+      "p99": 44.2427,
+      "max": 44.3552,
+      "allocatedBytes": 784031896,
+      "retainedBytes": 3785800,
+      "gc": [
+        73,
+        29,
+        15
+      ],
+      "maxProjectionBytes": 516159,
+      "scope": "Offline full Step \u002B canonical serialization/hash \u002B both player projections; excludes live reader/HUD/socket/disk"
+    }
+  ],
+  "Geometry": [
+    {
+      "cell": 50,
+      "gap": false,
+      "enclosed": "True",
+      "corridor": "Blocked",
+      "physicalMap": "3200x3200; same roots and unit coordinates"
+    },
+    {
+      "cell": 50,
+      "gap": true,
+      "enclosed": "False",
+      "corridor": "Open",
+      "physicalMap": "3200x3200; same roots and unit coordinates"
+    },
+    {
+      "cell": 100,
+      "gap": false,
+      "enclosed": "True",
+      "corridor": "Blocked",
+      "physicalMap": "3200x3200; same roots and unit coordinates"
+    },
+    {
+      "cell": 100,
+      "gap": true,
+      "enclosed": "False",
+      "corridor": "Open",
+      "physicalMap": "3200x3200; same roots and unit coordinates"
+    }
+  ],
+  "RuntimePerformance": "NotMeasured",
+  "Soak2700": "NotMeasured_32ticksOnly"
+}

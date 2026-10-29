@@ -1,0 +1,75 @@
+{
+  "Source": "UA01 new extracted table 52739/Units.json",
+  "SourceSha256": "CBAA1FF4929827F03FE11B65769FD8E95CDF834F802CDFD25620A0A412D479E4",
+  "ActiveDatabaseVerified": false,
+  "CapturePermissionRequiresActiveProfile": true,
+  "Candidates": [
+    {
+      "Id": 1,
+      "Name": "BTR-82",
+      "Role": 12,
+      "Type": 4,
+      "MaxStress": 1000.0,
+      "Cost": 55
+    },
+    {
+      "Id": 3,
+      "Name": "BMP-3",
+      "Role": 10,
+      "Type": 4,
+      "MaxStress": 1000.0,
+      "Cost": 65
+    },
+    {
+      "Id": 9,
+      "Name": "T-72B",
+      "Role": 11,
+      "Type": 4,
+      "MaxStress": 1000.0,
+      "Cost": 130
+    },
+    {
+      "Id": 57,
+      "Name": "Mech. Riflemen",
+      "Role": 30,
+      "Type": 2,
+      "MaxStress": 1000.0,
+      "Cost": 50
+    },
+    {
+      "Id": 59,
+      "Name": "Marines",
+      "Role": 31,
+      "Type": 2,
+      "MaxStress": 1000.0,
+      "Cost": 90
+    },
+    {
+      "Id": 60,
+      "Name": "Motopekhota",
+      "Role": 30,
+      "Type": 2,
+      "MaxStress": 1000.0,
+      "Cost": 65
+    },
+    {
+      "Id": 108,
+      "Name": "VDV DSh 1",
+      "Role": 31,
+      "Type": 2,
+      "MaxStress": 1000.0,
+      "Cost": 60
+    }
+  ],
+  "DeniedUnreviewed": [
+    710,
+    711,
+    713
+  ],
+  "Map": {
+    "DimensionsReader": "GameController.MapSettings.MapSize is not a playable mask",
+    "NameReader": "GameController.CurrentMapName",
+    "Selected": null,
+    "Status": "Blocked_NoVerifiedPlayableMaskRootsAndNavigation"
+  }
+}

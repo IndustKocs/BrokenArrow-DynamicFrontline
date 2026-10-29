@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "D:\\steam\\steamapps\\common\\broken_arrow\\GameAssembly.dll",
+    "Hash": "12E7088369539B029A7BF0064062CE030A53B5189E7067420903F47B4281FDDF"
+  },
+  {
+    "Path": "D:\\steam\\steamapps\\common\\broken_arrow\\BrokenArrow_Data\\il2cpp_data\\Metadata\\global-metadata.dat",
+    "Hash": "A4EDE1B29664378A2FB9F952F65330A73DBFA115B205065D1831F420540AFE01"
+  },
+  {
+    "Path": "D:\\steam\\steamapps\\common\\broken_arrow\\UnityPlayer.dll",
+    "Hash": "79A54AF1C83B5B3BFA34936BE18899DE49FA88EEA6A33BA7351C2163F95F6613"
+  },
+  {
+    "Path": "D:\\steam\\steamapps\\common\\broken_arrow\\BrokenArrow.exe",
+    "Hash": "A0A2D82854AF8FB1718D70EC0BE0F4028A1332B13BAE89051EC8B368187F34B4"
+  }
+]

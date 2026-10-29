@@ -1,0 +1,9 @@
+{
+  "Entries": 106,
+  "Dlls": [
+    "payload/DynamicFrontline.Poc030.dll",
+    "payload/DynamicFrontline.Poc030.MelonLoader.dll"
+  ],
+  "OriginalGameBinaries": 0,
+  "Secrets": 0
+}

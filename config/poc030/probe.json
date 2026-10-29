@@ -1,0 +1,11 @@
+{
+  "RuntimeReadAuthorized": false,
+  "PrivateSessionConfirmed": false,
+  "Mode": "ObserveTwoClient",
+  "SessionId": "",
+  "Role": "A",
+  "NetworkEnabled": false,
+  "Host": "127.0.0.1",
+  "Port": 39303,
+  "SecretFile": ""
+}

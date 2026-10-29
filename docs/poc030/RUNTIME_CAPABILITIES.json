@@ -1,0 +1,130 @@
+{
+  "Overall": "BlockedForCompleteTZ16Acceptance",
+  "InstallApproved": false,
+  "PreparedForTwoClientProbe": false,
+  "ObservationValidated": false,
+  "EffectsValidated": false,
+  "FullModeValidated": false,
+  "Capabilities": [
+    {
+      "Name": "RosterRead",
+      "Implemented": true,
+      "OfflineVerified": false,
+      "PreparedForProbe": true,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Owned ECS enumeration implemented; generic ref invocation, completeness, transport states, canonical generation not runtime validated"
+    },
+    {
+      "Name": "TerrainRead",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Map name identified; roots/scoring mask/directed navigation provider absent; MapSize cannot substitute"
+    },
+    {
+      "Name": "ServiceRead",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Streaming receipt model tested; positive native recipient operation source not bound"
+    },
+    {
+      "Name": "ModStateTransport",
+      "Implemented": true,
+      "OfflineVerified": true,
+      "PreparedForProbe": true,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Authenticated bounded status TCP tested; canonical world snapshots/deltas/resync not implemented"
+    },
+    {
+      "Name": "ClassStressApply",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Raw combat source and replace-only native authority not proven; no writer compiled"
+    },
+    {
+      "Name": "EncirclementStressApply",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Canonical identity and exact once native addition not proven; no writer compiled"
+    },
+    {
+      "Name": "RecoveryGate",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Native recovery suppression contract not proven; no writer compiled"
+    },
+    {
+      "Name": "TerritoryModeApply",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Verified map/profile absent; shadow connection blocked"
+    },
+    {
+      "Name": "NativeScoreRead",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Delta/Absolute source and immutable event identity not proven"
+    },
+    {
+      "Name": "MatchEndApply",
+      "Implemented": false,
+      "OfflineVerified": false,
+      "PreparedForProbe": false,
+      "RuntimeValidated": false,
+      "WriteAuthorized": false,
+      "BuildId": "26273833",
+      "Profile": "Unknown",
+      "Mode": "ObserveTwoClient",
+      "Reason": "Final policies/native authority not proven; no writer compiled"
+    }
+  ]
+}

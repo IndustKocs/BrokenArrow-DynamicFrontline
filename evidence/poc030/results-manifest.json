@@ -1,0 +1,66 @@
+[
+  {
+    "Path": "artifacts/poc030/build.log",
+    "Sha256": "FFF865CAB5AE1C99AB21A4F3843AB95CA22B455B87E6A84D86B2B339AC8850FA"
+  },
+  {
+    "Path": "artifacts/poc030/generator-build.log",
+    "Sha256": "DF378D7DBF78015B8AC99BA6F151BA965D2DFC77B63D055161E365B04E36B0F5"
+  },
+  {
+    "Path": "artifacts/poc030/install-plan.json",
+    "Sha256": "B47FC4E1F3ADA2F7BF05E091813ED891B7411F5393E5B8D38F4898193E19024A"
+  },
+  {
+    "Path": "artifacts/poc030/install-result.json",
+    "Sha256": "674D11F387C5A97728F0F893E281634A8C34B309AB243FCAD7879702051DEB33"
+  },
+  {
+    "Path": "artifacts/poc030/performance.log",
+    "Sha256": "73CBDD1B9B39C87103E27B1FA3433BEB8A6C8B00A50366A62C59C0C57F0BE5E4"
+  },
+  {
+    "Path": "artifacts/poc030/removal-plan.json",
+    "Sha256": "4928F58D1C58849BBFC2C610DA1280B6AA2227FB69800DA9855CFA294C1E7AE0"
+  },
+  {
+    "Path": "artifacts/poc030/removal-result.json",
+    "Sha256": "97DE3FDEF2A192379DA931239454C730193A1A2204C791738FBC5CE6F5932D6D"
+  },
+  {
+    "Path": "artifacts/poc030/sandbox-results.json",
+    "Sha256": "7A1A04112C8E9D68230163ED1433EEF821DE5AA584573B9CD0EE0B5A0857E604"
+  },
+  {
+    "Path": "artifacts/poc030/tests-build.log",
+    "Sha256": "B17F1DE01D33073F8AE87BEFD89A41E97707FB7BE134C4EC34B2A17B65861AE7"
+  },
+  {
+    "Path": "artifacts/poc030/tests.log",
+    "Sha256": "2E2824E1B34FBB51772CCCC9EB43FD7C24725C63C04A89619755F3DB2573502B"
+  },
+  {
+    "Path": "artifacts/poc030/tooling-negative-tests.json",
+    "Sha256": "68B55B28944E8D7A2A1CB34ECB3505484B132D6C8A464A556B13E6AB3DEA1315"
+  },
+  {
+    "Path": "artifacts/poc030/interop/cpp2il.log",
+    "Sha256": "285837BE68484280723AD82E2BE3975420CB8FE365D748A6396DC6123DEB9EE3"
+  },
+  {
+    "Path": "artifacts/poc030/interop/generator.log",
+    "Sha256": "9CD9A7A43EC005515B295190AE049D1C7AAAE6F0F0B3CD4B80B888DCF45F5F71"
+  },
+  {
+    "Path": "artifacts/poc030/loopback/A.json",
+    "Sha256": "66396EB674534F473711EDDF2DFBA0D2B5C484F19B1A29FF58BE7B73F2E99A76"
+  },
+  {
+    "Path": "artifacts/poc030/loopback/B.json",
+    "Sha256": "2C6BB7E76AA1FBB25F1B3AED53DB13B49C61F4426BA26F8385058E3D236B25F4"
+  },
+  {
+    "Path": "artifacts/poc030/performance/pipeline.json",
+    "Sha256": "037F0A665764342D36978F5242A59E4BB5576919FEE9FD80CF5C0A9A381E07D8"
+  }
+]
