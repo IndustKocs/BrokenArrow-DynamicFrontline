@@ -77,7 +77,7 @@ public sealed class BreakthroughEvaluator(PreparedTerrain terrain, VictoryConfig
     public Evidence[] Evaluate(TerritoryScoringProjection score, bool complete)
     {
         if (!complete || !terrain.Complete) return [Evidence.Unknown, Evidence.Unknown];
-        if (revision == score.Revision && terrainRevision == terrain.Revision) return cached;
+        if (revision == terrain.Grid.OwnershipRevision && terrainRevision == terrain.Revision) return cached;
         var g = terrain.Grid; var result = new Evidence[2];
         for (int team = 0; team < 2; team++)
         {
@@ -85,7 +85,7 @@ public sealed class BreakthroughEvaluator(PreparedTerrain terrain, VictoryConfig
             var wide = new bool[g.Count];
             for (int x = 0; x < g.Width; x++)
             {
-                int y = 0; while (y < g.Height) { int begin = y; while (y < g.Height && score.EffectiveOwner[y * g.Width + x] == team) y++;
+                int y = 0; while (y < g.Height) { int begin = y; while (y < g.Height && g.Owner(y * g.Width + x) == team) y++;
                     if ((y - begin) * g.CellSize + 1e-9 >= config.RequiredWidth) for (int row = begin; row < y; row++) wide[row * g.Width + x] = true;
                     if (y == begin) y++;
                 }
@@ -97,7 +97,7 @@ public sealed class BreakthroughEvaluator(PreparedTerrain terrain, VictoryConfig
             while (queue.TryDequeue(out var i)) { depth = Math.Max(depth, team == 0 ? (i % g.Width + 1.0) / g.Width : (g.Width - i % g.Width) / (double)g.Width); foreach (var j in g.Neighbors(i)) Visit(j); }
             result[team] = depth + 1e-10 >= config.DepthThreshold ? Evidence.True : Evidence.False;
         }
-        revision = score.Revision; terrainRevision = terrain.Revision; return cached = result;
+        revision = terrain.Grid.OwnershipRevision; terrainRevision = terrain.Revision; return cached = result;
     }
 }
 public sealed record ArmyValue(decimal[] Values, bool Complete, string Policy, string Provenance);

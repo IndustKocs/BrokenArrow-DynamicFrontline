@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$DotnetPath,[switch]$RuntimePipeline)
+param([Parameter(Mandatory)][string]$DotnetPath,[switch]$RuntimePipeline,[switch]$Reconnect)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $output=Join-Path $root ('artifacts/poc030_rc2/two-process-'+[Guid]::NewGuid().ToString('N'))
@@ -16,7 +16,7 @@ $key=New-Object byte[] 32
 $rng=[Security.Cryptography.RandomNumberGenerator]::Create();$rng.GetBytes($key);[IO.File]::WriteAllBytes($keyPath,$key)
 $listener=[Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback,0);$listener.Start();$port=$listener.LocalEndpoint.Port;$listener.Stop()
 $dll=Join-Path $root 'tests/DynamicFrontline.Rc2.Tests/bin/Release/net6.0/DynamicFrontline.Rc2.Tests.dll'
-$peerMode=if($RuntimePipeline){"runtime-peer-v2"}else{"peer-v2"};$processes=@()
+$peerMode=if($Reconnect){"runtime-resync"}elseif($RuntimePipeline){"runtime-peer-v2"}else{"peer-v2"};$processes=@()
 try {
  foreach($role in @('A','B')) {
   $info=[Diagnostics.ProcessStartInfo]::new();$info.FileName=$DotnetPath;$info.UseShellExecute=$false;$info.CreateNoWindow=$true

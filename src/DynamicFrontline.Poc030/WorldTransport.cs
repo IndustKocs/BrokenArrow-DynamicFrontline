@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Channels;
 namespace DynamicFrontline.Poc030;
 public sealed record OwnedSourceFrame(Observation Observation,SourceHealth Health);
+public sealed record OwnedDeltaFrame(OwnedDelta Delta,SourceHealth Health);
 public sealed record WorldMessage(string Kind,JsonElement Payload);
 public sealed record WorldEnvelope(Hello Hello,long Sequence,WorldMessage Message,string Digest,string Mac);
 public sealed record WireChunk(string Id,int Index,int Count,int Total,string Hash,byte[] Bytes);
@@ -55,6 +56,10 @@ public sealed partial class DevChannel
         if(!outbound.Writer.TryWrite(new(kind,JsonSerializer.SerializeToElement(payload)))){PublishFailure(SourceState.StoppedByBudget,"OutboundQueueFull_Resync");return false;}return true;
     }
     public string? LastTransportError {get;private set;}
+    public int PendingMessages=>outbound.Reader.Count;
+    public double? LastExchangeMilliseconds {get;private set;}
+    TcpClient? liveClient;
+    public void DisconnectForDiagnosticResync()=>Volatile.Read(ref liveClient)?.Close();
     public async Task RunWorld()
     {
         int attempts=0;while(!stop.IsCancellationRequested)
@@ -66,7 +71,7 @@ public sealed partial class DevChannel
                 using var timeout=CancellationTokenSource.CreateLinkedTokenSource(stop.Token);timeout.CancelAfter(TimeSpan.FromSeconds(20));State="ConnectingTls";
                 using var client=new TcpClient();TcpClient? accepted=null;
                 if(config.Role=="A"){listener=new(address,config.Port);listener.Start(1);accepted=await listener.AcceptTcpClientAsync(timeout.Token);}else await client.ConnectAsync(address,config.Port,timeout.Token);
-                using var active=accepted??client;listener?.Stop();active.NoDelay=true;
+                using var active=accepted??client;Volatile.Write(ref liveClient,active);listener?.Stop();active.NoDelay=true;
                 using var tls=new SslStream(active.GetStream(),false,(_,certificate,_,_)=>config.Role=="A"||certificate!=null&&Convert.ToHexString(SHA256.HashData(certificate.GetRawCertData()))==config.CertificatePin);
                 if(config.Role=="A"){using var certificate=new X509Certificate2(config.CertificateFile,string.Empty,X509KeyStorageFlags.DefaultKeySet);await tls.AuthenticateAsServerAsync(new SslServerAuthenticationOptions{ServerCertificate=certificate,EnabledSslProtocols=SslProtocols.Tls12|SslProtocols.Tls13,ClientCertificateRequired=false},timeout.Token);}
                 else await tls.AuthenticateAsClientAsync(new SslClientAuthenticationOptions{TargetHost="dynamic-frontline-private",EnabledSslProtocols=SslProtocols.Tls12|SslProtocols.Tls13},timeout.Token);
@@ -80,14 +85,14 @@ public sealed partial class DevChannel
                 {
                     using var frame=CancellationTokenSource.CreateLinkedTokenSource(stop.Token);frame.CancelAfter(TimeSpan.FromSeconds(10));
                     var message=outbound.Reader.TryRead(out var queued)?queued:new WorldMessage("SourceHealth",JsonSerializer.SerializeToElement(CurrentWorldHealth()));
-                    var send=WorldProtocol.Write(tls,WorldProtocol.Sign(h,++sent,message,secret),frame.Token);var receive=WorldProtocol.Read(tls,frame.Token);await Task.WhenAll(send,receive);var peer=await receive;WorldProtocol.Verify(peer,h,received,secret);received=peer.Sequence;
+                    var exchange=System.Diagnostics.Stopwatch.StartNew();var send=WorldProtocol.Write(tls,WorldProtocol.Sign(h,++sent,message,secret),frame.Token);var receive=WorldProtocol.Read(tls,frame.Token);await Task.WhenAll(send,receive);var peer=await receive;WorldProtocol.Verify(peer,h,received,secret);received=peer.Sequence;LastExchangeMilliseconds=exchange.Elapsed.TotalMilliseconds;
                     if(!handshaken){if(peer.Message.Kind!="Hello")throw new InvalidDataException("HelloRequired");var p=peer.Message.Payload;if(p.GetProperty("Mode").GetString()!=config.Mode||p.GetProperty("Replication").GetString()!=config.Replication||p.GetProperty("TrustedReplicaConsent").GetBoolean()!=config.TrustedReplicaConsent)throw new InvalidDataException("ReplicationConsentMismatch");handshaken=true;Send("Accepted",new{ConnectionEpoch});Send("ResyncRequest",new{Reason="FreshConnection"});}
                     State="AuthenticatedWorldTls";Received?.Invoke(peer.Message);await Task.Delay(10,stop.Token);
                 }
             }
-            catch(Exception ex)when(ex is IOException or SocketException or AuthenticationException or OperationCanceledException or InvalidDataException or JsonException or FormatException or ArgumentException or CryptographicException)
+            catch(Exception ex)when(ex is IOException or SocketException or AuthenticationException or OperationCanceledException or InvalidDataException or JsonException or FormatException or ArgumentException or CryptographicException or ObjectDisposedException)
             {State="Disconnected:"+ex.GetType().Name;LastTransportError=ex.ToString();ConnectionEpoch="";Received?.Invoke(new("Error",JsonSerializer.SerializeToElement(new{Reason=State})));}
-            finally{listener?.Stop();}
+            finally{Volatile.Write(ref liveClient,null);listener?.Stop();}
             if(stop.IsCancellationRequested)break;if(++attempts>30){State="ReconnectBudgetExhausted";break;}try{await Task.Delay(Math.Min(5000,250*attempts),stop.Token);}catch(OperationCanceledException){break;}
         }
     }

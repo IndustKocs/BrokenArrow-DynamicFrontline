@@ -19,9 +19,25 @@ static class BindingInspector
             ["BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent"]=["CurrentStressValue","MaxStress","CurrentStressLevel","ShockedStressValue","PanickedStressValue"],
             ["BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent"]=["AliveSoldierCount"],
             ["BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent"]=["get_NetEntity"],
-            ["BrokenArrow.DataBase.Models.Units"]=["get_Id","get_Role","get_MaxStress"]
+            ["BrokenArrow.DataBase.Models.Units"]=["get_Id","get_Role","get_MaxStress"],
+            ["BrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService"]=["get_State"],
+            ["NetworkCommon.Messages.Game.RoomState"]=["get_FightId","get_Seed","get_ScenarioMeta"],
+            ["NetworkCommon.Messages.Game.ScenarioMeta"]=["get_Name"],
+            ["BrokenArrow.Client.Ecs.BattleSystem.TargetSearchHelper"]=["_mpCheckZone"],
+            ["BrokenArrow.Client.Ecs.Controllers.PlayableZone"]=["get_PlayZoneBounds"],
+            ["BrokenArrow.Client.Ecs.Navigation.SceneNavigationGraphs"]=["get_Main"],
+            ["BrokenArrow.Core.Navigation.NavigationGraph"]=["Name","CellSize"],
+            ["BrokenArrow.Client.Ecs.Transports.Systems.RepairSystem"]=["ApplyRepairAndHealthNewValues"],
+            ["BrokenArrow.Client.Ecs.Transports.Systems.SupplySystem"]=["InternalUpdate"],
+            ["BrokenArrow.Client.Ecs.BattleSystem.AmmunitionContainer"]=["AddAmmo","AmmoAvailable","AmmunitionInfo"],
+            ["BrokenArrow.Client.Ecs.GNetwork.Services.NetworkWeaponsService"]=["SetAmmoCount"],
+            ["BrokenArrow.Client.Ecs.Transports.Components.LoadedComponent"]=[],
+            ["BrokenArrow.Client.Ecs.Transports.Components.EntityLoadOrderComponent"]=[],
+            ["BrokenArrow.Client.Ecs.Transports.Components.UnloadingComponent"]=[],
+            ["BrokenArrow.Shared.Ecs.Components.DeadComponent"]=[],
+            ["BrokenArrow.Shared.Ecs.Components.DeathComponent"]=[]
         };
-        var modules=new[]{"BrokenArrow.dll","DefaultEcs.dll","GalaxyCoreLib.dll"}.Select(n=>ModuleDefinition.FromFile(Path.Combine(directory,n))).ToArray();
+        var modules=new[]{"BrokenArrow.dll","DefaultEcs.dll","GalaxyCoreLib.dll","NetworkCommon.dll"}.Select(n=>ModuleDefinition.FromFile(Path.Combine(directory,File.Exists(Path.Combine(directory,n))?n:"Il2Cpp"+n))).ToArray();
         var types=modules.SelectMany(m=>m.GetAllTypes()).ToArray();var results=new List<object>();bool pass=true;
         foreach(var (name,members) in requirements)
         {

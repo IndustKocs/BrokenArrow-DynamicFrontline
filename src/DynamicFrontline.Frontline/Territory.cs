@@ -32,9 +32,28 @@ public sealed class TerritoryGrid
         return x<0||y<0||x>=Width||y>=Height?-1:(int)y*Width+(int)x;
     }
     public Point2 Center(int i)=>new(Origin.X+(i%Width+.5)*CellSize,Origin.Y+(i/Width+.5)*CellSize);
-    public IEnumerable<int> Neighbors(int i)
-    { if(i%Width>0)yield return i-1;if(i%Width<Width-1)yield return i+1;if(i>=Width)yield return i-Width;if(i<Count-Width)yield return i+Width; }
+    public NeighborCells Neighbors(int i)=>new(i,Width,Count);
+    public readonly struct NeighborCells(int index,int width,int count):IEnumerable<int>
+    {
+        public Enumerator GetEnumerator()=>new(index,width,count);
+        IEnumerator<int> IEnumerable<int>.GetEnumerator()=>GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()=>GetEnumerator();
+        public struct Enumerator(int index,int width,int count):IEnumerator<int>
+        {
+            int direction=-1;public int Current {get;private set;}
+            object System.Collections.IEnumerator.Current=>Current;
+            public bool MoveNext(){while(++direction<4){bool valid=direction switch{0=>index%width>0,1=>index%width<width-1,2=>index>=width,_=>index<count-width};if(valid){Current=index+(direction switch{0=>-1,1=>1,2=>-width,_=>width});return true;}}return false;}
+            public void Dispose(){}public void Reset()=>direction=-1;
+        }
+    }
     public CellState Cell(int i)=>new(i,mask[i],owners[i],challengers[i],progress[i],contested[i]);
+    public string StateDigest()
+    {
+        using var hash=System.Security.Cryptography.IncrementalHash.CreateHash(System.Security.Cryptography.HashAlgorithmName.SHA256);
+        Span<byte> bytes=stackalloc byte[18];
+        for(int i=0;i<Count;i++){bytes[0]=mask[i]?(byte)1:(byte)0;bytes[1]=contested[i]?(byte)1:(byte)0;System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(bytes[2..],owners[i]);System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(bytes[6..],challengers[i]);System.Buffers.Binary.BinaryPrimitives.WriteInt64LittleEndian(bytes[10..],progress[i]);hash.AppendData(bytes);}
+        return Convert.ToHexString(hash.GetHashAndReset());
+    }
     internal void Set(CellState c)
     { if(owners[c.Index]!=c.Owner)OwnershipRevision++;owners[c.Index]=c.Owner;challengers[c.Index]=c.Challenger;progress[c.Index]=c.Progress;contested[c.Index]=c.Contested; }
     // Initialization only; the simulation freezes its own root list.

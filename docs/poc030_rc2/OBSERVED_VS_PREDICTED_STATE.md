@@ -1,7 +1,9 @@
-# Observation lane
+# Наблюдение и прогноз
 
-Simulation023 defaults to its existing autonomous behavior. Its explicit Observe lane instead uses input HP, stress and stress level. ZOC derives strength from those actual values; Observe never calls the autonomous stress initialization/combat/apply backend. Frame stress and HUD own-unit stress are actual observations. Encirclement state and tau are explicitly labelled predictions.
+LiveReader читает только собственные сущности после owner gate. HP/MaxHP, Stress/MaxStress, native stress level и thresholds остаются наблюдаемыми значениями. Никаких Set/native command queue, восстановления, приказов или native victory calls нет.
 
-The 80→20→80 test verifies real-input replacement rather than accumulating a previous forecast. SupplyComplete=false suppresses penalty intents and elapsed penalty time. There is no native stress recovery/F0.5 scheduler in the live lane. Observation gaps advance uncertainty without replaying missed penalty time. A predicted terminal result does not stop subsequent observations.
+SimulationLane.Observe использует эти значения непосредственно при расчёте ZOC. Он не вызывает Initialize/Combat/Apply автономного stress backend. Прогноз котла хранится отдельно от actual stress. При SupplyComplete=false возраст штрафа не начисляется как подтверждённый penalty; Unknown не превращается в NoRelief. Actual stress 80→20→80 остаётся именно такой последовательностью, а не накоплением второй модели.
 
-Checkpoint lane is serialized and checked during restore. An autonomous checkpoint cannot be restored into Observe. Native effects remain disabled; no game mutator implementation was added.
+Тик250мс строится только из свежих полных согласованных owner-снимков. При разрыве GameTime не экстраполируется; ObservationGap не доначисляет пропущенное время. Пауза не старит игровой таймер, но источник обязан продолжать подтверждать чтение. После прогнозируемого конца live-наблюдение продолжается; штатный матч не завершается.
+
+HUD разделяет ACTUAL HP/stress/level и FORECAST state/relief/tau. F8 — собственная окружность, F9 — собственный диагностический выбор, не штатное выделение. Радиус рисуется через world-to-screen; круги чужих юнитов не показываются без подтверждённого visibility binding.

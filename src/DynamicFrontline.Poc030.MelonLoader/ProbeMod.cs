@@ -12,8 +12,10 @@ namespace DynamicFrontline.Poc030.MelonLoader;
 public sealed class ProbeMod : MelonMod
 {
  readonly Stopwatch timer=Stopwatch.StartNew();readonly Channel<string> records=Channel.CreateBounded<string>(256);readonly CancellationTokenSource stopping=new();
- LiveReader? reader;DevChannel? channel;RuntimeObserver? observer;ProbeConfig? config;GameCompatibilityDescriptor? descriptor;string dir="",status="Disabled: separate authorization required",lastLogged="";double next;bool authorized,ready,circles;int selected;Observation? latest;
- Type? rectType,vectorType;MethodInfo? boxMethod,cameraProject,keyMethod;object? camera;long samples;
+ LiveReader? reader;DevChannel? channel;RuntimeObserver? observer;ProbeConfig? config;GameCompatibilityDescriptor? descriptor;string dir="",status="Disabled: separate authorization required";double next;bool authorized,ready,circles;int selected;Observation? latest;
+ Type? rectType,vectorType;MethodInfo? boxMethod,cameraProject,keyMethod;object? camera;long samples;double? lastHudMilliseconds;long? lastHudBytes;
+ PassiveServiceProbe? service;readonly Queue<ServiceProof> serviceHistory=new();
+ void Record(object item){if(!records.Writer.TryWrite(JsonSerializer.Serialize(item))){status="DiagnosticQueueFull";observer?.Fail(SourceState.StoppedByBudget,status);}}
  public override void OnInitializeMelon()
  {
   try
@@ -31,14 +33,17 @@ public sealed class ProbeMod : MelonMod
  }
  void StartReader()
  {
-  InteropGate.VerifyLoaded(Path.Combine(dir,"interop-provenance.json"),descriptor!);
+  InteropGate.VerifyLoaded(Path.Combine(dir,"interop-provenance.json"),descriptor!,global::MelonLoader.Utils.MelonEnvironment.Il2CppAssembliesDirectory);
   reader=new(config!.RosterContractConfirmed);
   T? ReadOptional<T>(string path)=>string.IsNullOrWhiteSpace(path)?default:JsonSerializer.Deserialize<T>(File.ReadAllText(path));
   var binding=ReadOptional<MatchBinding>(config.BindingFile);var map=ReadOptional<MapDescriptor>(config.MapFile);var profiles=ReadOptional<ProfileSet>(config.ProfilesFile);
-  var assemblyPaths=new[]{typeof(ProbeMod).Assembly.Location,typeof(LiveReader).Assembly.Location,typeof(DynamicFrontline.Frontline.Rules023.Simulation023).Assembly.Location,typeof(DynamicFrontline.Core.CombatFormulas).Assembly.Location};
+  map?.VerifyLocalSources(Path.GetDirectoryName(Environment.ProcessPath)!);
+  var assemblyPaths=new[]{typeof(ProbeMod).Assembly.Location}.Concat(new[]{"Core","Frontline","GameAdapter","Integration","Poc030"}.Select(n=>Path.Combine(Path.GetDirectoryName(typeof(LiveReader).Assembly.Location)!,"DynamicFrontline."+n+".dll"))).ToArray();
   var payload=CanonicalCodec.Digest(assemblyPaths.Select(p=>new{Name=Path.GetFileName(p),Hash=DevInstall.Hash(p)}).OrderBy(p=>p.Name,StringComparer.Ordinal));
   channel=new(config,new("df030-world-2",config.SessionId,config.Role,descriptor!.Digest,payload,new DynamicFrontline.Frontline.Rules023.Rules023Config().Hash,profiles?.Hash??"Unknown",map?.Hash??"Unknown","ua01-rc2-read-contract","ReadOnlyRC2"),File.ReadAllBytes(config.SecretFile));
-  observer=new(config,channel,descriptor.Digest,binding,map,profiles);_=channel.RunWorld();_=observer.Run();ready=true;
+  observer=new(config,channel,descriptor.Digest,binding,map,profiles);observer.Diagnostic+=Record;
+  if(config.PassiveServiceProbeEnabled){service=new();try{service.Install();}catch(Exception e){Record(new{Kind="ServiceBindingUnavailable",Reason=e.GetType().Name});}}
+  _=channel.RunWorld();_=observer.Run();ready=true;
   records.Writer.TryWrite(JsonSerializer.Serialize(new{Kind="Start",Mode=config.Mode,Role=config.Role,Payload=payload,Compatibility=descriptor.Digest,RuntimeValidated=false}));
  }
  public override void OnUpdate()
@@ -53,9 +58,9 @@ public sealed class ProbeMod : MelonMod
   }catch{ /* Missing optional key binding cannot enable gameplay effects or block reading. */ }
   if(timer.Elapsed.TotalSeconds<next)return;next=timer.Elapsed.TotalSeconds+.25;
   var watch=Stopwatch.StartNew();long bytes=GC.GetAllocatedBytesForCurrentThread();
-  try{latest=reader!.Read();observer!.Submit(latest);status=config!.Mode+" / "+latest.Quality;}
+  try{latest=reader!.Read();if(service?.State.Contains("QueueExceeded")==true)throw new InvalidDataException("ServiceProofOverflow_SupplyUnknown");foreach(var proof in service?.Drain()??[]){serviceHistory.Enqueue(proof);Record(new{Kind="PositiveServiceOperation",Proof=proof,Interval="Point evidence only; continuous lifetime Unknown; no grace invented"});}while(serviceHistory.TryPeek(out var old)&&latest.GameTime-old.Time>10)serviceHistory.Dequeue();if(serviceHistory.Count>4096)throw new InvalidDataException("ServiceHistoryBudget");latest=latest with{ServiceProofs=serviceHistory.Where(p=>p.Owner==latest.Owner&&p.Time<=latest.GameTime&&latest.GameTime-p.Time<=10).ToArray()};observer!.Submit(latest);status=config!.Mode+" / "+latest.Quality;}
   catch(Exception ex){var state=ex.Message=="NoSession"?SourceState.NoSession:SourceState.ReadUnavailable;observer!.Fail(state,ex.GetType().Name);latest=null;status=state+":"+ex.GetType().Name;}
-  if(++samples%20==0||status!=lastLogged){lastLogged=status;records.Writer.TryWrite(JsonSerializer.Serialize(new{Kind="SourceMetric",State=status,Revision=latest?.Revision,GameTime=latest?.GameTime,ReadMilliseconds=watch.Elapsed.TotalMilliseconds,ReadBytes=GC.GetAllocatedBytesForCurrentThread()-bytes,Core=observer!.View.Status,InputHash=observer.View.InputHash,Blockers=observer.View.Blockers}));}
+  if(++samples>0){Record(new{Kind="SourceMetric",State=status,Revision=latest?.Revision,GameTime=latest?.GameTime,Owner=latest?.Owner,Participants=latest?.Participants,OwnedCount=latest?.Owned.Length,Map=latest?.MapState,ServiceSource=service?.State??"Disabled_SupplyUnknown",ReadMilliseconds=watch.Elapsed.TotalMilliseconds,ReadBytes=GC.GetAllocatedBytesForCurrentThread()-bytes,HudLastMilliseconds=lastHudMilliseconds,HudLastBytes=lastHudBytes,Core=observer!.View.Status,InputHash=observer.View.InputHash,Blockers=observer.View.Blockers});}
  }
  async Task WriteLogs(string path)
  {
@@ -64,6 +69,7 @@ public sealed class ProbeMod : MelonMod
  public override void OnGUI()
  {
   if(!authorized)return;
+  var hudWatch=Stopwatch.StartNew();long hudBytes=GC.GetAllocatedBytesForCurrentThread();
   try
   {
    rectType??=LiveReader.Resolve("UnityEngine.Rect");var gui=LiveReader.Resolve("UnityEngine.GUI");boxMethod??=gui.GetMethod("Box",[rectType,typeof(string)]);
@@ -76,6 +82,7 @@ public sealed class ProbeMod : MelonMod
    boxMethod?.Invoke(null,[Activator.CreateInstance(rectType,[16f,16f,780f,180f]),text]);
    if(circles&&chosen!=null&&view?.Projection!=null)DrawRadius(chosen,view.Projection.Circles.FirstOrDefault(c=>c.Key.Uid==chosen.NetworkId)?.Radius);
   }catch(Exception e){if(status!="HudUnavailable"){status="HudUnavailable";records.Writer.TryWrite(JsonSerializer.Serialize(new{Kind="HudUnavailable",Reason=e.GetType().Name}));}}
+  finally{lastHudMilliseconds=hudWatch.Elapsed.TotalMilliseconds;lastHudBytes=GC.GetAllocatedBytesForCurrentThread()-hudBytes;}
  }
  void DrawRadius(OwnedSample unit,double? radius)
  {
@@ -83,5 +90,5 @@ public sealed class ProbeMod : MelonMod
   vectorType??=LiveReader.Resolve("UnityEngine.Vector3");cameraProject??=cameraType.GetMethod("WorldToScreenPoint",[vectorType]);var screen=LiveReader.Resolve("UnityEngine.Screen");float height=Convert.ToSingle(screen.GetProperty("height")!.GetValue(null));
   for(int i=0;i<48;i++){double angle=i*Math.PI/24;var point=Activator.CreateInstance(vectorType,[(float)(unit.X+radius*Math.Cos(angle)),unit.Y,(float)(unit.Z+radius*Math.Sin(angle))]);var pixel=cameraProject?.Invoke(camera,[point]);if(pixel==null||Convert.ToSingle(LiveReader.Get(pixel,"z"))<=0)continue;float x=Convert.ToSingle(LiveReader.Get(pixel,"x")),y=height-Convert.ToSingle(LiveReader.Get(pixel,"y"));boxMethod?.Invoke(null,[Activator.CreateInstance(rectType!,[x,y,3f,3f]),""]);}
  }
- public override void OnDeinitializeMelon(){authorized=false;observer?.Dispose();channel?.Dispose();records.Writer.TryComplete();stopping.Cancel();latest=null;camera=null;}
+ public override void OnDeinitializeMelon(){authorized=false;service?.Dispose();observer?.Dispose();channel?.Dispose();records.Writer.TryComplete();latest=null;camera=null;}
 }

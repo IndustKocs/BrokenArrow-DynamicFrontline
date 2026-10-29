@@ -1,3 +1,5 @@
-# Native effects remain OFF
+# Следующий допуск эффектов
 
-No native effects, launcher changes or research edits are included. Future native writes require a separate task and consent after the two-client observation path, lifecycle identity, service proof, resync, performance and exact native semantics have been validated. A successful build or offline equality test grants no permission to write game state, change victory, stress recovery or retreat behavior.
+RC2 не содержит native writer. Ни успешная проба, ни config flag не включают изменение HP/stress, class multipliers, приказов, восстановления, supply/economy или native victory. Такие действия потребуют отдельного задания, доказанного binding, тестов exactly-once и отдельного согласия.
+
+Launcher, исследовательские материалы, B.A.R.O.-подобное auto-connect и native Gamelog не входят в эту работу. Full diagnostic replica — только явно согласованный приватный режим обоих участников; public projection остаётся собственной командой.

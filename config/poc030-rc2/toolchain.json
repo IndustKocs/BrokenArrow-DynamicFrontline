@@ -1,0 +1,40 @@
+{
+  "Schema": 1,
+  "GameAssembly": "12E7088369539B029A7BF0064062CE030A53B5189E7067420903F47B4281FDDF",
+  "Metadata": "A4EDE1B29664378A2FB9F952F65330A73DBFA115B205065D1831F420540AFE01",
+  "Cpp2IlSha256": "663FB432433B4371FD1EE0EBC321A8FFF2A9AAC5AC4230C843F9E03DDEE4E04C",
+  "Generator": [
+    {
+      "Name": "Il2CppInterop.Generator.dll",
+      "Sha256": "84DE44214ABF234A419A991F0B9DC91E2E39FCEB2CC0A4136A79FA369777FF23",
+      "Version": "1.5.1.0"
+    },
+    {
+      "Name": "Il2CppInterop.Runtime.dll",
+      "Sha256": "3878CE0BA0C60385F76F2BA37E07AD0EE3649D019703AEC8695DB3402ABEEDD7",
+      "Version": "1.5.1.0"
+    },
+    {
+      "Name": "MelonLoader.dll",
+      "Sha256": "BDD43DC0F3893C208C95389B863AB61C967AE14204DA0DD8051647E754C8709B",
+      "Version": "0.7.3.0"
+    },
+    {
+      "Name": "0Harmony.dll",
+      "Sha256": "6C898933B52149E8BCF6722305C7E4D94ADD47C9E53B364096F91721624C0877",
+      "Version": "Pinned MelonLoader 0.7.3 dependency"
+    },
+    {
+      "Name": "Il2CppInterop.HarmonySupport.dll",
+      "Sha256": "F64C53D389FC76A910FFAB86F7AC6D27E437B0C7C0C60918565A5D9F34F8AD06",
+      "Version": "Pinned MelonLoader 0.7.3 dependency"
+    }
+  ],
+  "Options": {
+    "Parallel": false,
+    "UnityBaseLibraries": "6000.3.24 exact official dependencies",
+    "NoXrefCache": false
+  },
+  "RuntimeValidated": false,
+  "Wrappers": {}
+}

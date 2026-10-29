@@ -1,7 +1,7 @@
 {
-  "Status": "DevelopmentCheckpoint_NotReadyForGameInstall",
-  "PreparedLoadReadProbe": false,
-  "PreparedObserveTwoClient": false,
+  "Status": "DiagnosticPrivatePackage_RuntimeNotValidated",
+  "PreparedLoadReadProbe": true,
+  "PreparedObserveTwoClient": true,
   "OfflineCanonicalTwoProcessValidated": true,
   "SandboxRecoveryValidated": true,
   "RuntimeValidated": false,
@@ -16,5 +16,7 @@
   "SoakValidated": false,
   "NativeEffectsEnabled": false,
   "GameInstallApproved": false,
-  "GameLaunchApproved": false
+  "GameLaunchApproved": false,
+  "OfflinePerformanceMatrixMeasured": true,
+  "FullPerformanceAcceptance": false
 }

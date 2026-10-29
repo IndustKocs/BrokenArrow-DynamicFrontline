@@ -4,3 +4,4 @@
 .cli/
 tools/
 artifacts/
+**/__pycache__/

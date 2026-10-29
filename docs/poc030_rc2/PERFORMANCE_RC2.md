@@ -1,7 +1,24 @@
-# Performance — not validated
+# RC2 — фактические offline измерения
 
-The full TZ17 matrix (10800 steps, three repeats, 100/500/1000 units, equal physical maps at 50/100 m, geometry oracle and allocation/queue statistics) has not yet been executed. No performance limit or live budget compliance is claimed.
+18 последовательных прогонов, 47 760 шагов, 128 warmup на прогон. Реальная статическая геометрия Airport, область 6500×6500 м. Наблюдения синтетические. Для 100/100 три прогона по 10 800 шагов (45 минут модельного времени каждый); остальные — три по 1024. Wall time около 980,49 с. Это не live soak.
 
-Implemented changes include cached reflection bindings, 250 ms snapshots, a single sequential worker, bounded queues and async compact logs capped at 32 MiB. They are implementation choices, not performance evidence. Canonical JSON, checkpoint-derived territory digest and full geometry work still allocate; optimization must follow measured full-pipeline workloads.
+|Юнитов|Ячейка м|Худший p95 мс|p99 мс|Max мс|MiB/шаг|>250мс|
+|---:|---:|---:|---:|---:|---:|---:|
+|100|100|6,405|7,368|14,173|1,656|0|
+|100|50|19,481|22,275|42,471|2,859|0|
+|500|100|29,767|36,429|43,600|9,526|0|
+|500|50|59,361|69,784|99,210|17,149|0|
+|1000|100|56,595|61,895|72,394|19,644|0|
+|1000|50|117,291|121,587|135,949|34,174|0|
 
-Short RC1 benchmarks do not establish RC2 or live performance. Native main-thread read latency cannot be measured without the separately authorized two-client experience.
+Raw CSV.GZ и 18 JSON: evidence/performance. measured-assemblies.json фиксирует измеренную сборку. После матрицы добавлены метрики, ConnectionProbe, supplier identity и OnMap; ядро Frontline не менялось. Цифры относятся к зафиксированной сборке, не к конечному игровому плагину.
+
+Измерены copied-owner observations → canonical lifecycle → JSON encode/decode → ядро/дигесты → собственная проекция. Raw включает prepare/ZOC/geometry/victory/encirclement/capture, GC, managed memory, RSS и Unknown. Native reads, TLS, HUD и запись CSV на диск в total не включены. Очереди синхронного стенда пусты по построению.
+
+Цель 0,5 MiB/шаг НЕ достигнута. Лимит диагностического режима — 100 суммарных юнитов, 4 Гц. Превышение останавливает полный прогноз. Unknown для 100/100 по seed: 96,88%, 49,10%, 6,35%. Плотные случайные расположения часто неопределённы; скорость не доказывает полноту геометрии. Средний RSS по четвертям длительных прогонов около 54–55 MB без очевидного неограниченного роста. Игровой heap не проверен.
+
+Дополнительно выполнены три event-soak прогона по 10 800 шагов (32 400 шагов, явно синтетическая карта, без подмены Airport): пары пехота/БТР на 99/101м, два кольца, разрыв/слияние расположений, observed stress 800→200→800, явные положительные service intervals, loading/death/generation/checkpoint. Худший p95 3.362 мс, p99 4.675 мс, max 20.447 мс, allocations 1.125 MiB/шаг, пропусков 250мс: 0. Raw и summaries: evidence/events. Это workload-нагрузка, а не независимое доказательство правильности каждого кольца; correctness проверяется functional oracle/tests. Всего в матрице и event-soak 80 160 шагов.
+
+Динамическая навигация в live RC2 не подтверждена и не имитируется как наблюдение. Стенд не заявляет замер перестройки настоящего navgraph. Полная performance-приёмка остаётся ограниченной превышением allocation target и отсутствием native/HUD/TLS live timing.
+
+Воспроизведение: scripts/poc030-rc2/benchmark-full.ps1 с DotnetPath, Map50, Map100, OutputDirectory. Не собирать параллельно замерам. CLI metrics <session.jsonl> выдаёт N/p50/p95/p99/max; отсутствующие значения не заменяются нулём. Wire exchange включает ожидание, HUD — последний завершённый callback.

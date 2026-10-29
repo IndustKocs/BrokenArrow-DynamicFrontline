@@ -13,6 +13,7 @@ public sealed record Frame023(Guid Session, string Version, string ConfigHash, l
     double[] ScoreFractions, VictoryMemory Victory, OwnNotice[] Notices, StressEffectIntent[]? Predictions = null);
 public sealed record Checkpoint023(Guid Session, string Version, string ConfigHash, string VictoryPolicy, long Revision, double Time,
     TerritoryStateSnapshot Territory, UnitEncirclementMemory[] Encirclement, StressMemory[] Stress, ServiceInterval[] Services, VictoryMemory Victory, SimulationLane Lane = SimulationLane.Autonomous);
+public sealed record CoreTimings(double Prepare,double Zoc,double Geometry,double Victory,double Encirclement,double Capture);
 public interface IGameRadialRulerBinding { void PreviewOwnRadius(UnitKey unit, double radius); } // Runtime/Binding Required; no implementation calls game APIs.
 
 public sealed class Simulation023
@@ -30,6 +31,8 @@ public sealed class Simulation023
     public VictorySimulation Victory { get; }
     private readonly VictoryConfig victoryConfig; private long revision = -1; private double time;
     public Frame023? Last { get; private set; }
+    public string TerritoryDigest()=>terrain.Grid.StateDigest();
+    public CoreTimings? LastTimings {get;private set;}
     public RulesMode Mode => RulesMode.Zoc_023;
     public Simulation023(Guid session, Rules023Config rules, VictoryConfig victoryConfig, PreparedTerrain terrain, ProfileCatalog profiles, Rules captureRules, bool[] scoringMask, SimulationLane lane = SimulationLane.Autonomous)
     {
@@ -40,11 +43,13 @@ public sealed class Simulation023
     }
     public Frame023 Step(Input023 input)
     {
+        long stamp=System.Diagnostics.Stopwatch.GetTimestamp();double Mark(){long now=System.Diagnostics.Stopwatch.GetTimestamp();double ms=(now-stamp)*1000d/System.Diagnostics.Stopwatch.Frequency;stamp=now;return ms;}
         Check.That(input.Session == session && input.RulesVersion == rules.Version && input.ConfigHash == rules.Hash, "Incompatible input");
         if (input.Revision == revision && Last != null) return Last;
         Check.That(input.Revision == revision + 1 && input.Start == time && Math.Abs(input.End - input.Start - .25) < 1e-8, "Missing/stale tick or unsupported cadence");
         var keys = new HashSet<UnitKey>();
         foreach (var u in input.Units) { u.Validate(session); Check.That(keys.Add(u.Key) && (!generations.TryGetValue(u.Key.Uid, out var generation) || u.Key.Generation >= generation), "Duplicate/stale generation"); }
+        if(lane==SimulationLane.Observe&&input.RosterComplete){foreach(var key in states.Keys.Where(k=>!keys.Contains(k)).ToArray())states.Remove(key);Supply.PruneExpired(input.Start);}
         if (lane == SimulationLane.Autonomous && Victory.State.End != null && Last != null) return Last;
         Check.That(input.Combat.All(c => keys.Contains(c.Unit) && c.Time == input.Start && c.Stage == "Raw" && !string.IsNullOrWhiteSpace(c.Provenance)), "Unproven combat input");
         foreach (var s in input.Services) { Check.That(keys.Contains(s.Recipient), "Unknown service recipient"); Supply.Add(s); }
@@ -52,13 +57,14 @@ public sealed class Simulation023
         var units = input.Units.OrderBy(u => u.Key.Uid).ThenBy(u => u.Key.Generation).Select(u => { if(lane == SimulationLane.Observe) return u; Stress.Initialize(u, input.Start); return u with { Stress = (float)Stress.Get(u).Stress, Level = Stress.Level(u) }; }).ToArray();
         var projected = units.Select(u => u.TerritoryUnit).ToArray(); territory.Refresh();
         var local = input.RosterComplete ? locals.Evaluate(units.Where(u => u.Profile.CanCreateLocalArea).Select(u => u.TerritoryUnit).ToArray(), terrain.Grid, territory) : Last?.LocalAreas ?? []; if (input.RosterComplete) Score.Update(local);
-        var zoc = CombinedArmsRadiusResolver.Resolve(units, terrain, rules); Field.Update(zoc, input.RosterComplete);
-        var geometry = units.Select(u => detector.Evaluate(u, zoc, Field)).ToArray();
+        var prepareMs=Mark();var zoc = CombinedArmsRadiusResolver.Resolve(units, terrain, rules); Field.Update(zoc, input.RosterComplete);var zocMs=Mark();
+        var geometry = units.Select(u => detector.Evaluate(u, zoc, Field)).ToArray();var geometryMs=Mark();
         var fractions = Score.Area.Select(x => x / Score.TotalArea).ToArray();
         var army = ActiveArmyValueProvider.Evaluate(units, input.RosterComplete && input.VictoryComplete, victoryConfig);
         Victory.Advance(new(session, rules.Version, input.Revision, input.Start, input.End, fractions, input.RosterComplete && input.VictoryComplete, army,
             breakthrough.Evaluate(Score, input.RosterComplete && input.VictoryComplete), input.NativeScore));
         var end = lane == SimulationLane.Observe ? input.End : Victory.State.End?.EffectiveTime ?? input.End;
+        var victoryMs=Mark();
         var predictions = new List<StressEffectIntent>();
         var notices = new List<(int Team, string Kind, UnitKey Key)>();
         for (int i = 0; i < units.Length; i++)
@@ -73,7 +79,8 @@ public sealed class Simulation023
             if (machine.Memory.State != before.State || machine.Memory.Relief != before.Relief)
                 notices.Add((u.Team, machine.Memory.State + "/" + machine.Memory.Relief, u.Key));
         }
-        if (input.RosterComplete && end == input.End) { capture.UpdateInfluence(projected, territory); capture.Advance(); }
+        var encirclementMs=Mark();if (input.RosterComplete && end == input.End) { capture.UpdateInfluence(projected, territory); capture.Advance(); }
+        LastTimings=new(prepareMs,zocMs,geometryMs,victoryMs,encirclementMs,Mark());
         time = end; revision = input.Revision;
         return Last = new(session, rules.Version, rules.Hash, revision, end, zoc, units.Select(u => states[u.Key].Memory).ToArray(), lane == SimulationLane.Autonomous ? Stress.Current() : units.Select(u=>new StressMemory(u.Key,u.Profile.Id,u.ObservedMaxStress ?? u.Profile.BaseMaxStress,u.Stress,0,end,end+1,[])).ToArray(), geometry, local, fractions, Victory.Export(),
             notices.GroupBy(n => (n.Team, n.Kind)).Select(g => new OwnNotice(g.Key.Team, g.Key.Kind, g.Select(n => n.Key).ToArray())).ToArray(), predictions.ToArray());

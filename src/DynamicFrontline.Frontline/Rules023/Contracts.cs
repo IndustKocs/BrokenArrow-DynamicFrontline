@@ -80,6 +80,8 @@ public sealed class PreparedTerrain
     public bool[][] Passable { get; }
     public TeamRoot[] Roots { get; }
     public NavPortal[] Portals { get; set; } = [];
+    public HashSet<long>[]? NativeEdges { get; set; }
+    public bool EdgeAllowed(int a,int b,Mobility mobility)=>NativeEdges==null||NativeEdges[(int)mobility].Contains((long)Math.Min(a,b)*Grid.Count+Math.Max(a,b));
     public long Revision { get; set; } = 1;
     public bool Complete { get; set; } = true;
     public PreparedTerrain(TerritoryGrid grid, TeamRoot[] roots)
@@ -92,9 +94,10 @@ public sealed class PreparedTerrain
         if (!Complete || Revision < 1) return Evidence.Unknown;
         if (checkedRevision != Revision) { for (int k = 0; k < 2; k++) unrestricted[k] = Passable[k].All(x => x); checkedRevision = Revision; }
         if (Grid.Index(a) < 0 || Grid.Index(b) < 0) return Evidence.False;
-        if (unrestricted[(int)mobility]) return Evidence.True;
+        if (unrestricted[(int)mobility]&&NativeEdges==null) return Evidence.True;
         var n = Math.Max(1, (int)Math.Ceiling(Math.Sqrt(a.DistanceSquared(b)) / (Grid.CellSize / 3)));
-        for (int i = 0; i <= n; i++) { var p = new Point2(a.X + (b.X - a.X) * i / n, a.Y + (b.Y - a.Y) * i / n); var k = Grid.Index(p); if (k < 0 || !Passable[(int)mobility][k]) return Evidence.False; }
+        int previous=Grid.Index(a);
+        for (int i = 0; i <= n; i++) { var p = new Point2(a.X + (b.X - a.X) * i / n, a.Y + (b.Y - a.Y) * i / n); var k = Grid.Index(p); if (k < 0 || !Passable[(int)mobility][k]) return Evidence.False;if(k!=previous&&!EdgeAllowed(previous,k,mobility)){int side=previous/Grid.Width*Grid.Width+k%Grid.Width;int other=k/Grid.Width*Grid.Width+previous%Grid.Width;if(!EdgeAllowed(previous,side,mobility)||!EdgeAllowed(side,k,mobility)||!EdgeAllowed(previous,other,mobility)||!EdgeAllowed(other,k,mobility))return Evidence.False;}previous=k; }
         return Evidence.True;
     }
 }

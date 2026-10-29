@@ -1,9 +1,13 @@
-# Tests at checkpoint
+# RC2 — результаты проверки
 
-Actual logs are under evidence/poc030_rc2. Baseline and modified regression: 356 existing groups (72+36+59+89+58+42) and 44 RC1 checks. Fifteen additional RC2 groups pass. Crash logs include nonzero child exit codes at all 12 apply fault boundaries and successful recovery assertions.
+356 прежних regression groups, 44/44 RC1, 47 групп RC2 проходят. Фактические журналы: evidence/regression-final.log, rc1-package-build.log, tests-package.log, tests-package/results.json. Двенадцать дочерних процессов намеренно завершаются fail-fast; recovery проверяется родительским тестом. Проверены retirement старого interop, rollback, mutable config, lifecycle, service dedup, checkpoint с активным tau, независимый геометрический oracle, replay/collector/compare.
 
-Independent process test: TLS + canonical input + separately constructed existing cores yielded equal stage digests. A second test uses RuntimeObserver on both sides: copied synthetic owner observations → TLS → canonical world → existing core → public HUD projection, with equal canonical input hashes. This is a real two-process offline pipeline, not gameplay.
+Финальный TLS/resync: evidence/two-process — два независимых процесса, synthetic owner observations → TLS → canonical world → ядро → own projection. Input hashes после разрыва одинаковы. network-probe-A/B.json проверяют endpoint/pin/HMAC/context, без игры.
 
-Build: SDK 8.0.426, target net6.0, pinned local MelonLoader references. Plugin and development CLI build with zero warnings/errors. Commands are in build-prototype023.ps1, scripts/poc030/build-poc030.ps1 and scripts/poc030-rc2/test-two-process.ps1; use -RuntimePipeline for the source-to-projection test.
+Свежий interop: 198 DLL + 2 базы; 30 групп metadata bindings, не вызов IL2CPP. preflight-final.log — чтение pinned игровых файлов. Полные manifests A/B прошли sandbox install/verify/remove с восстановлением прежнего кэша.
 
-NotRun: two games, loaded generic bindings, actual HUD, dynamic map, service operation feed, full reconnect negative suite, full performance matrix, live soak. These omissions prevent release acceptance.
+SDK8.0.426, target net6.0, pinned MelonLoader; ноль warnings/errors. Команды: build-prototype023.ps1; scripts/poc030/build-poc030.ps1; dotnet build scripts/poc030-rc2/dev-tools/dev-tools.csproj -c Release; dotnet run --project tests/DynamicFrontline.Rc2.Tests -c Release -- <output>; scripts/poc030-rc2/test-two-process.ps1 -DotnetPath <dotnet> -Reconnect.
+
+Промежуточный tests-retirement.log содержит единичный UnauthorizedAccessException; повтор и финальный suite прошли. Прежние source-health race и clock-skew resync исправлены, финальный двухпроцессный тест прошёл. Физическое отключение питания не тестировалось.
+
+NotRun: игровые A/B, loaded generic bindings, actual HUD, native service coverage, dynamic map, live timing/soak. Offline performance-пределы перечислены отдельно. Диагностическая поставка не означает полную игровую приёмку ТЗ17.

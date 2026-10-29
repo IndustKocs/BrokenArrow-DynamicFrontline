@@ -11,6 +11,7 @@ public sealed record ServiceInterval(UnitKey Recipient, string EventId, string S
 public sealed class SupplyReliefEvaluator
 {
     private readonly Dictionary<string, ServiceInterval> events = new();
+    public void PruneExpired(double watermark){foreach(var key in events.Where(p=>p.Value.End+20<watermark).Select(p=>p.Key).ToArray())events.Remove(key);}
     public void Add(ServiceInterval s)
     {
         Check.That(s.End > s.Start && s.Start >= 0 && double.IsFinite(s.End) && s.Amount > 0 && double.IsFinite(s.Amount) && s.Kind is "Ammo" or "Repair" or "Heal" && !string.IsNullOrWhiteSpace(s.Provenance), "Unconfirmed service");
