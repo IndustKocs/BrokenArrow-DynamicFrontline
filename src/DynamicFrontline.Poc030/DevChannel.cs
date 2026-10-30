@@ -36,12 +36,13 @@ public static class Protocol
         var body=new byte[length];await Exact(body);return JsonSerializer.Deserialize<WireMessage>(body)??throw new InvalidDataException("EmptyMessage");
     }
 }
-public sealed partial class DevChannel : IDisposable
+public sealed partial class DevChannel : IWorldChannel
 {
     readonly CancellationTokenSource stop=new(); readonly Hello hello; readonly byte[] secret; readonly ProbeConfig config;
     readonly SourceHealthTracker health=new(); readonly System.Diagnostics.Stopwatch sourceClock=System.Diagnostics.Stopwatch.StartNew();
     StatusFrame latest=new(0,0,0,"WaitingForRealSession",0,"");
     public string State {get;private set;}="Disabled";
+    public bool Authenticated => State=="AuthenticatedWorldTls";
     public StatusFrame? Peer {get;private set;}
     public DevChannel(ProbeConfig config,Hello hello,byte[] secret){if(secret.Length<32)throw new InvalidDataException("SecretTooShort");this.config=config;this.hello=hello;this.secret=secret;}
     public void Publish(Observation observation)

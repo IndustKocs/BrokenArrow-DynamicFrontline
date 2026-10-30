@@ -1,0 +1,66 @@
+{
+  "Scope": "Generated wrapper metadata; no runtime invocation",
+  "Passed": true,
+  "Contracts": [
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Services.Lobby.NetworkLobbyService",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Controllers.GameController",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "BrokenArrow.BrokenArrow.Client.Ecs.GNetwork.Services.EosAntiCheatService",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "NetworkCommon.Messages.Lobby.LobbyState",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "NetworkCommon.Messages.Lobby.LobbyOptions",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "NetworkCommon.Messages.Game.RoomState",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "NetworkCommon.Messages.Game.ScenarioMeta",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Utils.Log.LogManager",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Utils.Log.ILogger",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "UnityEngine.GUI",
+      "Missing": [],
+      "Found": true
+    },
+    {
+      "Type": "UnityEngine.Texture2D",
+      "Missing": [],
+      "Found": true
+    }
+  ]
+}

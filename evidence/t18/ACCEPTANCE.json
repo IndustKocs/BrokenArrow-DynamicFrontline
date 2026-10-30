@@ -1,0 +1,17 @@
+{
+  "Build": "Passed",
+  "T18Offline": 18,
+  "RC2Offline": 51,
+  "RC1Offline": 44,
+  "SandboxFiles": 291,
+  "SandboxInstallVerifyRemove": "Passed",
+  "SteamNativeExports": 30,
+  "WrapperContracts": 12,
+  "ActualSteamPair": "NotRun",
+  "InGameHud": "NotRun",
+  "NativeGameLogFile": "NotRun",
+  "RosterProbe": "NotRun_UserConfirmed",
+  "NativeEffectsEnabled": false,
+  "GameInstalled": false,
+  "GameLaunched": false
+}

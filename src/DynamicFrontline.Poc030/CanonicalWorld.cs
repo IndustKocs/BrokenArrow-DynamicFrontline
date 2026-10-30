@@ -161,6 +161,7 @@ public sealed class ObservationBridge
     }
     StageDigests Digests(string input,int team){var f=core.Last!;return new(input,core.TerritoryDigest(),CanonicalCodec.Digest(f.Zoc.Select(z=>new{z.Unit.Key,z.Radius,z.Power})),CanonicalCodec.Digest(f.Encirclement),CanonicalCodec.Digest(f.Encirclement.Select(e=>new{e.Key,e.Relief,e.Tau})),CanonicalCodec.Digest(Project(team)));}
     public Public023 Project(int team,bool circles=false)=>core.Project(team,circles,false);
+    public DisplayGrid Display(int team)=>DisplayProjection.Build(Export(),Last??throw new InvalidOperationException("NoFrame"),team);
     public ObservationCheckpoint Export()=>new(mapHash,profilesHash,next,lastHash,core.Checkpoint(),lastDigests);
     public void Restore(ObservationCheckpoint s){if(s.MapHash!=mapHash||s.ProfilesHash!=profilesHash)throw new InvalidDataException("CheckpointContext");core.Restore(s.Core);next=s.NextInput;lastHash=s.LastHash;lastDigests=s.LastDigests;time=s.Core.Time;coreRevision=s.Core.Revision+1;}
 }

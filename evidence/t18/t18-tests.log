@@ -1,0 +1,19 @@
+PASS ephemeral Steam channel authentication / equal epoch
+PASS fragmented payload >48KB arrives intact
+PASS reconnect rotates ECDH nonce/epoch
+PASS one-sided restart negotiates peer resync
+PASS out-of-order fragment stops world
+PASS mismatched package cannot become ready
+PASS same role rejected
+PASS outgoing queue bounded at32
+PASS territory projection excludes foreign ownership
+PASS open fixture invents no pocket
+PASS unknown supply does not invent a stress penalty
+PASS observed stress remains actual game value
+PASS invalid display index rejected
+PASS event storm bounded and duplicates rate-limited
+PASS native logger failure retains backup
+PASS Steam wire -> owned observations -> canonical world -> both graphical projections
+PASS existing core survives reconnect and resumes paired projection
+PASS incomplete source clears graphics
+T18: 18 checks passed; synthetic transport, NOT real Steam or game validation.

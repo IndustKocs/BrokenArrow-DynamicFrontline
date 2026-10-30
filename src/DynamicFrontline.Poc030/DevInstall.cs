@@ -36,9 +36,9 @@ public sealed class DevInstall : IDisposable
     }
     public static bool Allowed(string p,FileCategory category)=>category switch
     {
-        FileCategory.ImmutablePayload=>p=="Mods/DynamicFrontline.Poc030.MelonLoader.dll"||p.StartsWith("UserLibs/DynamicFrontline.",StringComparison.Ordinal)&&p.EndsWith(".dll",StringComparison.Ordinal)&&p.Count(c=>c=='/')==1&&!p.Contains('\\')||p=="UserData/DynamicFrontline030/compatibility.json",
+        FileCategory.ImmutablePayload=>p=="Mods/DynamicFrontline.Poc030.MelonLoader.dll"||p=="Mods/DynamicFrontline.Steam.MelonLoader.dll"||p.StartsWith("UserLibs/DynamicFrontline.",StringComparison.Ordinal)&&p.EndsWith(".dll",StringComparison.Ordinal)&&p.Count(c=>c=='/')==1&&!p.Contains('\\')||p=="UserData/DynamicFrontline030/compatibility.json"||p=="UserData/DynamicFrontlineSteam/compatibility.json"||p=="UserData/DynamicFrontlineSteam/map.json"||p=="UserData/DynamicFrontlineSteam/profiles.json",
         FileCategory.MutableUserConfig=>p=="UserData/DynamicFrontline030/probe.json",
-        FileCategory.VerifiedGeneratedInterop=>p=="UserData/DynamicFrontline030/interop-provenance.json", // shared loader cache has a separate ownership plan
+        FileCategory.VerifiedGeneratedInterop=>p=="UserData/DynamicFrontline030/interop-provenance.json"||p=="UserData/DynamicFrontlineSteam/interop-provenance.json", // shared loader cache has a separate ownership plan
         FileCategory.SharedInteropCache or FileCategory.RetiredInteropCache=>p.StartsWith("MelonLoader/Il2CppAssemblies/",StringComparison.Ordinal)&&p.Count(c=>c=='/')==2&&!p.Contains('\\')&&(p.EndsWith(".dll",StringComparison.Ordinal)||p.EndsWith(".db",StringComparison.Ordinal)),
         FileCategory.SharedLoaderConfig=>p=="MelonLoader/Dependencies/Il2CppAssemblyGenerator/Config.cfg"||p=="UserData/Loader.cfg",
         FileCategory.InteropBootstrap=>p=="MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Cpp2IL.exe"||p=="MelonLoader/Dependencies/Il2CppAssemblyGenerator/Cpp2IL/Plugins/Cpp2IL.Plugin.StrippedCodeRegSupport.dll"||p.StartsWith("MelonLoader/Dependencies/Il2CppAssemblyGenerator/UnityDependencies/",StringComparison.Ordinal)&&p.Count(c=>c=='/')==4&&!p.Contains('\\')&&p.EndsWith(".dll",StringComparison.Ordinal),
