@@ -1,0 +1,161 @@
+{
+  "ReadOnlyVerified": true,
+  "Files": [
+    {
+      "File": "5454584.bascr",
+      "Sha256": "9150B8D592E93A3D43FDFFA1B88C073111165E93763A33EC4BF04BCC50F87C1A"
+    },
+    {
+      "File": "meta.json",
+      "Sha256": "E124AF385B648053A3BFF8B014363CE80B13DDB5FA6148DE7E841B6315FB4D2E"
+    }
+  ],
+  "Scenario": "5454584",
+  "Map": "Airbase",
+  "Nav": [
+    {
+      "file": "Airbase.ng",
+      "sha256": "f595159696f25d64a6e55c18c1556f7f4270a7951fe9b17f69f9b85111d820cc",
+      "protobufFields": {
+        "1": "Airbase",
+        "2": 1,
+        "3": 30,
+        "5": 300,
+        "6": 300
+      },
+      "nodes": 90000,
+      "links": 687104,
+      "linkMasks": {
+        "1": 380709,
+        "9": 62109,
+        "8": 52166,
+        "17": 71208,
+        "16": 106783,
+        "25": 10729,
+        "65": 1459,
+        "64": 264,
+        "80": 358,
+        "81": 1240,
+        "73": 45,
+        "89": 12,
+        "24": 22
+      },
+      "nodeCoordinateExtents": [
+        15.0,
+        15.0,
+        8985.0,
+        8985.0
+      ],
+      "extentsArePlayableBounds": false
+    },
+    {
+      "file": "Airbase_roads.ng",
+      "sha256": "381c76891fbea9fd251bfac8af64a1c2b7bbad89c87cadf6a007201ba8daf557",
+      "protobufFields": {
+        "1": "Airbase",
+        "3": 30,
+        "5": 10423,
+        "6": 1
+      },
+      "nodes": 10423,
+      "links": 22765,
+      "linkMasks": {
+        "8": 22765
+      },
+      "nodeCoordinateExtents": [
+        1.5785800218582153,
+        0.10573399811983109,
+        8998.51953125,
+        8996.849609375
+      ],
+      "extentsArePlayableBounds": false
+    }
+  ],
+  "PlayableZoneObjects": 0,
+  "PlayableBounds": "Unknown: no explicit zone in this archive; graph extents are not playable bounds",
+  "Teams": [
+    {
+      "Uid": 1,
+      "Side": 0,
+      "Slots": 5
+    },
+    {
+      "Uid": 7,
+      "Side": 1,
+      "Slots": 5
+    },
+    {
+      "Uid": 13,
+      "Side": 101,
+      "Slots": 5
+    },
+    {
+      "Uid": 19,
+      "Side": 100,
+      "Slots": 4
+    }
+  ],
+  "Spawns": [
+    {
+      "Uid": 28,
+      "Team": 1,
+      "Types": [
+        1,
+        4,
+        5
+      ],
+      "Position": {
+        "X": 56.7489548,
+        "Y": 99.99999,
+        "Z": 3778.56787,
+        "SqrMagnitude": 14290795.0
+      }
+    },
+    {
+      "Uid": 29,
+      "Team": 7,
+      "Types": [
+        1,
+        4,
+        5
+      ],
+      "Position": {
+        "X": 8930.753,
+        "Y": 135.999985,
+        "Z": 4060.57471,
+        "SqrMagnitude": 96265100.0
+      }
+    }
+  ],
+  "ObjectiveZones": 3,
+  "NativeRuntimeValidated": false,
+  "ExistingRC2Compatible": false,
+  "OldMap": {
+    "Map": "Airport",
+    "Scenario": "Airport_network",
+    "CellSize": 100,
+    "Width": 65,
+    "Height": 65,
+    "Origin": {
+      "X": 1744.9539999999997,
+      "Y": 1583.005
+    },
+    "Roots": [
+      {
+        "Team": 0,
+        "Position": {
+          "X": 6373.75146,
+          "Y": 2491.39966
+        }
+      },
+      {
+        "Team": 1,
+        "Position": {
+          "X": 3036.983,
+          "Y": 6830.55957
+        }
+      }
+    ],
+    "ActiveZoneId": 55
+  }
+}
