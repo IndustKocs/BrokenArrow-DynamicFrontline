@@ -1,0 +1,308 @@
+{
+  "Scope": "GeneratedAssemblyMetadata_NotRuntimeInvocation",
+  "Passed": true,
+  "Results": [
+    {
+      "Type": "BrokenArrow.Client.Ecs.Controllers.GameController",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Controllers.GameController",
+      "Missing": [],
+      "Methods": [
+        "Il2CppDefaultEcs.World Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_GameContext()",
+        "Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_GameSession()",
+        "System.Single Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_GameTime()",
+        "Il2CppBrokenArrow.Client.Ecs.Utils.IPrefabLoader\u002BStatus Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_LoadStatus()",
+        "Il2CppBrokenArrow.Client.Ecs.Controllers.GameController Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_Instance()",
+        "System.Boolean Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_IsInstanceAlive()",
+        "System.String Il2CppBrokenArrow.Client.Ecs.Controllers.GameController::get_CurrentMapName()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Configs.GameSessionContext",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext",
+      "Missing": [],
+      "Methods": [
+        "Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext::get_CurrentPlayer()",
+        "System.Int32 Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext::get_PlayersCount()",
+        "System.Boolean Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext::get_IsPaused()",
+        "Il2CppSystem.Collections.Generic.IReadOnlyDictionary\u00602\u003CSystem.Int32, Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo\u003E Il2CppBrokenArrow.Client.Ecs.Configs.GameSessionContext::GetPlayers()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.BrokenArrow.Client.Ecs.GNetwork.Services.EosAntiCheatService",
+      "ActualType": "Il2CppBrokenArrow.BrokenArrow.Client.Ecs.GNetwork.Services.EosAntiCheatService",
+      "Missing": [],
+      "Methods": [
+        "System.Boolean Il2CppBrokenArrow.BrokenArrow.Client.Ecs.GNetwork.Services.EosAntiCheatService::get_IsIntegrityViolated()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Authorization.EosOpenIdAuthService",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.GNetwork.Authorization.EosOpenIdAuthService",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Authorization.AuthorizationService",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.GNetwork.Authorization.AuthorizationService",
+      "Missing": [],
+      "Methods": [
+        "System.Boolean Il2CppBrokenArrow.Client.Ecs.GNetwork.Authorization.AuthorizationService::get_IsLogged()",
+        "Il2CppSystem.Collections.Generic.HashSet\u00601\u003CIl2CppNetworkCommon.Enums.LobbyType\u003E Il2CppBrokenArrow.Client.Ecs.GNetwork.Authorization.AuthorizationService::get_ActiveLobbyTypes()"
+      ]
+    },
+    {
+      "Type": "UnityEngine.Debug",
+      "ActualType": "UnityEngine.Debug",
+      "Missing": [],
+      "Methods": [
+        "System.Void UnityEngine.Debug::Log(Il2CppSystem.Object)",
+        "System.Void UnityEngine.Debug::Log(Il2CppSystem.Object, UnityEngine.Object)"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.FileLog",
+      "ActualType": "Il2CppBrokenArrow.Shared.Ecs.FileLog",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "GalaxyCoreLib.GalaxyConnection",
+      "ActualType": "Il2CppGalaxyCoreLib.GalaxyConnection",
+      "Missing": [],
+      "Methods": [
+        "System.Boolean Il2CppGalaxyCoreLib.GalaxyConnection::get_IsRecordPlaying()"
+      ]
+    },
+    {
+      "Type": "GalaxyCoreLib.GalaxyApi",
+      "ActualType": "Il2CppGalaxyCoreLib.GalaxyApi",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "GalaxyCoreLib.Api.TransportConnection",
+      "ActualType": "Il2CppGalaxyCoreLib.Api.TransportConnection",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "DefaultEcs.World",
+      "ActualType": "Il2CppDefaultEcs.World",
+      "Missing": [],
+      "Methods": [
+        "Il2CppDefaultEcs.World\u002BEnumerator Il2CppDefaultEcs.World::GetEnumerator()"
+      ]
+    },
+    {
+      "Type": "GalaxyCoreLib.NetEntity.ClientNetEntity",
+      "ActualType": "Il2CppGalaxyCoreLib.NetEntity.ClientNetEntity",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 Il2CppGalaxyCoreLib.NetEntity.ClientNetEntity::get_NetID()"
+      ]
+    },
+    {
+      "Type": "DefaultEcs.Entity",
+      "ActualType": "Il2CppDefaultEcs.Entity",
+      "Missing": [],
+      "Methods": [
+        "System.Boolean Il2CppDefaultEcs.Entity::get_IsAliveVersion()",
+        "System.Boolean Il2CppDefaultEcs.Entity::Has\u003CT\u003E()",
+        "!!0\u0026 Il2CppDefaultEcs.Entity::Get\u003CT\u003E()"
+      ]
+    },
+    {
+      "Type": "DefaultEcs.World\u002BEnumerator",
+      "ActualType": "Il2CppDefaultEcs.World\u002BEnumerator",
+      "Missing": [],
+      "Methods": [
+        "Il2CppDefaultEcs.Entity Il2CppDefaultEcs.World\u002BEnumerator::get_Current()",
+        "System.Boolean Il2CppDefaultEcs.World\u002BEnumerator::MoveNext()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Utils.PlayerInfo",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo::get_UID()",
+        "System.Int32 Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo::get_NetID()",
+        "System.Boolean Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo::get_IsBot()",
+        "System.Int32 Il2CppBrokenArrow.Client.Ecs.Utils.PlayerInfo::get_TeamUid()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.UnitComponent",
+      "ActualType": "Il2CppBrokenArrow.Shared.Ecs.Components.UnitComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.TransformComponent",
+      "ActualType": "Il2CppBrokenArrow.Shared.Ecs.Components.TransformComponent",
+      "Missing": [],
+      "Methods": [
+        "UnityEngine.Vector3 Il2CppBrokenArrow.Shared.Ecs.Components.TransformComponent::get_Position()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent",
+      "Missing": [],
+      "Methods": [
+        "System.Single Il2CppBrokenArrow.Client.Ecs.BattleSystem.Components.HealthComponent::get_CurrentHealth()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.BattleSystem.Components.StressComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent",
+      "Missing": [],
+      "Methods": [
+        "Il2CppGalaxyCoreLib.NetEntity.ClientNetEntity Il2CppBrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent::get_NetEntity()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.DataBase.Models.Units",
+      "ActualType": "Il2CppBrokenArrow.DataBase.Models.Units",
+      "Missing": [],
+      "Methods": [
+        "System.Int32 Il2CppBrokenArrow.DataBase.Models.Units::get_Id()",
+        "Il2CppNetworkCommon.Enums.Common.UnitRole Il2CppBrokenArrow.DataBase.Models.Units::get_Role()",
+        "System.Single Il2CppBrokenArrow.DataBase.Models.Units::get_MaxStress()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService",
+      "Missing": [],
+      "Methods": [
+        "Il2CppNetworkCommon.Messages.Game.RoomState Il2CppBrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService::get_State()",
+        "Il2CppGalaxyCoreLib.GalaxyConnection Il2CppBrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService::get_Connection()"
+      ]
+    },
+    {
+      "Type": "NetworkCommon.Messages.Game.RoomState",
+      "ActualType": "Il2CppNetworkCommon.Messages.Game.RoomState",
+      "Missing": [],
+      "Methods": [
+        "Il2CppNetworkCommon.Enums.RoomStatus Il2CppNetworkCommon.Messages.Game.RoomState::get_Status()",
+        "System.Int32 Il2CppNetworkCommon.Messages.Game.RoomState::get_Seed()",
+        "Il2CppNetworkCommon.Enums.LobbyType Il2CppNetworkCommon.Messages.Game.RoomState::get_LobbyType()",
+        "Il2CppNetworkCommon.Messages.Game.ScenarioMeta Il2CppNetworkCommon.Messages.Game.RoomState::get_ScenarioMeta()",
+        "System.Int32 Il2CppNetworkCommon.Messages.Game.RoomState::get_HostId()",
+        "System.Int64 Il2CppNetworkCommon.Messages.Game.RoomState::get_FightId()",
+        "System.Int32 Il2CppNetworkCommon.Messages.Game.RoomState::get_WaitingRoomId()"
+      ]
+    },
+    {
+      "Type": "NetworkCommon.Messages.Game.ScenarioMeta",
+      "ActualType": "Il2CppNetworkCommon.Messages.Game.ScenarioMeta",
+      "Missing": [],
+      "Methods": [
+        "System.String Il2CppNetworkCommon.Messages.Game.ScenarioMeta::get_Name()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.TargetSearchHelper",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.BattleSystem.TargetSearchHelper",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Controllers.PlayableZone",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Controllers.PlayableZone",
+      "Missing": [],
+      "Methods": [
+        "UnityEngine.Bounds Il2CppBrokenArrow.Client.Ecs.Controllers.PlayableZone::get_PlayZoneBounds()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Navigation.SceneNavigationGraphs",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Navigation.SceneNavigationGraphs",
+      "Missing": [],
+      "Methods": [
+        "Il2CppBrokenArrow.Core.Navigation.NavigationGraph Il2CppBrokenArrow.Client.Ecs.Navigation.SceneNavigationGraphs::get_Main()"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Core.Navigation.NavigationGraph",
+      "ActualType": "Il2CppBrokenArrow.Core.Navigation.NavigationGraph",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Transports.Systems.RepairSystem",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Transports.Systems.RepairSystem",
+      "Missing": [],
+      "Methods": [
+        "System.Void Il2CppBrokenArrow.Client.Ecs.Transports.Systems.RepairSystem::ApplyRepairAndHealthNewValues(Il2CppDefaultEcs.Entity\u0026, Il2CppDefaultEcs.Entity\u0026, Il2CppBrokenArrow.Client.Ecs.UI.Labels.LabelFacade, System.Boolean, Il2CppSystem.Nullable\u00601\u003CSystem.Single\u003E, System.Boolean, System.Boolean)"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Transports.Systems.SupplySystem",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Transports.Systems.SupplySystem",
+      "Missing": [],
+      "Methods": [
+        "System.Void Il2CppBrokenArrow.Client.Ecs.Transports.Systems.SupplySystem::InternalUpdate(Il2CppDefaultEcs.Entity\u0026, System.Boolean)"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.BattleSystem.AmmunitionContainer",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.BattleSystem.AmmunitionContainer",
+      "Missing": [],
+      "Methods": [
+        "System.Void Il2CppBrokenArrow.Client.Ecs.BattleSystem.AmmunitionContainer::AddAmmo(System.Int32)"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.GNetwork.Services.NetworkWeaponsService",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.GNetwork.Services.NetworkWeaponsService",
+      "Missing": [],
+      "Methods": [
+        "System.Void Il2CppBrokenArrow.Client.Ecs.GNetwork.Services.NetworkWeaponsService::SetAmmoCount(Il2CppDefaultEcs.Entity\u0026, System.Int32, System.Int32)"
+      ]
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Transports.Components.LoadedComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Transports.Components.LoadedComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Transports.Components.EntityLoadOrderComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Transports.Components.EntityLoadOrderComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Client.Ecs.Transports.Components.UnloadingComponent",
+      "ActualType": "Il2CppBrokenArrow.Client.Ecs.Transports.Components.UnloadingComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.DeadComponent",
+      "ActualType": "Il2CppBrokenArrow.Shared.Ecs.Components.DeadComponent",
+      "Missing": [],
+      "Methods": []
+    },
+    {
+      "Type": "BrokenArrow.Shared.Ecs.Components.DeathComponent",
+      "ActualType": "Il2CppBrokenArrow.Shared.Ecs.Components.DeathComponent",
+      "Missing": [],
+      "Methods": []
+    }
+  ]
+}

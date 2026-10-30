@@ -1,29 +1,28 @@
-# [DF] диагностика — preflight2
+# Gamelog — preflight3 / ТЗ №18-В
 
-Native sink: существующий LogManager.GetLogger("DynamicFrontline").Info(string).
-Успешный вызов ещё не доказывает попадание в Gamelog-файл; runtime-проверки нет.
+Отправка выполняется через UnityEngine.Debug.Log на Unity thread. Штатная цепочка:
+Unity logger → FilteredLogHandler → Application.logMessageReceivedThreaded → очередь
+FileLog → штатный writer. DF не вызывает FileLog.Init/WriteMessage, не заменяет handler
+и не открывает Gamelog на запись. LogManager/DummyLogger и LogRelay не используются.
 
-Обычные сообщения сохраняют лимит 4/сек и подавление повторов kind (2 секунды).
-Result имеет отдельную очередь: полный структурированный PascalCase JSON с Kind=Result,
-InputId, SessionHash, ResultSource, шестью Digests и разрешёнными числовыми метриками.
-Нет усечения до 320 символов, JSON-в-строке или отбрасывания Result по частотному лимиту.
-Gamelog получает выборочные полные Result до 4/сек; резервный JSONL — все.
+UnityGamelog читает текущие _isInitialized, _fileMaxSizeReached и _logFilePath.
+GamelogProbe запоминает EOF и отправляет уникальный [DF] marker. Только обнаружение
+точной записи после этого EOF даёт GamelogMarkerConfirmed. Чтение ограничено 64 KiB
+раз в секунду; timeout 15 секунд. Rotation/truncation остаются unverified. Успешный
+вызов Debug.Log не доказывает запись. Если FileLog не готов, probe остаётся NotSent.
+Подтверждение одной записи не доказывает полноту или устойчивость Gamelog к сбою.
 
-Резерв: UserData/DynamicFrontlineSteam/logs/DF-*.jsonl. Ротация 16 MiB.
-Очередь Result 512 записей; переполнение = DiagnosticLoss и остановка расчёта.
-Ошибка записи также останавливает DF. Raw fallback может содержать приватный текст
-обычных сообщений и НЕ предназначен для пересылки.
+Структурированный JSONL preflight2 остаётся основным полным журналом Result: шесть
+полных контрольных сумм, SessionHash/InputId/ResultSource. Native sink получает
+редкие полные Result; при overflow фиксируется DiagnosticLoss и DF останавливается.
+Безопасный экспорт START.ps1 -Action Collect сохраняет только разрешённую схему,
+без сырого Gamelog, nonce marker, путей, SteamID, токенов и скрытого игрового мира.
+Он сохраняет фиксированный код GamelogMarkerConfirmed либо код неуспешной проверки.
 
-Экспорт через START.ps1 -Action Collect собирает новые записи по типизированной схеме,
-а не редактирует строки blacklist-заменами. Имена файлов заменены; свободный текст,
-пути, UTC, SteamID/Owner/participants, world/replay и loader logs исключены.
-Сохраняются digest-поля и псевдоним матча SessionHash для сравнения. Неизвестные kind/поля
-отбрасываются, повреждённые Result дают Complete=false/DiagnosticLoss. Sensitive replay
-флаг больше не открывает путь обхода безопасного экспорта.
+Сравнение двух экспортов — существующий dev-tools compare. CoordinatorReceipt не
+выдаётся за независимый пересчёт. Полнота реального матча не подтверждается только
+совпадением контрольных сумм.
 
-Compare понимает [DF]-строки, plain JSONL, файлы и каталоги экспортов, проверяет
-session+InputId, локальные конфликты, пропуски и потерю диагностики. Passed означает
-совпадение имеющихся наборов checksums, не успешный игровой опыт.
-CoordinatorReceipt на B проверяет передачу проекции и полученные хеши; независимый
-пересчёт возможен только при действительных Coordinator/Independent записях.
-CompleteSessionVerified всегда false: завершённый игровой сценарий подтверждается отдельно.
+Автономные проверки marker выполнены на искусственном файле. Настоящий Gamelog,
+Unity/IL2CPP вызов и native drain ещё требуют разрешённого runtime-теста на обоих ПК.
+См. T18B_REPORT.md и TESTER_QUICKSTART.md.

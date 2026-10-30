@@ -1,0 +1,73 @@
+PASS configuration finite validation and immutable rules hash
+PASS combined arms distance 99,99
+PASS combined arms distance 100
+PASS combined arms distance 100,01
+PASS no tank pair enemy pair embarked pair stacking or chain bonus
+PASS one soldier recon multiple infantry same IFV and partner death
+PASS blocked and unknown partnership geometry
+PASS strength falloff casualties tank HP state and desertion
+PASS incremental field equals independent full evaluator after movement radius death terrain
+PASS incomplete roster preserves field but marks unknown
+PASS single tank overlapping start is not an encirclement
+PASS enemies on one side and intersecting circles do not enclose
+PASS ring spatially encloses uncovered centre with certificate
+PASS filled ring does not release centre
+PASS large physical gap restores ground corridor
+PASS unknown nav and exhausted budget are not blocked proofs
+PASS geographic island no enemy is not combat pocket
+PASS explicit portal infantry vs vehicle block and reopen
+PASS experimental open-gap width 99 100 101
+PASS penalty integral 30s
+PASS penalty integral 60s
+PASS penalty integral 90s
+PASS penalty integral 120s
+PASS pending warning and exact ten second confirmation
+PASS FPS independent supply and integral dt=0,1
+PASS FPS independent supply and integral dt=0,25
+PASS FPS independent supply and integral dt=1
+PASS FPS independent supply and integral dt=200
+PASS service union grace no duplication and invalid proximity
+PASS short release preserves age and five seconds resets only history
+PASS alternative release policy keeps penalty until confirmation
+PASS embarkation uncertainty and region IDs preserve confirmed history
+PASS class composition Reserve
+PASS class composition Regular
+PASS class composition Special
+PASS single combat application provenance and original impact dedup no HP write
+PASS F02 F04 F05 F06 retained and no catch-up recovery
+PASS persistent territory local scoring union conflicts and no trail
+PASS phase boundaries exact weights and neutral area
+PASS full phase match configured synthetic final policy
+PASS ledger step invariance duplicate revision pause missing session
+PASS native absolute revision and delta are separate once-only channels
+PASS territorial breakthrough depth 0,75 width and disconnected local island
+PASS territorial breakthrough depth 0,8 width and disconnected local island
+PASS 119.999 vs120 breakthrough only one finish no later scoring
+PASS breakthrough continuity false unknown reset and simultaneous no ID priority
+PASS collapse minimum 1999
+PASS collapse minimum 2000
+PASS collapse minimum 2001
+PASS collapse 419.999/420 strict territory leader zero armies and unknown
+PASS active army full nominal roster excludes death ignores HP visibility sortie
+PASS victory replay ledgers timers incompatible version
+PASS own projection hidden enemy radius no leaks and notices not every tick
+PASS full replay checkpoint resumes FSM stress ledgers without duplicate
+PASS F04 independent unscaled target and unknown-source rejection
+PASS recon explicit permissions override legacy catalog
+PASS visible enemy hidden partner remains 400 then lost contact disappears
+PASS native invalid feed rejection is atomic
+PASS mirrored collapse and phase crossing preserve hold
+PASS first breakthrough clips later collapse and native events
+PASS checkpoint rejects same cell count different physical map
+PASS long stress intervals use watermark not growing per-tick history
+PASS supply grace preserves older deadline and combat still adds
+PASS team switch and new generation do not inherit encirclement age
+PASS offline aircraft and embarked infantry cannot create territory
+PASS line captures then death leaves persistent ownership
+PASS surviving second partner preserves 600 and no bonus chain
+PASS enemy-owned ground permits terrain corridor
+PASS hidden unrelated movements do not alter permitted projection
+PASS fractional phase boundaries and exact second-phase 12K 6K
+PASS same-team simultaneous grounds emit one end with both reasons
+PASS many moving local areas match full union and cell-size tolerance
+TOTAL 72; FAILED 0

@@ -8,6 +8,14 @@ static class BindingInspector
         var requirements=new Dictionary<string,string[]>{
             ["BrokenArrow.Client.Ecs.Controllers.GameController"]=["get_Instance","get_IsInstanceAlive","get_GameContext","get_GameSession","get_GameTime","get_LoadStatus","get_CurrentMapName","_networkRoomService"],
             ["BrokenArrow.Client.Ecs.Configs.GameSessionContext"]=["get_CurrentPlayer","get_IsPaused","get_PlayersCount","GetPlayers"],
+            ["BrokenArrow.BrokenArrow.Client.Ecs.GNetwork.Services.EosAntiCheatService"]=["ProtectedLobbyTypes","_roomService","_eosOpenIdAuthService","get_IsIntegrityViolated"],
+            ["BrokenArrow.Client.Ecs.GNetwork.Authorization.EosOpenIdAuthService"]=["_authorizationService"],
+            ["BrokenArrow.Client.Ecs.GNetwork.Authorization.AuthorizationService"]=["get_IsLogged","get_ActiveLobbyTypes"],
+            ["UnityEngine.Debug"]=["Log"],
+            ["BrokenArrow.Shared.Ecs.FileLog"]=["_isInitialized","_fileMaxSizeReached","_logFilePath"],
+            ["GalaxyCoreLib.GalaxyConnection"]=["Api","get_IsRecordPlaying"],
+            ["GalaxyCoreLib.GalaxyApi"]=["Transport"],
+            ["GalaxyCoreLib.Api.TransportConnection"]=["IsConnected"],
             ["DefaultEcs.World"]=["GetEnumerator"],
             ["GalaxyCoreLib.NetEntity.ClientNetEntity"]=["get_NetID"],
             ["DefaultEcs.Entity"]=["get_IsAliveVersion","Has","Get","Version","WorldId","EntityId"],
@@ -20,8 +28,8 @@ static class BindingInspector
             ["BrokenArrow.Client.Ecs.Infantry.Components.InfantryUnitComponent"]=["AliveSoldierCount"],
             ["BrokenArrow.Client.Ecs.GNetwork.Components.NetworkEntityComponent"]=["get_NetEntity"],
             ["BrokenArrow.DataBase.Models.Units"]=["get_Id","get_Role","get_MaxStress"],
-            ["BrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService"]=["get_State"],
-            ["NetworkCommon.Messages.Game.RoomState"]=["get_FightId","get_Seed","get_ScenarioMeta"],
+            ["BrokenArrow.Client.Ecs.GNetwork.Services.Room.NetworkRoomService"]=["get_State","get_Connection","_eosAntiCheatService"],
+            ["NetworkCommon.Messages.Game.RoomState"]=["get_FightId","get_Seed","get_ScenarioMeta","get_LobbyType","get_WaitingRoomId","get_HostId","get_Status"],
             ["NetworkCommon.Messages.Game.ScenarioMeta"]=["get_Name"],
             ["BrokenArrow.Client.Ecs.BattleSystem.TargetSearchHelper"]=["_mpCheckZone"],
             ["BrokenArrow.Client.Ecs.Controllers.PlayableZone"]=["get_PlayZoneBounds"],
@@ -37,7 +45,7 @@ static class BindingInspector
             ["BrokenArrow.Shared.Ecs.Components.DeadComponent"]=[],
             ["BrokenArrow.Shared.Ecs.Components.DeathComponent"]=[]
         };
-        var modules=new[]{"BrokenArrow.dll","DefaultEcs.dll","GalaxyCoreLib.dll","NetworkCommon.dll"}.Select(n=>ModuleDefinition.FromFile(Path.Combine(directory,File.Exists(Path.Combine(directory,n))?n:"Il2Cpp"+n))).ToArray();
+        var modules=new[]{"BrokenArrow.dll","DefaultEcs.dll","GalaxyCoreLib.dll","NetworkCommon.dll","UnityEngine.CoreModule.dll"}.Select(n=>ModuleDefinition.FromFile(Path.Combine(directory,File.Exists(Path.Combine(directory,n))?n:"Il2Cpp"+n))).ToArray();
         var types=modules.SelectMany(m=>m.GetAllTypes()).ToArray();var results=new List<object>();bool pass=true;
         foreach(var (name,members) in requirements)
         {

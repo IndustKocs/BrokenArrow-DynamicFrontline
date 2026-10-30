@@ -1,3 +1,5 @@
+> Актуальная ревизия: preflight3 / ТЗ №18-В. См. [T18B_REPORT.md](T18B_REPORT.md). Unity Debug + read-only marker receipt; строгий session gate; PocketCells отключён; handshake после входа в доказанную комнату. Ниже сохранён предыдущий контекст, при расхождении действует отчёт ТЗ №18-В.
+
 # Актуализация preflight2
 
 Текущий отчёт: [PREFLIGHT_HARDENING_REPORT.md](PREFLIGHT_HARDENING_REPORT.md).

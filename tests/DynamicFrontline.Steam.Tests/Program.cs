@@ -55,6 +55,7 @@ void Pump(SteamWorldChannel a,SteamWorldChannel b,int n=20){for(int i=0;i<n;i++)
  oa.Dispose();ob.Dispose();await Task.WhenAll(ta,tb);
 }
 HardeningTests.Run(Check);
+FinalPreflightTests.Run(Check);
 Console.WriteLine($"T18: {passed} checks passed; synthetic transport, NOT real Steam or game validation.");
 void CheckSend(bool value){if(!value)throw new Exception("Unexpected queue failure");}
 sealed class FakeWire : ISteamWire {public FakeWire Other=null!;public ConcurrentQueue<byte[]> In=new();public void Send(byte[] packet)=>Other.In.Enqueue(packet);public bool TryReceive(out byte[] packet)=>In.TryDequeue(out packet!);}
