@@ -1,3 +1,9 @@
+# Актуализация preflight2
+
+Протокол обновлён до df18-world-2: добавлены ResultWitness/CoordinatorReceipt.
+Steam Messages, native companion lobby и ядро сохранены. Политика транспорта теперь
+[RelayOnly_ICE0](STEAM_RELAY_POLICY.md); прежний default мог выбирать direct.
+
 # Подключение через Steam
 
 ## Пользовательский путь

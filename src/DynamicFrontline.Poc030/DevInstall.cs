@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text.Json;
 namespace DynamicFrontline.Poc030;
-public enum FileCategory { ImmutablePayload, VerifiedGeneratedInterop, MutableUserConfig, SharedInteropCache, SharedLoaderConfig, InteropBootstrap, RetiredInteropCache }
+public enum FileCategory { ImmutablePayload, VerifiedGeneratedInterop, MutableUserConfig, SharedInteropCache, SharedLoaderConfig, InteropBootstrap, RetiredInteropCache, PinnedLoader }
 public sealed record InstallFile(string Relative,string Source,string Sha256,FileCategory Category,string? ReplaceApprovedHash=null);
 public sealed record InstalledFile(string Relative,string Sha256,FileCategory Category,string? OriginalHash=null);
 public sealed record InstallReceipt(int Schema,string Target,InstalledFile[] Files);
@@ -36,6 +36,7 @@ public sealed class DevInstall : IDisposable
     }
     public static bool Allowed(string p,FileCategory category)=>category switch
     {
+        FileCategory.PinnedLoader=>PinnedLoader.Files.ContainsKey(p),
         FileCategory.ImmutablePayload=>p=="Mods/DynamicFrontline.Poc030.MelonLoader.dll"||p=="Mods/DynamicFrontline.Steam.MelonLoader.dll"||p.StartsWith("UserLibs/DynamicFrontline.",StringComparison.Ordinal)&&p.EndsWith(".dll",StringComparison.Ordinal)&&p.Count(c=>c=='/')==1&&!p.Contains('\\')||p=="UserData/DynamicFrontline030/compatibility.json"||p=="UserData/DynamicFrontlineSteam/compatibility.json"||p=="UserData/DynamicFrontlineSteam/map.json"||p=="UserData/DynamicFrontlineSteam/profiles.json",
         FileCategory.MutableUserConfig=>p=="UserData/DynamicFrontline030/probe.json",
         FileCategory.VerifiedGeneratedInterop=>p=="UserData/DynamicFrontline030/interop-provenance.json"||p=="UserData/DynamicFrontlineSteam/interop-provenance.json", // shared loader cache has a separate ownership plan
@@ -73,10 +74,11 @@ public sealed class DevInstall : IDisposable
         var receipt=Receipt();var next=new List<InstalledFile>();var plans=new List<FilePlan>();var op=Guid.NewGuid().ToString("N");var staging=Path.Combine(control,op);var preserved=new List<string>();
         foreach(var f in package)
         {
+            if(f.Category==FileCategory.PinnedLoader&&PinnedLoader.Files.GetValueOrDefault(f.Relative)!=f.Sha256)throw new InvalidDataException("UnpinnedLoader");
             if(!Allowed(f.Relative,f.Category)||!File.Exists(f.Source)||Hash(f.Source)!=f.Sha256)throw new InvalidDataException("Package integrity/path mismatch");
             var dest=Inside(f.Relative);string? before=File.Exists(dest)?Hash(dest):null;var own=receipt?.Files.SingleOrDefault(x=>x.Relative==f.Relative);
             if(before!=null&&f.Category==FileCategory.MutableUserConfig){using var cfg=JsonDocument.Parse(File.ReadAllText(dest));if(!cfg.RootElement.TryGetProperty("Mode",out _))throw new InvalidDataException("Config migration required");preserved.Add(f.Relative);next.Add(new(f.Relative,before,f.Category));continue;}
-            bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache;
+            bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader;
             if(before!=null&&(own==null||own.Sha256!=before)&&!(shared&&own==null&&f.ReplaceApprovedHash==before))throw new InvalidDataException("Foreign/changed file preserved: "+f.Relative);
             bool retire=f.Category==FileCategory.RetiredInteropCache;if(retire&&(before==null||f.ReplaceApprovedHash!=before))throw new InvalidDataException("Retirement requires exact current hash");
             next.Add(new(f.Relative,retire?"":f.Sha256,f.Category,own?.OriginalHash??(shared&&own==null?before:null)));plans.Add(new(f.Relative,before,retire?null:f.Sha256,Path.Combine(staging,plans.Count+".stage"),Path.Combine(staging,plans.Count+".backup"),f.Category));
@@ -106,11 +108,11 @@ public sealed class DevInstall : IDisposable
     public InstallResult Remove()
     {
         if(File.Exists(JournalPath))throw new InvalidDataException("Recover pending operation first");var receipt=Receipt()??throw new InvalidDataException("Missing receipt; no guessed deletion");var op=Guid.NewGuid().ToString("N");var plans=new List<FilePlan>();var keep=new List<InstalledFile>();var conflicts=new List<string>();
-        bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache)&&File.Exists(Inside(f.Relative))&&Hash(Inside(f.Relative))!=f.Sha256);
+        bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)&&File.Exists(Inside(f.Relative))&&Hash(Inside(f.Relative))!=f.Sha256);
         foreach(var f in receipt.Files)
         {
             var dest=Inside(f.Relative);if(f.Category==FileCategory.MutableUserConfig){keep.Add(f);continue;}
-            if(cacheConflict&&(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache)){keep.Add(f);conflicts.Add(f.Relative);continue;}
+            if(cacheConflict&&(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)){keep.Add(f);conflicts.Add(f.Relative);continue;}
             bool retired=f.Category==FileCategory.RetiredInteropCache;
             if(retired&&f.OriginalHash==null)continue;
             if(!File.Exists(dest)&&!retired)continue;if(File.Exists(dest)&&(retired||Hash(dest)!=f.Sha256)){keep.Add(f);conflicts.Add(f.Relative);continue;}

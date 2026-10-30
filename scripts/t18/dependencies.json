@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "runtime.zip",
+    "Url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/6.0.36/dotnet-runtime-6.0.36-win-x64.zip",
+    "Algorithm": "SHA512",
+    "Hash": "935DB5C6CEE19F2C016E67168BFAE7B491044735DE76C673ABB3B125DD325FD5E779D7EFE12BA80178D46689AE70A25E558A3FA846417D44C5F4CA256E7F4BF2"
+  },
+  {
+    "Name": "loader.zip",
+    "Url": "https://github.com/LavaGang/MelonLoader/releases/download/v0.7.3/MelonLoader.x64.zip",
+    "Algorithm": "SHA256",
+    "Hash": "5B2B2F3D1CD42B59EC886C5BDC2663EDAE87A0097A4F4A8F58C0965A99DDA416"
+  },
+  {
+    "Name": "Cpp2IL.exe",
+    "Url": "https://github.com/SamboyCoding/Cpp2IL/releases/download/2022.1.0-pre-release.21/Cpp2IL-2022.1.0-pre-release.21-Windows.exe",
+    "Algorithm": "SHA256",
+    "Hash": "663FB432433B4371FD1EE0EBC321A8FFF2A9AAC5AC4230C843F9E03DDEE4E04C"
+  },
+  {
+    "Name": "Managed.zip",
+    "Url": "https://github.com/LavaGang/MelonLoader.UnityDependencies/releases/download/6000.3.24/Managed.zip",
+    "Algorithm": "SHA256",
+    "Hash": "1142D6C9AA501DA2DF09AA82B5CFD18B584C0A7E1DDE0E059DE665A147278821"
+  },
+  {
+    "Name": "Cpp2IL.Plugin.StrippedCodeRegSupport.dll",
+    "Url": "https://github.com/SamboyCoding/Cpp2IL/releases/download/2022.1.0-pre-release.21/Cpp2IL.Plugin.StrippedCodeRegSupport.dll",
+    "Algorithm": "SHA256",
+    "Hash": "2CC4F8C66541F18B4DAED5410149EE7859C3190454D30BDA5CCD0895D2989EE6"
+  }
+]

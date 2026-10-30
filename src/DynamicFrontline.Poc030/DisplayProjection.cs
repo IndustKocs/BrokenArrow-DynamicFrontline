@@ -7,7 +7,8 @@ public sealed record DisplayGrid(Guid Session,double Time,int Width,int Height,d
 {
  public void Validate(){if(Width is <1 or >256||Height is <1 or >256||!double.IsFinite(CellSize)||CellSize<=0||!double.IsFinite(Time)||!double.IsFinite(Origin.X)||!double.IsFinite(Origin.Y)||Team is <0 or >1||OwnCells.Length>Width*Height||PocketCells.Length>Width*Height||Forecast.Length>100||OwnCells.Concat(PocketCells).Any(i=>i<0||i>=Width*Height)||Forecast.Any(f=>f.Delta.HasValue&&!double.IsFinite(f.Delta.Value)))throw new InvalidDataException("DisplayGridBudgetOrDomain");}
 }
-public sealed record TeamDisplay(Public023 Projection,DisplayGrid Display);
+public sealed record ResultWitness(long InputId,StageDigests Digests,string SessionHash,string ProjectionHash);
+public sealed record TeamDisplay(Public023 Projection,DisplayGrid Display,ResultWitness? Witness=null);
 public static class DisplayProjection
 {
  public static DisplayGrid Build(ObservationCheckpoint checkpoint,Frame023 frame,int team)

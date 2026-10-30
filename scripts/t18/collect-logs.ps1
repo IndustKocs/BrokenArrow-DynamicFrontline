@@ -1,13 +1,10 @@
-param([Parameter(Mandatory)][string]$GameRoot,[Parameter(Mandatory)][string]$OutputDirectory)
+#requires -Version 7.0
+param([Parameter(Mandatory)][string]$GameRoot,[Parameter(Mandatory)][string]$OutputDirectory,[Parameter(Mandatory)][string]$DotnetPath)
 $ErrorActionPreference='Stop'
-$game=[IO.Path]::GetFullPath($GameRoot).TrimEnd([IO.Path]::DirectorySeparatorChar)
-$out=[IO.Path]::GetFullPath($OutputDirectory)
-if($out -eq $game -or $out.StartsWith($game+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Output must be outside game'}
-if(Test-Path -LiteralPath $out){throw 'Fresh output required'}
-New-Item -ItemType Directory -Path $out | Out-Null
-$source=Join-Path $game 'UserData/DynamicFrontlineSteam/logs'
-if(Test-Path -LiteralPath $source){Get-ChildItem -LiteralPath $source -Filter 'DF-*.jsonl' -File|Sort-Object LastWriteTimeUtc -Descending|Select-Object -First 4|Copy-Item -Destination $out}
-$melon=Join-Path $game 'MelonLoader/Latest.log'
-if(Test-Path -LiteralPath $melon){Get-Content -LiteralPath $melon|Where-Object {$_ -match '\[DF\]|DynamicFrontline|Exception|Error'}|Set-Content -Encoding utf8 (Join-Path $out 'loader-filtered.log')}
-'Collected DF backup and filtered loader diagnostics. No credentials, interop or configs copied.'
-'Gamelog file routing must be verified in game: search its current log for [DF] and attach the matching excerpt.'
+$game=[IO.Path]::GetFullPath($GameRoot).TrimEnd([IO.Path]::DirectorySeparatorChar);$out=[IO.Path]::GetFullPath($OutputDirectory)
+if($out -eq $game -or $out.StartsWith($game+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Export must be outside game'}
+$root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+$cli=Join-Path $root 'bin/dev-tools/dev-tools.dll'
+if(!(Test-Path -LiteralPath $cli)){$cli=Join-Path $root 'scripts/poc030-rc2/dev-tools/bin/Release/net6.0/dev-tools.dll'}
+& $DotnetPath $cli collect (Join-Path $GameRoot 'UserData/DynamicFrontlineSteam/logs') $OutputDirectory
+if($LASTEXITCODE){throw 'Safe export failed; do not send raw logs'}

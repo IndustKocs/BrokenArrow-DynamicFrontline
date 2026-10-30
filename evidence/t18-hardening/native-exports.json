@@ -1,0 +1,7 @@
+{
+  "Scope": "PE export table only; no native invocation",
+  "NativeExports": 34,
+  "Missing": [],
+  "SteamDllSha256": "1ADD7F151FA644870A735AE86E68D1F019F296130D8E7C0A7ED3ECC7482DCCBC",
+  "RuntimeValidated": false
+}

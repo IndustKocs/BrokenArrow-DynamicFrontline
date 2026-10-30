@@ -11,15 +11,24 @@ public static class DiagnosticTools
     }
     static IEnumerable<JsonElement> Read(string path)
     {
+        if(Directory.Exists(path)){var files=Directory.GetFiles(path,"*.jsonl");if(files.Length>32)throw new InvalidDataException("DiagnosticFileBudget");foreach(var file in files.OrderBy(f=>f,StringComparer.Ordinal))foreach(var row in Read(file))yield return row;yield break;}
         if(new FileInfo(path).Length>128L*1024*1024)throw new InvalidDataException("DiagnosticFileBudget");
-        foreach(var line in File.ReadLines(path)){if(line.Length>24*1024*1024)throw new InvalidDataException("DiagnosticRecordBudget");if(string.IsNullOrWhiteSpace(line))continue;using var d=JsonDocument.Parse(line);yield return d.RootElement.Clone();}
+        foreach(var line in File.ReadLines(path)){if(line.Length>24*1024*1024)throw new InvalidDataException("DiagnosticRecordBudget");if(string.IsNullOrWhiteSpace(line))continue;var text=line.TrimStart('\uFEFF');if(text.StartsWith("[DF] ",StringComparison.Ordinal))text=text[5..];using var d=JsonDocument.Parse(text);yield return d.RootElement.Clone();}
     }
     public static object Compare(string a,string b)
     {
-        Dictionary<long,StageDigests> Results(string path){var result=new Dictionary<long,StageDigests>();foreach(var r in Read(path).Where(r=>r.GetProperty("Kind").GetString()=="Result")){long id=r.GetProperty("InputId").GetInt64();var digest=r.GetProperty("Digests").Deserialize<StageDigests>()!;if(result.TryGetValue(id,out var old)&&old!=digest)throw new InvalidDataException("ConflictingLocalResult");result[id]=digest;}return result;}
-        var x=Results(a);var y=Results(b);var shared=x.Keys.Intersect(y.Keys).OrderBy(i=>i).ToArray();var mismatches=shared.Where(i=>x[i]!=y[i]).ToArray();
-        return new{Scope="Canonical result comparison; runtime status comes from input logs",Compared=shared.Length,Matches=shared.Length-mismatches.Length,Mismatches=mismatches,OnlyA=x.Keys.Except(y.Keys).OrderBy(i=>i).ToArray(),OnlyB=y.Keys.Except(x.Keys).OrderBy(i=>i).ToArray(),Passed=shared.Length>0&&mismatches.Length==0};
+        bool loss=false,unscoped=false;var sources=new HashSet<string>();
+        Dictionary<string,(StageDigests Digests,string Source)> Results(string path){var result=new Dictionary<string,(StageDigests Digests,string Source)>();foreach(var row in Read(path)){
+            if(SafeDiagnostics.Kind(row)=="DiagnosticLoss"){loss=true;continue;}if(SafeDiagnostics.Kind(row)!="Result")continue;
+            JsonElement r;try{r=SafeDiagnostics.Sanitize(row)!.Value;}catch(InvalidDataException){loss=true;continue;}
+            long id=r.GetProperty("InputId").GetInt64();string context=r.TryGetProperty("SessionHash",out var c)?c.GetString()!:"legacy";unscoped|=context=="legacy";
+            string resultSource=r.GetProperty("ResultSource").GetString()!;sources.Add(resultSource);string key=context+"/"+id;
+            var digest=r.GetProperty("Digests").Deserialize<StageDigests>()!;if(result.TryGetValue(key,out var old)&&old!=(digest,resultSource))throw new InvalidDataException("ConflictingLocalResult");result[key]=(digest,resultSource);
+        }return result;}
+        var x=Results(a);var y=Results(b);var shared=x.Keys.Intersect(y.Keys).OrderBy(i=>i).ToArray();var mismatches=shared.Where(i=>x[i].Digests!=y[i].Digests).ToArray();
+        return new{Scope="Checksums by session and input. CoordinatorReceipt is receipt verification, NOT independent recomputation.",Compared=shared.Length,Matches=shared.Length-mismatches.Length,Mismatches=mismatches,OnlyA=x.Keys.Except(y.Keys).OrderBy(i=>i).ToArray(),OnlyB=y.Keys.Except(x.Keys).OrderBy(i=>i).ToArray(),DiagnosticLoss=loss,LegacyUnscoped=unscoped,CompleteSessionVerified=false,IndependentRecomputationVerified=!unscoped&&!loss&&shared.Length>0&&mismatches.Length==0&&shared.All(i=>x[i].Source=="Coordinator"&&y[i].Source=="Independent"||x[i].Source=="Independent"&&y[i].Source=="Coordinator"),Passed=shared.Length>0&&mismatches.Length==0&&!loss&&x.Count==shared.Length&&y.Count==shared.Length};
     }
+
     public static object Replay(string path)
     {
         ObservationBridge? bridge=null;var actual=new Dictionary<long,StageDigests>();var expected=new Dictionary<long,StageDigests>();int inputs=0;
@@ -33,9 +42,20 @@ public static class DiagnosticTools
     }
     public static object Collect(string directory,string output,bool sensitive=false)
     {
-        string[] allowed=["Start","SourceMetric","Result","Resync","NativeBinding","ServiceBindingUnavailable","HudUnavailable"];
-        var paths=Directory.GetFiles(directory,"*.jsonl");if(paths.Length>32)throw new InvalidDataException("CollectorFileBudget");Directory.CreateDirectory(output);var files=new List<object>();
-        foreach(var p in paths){var dest=Path.Combine(output,Path.GetFileName(p));if(File.Exists(dest))throw new IOException("Collector refuses overwrite");using(var writer=new StreamWriter(dest))foreach(var row in Read(p)){var kind=row.GetProperty("Kind").GetString();if(allowed.Contains(kind)||sensitive&&kind is "ReplayContext" or "ReplayInput" or "ReplayCheckpoint" or "PositiveServiceOperation")writer.WriteLine(row.GetRawText());}files.Add(new{Name=Path.GetFileName(dest),Sha256=DevInstall.Hash(dest)});}
-        var report=new{Schema=1,SensitiveReplayIncluded=sensitive,Files=files,Excluded="Configs, keys, certificates, game binaries, loader logs and unrecognized records"};File.WriteAllText(Path.Combine(output,"collection.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));return report;
+        if(sensitive)throw new InvalidDataException("SafeExportOnly_NoReplayOrRawRecords");
+        directory=Path.GetFullPath(directory);output=Path.GetFullPath(output);SafeDiagnostics.NoReparse(directory);SafeDiagnostics.NoReparse(output);
+        if(Directory.Exists(output)||File.Exists(output)||output.StartsWith(directory+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("FreshExternalExportRequired");
+        var paths=Directory.GetFiles(directory,"*.jsonl").OrderBy(p=>p,StringComparer.Ordinal).ToArray();if(paths.Length>32)throw new InvalidDataException("CollectorFileBudget");
+        foreach(var p in paths)SafeDiagnostics.NoReparse(p);Directory.CreateDirectory(output);var files=new List<object>();int bad=0;
+        for(int index=0;index<paths.Length;index++){
+            string name=$"client-log-{index+1:D3}.jsonl",dest=Path.Combine(output,name);int written=0,invalid=0;
+            using(var writer=new StreamWriter(dest)){
+                try{foreach(var row in Read(paths[index])){try{var clean=SafeDiagnostics.Sanitize(row);if(clean!=null){writer.WriteLine(clean.Value.GetRawText());written++;}}catch(Exception e)when(e is InvalidDataException or InvalidOperationException or FormatException){invalid++;}}}
+                catch(Exception e)when(e is JsonException or InvalidDataException){invalid++;}
+                if(invalid>0)writer.WriteLine("{\"Kind\":\"DiagnosticLoss\",\"Count\":1}");
+            }bad+=invalid;files.Add(new{Name=name,Sha256=DevInstall.Hash(dest),Records=written,Invalid=invalid});
+        }
+        var report=new{Schema=2,SensitiveReplayIncluded=false,Complete=bad==0,Invalid=bad,Files=files,Policy="Typed allowlist only; no identities, paths, timestamps, arbitrary text, world/replay, configs, credentials or loader logs"};
+        File.WriteAllText(Path.Combine(output,"collection.json"),JsonSerializer.Serialize(report,new JsonSerializerOptions{WriteIndented=true}));return report;
     }
 }

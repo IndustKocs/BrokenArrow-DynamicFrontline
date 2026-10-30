@@ -1,26 +1,29 @@
-# Gamelog / [DF]
+# [DF] диагностика — preflight2
 
-Используется существующий `BrokenArrow.Client.Ecs.Utils.Log.LogManager.Instance`,
-`GetLogger("DynamicFrontline")`, `ILogger.Info(string)`. События направляются в уже
-настроенные игрой handlers. Не открывается GameLogicLogger binary stream и не
-добавляется произвольный текст в бинарный лог игры.
+Native sink: существующий LogManager.GetLogger("DynamicFrontline").Info(string).
+Успешный вызов ещё не доказывает попадание в Gamelog-файл; runtime-проверки нет.
 
-Формат строки: `[DF] {"v":1,"utc":"...","kind":"Status","detail":"..."}`.
-Kinds: Build, Consent, Lobby, Connect, Status, Roster, RosterAttestation, Match,
-ReadUnavailable, Resync/Result, Reconnect, HudUnavailable, Stopped, Shutdown.
-Нет записи игровых наблюдений целиком или секретов в каждый кадр.
+Обычные сообщения сохраняют лимит 4/сек и подавление повторов kind (2 секунды).
+Result имеет отдельную очередь: полный структурированный PascalCase JSON с Kind=Result,
+InputId, SessionHash, ResultSource, шестью Digests и разрешёнными числовыми метриками.
+Нет усечения до 320 символов, JSON-в-строке или отбрасывания Result по частотному лимиту.
+Gamelog получает выборочные полные Result до 4/сек; резервный JSONL — все.
 
-Ограничения: до 4 строк/сек, одинаковый kind не чаще одного раза за 2 секунды;
-входная очередь 128, резервная память 256 строк, detail до 320 символов,
-резервный файл до 16 MiB. Переполнение учитывается счётчиком Dropped.
+Резерв: UserData/DynamicFrontlineSteam/logs/DF-*.jsonl. Ротация 16 MiB.
+Очередь Result 512 записей; переполнение = DiagnosticLoss и остановка расчёта.
+Ошибка записи также останавливает DF. Raw fallback может содержать приватный текст
+обычных сообщений и НЕ предназначен для пересылки.
 
-Резерв: `UserData/DynamicFrontlineSteam/logs/DF-<UTC>.jsonl`.
-Native logger вызывается на основном потоке. При его недоступности сохраняется
-резервная диагностика. HUD не утверждает, что строка уже оказалась в Gamelog:
-`GameLoggerAccepted_UnverifiedFile` означает только успешный вызов интерфейса.
-Маршрутизация именно в файл Gamelog должна быть подтверждена реальным тестом.
+Экспорт через START.ps1 -Action Collect собирает новые записи по типизированной схеме,
+а не редактирует строки blacklist-заменами. Имена файлов заменены; свободный текст,
+пути, UTC, SteamID/Owner/participants, world/replay и loader logs исключены.
+Сохраняются digest-поля и псевдоним матча SessionHash для сравнения. Неизвестные kind/поля
+отбрасываются, повреждённые Result дают Complete=false/DiagnosticLoss. Sensitive replay
+флаг больше не открывает путь обхода безопасного экспорта.
 
-Сбор: `scripts/t18/collect-logs.ps1 -GameRoot <папка игры> -OutputDirectory <новая папка>`.
-Он копирует четыре последних DF JSONL и фильтрованный Latest.log, без конфигов/ключей.
-После матча найдите `[DF]` в актуальном штатном Gamelog и приложите соответствующий
-фрагмент. Если строк нет — сообщите это вместе с fallback; не считать native sink проверенным.
+Compare понимает [DF]-строки, plain JSONL, файлы и каталоги экспортов, проверяет
+session+InputId, локальные конфликты, пропуски и потерю диагностики. Passed означает
+совпадение имеющихся наборов checksums, не успешный игровой опыт.
+CoordinatorReceipt на B проверяет передачу проекции и полученные хеши; независимый
+пересчёт возможен только при действительных Coordinator/Independent записях.
+CompleteSessionVerified всегда false: завершённый игровой сценарий подтверждается отдельно.

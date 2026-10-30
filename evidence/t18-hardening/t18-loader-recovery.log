@@ -1,0 +1,1 @@
+PASS interrupted complete loader/mod install restores original proxy and removes new plugin

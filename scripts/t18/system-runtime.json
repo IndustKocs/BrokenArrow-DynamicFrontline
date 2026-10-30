@@ -1,0 +1,6 @@
+{
+  "Name": "desktop-runtime.exe",
+  "Url": "https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/6.0.36/windowsdesktop-runtime-6.0.36-win-x64.exe",
+  "Algorithm": "SHA512",
+  "Hash": "86FA63997E7E0DC6F3BF609E00880388DCF8D985C8F6417D07EBBBB1ECC957BF90214C8FF93F559A0E762B5626BA8C56C581F4D506AA4DE7555F9792C2DA254D"
+}

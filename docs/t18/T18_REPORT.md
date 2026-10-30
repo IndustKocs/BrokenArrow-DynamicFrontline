@@ -1,3 +1,8 @@
+# Актуализация preflight2
+
+Текущий отчёт: [PREFLIGHT_HARDENING_REPORT.md](PREFLIGHT_HARDENING_REPORT.md).
+Инструкция: [TESTER_QUICKSTART.md](TESTER_QUICKSTART.md). Ниже сохранён отчёт исходного кандидата.
+
 # ТЗ №18 — Steam и визуализация, кандидат 0.4.0
 
 Дата: 2026-10-30. Ветка: `codex/t18-steam-visualization`. Основа: RC2 `b1c96ec`.

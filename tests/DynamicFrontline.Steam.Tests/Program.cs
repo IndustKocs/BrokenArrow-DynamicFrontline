@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using DynamicFrontline.Poc030;
 using DynamicFrontline.Steam;
 using DynamicFrontline.Frontline;
+if(args.Length==3&&args[0]=="loader-recovery"){HardeningTests.LoaderRecovery(args[1],args[2]);return;}
 int passed=0;
 void Check(bool b,string text){if(!b)throw new Exception(text);Console.WriteLine("PASS "+text);passed++;}
 Hello H(string role)=>new("df18-world-1",Rc2Fixtures.Binding.ModSession.ToString(),role,"fixture-build","payload","rules","profile","map","abi","SteamReadOnly");
@@ -42,15 +43,18 @@ void Pump(SteamWorldChannel a,SteamWorldChannel b,int n=20){for(int i=0;i<n;i++)
  var(w1,w2)=W();using var a=new SteamWorldChannel(w1,H("A"));using var b=new SteamWorldChannel(w2,H("B"));
  ProbeConfig C(string role)=>new(false,false,"ObserveTwoClient",Rc2Fixtures.Binding.ModSession.ToString(),role,true,"",0,"",Replication:"TeamSafe");
  using var oa=new RuntimeObserver(C("A"),a,"fixture-build",null,Rc2Fixtures.Map,Rc2Fixtures.Profiles,true);using var ob=new RuntimeObserver(C("B"),b,"fixture-build",null,Rc2Fixtures.Map,Rc2Fixtures.Profiles,true);
+ var observedA=new ConcurrentQueue<object>();var observedB=new ConcurrentQueue<object>();oa.Diagnostic+=observedA.Enqueue;ob.Diagnostic+=observedB.Enqueue;
  var ta=oa.Run();var tb=ob.Run();long rev=0;bool complete=false;double prior=0;string priorEpoch="";
  for(int i=0;i<200;i++){if(i%10==0){rev++;oa.Submit(Rc2Fixtures.Observation("A",rev,rev*.25));ob.Submit(Rc2Fixtures.Observation("B",rev,rev*.25));}Pump(a,b,2);await Task.Delay(10);if(oa.View.Display!=null&&ob.View.Display!=null){complete=true;prior=oa.View.Display.Time;priorEpoch=a.ConnectionEpoch;break;}}
  Check(complete,"Steam wire -> owned observations -> canonical world -> both graphical projections");
+ Check(observedA.Any(r=>JsonSerializer.SerializeToElement(r).GetProperty("Kind").GetString()=="Result")&&observedB.Any(r=>JsonSerializer.SerializeToElement(r).GetProperty("Kind").GetString()=="Result"),"both real observers emit structured coordinator/result receipts");
  w1.In.Clear();w2.In.Clear();a.Restart();b.Restart();bool resumed=false;
  for(int i=0;i<200;i++){if(i%10==0){rev++;oa.Submit(Rc2Fixtures.Observation("A",rev,rev*.25));ob.Submit(Rc2Fixtures.Observation("B",rev,rev*.25));}Pump(a,b,2);await Task.Delay(10);if(a.ConnectionEpoch!=priorEpoch&&oa.View.Display?.Time>prior&&ob.View.Display?.Time>prior){resumed=true;break;}}
  Check(resumed,"existing core survives reconnect and resumes paired projection");
  oa.Fail(SourceState.LivePartial,"unvalidated roster");ob.Fail(SourceState.LivePartial,"unvalidated roster");await Task.Delay(100);Check(oa.View.Projection==null&&oa.View.Display==null&&ob.View.Display==null,"incomplete source clears graphics");
  oa.Dispose();ob.Dispose();await Task.WhenAll(ta,tb);
 }
+HardeningTests.Run(Check);
 Console.WriteLine($"T18: {passed} checks passed; synthetic transport, NOT real Steam or game validation.");
 void CheckSend(bool value){if(!value)throw new Exception("Unexpected queue failure");}
 sealed class FakeWire : ISteamWire {public FakeWire Other=null!;public ConcurrentQueue<byte[]> In=new();public void Send(byte[] packet)=>Other.In.Enqueue(packet);public bool TryReceive(out byte[] packet)=>In.TryDequeue(out packet!);}

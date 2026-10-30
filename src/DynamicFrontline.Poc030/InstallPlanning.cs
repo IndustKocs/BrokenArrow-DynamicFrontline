@@ -15,7 +15,8 @@ public static class InstallPlanning
             if(!DevInstall.Allowed(f.Relative,f.Category)||DevInstall.Hash(f.Source)!=f.Sha256)throw new InvalidDataException("Invalid plan payload");
             var path=Path.GetFullPath(Path.Combine(target,f.Relative));if(!path.StartsWith(target+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new InvalidDataException("Plan path");
             for(var p=path;!string.IsNullOrEmpty(p);p=Path.GetDirectoryName(p))if((File.Exists(p)||Directory.Exists(p))&&(File.GetAttributes(p)&FileAttributes.ReparsePoint)!=0)throw new InvalidDataException("Plan reparse point");
-            bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache;
+            if(f.Category==FileCategory.PinnedLoader&&(PinnedLoader.Files.GetValueOrDefault(f.Relative)!=f.Sha256||File.Exists(path)&&DevInstall.Hash(path)!=f.Sha256))throw new InvalidDataException("ForeignOrUnpinnedLoader_Stop");
+            bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader;
             return f with{ReplaceApprovedHash=shared&&File.Exists(path)?DevInstall.Hash(path):null};
         }).ToArray();
     }
@@ -26,7 +27,7 @@ public static class InstallPlanning
         if(descriptor.BuildId!="26273833"||descriptor.MetadataVersion!=39||descriptor.UnityVersion!="6000.3.24f1"||descriptor.Files.Count!=4||!descriptor.Files.Values.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(expected))throw new InvalidDataException("Unreviewed build descriptor");
         descriptor.Verify(root);
         if(!files.Any(f=>f.Category==FileCategory.SharedInteropCache)||!files.Any(f=>f.Category==FileCategory.SharedLoaderConfig)||!files.Any(f=>f.Category==FileCategory.InteropBootstrap))throw new InvalidDataException("Complete local interop plan required");
-        var loader=Path.Combine(root,"MelonLoader","net6","MelonLoader.dll");if(!File.Exists(loader)||DevInstall.Hash(loader)!="BDD43DC0F3893C208C95389B863AB61C967AE14204DA0DD8051647E754C8709B")throw new InvalidDataException("Install the pinned MelonLoader 0.7.3 separately before applying RC2");
+        var loader=Path.Combine(root,"MelonLoader","net6","MelonLoader.dll");if(!files.Any(f=>f.Category==FileCategory.PinnedLoader&&f.Relative=="MelonLoader/net6/MelonLoader.dll")&&(!File.Exists(loader)||DevInstall.Hash(loader)!="BDD43DC0F3893C208C95389B863AB61C967AE14204DA0DD8051647E754C8709B"))throw new InvalidDataException("Install the pinned MelonLoader 0.7.3 separately before applying RC2");
         var cfg=Path.Combine(root,"UserData","Loader.cfg");if(File.Exists(cfg)&&System.Text.RegularExpressions.Regex.IsMatch(File.ReadAllText(cfg),@"(?im)^\s*force_regeneration\s*=\s*true"))throw new InvalidDataException("Loader force_regeneration must be disabled before planning");
     }
 }
