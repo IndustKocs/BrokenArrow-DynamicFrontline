@@ -1,0 +1,15 @@
+{
+  "Passed": true,
+  "InventoryFiles": 303,
+  "Clients": [
+    "A",
+    "B"
+  ],
+  "FullLocalInterop": true,
+  "InstallVerifyRemove": true,
+  "PreviousCacheRestored": true,
+  "Replay": true,
+  "GameInstalled": false,
+  "GameLaunched": false,
+  "ArchiveSha256": "550E92DE5ED8F48A2945522859596792CFC17250741BA878CB3932624AEF61ED"
+}

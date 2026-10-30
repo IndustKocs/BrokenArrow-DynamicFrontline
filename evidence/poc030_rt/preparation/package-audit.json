@@ -1,0 +1,10 @@
+{
+  "Status": "PASS",
+  "Scope": "Offline package audit only",
+  "PackageHash": "550E92DE5ED8F48A2945522859596792CFC17250741BA878CB3932624AEF61ED",
+  "Commit": "007f943fb079c1862af9fe128b22d8d4d08e23da",
+  "InventoryEntries": 303,
+  "ExactMembership": true,
+  "RequiredPayload": true,
+  "RuntimeValidated": false
+}

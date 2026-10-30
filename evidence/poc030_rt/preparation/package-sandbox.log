@@ -1,0 +1,3 @@
+Prepared local client configuration and manifest only. Run plan/review first; apply requires separate explicit game-install consent. Existing mutable probe.json is preserved by installation.
+Prepared local client configuration and manifest only. Run plan/review first; apply requires separate explicit game-install consent. Existing mutable probe.json is preserved by installation.
+PASS extracted archive inventory, full interop sandbox A/B, restoration and replay

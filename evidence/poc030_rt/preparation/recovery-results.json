@@ -1,0 +1,194 @@
+{
+  "count": 47,
+  "failed": 0,
+  "results": [
+    {
+      "name": "R1 configure remove preserve reinstall",
+      "passed": true
+    },
+    {
+      "name": "R1 RC1 receipt migration preserves configured role without manual editing",
+      "passed": true
+    },
+    {
+      "name": "R1 changed DLL conflict retained independently",
+      "passed": true
+    },
+    {
+      "name": "R2 injected exception all apply boundaries recover twice",
+      "passed": true
+    },
+    {
+      "name": "R2 fresh process recovery after fail-fast at every apply boundary",
+      "passed": true
+    },
+    {
+      "name": "R2 interrupted upgrade and removal preserve original receipt and bytes",
+      "passed": true
+    },
+    {
+      "name": "R2 wrong package hash foreign same name and concurrent operations",
+      "passed": true
+    },
+    {
+      "name": "R2 shared cache replacement removal restores original files",
+      "passed": true
+    },
+    {
+      "name": "R2 shared cache crash rollback and changed cache preserve group",
+      "passed": true
+    },
+    {
+      "name": "R3 heartbeat cannot freshen failed source and pause is live",
+      "passed": true
+    },
+    {
+      "name": "R5 observed 80 20 80 follows actual state and no backend feedback",
+      "passed": true
+    },
+    {
+      "name": "R6 independent core same canonical input no local handle hash",
+      "passed": true
+    },
+    {
+      "name": "R6 world partial stale wrong owner delta gap and conflict reject",
+      "passed": true
+    },
+    {
+      "name": "R6 duplicate delta is idempotent and conflicting duplicate rejected",
+      "passed": true
+    },
+    {
+      "name": "R6 checkpoint restore preserves core and next canonical id",
+      "passed": true
+    },
+    {
+      "name": "R6 authenticated chunk roundtrip truncated and oversized reject",
+      "passed": true
+    },
+    {
+      "name": "R5 live observer survives projected terminal time",
+      "passed": true
+    },
+    {
+      "name": "R6 rejected profile leaves spawn registry transactional",
+      "passed": true
+    },
+    {
+      "name": "R6 lifecycle death disappearance reuse owner transfer and resync",
+      "passed": true
+    },
+    {
+      "name": "R5 active profile mismatch never gets a fallback",
+      "passed": true
+    },
+    {
+      "name": "Map runtime bounds scenario and root teams are mandatory",
+      "passed": true
+    },
+    {
+      "name": "Two independent pocket certificates do not merge interiors",
+      "passed": true
+    },
+    {
+      "name": "Persistent breakthrough survives conflicting local score projection",
+      "passed": true
+    },
+    {
+      "name": "Diagnostics replay and comparison use actual matching inputs",
+      "passed": true
+    },
+    {
+      "name": "Clock staggering waits without consuming a canonical revision",
+      "passed": true
+    },
+    {
+      "name": "Checkpoint with active tau preserves forecast and duplicate idempotence",
+      "passed": true
+    },
+    {
+      "name": "R2 retire old unprefixed cache and restore on removal",
+      "passed": true
+    },
+    {
+      "name": "R2 retired cache interruption restores complete old cache",
+      "passed": true
+    },
+    {
+      "name": "Positive service evidence is deduplicated and never invents intervals",
+      "passed": true
+    },
+    {
+      "name": "Old local entity service proof cannot attach to reused NetID",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 0 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 0 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 1 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 1 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 2 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 2 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 3 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 50m rotation 3 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 0 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 0 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 1 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 1 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 2 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 2 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 3 mirror False",
+      "passed": true
+    },
+    {
+      "name": "Independent concave polygon oracle 100m rotation 3 mirror True",
+      "passed": true
+    },
+    {
+      "name": "Native missing topology is Unknown rather than blocked proof",
+      "passed": true
+    }
+  ]
+}

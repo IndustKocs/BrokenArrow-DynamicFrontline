@@ -1,0 +1,8 @@
+{
+  "Target": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\poc030-rc2-two-client-integration\\artifacts\\poc030_rt\\package-sandbox\\sandbox-A",
+  "State": "Verified",
+  "Preserved": [
+    "UserData/DynamicFrontline030/probe.json"
+  ],
+  "Conflicts": []
+}

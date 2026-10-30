@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Cpp2IL",
+    "Hash": "663FB432433B4371FD1EE0EBC321A8FFF2A9AAC5AC4230C843F9E03DDEE4E04C",
+    "Passed": true
+  },
+  {
+    "Name": "UnityDependencies",
+    "Hash": "1142D6C9AA501DA2DF09AA82B5CFD18B584C0A7E1DDE0E059DE665A147278821",
+    "Passed": true
+  },
+  {
+    "Name": "StrippedCodeRegSupport",
+    "Hash": "2CC4F8C66541F18B4DAED5410149EE7859C3190454D30BDA5CCD0895D2989EE6",
+    "Passed": true
+  },
+  {
+    "Name": "MelonLoaderArchive",
+    "Hash": "5B2B2F3D1CD42B59EC886C5BDC2663EDAE87A0097A4F4A8F58C0965A99DDA416",
+    "Passed": true
+  }
+]

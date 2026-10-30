@@ -1,0 +1,7 @@
+{
+  "Operation": "PlanOnly",
+  "Target": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\poc030-rc2-two-client-integration\\artifacts\\poc030_rt\\package-sandbox\\sandbox-B",
+  "Files": 290,
+  "WritesToTarget": 0,
+  "Plan": "C:\\Users\\pl-ni\\Documents\\ChatGPT\\\u0431\u0430\\poc030-rc2-two-client-integration\\artifacts\\poc030_rt\\package-sandbox\\client-B\\plan.json"
+}
