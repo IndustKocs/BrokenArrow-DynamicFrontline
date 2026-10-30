@@ -1,3 +1,5 @@
+> Дополнение FullDebugView + Launcher: актуальные документы — [установка](INSTALL_GUIDE_LAUNCHER.md), [FullDebug](FULL_DEBUG_VIEW_REPORT.md), [испытания лаунчера](LAUNCHER_TEST_REPORT.md), [runtime](RUNTIME_CHECKLIST_FULLDEBUG.md). TeamSafe по умолчанию; полная геометрия разрешается только после двух согласий.
+
 # ТЗ №18-В — 0.4.0-T18-preflight3
 
 Основа: preflight2, bf128c4. Ветка codex/t18b-final-preflight. Только подготовка к первому приватному Scenario PvP 1v1; игровая приёмка НЕ выполнена.

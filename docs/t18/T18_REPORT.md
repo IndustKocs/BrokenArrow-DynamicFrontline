@@ -1,3 +1,5 @@
+> Дополнение FullDebugView + Launcher: актуальные документы — [установка](INSTALL_GUIDE_LAUNCHER.md), [FullDebug](FULL_DEBUG_VIEW_REPORT.md), [испытания лаунчера](LAUNCHER_TEST_REPORT.md), [runtime](RUNTIME_CHECKLIST_FULLDEBUG.md). TeamSafe по умолчанию; полная геометрия разрешается только после двух согласий.
+
 > Актуальная ревизия: preflight3 / ТЗ №18-В. См. [T18B_REPORT.md](T18B_REPORT.md). Unity Debug + read-only marker receipt; строгий session gate; PocketCells отключён; handshake после входа в доказанную комнату. Ниже сохранён предыдущий контекст, при расхождении действует отчёт ТЗ №18-В.
 
 # Актуализация preflight2

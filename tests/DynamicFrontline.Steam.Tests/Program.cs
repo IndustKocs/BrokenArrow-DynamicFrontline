@@ -54,6 +54,30 @@ void Pump(SteamWorldChannel a,SteamWorldChannel b,int n=20){for(int i=0;i<n;i++)
  oa.Fail(SourceState.LivePartial,"unvalidated roster");ob.Fail(SourceState.LivePartial,"unvalidated roster");await Task.Delay(100);Check(oa.View.Projection==null&&oa.View.Display==null&&ob.View.Display==null,"incomplete source clears graphics");
  oa.Dispose();ob.Dispose();await Task.WhenAll(ta,tb);
 }
+// Explicit trusted FullDebug pair reuses the canonical replica protocol and existing core.
+{
+ Check(DebugViewConsent.Epoch("a","b",true)==DebugViewConsent.Epoch("b","a",false),"both clients derive identical consent epoch");
+ Check(DebugViewConsent.Epoch("a","b",true)!=DebugViewConsent.Epoch("new","b",true),"reconsent creates fresh diagnostic session scope");
+ for(int mask=0;mask<16;mask++)Check(DebugViewConsent.Enabled((mask&1)!=0,(mask&2)!=0,(mask&4)!=0,(mask&8)!=0)==(mask==15),"FullDebug requires both consents and both rosters "+mask);
+ var(w1,w2)=W();using var a=new SteamWorldChannel(w1,H("A"));using var b=new SteamWorldChannel(w2,H("B"));
+ ProbeConfig C(string role)=>new(false,false,"ObserveTwoClient",Rc2Fixtures.Binding.ModSession.ToString(),role,true,"",0,"",Replication:"TrustedDiagnosticReplica",TrustedReplicaConsent:true,FullDebugView:true);
+ using var oa=new RuntimeObserver(C("A"),a,"fixture-build",null,Rc2Fixtures.Map,Rc2Fixtures.Profiles,true);using var ob=new RuntimeObserver(C("B"),b,"fixture-build",null,Rc2Fixtures.Map,Rc2Fixtures.Profiles,true);
+ var ta=oa.Run();var tb=ob.Run();bool complete=false;long rev=0;
+ for(int i=0;i<300;i++){if(i%10==0){rev++;oa.Submit(Rc2Fixtures.Observation("A",rev,rev*.25));ob.Submit(Rc2Fixtures.Observation("B",rev,rev*.25));}Pump(a,b,2);await Task.Delay(10);if(oa.View.Display?.FullDebug==true&&ob.View.Display?.FullDebug==true&&oa.View.Projection?.Own.Length==2&&ob.View.Projection?.Own.Length==2&&oa.View.Display.Time==ob.View.Display.Time){complete=true;break;}}
+ Check(complete,"FullDebug two observers independently render both teams from canonical input");
+ if(complete){oa.View.Display!.Validate(true);ob.View.Display!.Validate(true);Check(CanonicalCodec.Digest(oa.View.Projection!.Circles)==CanonicalCodec.Digest(ob.View.Projection!.Circles),"FullDebug synchronized ZOC geometry");Check(oa.View.Display.OwnCells.Concat(oa.View.Display.OtherCells??[]).OrderBy(i=>i).SequenceEqual(ob.View.Display.OwnCells.Concat(ob.View.Display.OtherCells??[]).OrderBy(i=>i)),"FullDebug synchronized two-team territory geometry");}
+ oa.Fail(SourceState.NoSession,"ConsentRevoked");ob.Fail(SourceState.NoSession,"ConsentRevoked");Check(oa.View.Display==null&&ob.View.Display==null,"consent withdrawal clears full view before new TeamSafe session");
+ oa.Dispose();ob.Dispose();await Task.WhenAll(ta,tb);
+ bool denied=false;try{using var invalid=new RuntimeObserver(C("A") with{TrustedReplicaConsent=false},a,"fixture");}catch(InvalidDataException){denied=true;}Check(denied,"FullDebug observer cannot be created without explicit replica consent");
+ var bridge=Rc2Fixtures.Bridge();bridge.Step(Rc2Fixtures.Input(),0);var frame=bridge.Last! with{Geometry=[new(DynamicFrontline.Frontline.Rules023.CorridorState.Blocked,DynamicFrontline.Frontline.Rules023.Evidence.True,new(0,DynamicFrontline.Frontline.Rules023.Mobility.Infantry,1,[1,2,3],[4],"hidden","fixture",true,false))]};
+ var full=DisplayProjection.Build(bridge.Export(),frame,0,true);Check(full.PocketCells.SequenceEqual(new[]{1,2,3}),"consented full pocket geometry retained exactly");
+ denied=false;try{full.Validate();}catch(InvalidDataException){denied=true;}Check(denied,"TeamSafe rejects a full debug payload even with a FullDebug flag");
+}
+{
+ var bridge=Rc2Fixtures.Bridge();var input=Rc2Fixtures.Input();var units=Enumerable.Range(0,100).Select(i=>input.Units[i%2] with{Key=input.Units[i%2].Key with{Uid=100+i},Visible=false,Position=new DynamicFrontline.Frontline.Point2(50+(i%10)*140,50+(i/10)*140)}).ToArray();bridge.Step(input with{Units=units},0);
+ var timer=System.Diagnostics.Stopwatch.StartNew();long bytes=GC.GetAllocatedBytesForCurrentThread();for(int i=0;i<100;i++){bridge.Display(0,true).Validate(true);bridge.DebugProject();}timer.Stop();
+ Check(bridge.DebugProject().Own.Length==100&&bridge.DebugProject().Circles.Length<=100,"FullDebug complete 100-unit projection within canonical budget");Console.WriteLine($"METRIC FullDebug 100 units / 100 projections: {timer.Elapsed.TotalMilliseconds:F2} ms, {GC.GetAllocatedBytesForCurrentThread()-bytes} bytes; managed projection only, NOT Unity FPS");
+}
 HardeningTests.Run(Check);
 FinalPreflightTests.Run(Check);
 Console.WriteLine($"T18: {passed} checks passed; synthetic transport, NOT real Steam or game validation.");

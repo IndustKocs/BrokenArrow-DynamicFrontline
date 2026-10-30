@@ -1,5 +1,5 @@
 #requires -Version 7.0
-param([ValidateSet('Prepare','Check','Install','Verify','Remove','Recover','Collect')][string]$Action='Prepare',[string]$GameRoot,[string]$WorkDirectory,[string]$InteropManifest,[switch]$Offline,[switch]$ConfirmGameChanges,[switch]$Sandbox)
+param([ValidateSet('Prepare','Check','Install','Verify','Remove','Recover','Collect')][string]$Action='Prepare',[string]$GameRoot,[string]$WorkDirectory,[string]$InteropManifest,[switch]$Offline,[switch]$ConfirmGameChanges,[switch]$Sandbox,[switch]$RemoveSettings)
 $ErrorActionPreference='Stop'
 function HasGameRuntime {
  $base=Join-Path $env:ProgramFiles 'dotnet/shared'
@@ -60,6 +60,7 @@ if($Action -in @('Install','Remove','Recover','Verify','Collect')){
  $command=$Action.ToLowerInvariant();if($Sandbox){$command='sandbox-'+$command}
  $argsList=@($command,$game);if($Action -eq 'Install'){$argsList+=$plan}
  $argsList+=if($Action -eq 'Remove'){'--explicit-removal-consent'}else{'--explicit-install-consent'}
+ if($Action -eq "Remove" -and $RemoveSettings){$argsList+="--remove-owned-settings"}
  RunCli $argsList;return
 }
 if(!$Sandbox){& (Join-Path $root 'scripts/poc030/preflight-runtime.ps1') -GameRoot $game | Out-Null}

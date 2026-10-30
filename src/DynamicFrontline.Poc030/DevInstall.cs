@@ -105,13 +105,13 @@ public sealed class DevInstall : IDisposable
         fault?.Invoke("before-receipt");Atomic(ReceiptPath,journal.AfterReceipt,op);fault?.Invoke("after-receipt");
         Atomic(JournalPath,journal with{Committed=true},op);fault?.Invoke("committed");Cleanup(journal);return new(root,"Installed",preserved.ToArray(),[]);
     }
-    public InstallResult Remove()
+    public InstallResult Remove(bool preserveSettings=true)
     {
         if(File.Exists(JournalPath))throw new InvalidDataException("Recover pending operation first");var receipt=Receipt()??throw new InvalidDataException("Missing receipt; no guessed deletion");var op=Guid.NewGuid().ToString("N");var plans=new List<FilePlan>();var keep=new List<InstalledFile>();var conflicts=new List<string>();
         bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)&&File.Exists(Inside(f.Relative))&&Hash(Inside(f.Relative))!=f.Sha256);
         foreach(var f in receipt.Files)
         {
-            var dest=Inside(f.Relative);if(f.Category==FileCategory.MutableUserConfig){keep.Add(f);continue;}
+            var dest=Inside(f.Relative);if(f.Category==FileCategory.MutableUserConfig){if(preserveSettings){keep.Add(f);continue;}if(File.Exists(dest))plans.Add(new(f.Relative,Hash(dest),null,Path.Combine(control,op,plans.Count+".stage"),Path.Combine(control,op,plans.Count+".backup"),f.Category));continue;}
             if(cacheConflict&&(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)){keep.Add(f);conflicts.Add(f.Relative);continue;}
             bool retired=f.Category==FileCategory.RetiredInteropCache;
             if(retired&&f.OriginalHash==null)continue;

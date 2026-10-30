@@ -20,7 +20,7 @@ public sealed class SteamMod : MelonMod
    descriptor.Verify(root);map=Read<MapDescriptor>("map.json");profiles=Read<ProfileSet>("profiles.json");map.VerifyLocalSources(root);
    string assembly=Path.GetDirectoryName(typeof(SteamMod).Assembly.Location)!;
    var hashes=new[]{"Steam.MelonLoader","Steam","Poc030","Core","Frontline","GameAdapter","Integration"}.Select(n=>new{Name=n,Hash=DevInstall.Hash(n=="Steam.MelonLoader"?typeof(SteamMod).Assembly.Location:Path.Combine(Path.GetDirectoryName(typeof(LiveReader).Assembly.Location)!,"DynamicFrontline."+n+".dll"))}).ToArray();
-   compatibility=CanonicalCodec.Digest(new{Protocol="df18-world-3",Relay="RelayOnly_ICE0",Payload=hashes,Game=descriptor.Digest,Map=map.Hash,Profiles=profiles.Hash,Rules=new Rules023Config().Hash,Mode="ObserveOnly_TeamSafe"});
+   compatibility=CanonicalCodec.Digest(new{Protocol="df18-world-4",Relay="RelayOnly_ICE0",Payload=hashes,Game=descriptor.Digest,Map=map.Hash,Profiles=profiles.Hash,Rules=new Rules023Config().Hash,Mode="ObserveOnly_TeamSafe"});
    Directory.CreateDirectory(Path.Combine(dir,"logs"));backup=new(Path.Combine(dir,"logs","DF-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+".jsonl")){AutoFlush=true};events.Add("Build","T18 candidate; runtime validation pending; native writes OFF");
   }catch(Exception e){failed=true;status="Disabled: "+e.GetType().Name+" / "+e.Message;LoggerInstance.Error(status);}
  }
@@ -44,7 +44,7 @@ public sealed class SteamMod : MelonMod
    if(discovery==null)return;discovery.Pump();status=discovery.State;
    if(!discovery.PairReady){latest=null;observer?.Fail(SourceState.NoSession,"SteamPeerNotReady");FlushLogs();return;}
    if(fight<=0){status="Steam companion ready; awaiting verified Scenario room";FlushLogs();return;}
-   string expected=discovery.Session+"/"+discovery.Peer+"/"+discovery.Mode+"/"+fight;
+   string expected=discovery.Session+"/"+discovery.Peer+"/"+discovery.Mode+"/"+fight+"/"+discovery.FullDebug+"/"+discovery.ConsentEpoch;
    // Native FightId is checked by the existing session binding; lobby peer readiness is independent of game reads.
    if(connection!=expected){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+2;ResetWorld();StartWorld(expected);}
    if(channel!.State.StartsWith("SteamDisconnected:")&&clock.Elapsed.TotalSeconds>=nextRetry){nextRetry=clock.Elapsed.TotalSeconds+3;channel.Restart();events.Add("Reconnect","Preserving observer/core; requesting checkpoint and full snapshots");}
@@ -60,9 +60,9 @@ public sealed class SteamMod : MelonMod
  {
   var d=discovery!;var session=Guid.Parse(d.Session);
   // New fight/mode => separate memory/nonce scope. Identical on both clients without manual config.
-  byte[] bytes=System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(session+"/"+fight+"/"+d.Mode));var matchSession=new Guid(bytes.Take(16).ToArray()).ToString();
-  var cfg=new ProbeConfig(true,true,d.Mode,matchSession,d.Role,true,"",0,"",Replication:"TeamSafe",RosterContractConfirmed:roster&&d.Mode=="ObserveTwoClient");
-  var hello=new Hello("df18-world-3",cfg.SessionId,cfg.Role,descriptor!.Digest,compatibility,new Rules023Config().Hash,profiles!.Hash,map!.Hash,"ua01-rc2-read-contract","SteamReadOnly/"+cfg.Mode);
+  byte[] bytes=System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(session+"/"+fight+"/"+d.Mode+"/"+d.FullDebug+"/"+d.ConsentEpoch));var matchSession=new Guid(bytes.Take(16).ToArray()).ToString();
+  var cfg=new ProbeConfig(true,true,d.Mode,matchSession,d.Role,true,"",0,"",Replication:d.FullDebug?"TrustedDiagnosticReplica":"TeamSafe",TrustedReplicaConsent:d.FullDebug,FullDebugView:d.FullDebug,RosterContractConfirmed:roster&&d.Mode=="ObserveTwoClient");
+  var hello=new Hello("df18-world-4",cfg.SessionId,cfg.Role,descriptor!.Digest,compatibility,new Rules023Config().Hash,profiles!.Hash,map!.Hash,"ua01-rc2-read-contract","SteamReadOnly/"+cfg.Mode+"/"+cfg.Replication);
   steam!.ActivateRelay();
   wire=new(steam!,d.Peer);channel=new(wire,hello);observer=new(cfg,channel,descriptor.Digest,null,map,profiles,true);observer.Diagnostic+=events.Structured;reader=new(cfg.RosterContractConfirmed);worker=Task.Run(observer.Run);connection=id;events.Add("Connect",cfg.Role+" / "+cfg.Mode+"; Steam identity + ECDH/HMAC; no IP config");
  }
@@ -73,8 +73,9 @@ public sealed class SteamMod : MelonMod
  {
   if(hud==null)return;
   try{
+   hud.FullDebug=discovery?.FullDebug==true;
    var view=observer?.View;var own=latest?.Owned;var unit=own?.Length>0?own[hud.Selected%own.Length]:null;var prediction=unit==null?null:view?.Projection?.Own.FirstOrDefault(u=>u.Key.Uid==unit.NetworkId);var delta=unit==null?null:view?.Display?.Forecast.FirstOrDefault(u=>u.Unit==unit.NetworkId);
-   hud.Box(16,16,820,176,$"Dynamic Frontline T18 | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
+   hud.Box(16,16,820,176,$"Dynamic Frontline T18 | {(hud.FullDebug?"FULL DEBUG — HIDDEN DATA SHARED":"TEAM SAFE")} | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
     (unit==null?"Own roster not yet available":$"Own count {own!.Length}; HUD selection #{unit.NetworkId} ({unit.Definition}): ACTUAL stress {unit.Stress:F1}/{unit.MaxStress:F1}; HP {unit.Hp:F1}/{unit.MaxHp:F1}")+"\n"+
     (prediction==null?"Encirclement forecast unavailable":$"FORECAST: {prediction.State}; tau {prediction.Tau:F1}s; penalty delta {(delta?.Delta is double value?value.ToString("F2"):"UNKNOWN")}")+"\n"+
     $"Notices: {string.Join(", ",view?.Projection?.Notices.Select(n=>n.Kind)??[])} | {string.Join("; ",view?.Blockers??[])}\nGameLog: {gameLog?.State??"Unity binding unavailable"} / {events.SinkState}; backup ON. Private Scenario 5454584 only.");
@@ -85,6 +86,7 @@ public sealed class SteamMod : MelonMod
    if(hud.Button(484,198,150,28,"Stop / disconnect")){enabled=false;ResetAll();status="Stopped by tester";}
    if(!roster&&discovery!=null&&samples>=20&&latest?.Owned.Length>0){if(hud.Button(16,234,820,42,"Confirm MY roster checked: count, identities, transport, death. Both confirmations enable calculation.")){roster=true;discovery.ConfirmRoster();events.Add("RosterAttestation","User confirms own roster; not an automated proof. Await peer confirmation.");}}
    else hud.Box(16,234,820,42,roster?"Own roster confirmed; waiting for peer / ObserveTwoClient":"First run: compare own units against HUD before confirming the roster.");
+   if(discovery!=null&&hud.Button(850,16,310,52,discovery.LocalDebugConsent?"Revoke FullDebug consent / TeamSafe":"I CONSENT to sharing HIDDEN DATA\nFullDebug: both testers must consent")){discovery.SetDebugConsent(!discovery.LocalDebugConsent);ResetWorld();events.Add("Consent","FullDebug consent changed; clear old session");}
    hud.Render(view,latest);
   }catch(Exception e){events.Add("HudUnavailable",e.GetType().Name);}
  }

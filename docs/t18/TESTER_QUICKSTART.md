@@ -1,3 +1,5 @@
+> Дополнение FullDebugView + Launcher: актуальные документы — [установка](INSTALL_GUIDE_LAUNCHER.md), [FullDebug](FULL_DEBUG_VIEW_REPORT.md), [испытания лаунчера](LAUNCHER_TEST_REPORT.md), [runtime](RUNTIME_CHECKLIST_FULLDEBUG.md). TeamSafe по умолчанию; полная геометрия разрешается только после двух согласий.
+
 # Инструкция для двух тестировщиков — preflight3
 
 Пока только подготовка. Игра и мод ещё не проверены в реальном матче.

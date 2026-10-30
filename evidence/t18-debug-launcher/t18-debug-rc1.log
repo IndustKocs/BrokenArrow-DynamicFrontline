@@ -1,0 +1,45 @@
+PASS Valid authenticated peer
+PASS Wrong secret
+PASS Replay
+PASS Gap
+PASS Handshake Hello { Protocol = df030-status-1, Session = other, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = A, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = other, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = other, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = other, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = other, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = other, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = other, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = other, Connection =  }
+PASS Tampered payload
+PASS Framed roundtrip
+PASS Size before allocation
+PASS No native writer OfflineReplay
+PASS No native writer ObserveTwoClient
+PASS No native writer EffectsTest
+PASS No native writer FullModeTest
+PASS Line explicit
+PASS Assault explicit
+PASS Assault unreviewed
+PASS Unreviewed new unit 710
+PASS Unreviewed new unit 711
+PASS Unreviewed new unit 713
+PASS Pinned file
+PASS Changed pair
+PASS Begin alone is not relief
+PASS Positive receipt starts relief
+PASS Lost service source is unknown
+PASS Grace capped at 20
+PASS Short service cannot shorten grace
+PASS Future service rejected
+PASS First effect reserved
+PASS Ambiguous write not retried
+PASS Duplicate no-op
+PASS Conflict blocked
+PASS Bounded journal fails closed
+PASS Unknown rebind resync
+PASS Ownership is not new generation
+PASS Descriptor digest does not recurse
+PASS Connection replay nonce
+PASS Malformed envelope
+RESULT 44/44; Offline only; no IL2CPP/runtime claims

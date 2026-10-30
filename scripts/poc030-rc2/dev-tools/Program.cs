@@ -12,6 +12,6 @@ try {
  InstallFile[]? files=command=="install"?JsonSerializer.Deserialize<InstallFile[]>(File.ReadAllText(args[2])):null;
  if(!sandbox&&files!=null){if(!consent)throw new InvalidDataException("Separate explicit installation consent required");InstallPlanning.VerifyGame(args[1],files);}
  using var installer=new DevInstall(args[1],sandbox,consent);
- var result=command switch {"install"=>installer.Apply(files!),"verify"=>installer.Verify(),"recover"=>installer.Recover(),"remove"=>installer.Remove(),_=>throw new ArgumentException("Unknown command")};
+ var result=command switch {"install"=>installer.Apply(files!),"verify"=>installer.Verify(),"recover"=>installer.Recover(),"remove"=>installer.Remove(!args.Contains("--remove-owned-settings")),_=>throw new ArgumentException("Unknown command")};
  Console.WriteLine(JsonSerializer.Serialize(result,json));return result.Conflicts.Length==0?0:2;
 }catch(Exception e){Console.Error.WriteLine(e.GetType().Name+": "+e.Message);return 1;}
