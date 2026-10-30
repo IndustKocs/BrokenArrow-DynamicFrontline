@@ -1,0 +1,18 @@
+{
+  "NativeNodes": 90000,
+  "MutualLandLinks": 338770,
+  "PhysicalZone": [
+    9000,
+    9000
+  ],
+  "CellSize": 100,
+  "Cells": 8100,
+  "SupportedCells": 7746,
+  "AmbiguousCellsExcluded": 354,
+  "Edges": 14665,
+  "ConnectivityProof": "Every retained cell is internally connected in the native mutual graph; every retained edge has a native witness",
+  "RuntimeValidated": false,
+  "ActiveZoneRuntimeValidated": false,
+  "DynamicNavigationValidated": false,
+  "MapFileSha256": "9c6acbed511c72a41f1ca281c9372e1957ef67ea29e39621546932a77159f43f"
+}

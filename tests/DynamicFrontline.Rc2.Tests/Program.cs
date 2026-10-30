@@ -12,10 +12,13 @@ if(args.Length>0&&args[0]=="crash-install"){
 if(args.Length>0&&args[0] is "runtime-peer-v2" or "runtime-resync"){
  string role=args[1];var config=new ProbeConfig(false,false,"ObserveTwoClient",Rc2Fixtures.Binding.ModSession.ToString(),role,true,"127.0.0.1",int.Parse(args[2]),args[3],args[4],args[5],"TrustedDiagnosticReplica",true);
  var hello=new Hello("df030-world-2",config.SessionId,role,"fixture-build","fixture-payload","fixture-rules","fixture-profile","fixture-map","fixture-ABI","NoWrites");
- using var channel=new DevChannel(config,hello,File.ReadAllBytes(args[3]));using var observer=new RuntimeObserver(config,channel,"fixture-build",null,Rc2Fixtures.Map,Rc2Fixtures.Profiles);
+ var runtimeMap=args.Length>7?JsonSerializer.Deserialize<MapDescriptor>(File.ReadAllText(args[7]))!:Rc2Fixtures.Map;
+ var runtimeProfiles=Rc2Fixtures.Profiles with{BuildFingerprint=runtimeMap.GameFingerprint};
+ Observation Sample(string peer,long revision,double time){var o=Rc2Fixtures.Observation(peer,revision,time);if(runtimeMap.Scenario==null)return o;return o with{Map=runtimeMap.Map,Participants=Rc2Fixtures.Binding.Players.Select(p=>p with{TeamUid=p.Owner==1?1:7}).ToArray(),Owned=o.Owned.Select(u=>u with{TeamUid=u.Owner==1?1:7}).ToArray(),MapState=new(runtimeMap.Scenario,runtimeMap.Map,30,0,0,9000,9000,"Synthetic observations for real static Airbase map; not game")};}
+ using var channel=new DevChannel(config,hello,File.ReadAllBytes(args[3]));using var observer=new RuntimeObserver(config,channel,runtimeMap.GameFingerprint,null,runtimeMap,runtimeProfiles);
  var events=new System.Collections.Concurrent.ConcurrentQueue<string>();observer.Diagnostic+=e=>events.Enqueue(JsonSerializer.Serialize(e));
  var transport=channel.RunWorld();var worker=observer.Run();var watch=System.Diagnostics.Stopwatch.StartNew();long revision=0;bool success=false,dropped=false;bool reconnect=args[0]=="runtime-resync";
- while(watch.Elapsed.TotalSeconds<12){double time=reconnect?(watch.Elapsed.TotalSeconds<4?.25:.5):.25;observer.Submit(Rc2Fixtures.Observation(role,++revision,time));if(reconnect&&role=="B"&&!dropped&&watch.Elapsed.TotalSeconds>2){channel.DisconnectForDiagnosticResync();dropped=true;}await Task.Delay(100);if(observer.View.InputHash.Length>0&&observer.View.Projection!=null&&(!reconnect||watch.Elapsed.TotalSeconds>7&&observer.View.Projection.Time==.5)){success=true;break;}}
+ while(watch.Elapsed.TotalSeconds<12){double time=reconnect?(watch.Elapsed.TotalSeconds<4?.25:.5):.25;observer.Submit(Sample(role,++revision,time));if(reconnect&&role=="B"&&!dropped&&watch.Elapsed.TotalSeconds>2){channel.DisconnectForDiagnosticResync();dropped=true;}await Task.Delay(100);if(observer.View.InputHash.Length>0&&observer.View.Projection!=null&&(!reconnect||watch.Elapsed.TotalSeconds>7&&observer.View.Projection.Time==.5)){success=true;break;}}
  File.WriteAllLines(args[6]+".jsonl",events);
  await Task.Delay(300);File.WriteAllText(args[6],JsonSerializer.Serialize(new{Role=role,Success=success,observer.View.InputHash,observer.View.Status,observer.View.Blockers,Kind="IndependentSourceTransportCanonicalCoreProjection_NotGame",channel.State,channel.LastTransportError}));observer.Dispose();channel.Dispose();await Task.WhenAll(worker,transport);return success?0:1;
 }
@@ -90,6 +93,25 @@ Test("Map runtime bounds scenario and root teams are mandatory",()=>{var m=Rc2Fi
 Test("Two independent pocket certificates do not merge interiors",()=>{var m=Map(140,50);var units=new List<Unit023>();long id=100;foreach(double cx in new[]{1800d,5000d}){units.Add(Unit((long)cx,cx,3500,p:Infantry with{CanProjectZoc=false}));for(int i=0;i<12;i++)units.Add(Unit(id++,cx+650*Math.Cos(i*Math.PI/6),3500+650*Math.Sin(i*Math.PI/6),1,Tank));}var z=CombinedArmsRadiusResolver.Resolve(units.ToArray(),m,new());var f=new ZocInfluenceField(m);f.Update(z);var d=new EncirclementRegionDetector(m,new());var a=d.Evaluate(units[0],z,f);var b=d.Evaluate(units[13],z,f);Assert(a.Enclosed==Evidence.True&&b.Enclosed==Evidence.True);Assert(!a.Certificate!.Interior.Intersect(b.Certificate!.Interior).Any());});
 Test("Persistent breakthrough survives conflicting local score projection",()=>{var m=Map(20,50);for(int x=0;x<16;x++)for(int y=8;y<13;y++)m.Grid.Seed(y*20+x,0);var score=new TerritoryScoringProjection(m.Grid,Enumerable.Repeat(true,400).ToArray());score.Update([new(Unit(999).Key,1,new(450,525),400,0)]);Assert(score.EffectiveOwner.Any(o=>o<0));Assert(new BreakthroughEvaluator(m,new(){RequiredWidth=250}).Evaluate(score,true)[0]==Evidence.True);});
 Test("Diagnostics replay and comparison use actual matching inputs",()=>{var input=Rc2Fixtures.Input();var result=Rc2Fixtures.Bridge().Step(input,0);var path=Path.Combine(output,"replay.jsonl");File.WriteAllLines(path,new[]{JsonSerializer.Serialize(new{Kind="ReplayContext",Binding=Rc2Fixtures.Binding,Map=Rc2Fixtures.Map,Profiles=Rc2Fixtures.Profiles,Fingerprint="fixture-build"}),JsonSerializer.Serialize(new{Kind="ReplayInput",Input=input}),JsonSerializer.Serialize(new{Kind="Result",input.InputId,Digests=result})});Assert(JsonSerializer.SerializeToElement(DiagnosticTools.Replay(path)).GetProperty("Passed").GetBoolean());Assert(JsonSerializer.SerializeToElement(DiagnosticTools.Compare(path,path)).GetProperty("Compared").GetInt32()==1);var collected=Path.Combine(output,"collected-"+Guid.NewGuid().ToString("N"));DiagnosticTools.Collect(output,collected);Assert(!File.ReadAllText(Path.Combine(collected,"replay.jsonl")).Contains("ReplayInput"));});
+
+Test("Airbase actual descriptor roots and observed source contract",()=>{
+ var m=JsonSerializer.Deserialize<MapDescriptor>(File.ReadAllText("config/poc030-rc2/maps/Airbase-5454584-100.json"))!;
+ var t=m.Create("Airbase",m.GameFingerprint);Assert(m.Width==90&&m.Height==90&&m.CellSize==100&&m.Origin==new Point2(0,0)&&m.ActiveZoneId==null);
+ foreach(var root in m.Roots)Assert(t.Passable[0][t.Grid.Index(root.Position)]);
+ var a=Rc2Fixtures.Observation("A",1,.25) with{Map="Airbase",Participants=[new(1,1,101,false),new(2,7,102,false)],MapState=new("5454584","Airbase",30,0,0,9000,9000,"Fixture native sample")};
+ m.CheckObserved(a);
+ foreach(var n in new[]{a.MapState! with{Scenario="Airport_network"},a.MapState! with{NavigationName="Airport"},a.MapState! with{NavigationCellSize=23},a.MapState! with{MinX=1},a.MapState! with{SizeX=6500}})Reject(()=>m.CheckObserved(a with{MapState=n}));
+ Reject(()=>m.CheckObserved(a with{Participants=[new(1,1,101,false),new(2,4,102,false)]}));
+ Reject(()=>(m with{Scenario="unknown"}).CheckObserved(a));
+});
+Test("Airbase source hash covers scenario settings and metadata",()=>{
+ var m=JsonSerializer.Deserialize<MapDescriptor>(File.ReadAllText("config/poc030-rc2/maps/Airbase-5454584-100.json"))!;var root=Path.Combine(sandbox,"airbase-sources");
+ string[] paths=["BrokenArrow_Data/StreamingAssets/Navigation/Airbase.ng","Scenarios/5454584/5454584.bascr","BrokenArrow_Data/StreamingAssets/aa/PC/mapsettings_assets_mapsettingsairbase_f28604c0f1829a35d50f99e2b6dcdef2.bundle","Scenarios/5454584/meta.json"];
+ foreach(var path in paths){var full=Path.Combine(root,path);Directory.CreateDirectory(Path.GetDirectoryName(full)!);File.WriteAllText(full,path);}
+ var bytes=paths.SelectMany(p=>File.ReadAllBytes(Path.Combine(root,p))).ToArray();m=m with{SourceSha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes))};m.VerifyLocalSources(root);
+ foreach(var path in paths){var full=Path.Combine(root,path);File.WriteAllText(full,"changed");Reject(()=>m.VerifyLocalSources(root));File.WriteAllText(full,path);}
+});
+
 AdditionalRc2Tests.Run(Test,Assert,Reject,output,files,sandbox);
 GeometryOracleTests.Run(Test,Assert);
 File.WriteAllText(Path.Combine(output,"results.json"),JsonSerializer.Serialize(new{count=results.Count,failed,results},new JsonSerializerOptions{WriteIndented=true}));Console.WriteLine($"TOTAL {results.Count}; FAILED {failed}");return failed==0?0:1;

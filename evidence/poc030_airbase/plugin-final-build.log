@@ -1,0 +1,82 @@
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+  DynamicFrontline.Core -> <WORKSPACE>\src\DynamicFrontline.Core\bin\Release\net6.0\DynamicFrontline.Core.dll
+  DynamicFrontline.GameAdapter -> <WORKSPACE>\src\DynamicFrontline.GameAdapter\bin\Release\net6.0\DynamicFrontline.GameAdapter.dll
+  DynamicFrontline.Frontline -> <WORKSPACE>\src\DynamicFrontline.Frontline\bin\Release\net6.0\DynamicFrontline.Frontline.dll
+  DynamicFrontline.Integration -> <WORKSPACE>\src\DynamicFrontline.Integration\bin\Release\net6.0\DynamicFrontline.Integration.dll
+  DynamicFrontline.Poc030 -> <WORKSPACE>\src\DynamicFrontline.Poc030\bin\Release\net6.0\DynamicFrontline.Poc030.dll
+  DynamicFrontline.Poc030.MelonLoader -> <WORKSPACE>\src\DynamicFrontline.Poc030.MelonLoader\bin\Release\net6.0\DynamicFrontline.Poc030.MelonLoader.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:01.20
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+  DynamicFrontline.Core -> <WORKSPACE>\src\DynamicFrontline.Core\bin\Release\net6.0\DynamicFrontline.Core.dll
+  DynamicFrontline.GameAdapter -> <WORKSPACE>\src\DynamicFrontline.GameAdapter\bin\Release\net6.0\DynamicFrontline.GameAdapter.dll
+  DynamicFrontline.Frontline -> <WORKSPACE>\src\DynamicFrontline.Frontline\bin\Release\net6.0\DynamicFrontline.Frontline.dll
+  DynamicFrontline.Integration -> <WORKSPACE>\src\DynamicFrontline.Integration\bin\Release\net6.0\DynamicFrontline.Integration.dll
+  DynamicFrontline.Poc030 -> <WORKSPACE>\src\DynamicFrontline.Poc030\bin\Release\net6.0\DynamicFrontline.Poc030.dll
+  DynamicFrontline.Poc030.Tests -> <WORKSPACE>\tests\DynamicFrontline.Poc030.Tests\bin\Release\net6.0\DynamicFrontline.Poc030.Tests.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:01.04
+PASS Valid authenticated peer
+PASS Wrong secret
+PASS Replay
+PASS Gap
+PASS Handshake Hello { Protocol = df030-status-1, Session = other, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = A, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = other, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = other, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = other, Profile = profile, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = other, Map = map, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = other, Abi = abi, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = other, Capabilities = caps, Connection =  }
+PASS Handshake Hello { Protocol = df030-status-1, Session = session, Role = B, Compatibility = build, Payload = payload, Rules = rules, Profile = profile, Map = map, Abi = abi, Capabilities = other, Connection =  }
+PASS Tampered payload
+PASS Framed roundtrip
+PASS Size before allocation
+PASS No native writer OfflineReplay
+PASS No native writer ObserveTwoClient
+PASS No native writer EffectsTest
+PASS No native writer FullModeTest
+PASS Line explicit
+PASS Assault explicit
+PASS Assault unreviewed
+PASS Unreviewed new unit 710
+PASS Unreviewed new unit 711
+PASS Unreviewed new unit 713
+PASS Pinned file
+PASS Changed pair
+PASS Begin alone is not relief
+PASS Positive receipt starts relief
+PASS Lost service source is unknown
+PASS Grace capped at 20
+PASS Short service cannot shorten grace
+PASS Future service rejected
+PASS First effect reserved
+PASS Ambiguous write not retried
+PASS Duplicate no-op
+PASS Conflict blocked
+PASS Bounded journal fails closed
+PASS Unknown rebind resync
+PASS Ownership is not new generation
+PASS Descriptor digest does not recurse
+PASS Connection replay nonce
+PASS Malformed envelope
+RESULT 44/44; Offline only; no IL2CPP/runtime claims
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+  interop-generator -> <WORKSPACE>\scripts\poc030\interop-generator\bin\Release\net6.0\interop-generator.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:00.73

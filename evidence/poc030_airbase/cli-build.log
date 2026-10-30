@@ -1,0 +1,12 @@
+  DynamicFrontline.Core -> <WORKSPACE>\src\DynamicFrontline.Core\bin\Release\net6.0\DynamicFrontline.Core.dll
+  DynamicFrontline.Frontline -> <WORKSPACE>\src\DynamicFrontline.Frontline\bin\Release\net6.0\DynamicFrontline.Frontline.dll
+  DynamicFrontline.GameAdapter -> <WORKSPACE>\src\DynamicFrontline.GameAdapter\bin\Release\net6.0\DynamicFrontline.GameAdapter.dll
+  DynamicFrontline.Integration -> <WORKSPACE>\src\DynamicFrontline.Integration\bin\Release\net6.0\DynamicFrontline.Integration.dll
+  DynamicFrontline.Poc030 -> <WORKSPACE>\src\DynamicFrontline.Poc030\bin\Release\net6.0\DynamicFrontline.Poc030.dll
+  dev-tools -> <WORKSPACE>\scripts\poc030-rc2\dev-tools\bin\Release\net6.0\dev-tools.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:01.00

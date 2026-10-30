@@ -49,7 +49,7 @@ public sealed class RuntimeObserver : IDisposable
                         if(config.Replication=="TrustedDiagnosticReplica")Send("CanonicalInput",input);else{Send("TeamProjection",bridge.Project(TeamFor("B"),true));expected.Remove(input.InputId);}
                         LogResult(input,digest);
                         if(config.DetailedReplayConsent)Diagnostic?.Invoke(new{Kind="ReplayInput",Input=input});
-                        View=new("CanonicalObserved",health,aged,bridge.Project(TeamFor("A"),true),input.Hash,["SupplyUnknown","VictoryInputsUnknown","StaticAirportGeometry_DynamicChangesUnvalidated"],"Prediction of encirclement — game effects OFF");
+                        View=new("CanonicalObserved",health,aged,bridge.Project(TeamFor("A"),true),input.Hash,["SupplyUnknown","VictoryInputsUnknown","StaticMapGeometry_DynamicChangesUnvalidated"],"Prediction of encirclement — game effects OFF");
                     }
                     else View=View with{Status="WaitingForFreshCompletePair",Local=health,Peer=aged,Projection=health.State==SourceState.LiveComplete&&aged.State==SourceState.LiveComplete&&aged.AgeSeconds<=1?View.Projection:null};
                 }
@@ -101,7 +101,7 @@ public sealed class RuntimeObserver : IDisposable
                 Handle(new("OwnedSnapshotFull",JsonSerializer.SerializeToElement(new OwnedSourceFrame(full,delta.Health))));break;
             case "CanonicalInput":
                 if(config.Role!="B"||config.Replication!="TrustedDiagnosticReplica"||!config.TrustedReplicaConsent)throw new InvalidDataException("UnapprovedFullReplica");EnsureCore();var input=message.Payload.Deserialize<CanonicalInput>()!;if(input.Units.Length>config.MaximumCanonicalUnits)throw new InvalidDataException("UnitBudgetExceeded");var result=bridge!.Step(input,0);inputHash=input.Hash;
-                View=new("IndependentCanonicalResult",source.At(clock.Elapsed.TotalSeconds),peer,bridge.Last==null?null:bridge.Project(TeamFor("B"),true),input.Hash,["SupplyUnknown","VictoryInputsUnknown","StaticAirportGeometry_DynamicChangesUnvalidated"],"Prediction only — game effects OFF");Send("InputAck",new{input.InputId,Hash=input.Hash});Send("ResultDigest",new{input.InputId,Digests=result});LogResult(input,result);if(config.DetailedReplayConsent)Diagnostic?.Invoke(new{Kind="ReplayInput",Input=input});break;
+                View=new("IndependentCanonicalResult",source.At(clock.Elapsed.TotalSeconds),peer,bridge.Last==null?null:bridge.Project(TeamFor("B"),true),input.Hash,["SupplyUnknown","VictoryInputsUnknown","StaticMapGeometry_DynamicChangesUnvalidated"],"Prediction only — game effects OFF");Send("InputAck",new{input.InputId,Hash=input.Hash});Send("ResultDigest",new{input.InputId,Digests=result});LogResult(input,result);if(config.DetailedReplayConsent)Diagnostic?.Invoke(new{Kind="ReplayInput",Input=input});break;
             case "ResultDigest":
                 long id=message.Payload.GetProperty("InputId").GetInt64();var digests=message.Payload.GetProperty("Digests").Deserialize<StageDigests>()!;
                 if(!recentResults.TryGetValue(id,out var own)||own!=digests)throw new InvalidDataException("ResultMismatch_StopAndResync");expected.Remove(id);break;

@@ -42,15 +42,19 @@ public sealed record MapDescriptor(string Map,string GameFingerprint,string Evid
     public void CheckObserved(Observation observation)
     {
         if(Scenario==null)return; // Offline fixtures have no native scenario contract.
+        if((Map,Scenario) is not (("Airport","Airport_network") or ("Airbase","5454584")))throw new InvalidDataException("UnsupportedNativeMap");
         var n=observation.MapState??throw new InvalidDataException("NativeMapBindingUnavailable");
-        if(n.Scenario!=Scenario||n.NavigationCellSize!=23||n.NavigationName!=Map||Math.Abs(n.MinX-Origin.X)>.1||Math.Abs(n.MinZ-Origin.Y)>.1||Math.Abs(n.SizeX-Width*CellSize)>.1||Math.Abs(n.SizeZ-Height*CellSize)>.1)throw new InvalidDataException("ActiveScenarioOrPlayableBoundsMismatch");
-        if(!observation.Participants!.Select(p=>p.TeamUid).OrderBy(x=>x).SequenceEqual(new[]{1,4}))throw new InvalidDataException("AirportRootTeamBindingMismatch");
+        if(n.Scenario!=Scenario||n.NavigationCellSize!=(Map=="Airbase"&&Scenario=="5454584"?30:23)||n.NavigationName!=Map||Math.Abs(n.MinX-Origin.X)>.1||Math.Abs(n.MinZ-Origin.Y)>.1||Math.Abs(n.SizeX-Width*CellSize)>.1||Math.Abs(n.SizeZ-Height*CellSize)>.1)throw new InvalidDataException("ActiveScenarioOrPlayableBoundsMismatch");
+        if(!observation.Participants!.Select(p=>p.TeamUid).OrderBy(x=>x).SequenceEqual(Map=="Airbase"&&Scenario=="5454584"?new[]{1,7}:new[]{1,4}))throw new InvalidDataException("MapRootTeamBindingMismatch");
     }
     public void VerifyLocalSources(string gameRoot)
     {
-        if(Map!="Airport"||Scenario!="Airport_network")throw new InvalidDataException("UnsupportedNativeMap");
+        string[] sources=(Map,Scenario) switch{
+            ("Airport","Airport_network")=>["BrokenArrow_Data/StreamingAssets/Navigation/Airport.ng","BrokenArrow_Data/StreamingAssets/SharedMissions/Airport_network/Airport_network.bascr"],
+            ("Airbase","5454584")=>["BrokenArrow_Data/StreamingAssets/Navigation/Airbase.ng","Scenarios/5454584/5454584.bascr","BrokenArrow_Data/StreamingAssets/aa/PC/mapsettings_assets_mapsettingsairbase_f28604c0f1829a35d50f99e2b6dcdef2.bundle","Scenarios/5454584/meta.json"],
+            _=>throw new InvalidDataException("UnsupportedNativeMap")};
         using var hash=System.Security.Cryptography.IncrementalHash.CreateHash(System.Security.Cryptography.HashAlgorithmName.SHA256);var buffer=new byte[65536];
-        foreach(var relative in new[]{"BrokenArrow_Data/StreamingAssets/Navigation/Airport.ng","BrokenArrow_Data/StreamingAssets/SharedMissions/Airport_network/Airport_network.bascr"}){using var stream=new FileStream(Path.Combine(gameRoot,relative),FileMode.Open,FileAccess.Read,FileShare.Read);int n;while((n=stream.Read(buffer))>0)hash.AppendData(buffer.AsSpan(0,n));}
+        foreach(var relative in sources){using var stream=new FileStream(Path.Combine(gameRoot,relative),FileMode.Open,FileAccess.Read,FileShare.Read);int n;while((n=stream.Read(buffer))>0)hash.AppendData(buffer.AsSpan(0,n));}
         if(Convert.ToHexString(hash.GetHashAndReset())!=SourceSha256)throw new InvalidDataException("MapOrScenarioSourceChanged");
     }
     public PreparedTerrain Create(string actualMap,string fingerprint)

@@ -1,0 +1,40 @@
+{
+  "MapSettingsAsset": {
+    "Name": "Airbase",
+    "MapSize": {
+      "x": 9000.0,
+      "y": 9000.0
+    },
+    "Bundle": "mapsettings_assets_mapsettingsairbase_f28604c0f1829a35d50f99e2b6dcdef2.bundle",
+    "BundleSha256": "18D11C1F9904A62B11C58EFCF063253746D2E461849A0B5658FE33932AC90E97",
+    "ObjectPathID": -5144426858433427924
+  },
+  "BoundsConstructor": {
+    "Source": "UA01 PlayableZone..ctor(IGameController)",
+    "SourceSHA256": "CD9C4D5CA8CB7FA536AA4FB1225B78D1F035761DE8386D8BDFB4B951D3994B27",
+    "MapSizeFieldOffsets": [
+      "0x1C",
+      "0x20"
+    ],
+    "MultiplierVA": "0x18677FC00",
+    "MultiplierReadFromPinnedGameAssembly": 0.5,
+    "CenterXZ": [
+      4500,
+      4500
+    ],
+    "ExtentsXZ": [
+      4500,
+      4500
+    ]
+  },
+  "ScenarioExplicitPlayableZones": 0,
+  "ScenarioScriptNodeListsEmpty": true,
+  "StaticDefaultBounds": {
+    "MinX": 0,
+    "MinZ": 0,
+    "SizeX": 9000,
+    "SizeZ": 9000
+  },
+  "RuntimeBoundsValidated": false,
+  "RequiredRuntimeCheck": "Exact native bounds/scenario/map/nav cell/team match before full core"
+}

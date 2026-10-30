@@ -5,7 +5,7 @@ if(Test-Path -LiteralPath $out){throw 'Fresh client output required'}
 $pair=Get-Content (Join-Path $PairDirectory 'pair.json') -Raw|ConvertFrom-Json
 if(([DateTime]$pair.ExpiresUtc).ToUniversalTime() -lt [DateTime]::UtcNow){throw 'Pair certificate expired; create a new pair'}
 $map=Get-Content $MapFile -Raw|ConvertFrom-Json
-if($map.Map -ne 'Airport' -or $map.Scenario -ne 'Airport_network'){throw 'Only prepared Airport_network descriptor supported'}
+if(!(($map.Map -eq 'Airport' -and $map.Scenario -eq 'Airport_network') -or ($map.Map -eq 'Airbase' -and $map.Scenario -eq '5454584'))){throw 'Only prepared Airport_network or Airbase/5454584 supported'}
 if($Mode -eq 'ObserveTwoClient' -and !$RosterValidated){throw 'Complete both LoadReadProbe checks before enabling ObserveTwoClient'}
 New-Item -ItemType Directory -Path $out|Out-Null
 $cfg=[ordered]@{RuntimeReadAuthorized=[bool]$AuthorizeRuntimeRead;PrivateSessionConfirmed=[bool]$AuthorizeRuntimeRead;Mode=$Mode;SessionId=$pair.SessionId;Role=$Role;NetworkEnabled=$true;Host=$pair.Host;Port=$pair.Port;SecretFile=[IO.Path]::GetFullPath((Join-Path $PairDirectory 'session.key'));CertificateFile=if($Role -eq 'A'){[IO.Path]::GetFullPath((Join-Path $PairDirectory 'server.pfx'))}else{''};CertificatePin=$pair.CertificatePin;Replication=if($TrustedReplicaConsent){'TrustedDiagnosticReplica'}else{'TeamSafe'};TrustedReplicaConsent=[bool]$TrustedReplicaConsent;BindingFile='';MapFile=[IO.Path]::GetFullPath($MapFile);ProfilesFile=(Join-Path $root 'config/poc030-rc2/profiles.json');RosterContractConfirmed=[bool]$RosterValidated;CircleKey='F8';SelectOwnKey='F9';PassiveServiceProbeEnabled=[bool]$PassiveServiceProbe;DetailedReplayConsent=[bool]$DetailedReplayConsent}

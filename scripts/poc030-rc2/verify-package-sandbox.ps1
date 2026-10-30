@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$DotnetPath,[Parameter(Mandatory)][string]$Archive,[Parameter(Mandatory)][string]$OutputDirectory,[Parameter(Mandatory)][string]$InteropManifest,[Parameter(Mandatory)][string]$PairRoot)
+param([Parameter(Mandatory)][string]$DotnetPath,[Parameter(Mandatory)][string]$Archive,[Parameter(Mandatory)][string]$OutputDirectory,[Parameter(Mandatory)][string]$InteropManifest,[Parameter(Mandatory)][string]$PairRoot,[string]$MapRelative="config/poc030-rc2/maps/Airport-100.json")
 $ErrorActionPreference='Stop'
 $out=[IO.Path]::GetFullPath($OutputDirectory)
 if(Test-Path -LiteralPath $out){throw 'Fresh sandbox output required'}
@@ -13,7 +13,7 @@ foreach($role in @('A','B')){
  New-Item -ItemType Directory -Path (Split-Path $old)|Out-Null
  [IO.File]::WriteAllText($old,'original sandbox interop sentinel')
  $client=Join-Path $out "client-$role"
- & (Join-Path $package 'scripts/poc030-rc2/prepare-client.ps1') -Role $role -PairDirectory (Join-Path $PairRoot $role) -MapFile (Join-Path $package 'config/poc030-rc2/maps/Airport-100.json') -InteropManifest $InteropManifest -OutputDirectory $client
+ & (Join-Path $package 'scripts/poc030-rc2/prepare-client.ps1') -Role $role -PairDirectory (Join-Path $PairRoot $role) -MapFile (Join-Path $package $MapRelative) -InteropManifest $InteropManifest -OutputDirectory $client
  & $DotnetPath $cli plan $target (Join-Path $client 'client-manifest.json') (Join-Path $client 'plan.json') | Out-File (Join-Path $out "plan-$role.log")
  if($LASTEXITCODE){throw 'Plan failed'}
  foreach($operation in @('install','verify','remove')){

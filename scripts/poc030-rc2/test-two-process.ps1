@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$DotnetPath,[switch]$RuntimePipeline,[switch]$Reconnect)
+param([Parameter(Mandatory)][string]$DotnetPath,[switch]$RuntimePipeline,[switch]$Reconnect,[string]$MapFile)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $output=Join-Path $root ('artifacts/poc030_rc2/two-process-'+[Guid]::NewGuid().ToString('N'))
@@ -21,6 +21,7 @@ try {
  foreach($role in @('A','B')) {
   $info=[Diagnostics.ProcessStartInfo]::new();$info.FileName=$DotnetPath;$info.UseShellExecute=$false;$info.CreateNoWindow=$true
   foreach($arg in @($dll,$peerMode,$role,"$port",$keyPath,$certPath,$pin,(Join-Path $output "$role.json"))){$info.ArgumentList.Add($arg)}
+  if($MapFile){$info.ArgumentList.Add([IO.Path]::GetFullPath($MapFile))}
   $processes+=,[Diagnostics.Process]::Start($info)
  }
  foreach($process in $processes){if(!$process.WaitForExit(20000)){$process.Kill();throw 'Peer timeout'};if($process.ExitCode -ne 0){throw 'Peer failed; inspect JSON evidence'}}

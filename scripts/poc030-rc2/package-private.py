@@ -2,7 +2,8 @@
 import hashlib, json, pathlib, shutil, subprocess, zipfile, sys
 root = pathlib.Path(__file__).resolve().parents[2]
 out = root / (sys.argv[1] if len(sys.argv)>1 else 'artifacts/poc030_rc2/delivery')
-stage = out / 'DynamicFrontline-030-RC2-private'
+airbase=len(sys.argv)>2 and sys.argv[2]=='airbase'
+stage = out / ('DynamicFrontline-030-RC2-Airbase-5454584' if airbase else 'DynamicFrontline-030-RC2-private')
 if stage.exists():
     raise SystemExit('Fresh delivery directory required')
 stage.mkdir(parents=True)
@@ -25,7 +26,11 @@ for suffix in ('.dll','.deps.json','.runtimeconfig.json'):
     p='scripts/poc030/interop-generator/bin/Release/net6.0/interop-generator'+suffix
     copy(p)
 tree('config/poc030-rc2'); copy('config/poc030/compatibility.json')
-tree('docs/poc030_rc2'); tree('scripts/poc030-rc2',suffixes={'.ps1','.py','.cs','.csproj'})
+tree('docs/poc030_rc2');
+if airbase:
+    tree('docs/poc030_airbase')
+    tree('evidence/poc030_airbase',dst='evidence/airbase')
+tree('scripts/poc030-rc2',suffixes={'.ps1','.py','.cs','.csproj'})
 for name in ('preflight-runtime.ps1','generate-interop.ps1','build-poc030.ps1'): copy('scripts/poc030/'+name)
 tree('scripts/poc030/interop-generator',suffixes={'.cs','.csproj'})
 for family in ('Core','Frontline','GameAdapter','Integration','Poc030','Poc030.MelonLoader'):
@@ -88,6 +93,17 @@ No native effects. Keep payload/config and generated local preparation directori
 at stable paths. Never copy the entire archive into the game directory.
 CLI: scripts/poc030-rc2/run-dev-tools.ps1. Install/remove only through reviewed plans.
 Evidence contains synthetic observations, not a recorded game match.
+''',encoding='utf-8')
+if airbase:
+    (stage/'README.md').write_text('''# RC2 Airbase / 5454584 — separate diagnostic build
+
+Start with docs/poc030_airbase/RELEASE.md and RUNBOOK.md.
+Use config/poc030-rc2/maps/Airbase-5454584-100.json, never rename the Airport map.
+RuntimeValidated=false. No game installation or launch authorized.
+Baseline docs/poc030_rc2 and evidence outside evidence/airbase are historical
+Airport evidence, not validation of this variant. New build evidence: evidence/airbase.
+Scenario/game binaries and secrets are not included. Both PCs require identical
+original scenario bascr AND meta.json, pinned game and local interop.
 ''',encoding='utf-8')
 record={'SourceRevision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
         'SourceStatus':subprocess.check_output(['git','status','--porcelain'],cwd=root,text=True).splitlines(),

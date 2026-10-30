@@ -1,0 +1,34 @@
+{
+  "Scope": "Copied synthetic owner observations -\u003E canonical lifecycle -\u003E JSON wire -\u003E existing Observe core/digests -\u003E own projection serialization. Map topology identified by MapHash; synthetic event map when events=true. NO game/TLS/HUD/disk time included in total; CSV disk outside timing.",
+  "MapHash": "E5B562797A8236EDD29FA4CA573E9255535434C36F2DD1462120CFECDC3507A0",
+  "Count": 100,
+  "Steps": 10800,
+  "Repeat": 0,
+  "Warmup": 128,
+  "Cell": 100,
+  "PhysicalSize": [
+    9000,
+    9000
+  ],
+  "Seed": 1700,
+  "Runtime": "6.0.36",
+  "OS": "Microsoft Windows NT 10.0.19045.0",
+  "CPU": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+  "Cores": 20,
+  "P50": 11.149,
+  "P95": 12.673799999999998,
+  "P99": 13.9113,
+  "Max": 52.1919,
+  "DeadlineMisses": 0,
+  "BytesPerStep": 1808578.111111111,
+  "TotalProcessAllocated": 19787329944,
+  "GC": [
+    2160,
+    1037,
+    787
+  ],
+  "FirstWorkingSet": 58232832,
+  "LastWorkingSet": 55795712,
+  "Queues": "Synchronous offline stages; queue occupancy zero by construction; native reads/TLS/HUD require separate measurements",
+  "Seconds": 123.8101596
+}

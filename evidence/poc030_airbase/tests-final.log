@@ -1,0 +1,50 @@
+PASS R1 configure remove preserve reinstall
+PASS R1 RC1 receipt migration preserves configured role without manual editing
+PASS R1 changed DLL conflict retained independently
+PASS R2 injected exception all apply boundaries recover twice
+PASS R2 fresh process recovery after fail-fast at every apply boundary
+PASS R2 interrupted upgrade and removal preserve original receipt and bytes
+PASS R2 wrong package hash foreign same name and concurrent operations
+PASS R2 shared cache replacement removal restores original files
+PASS R2 shared cache crash rollback and changed cache preserve group
+PASS R3 heartbeat cannot freshen failed source and pause is live
+PASS R5 observed 80 20 80 follows actual state and no backend feedback
+PASS R6 independent core same canonical input no local handle hash
+PASS R6 world partial stale wrong owner delta gap and conflict reject
+PASS R6 duplicate delta is idempotent and conflicting duplicate rejected
+PASS R6 checkpoint restore preserves core and next canonical id
+PASS R6 authenticated chunk roundtrip truncated and oversized reject
+PASS R5 live observer survives projected terminal time
+PASS R6 rejected profile leaves spawn registry transactional
+PASS R6 lifecycle death disappearance reuse owner transfer and resync
+PASS R5 active profile mismatch never gets a fallback
+PASS Map runtime bounds scenario and root teams are mandatory
+PASS Two independent pocket certificates do not merge interiors
+PASS Persistent breakthrough survives conflicting local score projection
+PASS Diagnostics replay and comparison use actual matching inputs
+PASS Airbase actual descriptor roots and observed source contract
+PASS Airbase source hash covers scenario settings and metadata
+PASS Clock staggering waits without consuming a canonical revision
+PASS Checkpoint with active tau preserves forecast and duplicate idempotence
+PASS R2 retire old unprefixed cache and restore on removal
+PASS R2 retired cache interruption restores complete old cache
+PASS Positive service evidence is deduplicated and never invents intervals
+PASS Old local entity service proof cannot attach to reused NetID
+PASS Independent concave polygon oracle 50m rotation 0 mirror False
+PASS Independent concave polygon oracle 50m rotation 0 mirror True
+PASS Independent concave polygon oracle 50m rotation 1 mirror False
+PASS Independent concave polygon oracle 50m rotation 1 mirror True
+PASS Independent concave polygon oracle 50m rotation 2 mirror False
+PASS Independent concave polygon oracle 50m rotation 2 mirror True
+PASS Independent concave polygon oracle 50m rotation 3 mirror False
+PASS Independent concave polygon oracle 50m rotation 3 mirror True
+PASS Independent concave polygon oracle 100m rotation 0 mirror False
+PASS Independent concave polygon oracle 100m rotation 0 mirror True
+PASS Independent concave polygon oracle 100m rotation 1 mirror False
+PASS Independent concave polygon oracle 100m rotation 1 mirror True
+PASS Independent concave polygon oracle 100m rotation 2 mirror False
+PASS Independent concave polygon oracle 100m rotation 2 mirror True
+PASS Independent concave polygon oracle 100m rotation 3 mirror False
+PASS Independent concave polygon oracle 100m rotation 3 mirror True
+PASS Native missing topology is Unknown rather than blocked proof
+TOTAL 49; FAILED 0

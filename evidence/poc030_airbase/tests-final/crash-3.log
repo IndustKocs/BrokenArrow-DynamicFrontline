@@ -1,0 +1,10 @@
+Exit=-2146232797
+Process terminated. Injected installer process termination
+   at System.Environment.FailFast(System.String)
+   at Program+<>c__DisplayClass0_1.<<Main>$>b__29(System.String)
+   at DynamicFrontline.Poc030.DevInstall.Apply(DynamicFrontline.Poc030.InstallFile[])
+   at Program+<<Main>$>d__0.MoveNext()
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[[Program+<<Main>$>d__0, DynamicFrontline.Rc2.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](<<Main>$>d__0 ByRef)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]].Start[[Program+<<Main>$>d__0, DynamicFrontline.Rc2.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](<<Main>$>d__0 ByRef)
+   at Program.<Main>$(System.String[])
+   at Program.<Main>(System.String[])
