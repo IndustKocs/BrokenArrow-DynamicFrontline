@@ -112,6 +112,20 @@ Test("Airbase source hash covers scenario settings and metadata",()=>{
  foreach(var path in paths){var full=Path.Combine(root,path);File.WriteAllText(full,"changed");Reject(()=>m.VerifyLocalSources(root));File.WriteAllText(full,path);}
 });
 
+
+Test("Radmin requires opt-in and exact coordinator and role",()=>{
+ var c=new ProbeConfig(false,false,"NetworkProbe","fixture","A",true,EndpointPolicy.RadminA,47617,"");Reject(()=>EndpointPolicy.Validate(c));
+ foreach(var role in new[]{"A","B"})Assert(EndpointPolicy.Validate(c with{Role=role,RadminPair=true}).ToString()==EndpointPolicy.RadminA);
+ foreach(var host in new[]{EndpointPolicy.RadminB,"26.1.2.3","0.0.0.0","8.8.8.8","127.0.0.1"})Reject(()=>EndpointPolicy.Validate(c with{Host=host,RadminPair=true}));
+ Reject(()=>EndpointPolicy.Validate(c with{RadminPair=true,Role="C"}));Reject(()=>EndpointPolicy.Validate(c with{RadminPair=true,Port=80}));
+ Assert(EndpointPolicy.Validate(c with{Host="192.168.1.2"}).ToString()=="192.168.1.2");
+});
+Test("Radmin peers are pinned independently of HMAC identity",()=>{
+ EndpointPolicy.VerifyRadminPeer("A",System.Net.IPAddress.Parse(EndpointPolicy.RadminB));EndpointPolicy.VerifyRadminPeer("B",System.Net.IPAddress.Parse(EndpointPolicy.RadminA));
+ foreach(var host in new[]{"26.1.2.3","127.0.0.1","192.168.1.2"}){Reject(()=>EndpointPolicy.VerifyRadminPeer("A",System.Net.IPAddress.Parse(host)));Reject(()=>EndpointPolicy.VerifyRadminPeer("B",System.Net.IPAddress.Parse(host)));}
+ Reject(()=>EndpointPolicy.VerifyRadminPeer("A",System.Net.IPAddress.Parse(EndpointPolicy.RadminA)));
+});
+
 AdditionalRc2Tests.Run(Test,Assert,Reject,output,files,sandbox);
 GeometryOracleTests.Run(Test,Assert);
 File.WriteAllText(Path.Combine(output,"results.json"),JsonSerializer.Serialize(new{count=results.Count,failed,results},new JsonSerializerOptions{WriteIndented=true}));Console.WriteLine($"TOTAL {results.Count}; FAILED {failed}");return failed==0?0:1;

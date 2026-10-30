@@ -2,8 +2,9 @@
 import hashlib, json, pathlib, shutil, subprocess, zipfile, sys
 root = pathlib.Path(__file__).resolve().parents[2]
 out = root / (sys.argv[1] if len(sys.argv)>1 else 'artifacts/poc030_rc2/delivery')
-airbase=len(sys.argv)>2 and sys.argv[2]=='airbase'
-stage = out / ('DynamicFrontline-030-RC2-Airbase-5454584' if airbase else 'DynamicFrontline-030-RC2-private')
+radmin=len(sys.argv)>2 and sys.argv[2]=='radmin'
+airbase=len(sys.argv)>2 and sys.argv[2] in ('airbase','radmin')
+stage = out / ('DynamicFrontline-030-RC2-Airbase-Radmin' if radmin else 'DynamicFrontline-030-RC2-Airbase-5454584' if airbase else 'DynamicFrontline-030-RC2-private')
 if stage.exists():
     raise SystemExit('Fresh delivery directory required')
 stage.mkdir(parents=True)
@@ -26,6 +27,9 @@ for suffix in ('.dll','.deps.json','.runtimeconfig.json'):
     p='scripts/poc030/interop-generator/bin/Release/net6.0/interop-generator'+suffix
     copy(p)
 tree('config/poc030-rc2'); copy('config/poc030/compatibility.json')
+if radmin:
+    tree('docs/poc030_radmin')
+    tree('evidence/poc030_radmin',dst='evidence/radmin')
 tree('docs/poc030_rc2');
 if airbase:
     tree('docs/poc030_airbase')
@@ -104,6 +108,16 @@ Baseline docs/poc030_rc2 and evidence outside evidence/airbase are historical
 Airport evidence, not validation of this variant. New build evidence: evidence/airbase.
 Scenario/game binaries and secrets are not included. Both PCs require identical
 original scenario bascr AND meta.json, pinned game and local interop.
+''',encoding='utf-8')
+if radmin:
+    (stage/'README.md').write_text('''# RC2 Airbase / 5454584 / pinned Radmin pair
+
+Start with docs/poc030_radmin/RUNBOOK.md and RELEASE.md.
+A=26.137.77.181, B=26.204.104.7. Explicit -RadminPair preparation required.
+TLS certificate pinning and HMAC remain mandatory. No installation has been performed.
+Do not reuse DLLs or configs from previous ZIPs. Actual two-PC Radmin probe NotRun.
+Current evidence: evidence/radmin. Airbase/base evidence is historical.
+No scenario/game/loader binaries, PFX or keys included. RuntimeValidated=false.
 ''',encoding='utf-8')
 record={'SourceRevision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
         'SourceStatus':subprocess.check_output(['git','status','--porcelain'],cwd=root,text=True).splitlines(),

@@ -67,11 +67,14 @@ public sealed partial class DevChannel
             TcpListener? listener=null;
             try
             {
-                var address=IPAddress.Parse(config.Host);var b=address.GetAddressBytes();if(!(IPAddress.IsLoopback(address)||b.Length==4&&(b[0]==10||b[0]==172&&b[1] is >=16 and <=31||b[0]==192&&b[1]==168))||config.Port is <1024 or >65535)throw new InvalidDataException("ExplicitPrivateEndpointRequired");
+                var address=EndpointPolicy.Validate(config);
                 using var timeout=CancellationTokenSource.CreateLinkedTokenSource(stop.Token);timeout.CancelAfter(TimeSpan.FromSeconds(20));State="ConnectingTls";
                 using var client=new TcpClient();TcpClient? accepted=null;
+                if(config.RadminPair&&config.Role=="B")client.Client.Bind(new IPEndPoint(IPAddress.Parse(EndpointPolicy.RadminB),0));
                 if(config.Role=="A"){listener=new(address,config.Port);listener.Start(1);accepted=await listener.AcceptTcpClientAsync(timeout.Token);}else await client.ConnectAsync(address,config.Port,timeout.Token);
-                using var active=accepted??client;Volatile.Write(ref liveClient,active);listener?.Stop();active.NoDelay=true;
+                using var active=accepted??client;
+                if(config.RadminPair)EndpointPolicy.VerifyRadminPeer(config.Role,((IPEndPoint)active.Client.RemoteEndPoint!).Address);
+                Volatile.Write(ref liveClient,active);listener?.Stop();active.NoDelay=true;
                 using var tls=new SslStream(active.GetStream(),false,(_,certificate,_,_)=>config.Role=="A"||certificate!=null&&Convert.ToHexString(SHA256.HashData(certificate.GetRawCertData()))==config.CertificatePin);
                 if(config.Role=="A"){using var certificate=new X509Certificate2(config.CertificateFile,string.Empty,X509KeyStorageFlags.DefaultKeySet);await tls.AuthenticateAsServerAsync(new SslServerAuthenticationOptions{ServerCertificate=certificate,EnabledSslProtocols=SslProtocols.Tls12|SslProtocols.Tls13,ClientCertificateRequired=false},timeout.Token);}
                 else await tls.AuthenticateAsClientAsync(new SslClientAuthenticationOptions{TargetHost="dynamic-frontline-private",EnabledSslProtocols=SslProtocols.Tls12|SslProtocols.Tls13},timeout.Token);
