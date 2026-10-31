@@ -11,6 +11,10 @@ class UpdaterTests {
  static int Main(string[] args){try{
   string repo="IndustKocs/BrokenArrow-DynamicFrontline",url="https://github.com/"+repo+"/releases/download/test/DynamicFrontlineLauncher.exe";
   string executable=Path.GetFullPath(args[0]),root=Path.GetFullPath(args[1]);Directory.CreateDirectory(root);
+  Check(LauncherFolders.Logs(root,false)==Path.Combine(root,"GameLogs"));
+  Check(LauncherFolders.Logs(root,true)==Path.Combine(root,"UserData","DynamicFrontlineSteam","logs"));
+  Reject(()=>LauncherFolders.Logs("",true));
+  Check(!Directory.Exists(Path.Combine(root,"GameLogs"))&&!Directory.Exists(Path.Combine(root,"UserData")));
   byte[] bytes=File.ReadAllBytes(executable);string hash=LauncherUpdate.Hash(executable);
   var asset=LauncherUpdate.Select(Json(hash,url,bytes.Length),repo,true);Check(asset.Hash==hash);
   Reject(()=>LauncherUpdate.Select(Json(hash,url,bytes.Length,true),repo,true));
