@@ -45,7 +45,7 @@ if($Action -in @('Install','Remove','Recover','Verify','Collect')){
  Add-Type -AssemblyName System.IO.Compression.FileSystem
  $archive=[IO.Compression.ZipFile]::OpenRead($runtimeZip)
  try{foreach($entry in $archive.Entries){if(!$entry.Name){continue};$stream=$entry.Open();$sha=[Security.Cryptography.SHA256]::Create();try{$expected=[Convert]::ToHexString($sha.ComputeHash($stream))}finally{$sha.Dispose();$stream.Dispose()};$path=Join-Path (Split-Path $runtime) $entry.FullName;SafePath $path;if((Get-FileHash -LiteralPath $path).Hash -ne $expected){throw 'Extracted runtime changed'}}}finally{$archive.Dispose()}
- if($Action -eq 'Collect'){RunCli @('collect',(Join-Path $game 'UserData/DynamicFrontlineSteam/logs'),(Join-Path $work ('export-'+(Get-Date -Format 'yyyyMMdd-HHmmss'))));return}
+ if($Action -eq 'Collect'){$export=Join-Path $work ('export-'+(Get-Date -Format 'yyyyMMdd-HHmmss'));RunCli @('collect',(Join-Path $game 'UserData/DynamicFrontlineSteam/logs'),$export);Write-Output ('Safe diagnostics folder: '+$export);return}
  if($Action -eq 'Install' -and !$Sandbox -and !(HasGameRuntime)){
   & (Join-Path $root 'scripts/poc030/preflight-runtime.ps1') -GameRoot $game | Out-Null
   if(Get-Process -Name BrokenArrow,EACLauncher -ErrorAction SilentlyContinue){throw 'Close game before installing prerequisites'}

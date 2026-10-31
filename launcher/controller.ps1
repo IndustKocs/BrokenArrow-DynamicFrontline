@@ -30,7 +30,7 @@ try {
   foreach($row in $rows){$p=[IO.Path]::GetFullPath((Join-Path $folder $row.Path));if(!$p.StartsWith($folder.TrimEnd('\')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Inventory path escape'};Safe $p;if((Get-FileHash -LiteralPath $p).Hash -ne $row.SHA256){throw 'Release integrity mismatch'}}
   if((Get-ChildItem -LiteralPath $folder -Recurse -File).Count -ne $rows.Count+1){throw 'Unlisted package files'}
  }
- if((($r.Action -in @('Update','CheckUpdates')) -or ($r.Action -eq 'Install' -and $channel.Repository -and $env:DF_GITHUB_TOKEN)) -and !($r.Sandbox -and $r.Offline -and $r.Action -in @('Install','Update'))){
+ if((($r.Action -in @('Update','CheckUpdates')) -or ($r.Action -eq 'Install' -and $channel.Repository -and (!$channel.Private -or $env:DF_GITHUB_TOKEN))) -and !($r.Sandbox -and $r.Offline -and $r.Action -in @('Install','Update'))){
   if($channel.Repository -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$'){throw 'GitHub Releases repository is not configured; bundled installation remains available'}
   if($channel.Private -and !$env:DF_GITHUB_TOKEN){throw 'Private Releases: enter a read-only GitHub token, or install the bundled version without a token'}
   $headers=@{'User-Agent'='DynamicFrontlineLauncher';'Accept'='application/vnd.github+json'};if($env:DF_GITHUB_TOKEN){$headers.Authorization='Bearer '+$env:DF_GITHUB_TOKEN}

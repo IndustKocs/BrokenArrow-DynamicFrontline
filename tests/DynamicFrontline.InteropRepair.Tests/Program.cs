@@ -6,6 +6,10 @@ var plugin=ModuleDefinition.FromFile(args[1]);
 var game=plugin.Assembly!.CustomAttributes.Single(a=>a.Constructor?.DeclaringType?.Name=="MelonGameAttribute").Signature!.FixedArguments;
 if(game[0].Element?.ToString()!="SteelBalalaikaStudio" || game[1].Element?.ToString()!="BrokenArrow")throw new Exception("Wrong MelonGame identity");
 Console.WriteLine("PASS: built plugin MelonGame matches observed runtime identity.");
+var hooks=plugin.GetAllTypes().Single(t=>t.Name=="NativeContext").Methods.Single(m=>m.Name=="Install");
+var literals=hooks.CilMethodBody!.Instructions.Select(i=>i.Operand as string).Where(x=>x!=null).ToArray();
+if(literals.Contains("get_State")||literals.Contains("Initialize")||!literals.Contains("Connect")||!literals.Contains("Dispose"))throw new Exception("Unsafe lobby hook regression");
+Console.WriteLine("PASS: compiled lobby hooks exclude folded getter and Initialize.");
 var temp=Path.Combine(Path.GetFullPath(args[0]),Guid.NewGuid().ToString("N"));Directory.CreateDirectory(temp);
 var source=ModuleDefinition.FromFile(Assembly.GetExecutingAssembly().Location);
 foreach(var method in source.GetAllTypes().Single(t=>t.Name=="Fixture").Methods) {

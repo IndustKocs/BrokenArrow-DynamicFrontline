@@ -1,0 +1,40 @@
+{
+  "Version": "0.4.0-T18-full-debug5",
+  "RuntimeValidated": false,
+  "GameStarted": false,
+  "GameInstalled": false,
+  "ManagedSuites": {
+    "Steam": 95,
+    "RC2": 54,
+    "RC1": 44,
+    "Simulation023": 72
+  },
+  "FreshInterop": {
+    "Generated": true,
+    "ValueFieldsChecked": 13162,
+    "Bindings": 38,
+    "JitCctorsOnly": true,
+    "NativeInvocation": false
+  },
+  "LobbyHookAudit": {
+    "RemovedSharedGetterRva": "0xB7F0",
+    "SharedMethods": 1540,
+    "RejectedOldGetter": true,
+    "UniqueHooks": {
+      ".ctor": "0x652490",
+      "Connect": "0x64F340",
+      "Dispose": "0x64FC10"
+    }
+  },
+  "Sandbox": {
+    "Scope": "Offline sandbox; not game or GitHub",
+    "Install": true,
+    "Verify": true,
+    "IdempotentUpdate": true,
+    "NoConsentRejected": true,
+    "CorruptionDetected": true,
+    "Remove": true,
+    "ForeignFilePreserved": true,
+    "GameStarted": false
+  }
+}

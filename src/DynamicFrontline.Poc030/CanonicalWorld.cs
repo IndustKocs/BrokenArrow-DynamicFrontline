@@ -53,6 +53,10 @@ public sealed record MapDescriptor(string Map,string GameFingerprint,string Evid
             ("Airport","Airport_network")=>["BrokenArrow_Data/StreamingAssets/Navigation/Airport.ng","BrokenArrow_Data/StreamingAssets/SharedMissions/Airport_network/Airport_network.bascr"],
             ("Airbase","5454584")=>["BrokenArrow_Data/StreamingAssets/Navigation/Airbase.ng","Scenarios/5454584/5454584.bascr","BrokenArrow_Data/StreamingAssets/aa/PC/mapsettings_assets_mapsettingsairbase_f28604c0f1829a35d50f99e2b6dcdef2.bundle","Scenarios/5454584/meta.json"],
             _=>throw new InvalidDataException("UnsupportedNativeMap")};
+        if(Map=="Airbase"&&Scenario=="5454584"){
+            var scenario=ScenarioSources.Resolve5454584(gameRoot);
+            sources[1]=Path.Combine(scenario,"5454584.bascr");sources[3]=Path.Combine(scenario,"meta.json");
+        }
         using var hash=System.Security.Cryptography.IncrementalHash.CreateHash(System.Security.Cryptography.HashAlgorithmName.SHA256);var buffer=new byte[65536];
         foreach(var relative in sources){using var stream=new FileStream(Path.Combine(gameRoot,relative),FileMode.Open,FileAccess.Read,FileShare.Read);int n;while((n=stream.Read(buffer))>0)hash.AppendData(buffer.AsSpan(0,n));}
         if(Convert.ToHexString(hash.GetHashAndReset())!=SourceSha256)throw new InvalidDataException("MapOrScenarioSourceChanged");

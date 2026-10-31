@@ -8,9 +8,17 @@ public sealed class NativeContext : IDisposable
 {
  const string LobbyType="BrokenArrow.Client.Ecs.GNetwork.Services.Lobby.NetworkLobbyService";
  static object? lobbyService;readonly HarmonyLib.Harmony harmony=new("DynamicFrontline.T18.LobbyObserver");NativeScenario? retained;int retainedLobby,retainedHost;
- public void Install(){var type=LiveReader.Resolve(LobbyType);harmony.Patch(type.GetMethod("get_State"),postfix:new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Capture),BindingFlags.Static|BindingFlags.NonPublic)));harmony.Patch(type.GetMethod("Dispose"),postfix:new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Closed),BindingFlags.Static|BindingFlags.NonPublic)));}
- static void Capture(object __instance)=>Interlocked.Exchange(ref lobbyService,__instance);
- static void Closed(object __instance){Interlocked.Exchange(ref lobbyService,null);}
+ public void Install(){
+  var type=LiveReader.Resolve(LobbyType);
+  // get_State is a folded native getter shared by 1540 methods in the supported build.
+  // Never detour it: unrelated instances would be marshalled as NetworkLobbyService.
+  var capture=new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Capture),BindingFlags.Static|BindingFlags.NonPublic));
+  harmony.Patch(type.GetConstructors().Single(c=>c.GetParameters().Length==7),postfix:capture);
+  harmony.Patch(type.GetMethod("Connect")??throw new MissingMethodException("Lobby.Connect"),postfix:capture);
+  harmony.Patch(type.GetMethod("Dispose")??throw new MissingMethodException("Lobby.Dispose"),prefix:new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Closed),BindingFlags.Static|BindingFlags.NonPublic)));
+ }
+ static void Capture(object __instance){if(LiveReader.Resolve(LobbyType).IsInstanceOfType(__instance))Interlocked.Exchange(ref lobbyService,__instance);}
+ static void Closed(object __instance){var current=Volatile.Read(ref lobbyService);if(current!=null&&Equals(LiveReader.Get(current,"Pointer"),LiveReader.Get(__instance,"Pointer")))Interlocked.CompareExchange(ref lobbyService,null,current);}
  public NativeScenario? Read()
  {
   var gc=LiveReader.Resolve("BrokenArrow.Client.Ecs.Controllers.GameController");

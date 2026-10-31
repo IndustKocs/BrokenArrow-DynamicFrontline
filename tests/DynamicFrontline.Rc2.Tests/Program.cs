@@ -116,6 +116,21 @@ Test("Airbase source hash covers scenario settings and metadata",()=>{
 });
 
 
+Test("Workshop scenario discovery preserves source hashes and refuses conflicts",()=>{
+ var m=JsonSerializer.Deserialize<MapDescriptor>(File.ReadAllText("config/poc030-rc2/maps/Airbase-5454584-100.json"))!;
+ var library=Path.Combine(sandbox,"workshop-library","steamapps");var root=Path.Combine(library,"common","broken_arrow");Directory.CreateDirectory(root);
+ Reject(()=>ScenarioSources.Resolve5454584(root));
+ var workshop=Path.Combine(library,"workshop","content","1604270","3830189668");Directory.CreateDirectory(workshop);
+ File.WriteAllText(Path.Combine(workshop,"5454584.bascr"),"scenario");Reject(()=>ScenarioSources.Resolve5454584(root));
+ File.WriteAllText(Path.Combine(workshop,"meta.json"),"metadata");Assert(ScenarioSources.Resolve5454584(root)==workshop);
+ string[] files=["BrokenArrow_Data/StreamingAssets/Navigation/Airbase.ng",Path.Combine(workshop,"5454584.bascr"),"BrokenArrow_Data/StreamingAssets/aa/PC/mapsettings_assets_mapsettingsairbase_f28604c0f1829a35d50f99e2b6dcdef2.bundle",Path.Combine(workshop,"meta.json")];
+ foreach(var f in new[]{files[0],files[2]}){var p=Path.Combine(root,f);Directory.CreateDirectory(Path.GetDirectoryName(p)!);File.WriteAllText(p,f);}
+ m=m with{SourceSha256=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(files.SelectMany(f=>File.ReadAllBytes(Path.Combine(root,f))).ToArray()))};m.VerifyLocalSources(root);
+ File.AppendAllText(Path.Combine(workshop,"meta.json"),"changed");Reject(()=>m.VerifyLocalSources(root));File.WriteAllText(Path.Combine(workshop,"meta.json"),"metadata");
+ var local=Path.Combine(root,"Scenarios","5454584");Directory.CreateDirectory(local);foreach(var n in new[]{"5454584.bascr","meta.json"})File.Copy(Path.Combine(workshop,n),Path.Combine(local,n));m.VerifyLocalSources(root);
+ File.AppendAllText(Path.Combine(local,"5454584.bascr"),"different");Reject(()=>m.VerifyLocalSources(root));
+});
+
 Test("Radmin requires opt-in and exact coordinator and role",()=>{
  var c=new ProbeConfig(false,false,"NetworkProbe","fixture","A",true,EndpointPolicy.RadminA,47617,"");Reject(()=>EndpointPolicy.Validate(c));
  foreach(var role in new[]{"A","B"})Assert(EndpointPolicy.Validate(c with{Role=role,RadminPair=true}).ToString()==EndpointPolicy.RadminA);
