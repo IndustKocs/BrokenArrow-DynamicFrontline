@@ -15,7 +15,9 @@ public sealed class NativeContext : IDisposable
  {
   var gc=LiveReader.Resolve("BrokenArrow.Client.Ecs.Controllers.GameController");
   bool active=Convert.ToBoolean(gc.GetProperty("IsInstanceAlive")!.GetValue(null));
-  if(active){var game=gc.GetProperty("Instance")!.GetValue(null)!;var room=LiveReader.Get(game,"_networkRoomService")!;var state=LiveReader.Get(room,"State")!;
+  if(active){var game=gc.GetProperty("Instance")!.GetValue(null);var state=RuntimeStartup.RoomState(game,LiveReader.Get);
+   if(state!=null){
+   var room=LiveReader.Get(game!,"_networkRoomService")??throw new InvalidDataException("ScenarioSessionNotReady");
    if(Convert.ToString(LiveReader.Get(state,"LobbyType"))!="Scenario"||Convert.ToString(LiveReader.Get(LiveReader.Get(state,"ScenarioMeta")!,"Name"))!="5454584")throw new InvalidDataException("OnlyScenario5454584");
    // Read effective server policy and actual EOS session bookkeeping; no protection/auth calls or hooks.
    var eos=LiveReader.Get(room,"_eosAntiCheatService")??throw new InvalidDataException("SessionPolicyUnknown");
@@ -29,6 +31,7 @@ public sealed class NativeContext : IDisposable
    if(verdict!="AllowedScenario")throw new InvalidDataException(verdict);
 
    return retained! with{InMatch=true,FightId=Convert.ToInt64(LiveReader.Get(state,"FightId"))};
+   }
   }
   var lobby=Volatile.Read(ref lobbyService);if(lobby==null){retained=null;return null;}
   var ls=LiveReader.Get(lobby,"State");if(ls==null){retained=null;return null;}var opts=LiveReader.Get(ls,"Options")!;

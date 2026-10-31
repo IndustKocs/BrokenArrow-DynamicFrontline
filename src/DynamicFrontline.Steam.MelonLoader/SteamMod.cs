@@ -10,7 +10,7 @@ using MelonLoader;
 namespace DynamicFrontline.Steam.MelonLoader;
 public sealed class SteamMod : MelonMod
 {
- readonly Stopwatch clock=Stopwatch.StartNew();readonly DfEvents events=new();string dir="",status="Preparing bindings",lastStatus="",compatibility="",scope="",connection="";bool enabled=true,initialized,failed,roster;double nextRead,nextContext,nextRetry;int samples;
+ readonly Stopwatch clock=Stopwatch.StartNew();readonly DfEvents events=new();string dir="",status="Preparing bindings",lastStatus="",compatibility="",scope="",connection="";bool enabled=true,initialized,failed,roster;double nextRead,nextContext,nextRetry,nextFault;int samples;bool interopReady,hudCallback,hudDrawn;string phase="Bootstrap";
  GameCompatibilityDescriptor? descriptor;MapDescriptor? map;ProfileSet? profiles;NativeContext? context;NativeSteam? steam;SteamDiscovery? discovery;NativeSteam.Wire? wire;SteamWorldChannel? channel;RuntimeObserver? observer;LiveReader? reader;Observation? latest;SteamHud? hud;UnityGamelog? gameLog;StreamWriter? backup;Task? worker;long fight;
  T Read<T>(string name)=>JsonSerializer.Deserialize<T>(File.ReadAllText(Path.Combine(dir,name)))??throw new InvalidDataException(name);
  public override void OnInitializeMelon()
@@ -21,32 +21,35 @@ public sealed class SteamMod : MelonMod
    string assembly=Path.GetDirectoryName(typeof(SteamMod).Assembly.Location)!;
    var hashes=new[]{"Steam.MelonLoader","Steam","Poc030","Core","Frontline","GameAdapter","Integration"}.Select(n=>new{Name=n,Hash=DevInstall.Hash(n=="Steam.MelonLoader"?typeof(SteamMod).Assembly.Location:Path.Combine(Path.GetDirectoryName(typeof(LiveReader).Assembly.Location)!,"DynamicFrontline."+n+".dll"))}).ToArray();
    compatibility=CanonicalCodec.Digest(new{Protocol="df18-world-4",Relay="RelayOnly_ICE0",Payload=hashes,Game=descriptor.Digest,Map=map.Hash,Profiles=profiles.Hash,Rules=new Rules023Config().Hash,Mode="ObserveOnly_TeamSafe"});
-   Directory.CreateDirectory(Path.Combine(dir,"logs"));backup=new(Path.Combine(dir,"logs","DF-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+".jsonl")){AutoFlush=true};events.Add("Build","T18 candidate; runtime validation pending; native writes OFF");
-  }catch(Exception e){failed=true;status="Disabled: "+e.GetType().Name+" / "+e.Message;LoggerInstance.Error(status);}
+   Directory.CreateDirectory(Path.Combine(dir,"logs"));backup=new(Path.Combine(dir,"logs","DF-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+".jsonl")){AutoFlush=true};events.Add("Build","T18 candidate; runtime validation pending; native writes OFF");events.Flush(clock.Elapsed.TotalSeconds,null,WriteBackup);LoggerInstance.Msg("DF bootstrap ready; awaiting Unity callbacks");
+  }catch(Exception e){failed=true;status="Disabled: "+RuntimeStartup.Fault(phase,e);LoggerInstance.Error(status);}
  }
  void InitializeBindings()
  {
-  InteropGate.VerifyLoaded(Path.Combine(dir,"interop-provenance.json"),descriptor!,global::MelonLoader.Utils.MelonEnvironment.Il2CppAssembliesDirectory);
-  hud=new();context=new();context.Install();initialized=true;status="Waiting for private Scenario 5454584";
+  phase="InteropGate";InteropGate.VerifyLoaded(Path.Combine(dir,"interop-provenance.json"),descriptor!,global::MelonLoader.Utils.MelonEnvironment.Il2CppAssembliesDirectory);interopReady=true;
+  phase="LobbyHooks";context?.Dispose();context=new();try{context.Install();}catch{context.Dispose();context=null;throw;}
+  initialized=true;phase="Waiting";status="Waiting for private Scenario 5454584";LoggerInstance.Msg("DF interop and lobby hooks ready");
+
  }
  public override void OnUpdate()
  {
-  if(failed)return;
+  if(failed){FlushLogs();return;}
   try{
-   if(!initialized){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+1;try{InitializeBindings();}catch(Exception e){status="Bindings waiting: "+e.GetType().Name;if(clock.Elapsed.TotalSeconds>60)throw;}return;}
+   if(interopReady&&!hudCallback&&clock.Elapsed.TotalSeconds>30&&clock.Elapsed.TotalSeconds>=nextFault){nextFault=clock.Elapsed.TotalSeconds+15;LoggerInstance.Warning("DF HudCallbackMissing: Melon OnGUI has not been received");events.Add("HudUnavailable","HudCallbackMissing");}
+   if(!initialized){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+1;try{InitializeBindings();}catch(Exception e){status="Bindings waiting: "+phase;ReportFault(phase,e);FlushLogs();if(clock.Elapsed.TotalSeconds>60)throw;}return;}
    if(!enabled){FlushLogs();return;}
-   if(clock.Elapsed.TotalSeconds>=nextContext){nextContext=clock.Elapsed.TotalSeconds+.5;var native=context!.Read();
+   if(clock.Elapsed.TotalSeconds>=nextContext){nextContext=clock.Elapsed.TotalSeconds+.5;phase="NativeContext.Read";var native=context!.Read();
     if(native==null){ResetAll();status="Waiting for private Scenario 5454584 lobby";FlushLogs();return;}
     if(scope!=native.Key){ResetAll();scope=native.Key;steam??=new();discovery=new(steam,scope,native.Host,compatibility);events.Add("Lobby","Native private Scenario observed; discovering Steam companion");}
     if(fight!=native.FightId){ResetWorld();fight=native.FightId;events.Add("Match",native.InMatch?"Native match entered":"Returned to lobby");}
     if(!native.InMatch){latest=null;observer?.Fail(SourceState.NoSession,"InLobby");}
    }
-   if(discovery==null)return;discovery.Pump();status=discovery.State;
+   if(discovery==null){FlushLogs();return;}phase="SteamDiscovery.Pump";discovery.Pump();status=discovery.State;
    if(!discovery.PairReady){latest=null;observer?.Fail(SourceState.NoSession,"SteamPeerNotReady");FlushLogs();return;}
    if(fight<=0){status="Steam companion ready; awaiting verified Scenario room";FlushLogs();return;}
    string expected=discovery.Session+"/"+discovery.Peer+"/"+discovery.Mode+"/"+fight+"/"+discovery.FullDebug+"/"+discovery.ConsentEpoch;
    // Native FightId is checked by the existing session binding; lobby peer readiness is independent of game reads.
-   if(connection!=expected){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+2;ResetWorld();StartWorld(expected);}
+   if(connection!=expected){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+2;ResetWorld();phase="StartWorld";StartWorld(expected);}
    if(channel!.State.StartsWith("SteamDisconnected:")&&clock.Elapsed.TotalSeconds>=nextRetry){nextRetry=clock.Elapsed.TotalSeconds+3;channel.Restart();events.Add("Reconnect","Preserving observer/core; requesting checkpoint and full snapshots");}
    channel.Pump();if(channel.State.StartsWith("SteamDisconnected:")&&(channel.State.Contains("Relay",StringComparison.Ordinal)||channel.State.Contains("PayloadBeforeRelayProof",StringComparison.Ordinal)))throw new InvalidDataException("RelayFailure_StopDF_RestartGameForDefaults");status=discovery.State+" / "+channel.State;
    if(fight>0&&channel.Authenticated&&clock.Elapsed.TotalSeconds>=nextRead){nextRead=clock.Elapsed.TotalSeconds+.25;
@@ -54,7 +57,7 @@ public sealed class SteamMod : MelonMod
     catch(Exception e){latest=null;observer!.Fail(SourceState.ReadUnavailable,e.GetType().Name);events.Add("ReadUnavailable",e.GetType().Name+":"+e.Message);}
    }
    FlushLogs();if(events.Faulted)throw new InvalidDataException("ResultLogOverflow_Stop");
-  }catch(Exception e){ResetAll();enabled=false;status="Stopped: "+e.GetType().Name+" / "+e.Message;events.Add("Stopped",status);LoggerInstance.Warning(status);FlushLogs();}
+  }catch(Exception e){enabled=false;status="Stopped: "+RuntimeStartup.Fault(phase,e);ReportFault(phase,e,true);try{ResetAll();}catch(Exception cleanup){ReportFault("ResetAll",cleanup,true);}events.Add("Stopped",status);FlushLogs();}
  }
  void StartWorld(string id)
  {
@@ -68,17 +71,27 @@ public sealed class SteamMod : MelonMod
  }
  void ResetWorld(){observer?.Dispose();try{if(worker!=null&&!worker.Wait(2000))events.MarkLoss();}catch(AggregateException){events.MarkLoss();}if(observer!=null)observer.Diagnostic-=events.Structured;worker=null;channel?.Dispose();wire?.Dispose();observer=null;channel=null;wire=null;reader=null;latest=null;connection="";}
  void ResetAll(){ResetWorld();discovery?.Dispose();discovery=null;scope="";fight=0;roster=false;samples=0;}
- void FlushLogs(){if(status!=lastStatus){lastStatus=status;events.Add("Status",status);}if(gameLog==null)try{gameLog=new UnityGamelog();}catch{}gameLog?.Tick(clock.Elapsed.TotalSeconds,code=>events.Add("GamelogReceipt",code));events.Flush(clock.Elapsed.TotalSeconds,gameLog==null?null:gameLog.Write,line=>{if(backup!=null){if(backup.BaseStream.Length>=16*1024*1024){backup.Dispose();backup=new(Path.Combine(dir,"logs","DF-"+Guid.NewGuid().ToString("N")+".jsonl")){AutoFlush=true};}backup.WriteLine(line);}});}
+ void WriteBackup(string line){if(backup==null)return;if(backup.BaseStream.Length>=16*1024*1024){backup.Dispose();backup=new(Path.Combine(dir,"logs","DF-"+Guid.NewGuid().ToString("N")+".jsonl")){AutoFlush=true};}backup.WriteLine(line);}
+ void ReportFault(string stage,Exception e,bool force=false){if(!force&&clock.Elapsed.TotalSeconds<nextFault)return;nextFault=clock.Elapsed.TotalSeconds+5;string detail=RuntimeStartup.Fault(stage,e);LoggerInstance.Warning(detail);events.Add(stage.StartsWith("Hud",StringComparison.Ordinal)?"HudUnavailable":"Stopped",detail);}
+ void FlushLogs(){
+  if(status!=lastStatus){lastStatus=status;events.Add("Status",status);}
+  // Persist pending events before attempting any native Unity/FileLog binding.
+  try{events.Flush(clock.Elapsed.TotalSeconds,gameLog==null?null:gameLog.Write,WriteBackup);}catch(Exception e){LoggerInstance.Warning(RuntimeStartup.Fault("Backup",e));enabled=false;}
+  if(!interopReady)return;
+  try{gameLog??=new UnityGamelog();gameLog.Tick(clock.Elapsed.TotalSeconds,code=>events.Add("GamelogReceipt",code));}catch(Exception e){ReportFault("GamelogBinding",e);}
+ }
  public override void OnGUI()
  {
-  if(hud==null)return;
+  hudCallback=true;if(!interopReady)return;
   try{
+   hud??=new();using var frame=hud.BeginFrame();
    hud.FullDebug=discovery?.FullDebug==true;
    var view=observer?.View;var own=latest?.Owned;var unit=own?.Length>0?own[hud.Selected%own.Length]:null;var prediction=unit==null?null:view?.Projection?.Own.FirstOrDefault(u=>u.Key.Uid==unit.NetworkId);var delta=unit==null?null:view?.Display?.Forecast.FirstOrDefault(u=>u.Unit==unit.NetworkId);
-   hud.Box(16,16,820,176,$"Dynamic Frontline T18 | {(hud.FullDebug?"FULL DEBUG — HIDDEN DATA SHARED":"TEAM SAFE")} | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
+   hud.Box(16,16,820,176,$"Dynamic Frontline full-debug3 | {(hud.FullDebug?"FULL DEBUG — HIDDEN DATA SHARED":"TEAM SAFE")} | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
     (unit==null?"Own roster not yet available":$"Own count {own!.Length}; HUD selection #{unit.NetworkId} ({unit.Definition}): ACTUAL stress {unit.Stress:F1}/{unit.MaxStress:F1}; HP {unit.Hp:F1}/{unit.MaxHp:F1}")+"\n"+
     (prediction==null?"Encirclement forecast unavailable":$"FORECAST: {prediction.State}; tau {prediction.Tau:F1}s; penalty delta {(delta?.Delta is double value?value.ToString("F2"):"UNKNOWN")}")+"\n"+
     $"Notices: {string.Join(", ",view?.Projection?.Notices.Select(n=>n.Kind)??[])} | {string.Join("; ",view?.Blockers??[])}\nGameLog: {gameLog?.State??"Unity binding unavailable"} / {events.SinkState}; backup ON. Private Scenario 5454584 only.");
+   if(!hudDrawn){hudDrawn=true;LoggerInstance.Msg("DF HUD first status panel draw completed");events.Add("Status","HudDrawSucceeded");}
    if(!enabled){if(hud.Button(16,198,820,32,"Retry in private Scenario (Anti-Cheat Disabled)")){enabled=true;nextRetry=0;events.Add("Consent","Operator retried read-only private Scenario diagnostics");}return;}
    if(hud.Button(16,198,150,28,"Map on/off"))hud.MapVisible=!hud.MapVisible;
    if(hud.Button(172,198,150,28,"Own ZOC toggle"))hud.AllOwnZoc=!hud.AllOwnZoc;
@@ -88,7 +101,7 @@ public sealed class SteamMod : MelonMod
    else hud.Box(16,234,820,42,roster?"Own roster confirmed; waiting for peer / ObserveTwoClient":"First run: compare own units against HUD before confirming the roster.");
    if(discovery!=null&&hud.Button(850,16,310,52,discovery.LocalDebugConsent?"Revoke FullDebug consent / TeamSafe":"I CONSENT to sharing HIDDEN DATA\nFullDebug: both testers must consent")){discovery.SetDebugConsent(!discovery.LocalDebugConsent);ResetWorld();events.Add("Consent","FullDebug consent changed; clear old session");}
    hud.Render(view,latest);
-  }catch(Exception e){events.Add("HudUnavailable",e.GetType().Name);}
+  }catch(Exception e){ReportFault("Hud.OnGUI",e);}
  }
  public override void OnDeinitializeMelon(){enabled=false;ResetAll();context?.Dispose();events.Add("Shutdown","Read-only session ended");do{FlushLogs();}while(events.PendingResults>0);backup?.Dispose();}
 }

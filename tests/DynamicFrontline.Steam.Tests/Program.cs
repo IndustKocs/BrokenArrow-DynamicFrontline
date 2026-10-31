@@ -80,6 +80,22 @@ void Pump(SteamWorldChannel a,SteamWorldChannel b,int n=20){for(int i=0;i<n;i++)
 }
 HardeningTests.Run(Check);
 FinalPreflightTests.Run(Check);
+{
+ int reads=0;object? ReadMissing(object o,string name){reads++;return null;}
+ Check(RuntimeStartup.RoomState(null,ReadMissing)==null&&reads==0,"menu without controller does not dereference native state");
+ Check(RuntimeStartup.RoomState(new object(),ReadMissing)==null&&reads==1,"controller without room remains outside match");
+ var controller=new object();var room=new object();var state=new object();
+ Check(RuntimeStartup.RoomState(controller,(o,n)=>n=="_networkRoomService"?room:null)==null,"room without state remains outside match");
+ Check(ReferenceEquals(RuntimeStartup.RoomState(controller,(o,n)=>n=="_networkRoomService"?room:state),state),"room-state identity preserved for existing policy gate");
+ bool throws=false;try{RuntimeStartup.RoomState(controller,(_,_)=>throw new MissingMemberException("fixture"));}catch(MissingMemberException){throws=true;}
+ Check(throws,"missing binding is not silently treated as an allowed session");
+ var detail=RuntimeStartup.Fault("Hud.OnGUI",new System.Reflection.TargetInvocationException(new NullReferenceException("SECRET_123 C:/private/user.txt 26.1.2.3")));
+ Check(detail.Contains("NullReferenceException")&&!detail.Contains("SECRET")&&!detail.Contains("private")&&!detail.Contains("26.1"),"fault diagnostic unwraps reflection and excludes messages/paths/identifiers");
+ var clean=SafeDiagnostics.Sanitize(JsonSerializer.SerializeToElement(new{kind="HudUnavailable",detail}));
+ Check(clean!.Value.GetRawText().Contains("Hud.OnGUI")&&clean.Value.GetRawText().Contains("NullReferenceException"),"safe export preserves bounded HUD error codes");
+ var boot=new DfEvents();var lines=new List<string>();boot.Add("Build","Bootstrap");boot.Flush(0,null,lines.Add);
+ Check(lines.Count==1,"bootstrap JSONL does not depend on native logger initialization");
+}
 Console.WriteLine($"T18: {passed} checks passed; synthetic transport, NOT real Steam or game validation.");
 void CheckSend(bool value){if(!value)throw new Exception("Unexpected queue failure");}
 sealed class FakeWire : ISteamWire {public FakeWire Other=null!;public ConcurrentQueue<byte[]> In=new();public void Send(byte[] packet)=>Other.In.Enqueue(packet);public bool TryReceive(out byte[] packet)=>In.TryDequeue(out packet!);}

@@ -6,13 +6,20 @@ namespace DynamicFrontline.Steam.MelonLoader;
 public sealed class SteamHud
 {
  readonly Type rect=LiveReader.Resolve("UnityEngine.Rect"),gui=LiveReader.Resolve("UnityEngine.GUI"),color=LiveReader.Resolve("UnityEngine.Color");
- readonly MethodInfo box,button,draw; readonly PropertyInfo tint; readonly object texture;
+ readonly MethodInfo box,button,draw; readonly PropertyInfo tint; readonly PropertyInfo whiteTexture; object? texture;
  public bool MapVisible=true,AllOwnZoc,FullDebug;public int Selected;public int LastDrawCalls {get;private set;}
- public SteamHud(){box=gui.GetMethod("Box",[rect,typeof(string)])!;button=gui.GetMethod("Button",[rect,typeof(string)])!;var tex=LiveReader.Resolve("UnityEngine.Texture");draw=gui.GetMethod("DrawTexture",[rect,tex])!;tint=gui.GetProperty("color")!;texture=LiveReader.Resolve("UnityEngine.Texture2D").GetProperty("whiteTexture")!.GetValue(null)!;if(box==null||button==null||draw==null)throw new MissingMethodException("Unity GUI binding");}
+ public SteamHud(){box=gui.GetMethod("Box",[rect,typeof(string)])??throw new MissingMethodException("GUI.Box");button=gui.GetMethod("Button",[rect,typeof(string)])??throw new MissingMethodException("GUI.Button");var tex=LiveReader.Resolve("UnityEngine.Texture");draw=gui.GetMethod("DrawTexture",[rect,tex])??throw new MissingMethodException("GUI.DrawTexture");tint=gui.GetProperty("color")??throw new MissingMemberException("GUI.color");whiteTexture=LiveReader.Resolve("UnityEngine.Texture2D").GetProperty("whiteTexture")??throw new MissingMemberException("Texture2D.whiteTexture");}
+ public IDisposable BeginFrame()=>new GuiState(gui,color);
+ sealed class GuiState:IDisposable
+ {
+  readonly List<(PropertyInfo Property,object? Value)> saved=new();
+  public GuiState(Type gui,Type color){try{foreach(var name in new[]{"color","backgroundColor","contentColor","enabled","depth"}){var property=gui.GetProperty(name)??throw new MissingMemberException("GUI."+name);saved.Add((property,property.GetValue(null)));property.SetValue(null,name=="enabled"?true:name=="depth"?-10000:Activator.CreateInstance(color,[1f,1f,1f,1f]));}}catch{Dispose();throw;}}
+  public void Dispose(){foreach(var entry in saved.AsEnumerable().Reverse())entry.Property.SetValue(null,entry.Value);saved.Clear();}
+ }
  object Rect(float x,float y,float w,float h)=>Activator.CreateInstance(rect,[x,y,w,h])!;
  public void Box(float x,float y,float w,float h,string text)=>box.Invoke(null,[Rect(x,y,w,h),text]);
  public bool Button(float x,float y,float w,float h,string text)=>Convert.ToBoolean(button.Invoke(null,[Rect(x,y,w,h),text]));
- void Fill(float x,float y,float w,float h,float r,float g,float b,float a=1){tint.SetValue(null,Activator.CreateInstance(color,[r,g,b,a]));draw.Invoke(null,[Rect(x,y,w,h),texture]);LastDrawCalls++;}
+ void Fill(float x,float y,float w,float h,float r,float g,float b,float a=1){texture??=whiteTexture.GetValue(null)??throw new InvalidOperationException("WhiteTextureNotReady");tint.SetValue(null,Activator.CreateInstance(color,[r,g,b,a]));draw.Invoke(null,[Rect(x,y,w,h),texture]);LastDrawCalls++;}
  public void Render(RuntimeView? view,Observation? own)
  {
   LastDrawCalls=0;if(!MapVisible)return;
