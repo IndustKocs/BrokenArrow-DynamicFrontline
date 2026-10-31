@@ -9,7 +9,8 @@ $expected=Get-Content (Join-Path $root 'config/poc030-rc2/toolchain.json') -Raw|
 if((Get-FileHash $Cpp2IlPath).Hash -ne $expected.Cpp2IlSha256){throw 'Cpp2IL version/hash mismatch'}
 foreach($d in $expected.Generator){if((Get-FileHash (Join-Path $LoaderDirectory $d.Name)).Hash -ne $d.Sha256){throw 'Generator dependency mismatch'}}
 New-Item -ItemType Directory $out | Out-Null
-& $Cpp2IlPath --force-binary-path (Join-Path $game 'GameAssembly.dll') --force-metadata-path (Join-Path $game 'BrokenArrow_Data/il2cpp_data/Metadata/global-metadata.dat') --force-unity-version 6000.3.24f1 --output-as dummydll --output-to (Join-Path $out 'dummy') > (Join-Path $out 'cpp2il.log')
+Push-Location (Split-Path $Cpp2IlPath)
+try{ & $Cpp2IlPath --force-binary-path (Join-Path $game 'GameAssembly.dll') --force-metadata-path (Join-Path $game 'BrokenArrow_Data/il2cpp_data/Metadata/global-metadata.dat') --force-unity-version 6000.3.24f1 --use-processor attributeanalyzer,attributeinjector --output-as dummydll --output-to (Join-Path $out 'dummy') > (Join-Path $out 'cpp2il.log') }finally{Pop-Location}
 if($LASTEXITCODE){throw 'Cpp2IL failed'}
 $driver=Join-Path $root 'scripts/poc030/interop-generator/bin/Release/net6.0/interop-generator.dll'
 if(!(Test-Path $driver)){throw 'Build supplied interop-generator project with LoaderDirectory property first'}
@@ -22,6 +23,7 @@ if($LASTEXITCODE){throw 'Interop JIT preflight failed; game not launched'}
 if($LASTEXITCODE){throw 'Binding inspection failed'}
 & (Join-Path $PSScriptRoot 'preflight-runtime.ps1') -GameRoot $GameRoot | Out-Null
 $hashes=[ordered]@{};Get-ChildItem (Join-Path $out 'wrappers') -File|Sort-Object Name|ForEach-Object {$hashes[$_.Name]=(Get-FileHash $_.FullName).Hash}
+$expected.Options | Add-Member -NotePropertyName Cpp2IlProcessors -NotePropertyValue @('attributeanalyzer','attributeinjector') -Force
 $expected.Options.UnityBaseLibraries='6000.3.24 exact official dependencies';$expected.Options.NoXrefCache=$false
 $expected.Options | Add-Member -NotePropertyName PointerNameRepair -NotePropertyValue 'element-renderer-plus-pointer-suffix-v1' -Force
 $expected.Wrappers=$hashes;$expected|ConvertTo-Json -Depth 8|Set-Content (Join-Path $out 'interop-provenance.json')

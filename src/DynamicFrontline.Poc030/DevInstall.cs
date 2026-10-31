@@ -63,9 +63,10 @@ public sealed class DevInstall : IDisposable
         using(var file=new FileStream(temp,FileMode.Create,FileAccess.Write,FileShare.None)){var bytes=JsonSerializer.SerializeToUtf8Bytes(value,Json);file.Write(bytes);file.Flush(true);}
         File.Move(temp,path,true);
     }
+    bool MatchesOwned(InstalledFile file,string path)=>File.Exists(path)&&(Hash(path)==file.Sha256 || file.Category==FileCategory.SharedLoaderConfig&&file.Relative==LoaderConfigFormatting.Relative&&LoaderConfigFormatting.Matches(File.ReadAllText(path),file.Sha256));
     public InstallResult Verify()
     {
-        var receipt=Receipt()??throw new InvalidDataException("Missing receipt");return new(root,"Verified",receipt.Files.Where(f=>f.Category==FileCategory.MutableUserConfig&&File.Exists(Inside(f.Relative))).Select(f=>f.Relative).ToArray(),receipt.Files.Where(f=>f.Category==FileCategory.RetiredInteropCache?File.Exists(Inside(f.Relative)):f.Category!=FileCategory.MutableUserConfig&&(!File.Exists(Inside(f.Relative))||Hash(Inside(f.Relative))!=f.Sha256)).Select(f=>f.Relative).ToArray());
+        var receipt=Receipt()??throw new InvalidDataException("Missing receipt");return new(root,"Verified",receipt.Files.Where(f=>f.Category==FileCategory.MutableUserConfig&&File.Exists(Inside(f.Relative))).Select(f=>f.Relative).ToArray(),receipt.Files.Where(f=>f.Category==FileCategory.RetiredInteropCache?File.Exists(Inside(f.Relative)):f.Category!=FileCategory.MutableUserConfig&&!MatchesOwned(f,Inside(f.Relative))).Select(f=>f.Relative).ToArray());
     }
     public InstallResult Apply(InstallFile[] package)
     {
@@ -79,7 +80,7 @@ public sealed class DevInstall : IDisposable
             var dest=Inside(f.Relative);string? before=File.Exists(dest)?Hash(dest):null;var own=receipt?.Files.SingleOrDefault(x=>x.Relative==f.Relative);
             if(before!=null&&f.Category==FileCategory.MutableUserConfig){using var cfg=JsonDocument.Parse(File.ReadAllText(dest));if(!cfg.RootElement.TryGetProperty("Mode",out _))throw new InvalidDataException("Config migration required");preserved.Add(f.Relative);next.Add(new(f.Relative,before,f.Category));continue;}
             bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader;
-            if(before!=null&&(own==null||own.Sha256!=before)&&!(shared&&own==null&&f.ReplaceApprovedHash==before))throw new InvalidDataException("Foreign/changed file preserved: "+f.Relative);
+            if(before!=null&&(own==null||!MatchesOwned(own,dest))&&!(shared&&own==null&&f.ReplaceApprovedHash==before))throw new InvalidDataException("Foreign/changed file preserved: "+f.Relative);
             bool retire=f.Category==FileCategory.RetiredInteropCache;if(retire&&(before==null||f.ReplaceApprovedHash!=before))throw new InvalidDataException("Retirement requires exact current hash");
             next.Add(new(f.Relative,retire?"":f.Sha256,f.Category,own?.OriginalHash??(shared&&own==null?before:null)));plans.Add(new(f.Relative,before,retire?null:f.Sha256,Path.Combine(staging,plans.Count+".stage"),Path.Combine(staging,plans.Count+".backup"),f.Category));
         }
@@ -108,16 +109,16 @@ public sealed class DevInstall : IDisposable
     public InstallResult Remove(bool preserveSettings=true)
     {
         if(File.Exists(JournalPath))throw new InvalidDataException("Recover pending operation first");var receipt=Receipt()??throw new InvalidDataException("Missing receipt; no guessed deletion");var op=Guid.NewGuid().ToString("N");var plans=new List<FilePlan>();var keep=new List<InstalledFile>();var conflicts=new List<string>();
-        bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)&&File.Exists(Inside(f.Relative))&&Hash(Inside(f.Relative))!=f.Sha256);
+        bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)&&File.Exists(Inside(f.Relative))&&!MatchesOwned(f,Inside(f.Relative)));
         foreach(var f in receipt.Files)
         {
             var dest=Inside(f.Relative);if(f.Category==FileCategory.MutableUserConfig){if(preserveSettings){keep.Add(f);continue;}if(File.Exists(dest))plans.Add(new(f.Relative,Hash(dest),null,Path.Combine(control,op,plans.Count+".stage"),Path.Combine(control,op,plans.Count+".backup"),f.Category));continue;}
             if(cacheConflict&&(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)){keep.Add(f);conflicts.Add(f.Relative);continue;}
             bool retired=f.Category==FileCategory.RetiredInteropCache;
             if(retired&&f.OriginalHash==null)continue;
-            if(!File.Exists(dest)&&!retired)continue;if(File.Exists(dest)&&(retired||Hash(dest)!=f.Sha256)){keep.Add(f);conflicts.Add(f.Relative);continue;}
+            if(!File.Exists(dest)&&!retired)continue;if(File.Exists(dest)&&(retired||!MatchesOwned(f,dest))){keep.Add(f);conflicts.Add(f.Relative);continue;}
             if(f.OriginalHash!=null&&(!File.Exists(Original(f.OriginalHash))||Hash(Original(f.OriginalHash))!=f.OriginalHash))throw new InvalidDataException("Original cache backup missing or changed");
-            plans.Add(new(f.Relative,retired?null:f.Sha256,f.OriginalHash,Path.Combine(control,op,plans.Count+".stage"),Path.Combine(control,op,plans.Count+".backup"),f.Category));
+            plans.Add(new(f.Relative,retired?null:Hash(dest),f.OriginalHash,Path.Combine(control,op,plans.Count+".stage"),Path.Combine(control,op,plans.Count+".backup"),f.Category));
         }
         var journal=new InstallJournal(2,op,root,false,receipt,new(2,root,keep.ToArray()),plans.ToArray());Atomic(JournalPath,journal,op);fault?.Invoke("prepared");Directory.CreateDirectory(Path.Combine(control,op));
         foreach(var p in plans){var dest=Inside(p.Relative);if((File.Exists(dest)?Hash(dest):null)!=p.Before)throw new InvalidDataException("Remove target changed");if(p.After!=null){using(var from=File.OpenRead(Original(p.After)))using(var stage=new FileStream(p.Stage,FileMode.CreateNew,FileAccess.Write,FileShare.None)){from.CopyTo(stage);stage.Flush(true);}if(p.Before!=null)File.Copy(dest,p.Backup);File.Move(p.Stage,dest,true);}else File.Move(dest,p.Backup);fault?.Invoke("after-remove:"+p.Relative);}

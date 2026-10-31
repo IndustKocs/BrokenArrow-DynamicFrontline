@@ -18,14 +18,18 @@ public sealed class NativeContext : IDisposable
   if(active){var game=gc.GetProperty("Instance")!.GetValue(null);var state=RuntimeStartup.RoomState(game,LiveReader.Get);
    if(state!=null){
    var room=LiveReader.Get(game!,"_networkRoomService")??throw new InvalidDataException("ScenarioSessionNotReady");
-   if(Convert.ToString(LiveReader.Get(state,"LobbyType"))!="Scenario"||Convert.ToString(LiveReader.Get(LiveReader.Get(state,"ScenarioMeta")!,"Name"))!="5454584")throw new InvalidDataException("OnlyScenario5454584");
+   var scenario=LiveReader.Get(state,"ScenarioMeta");if(scenario==null){retained=null;return null;}
+   if(Convert.ToString(LiveReader.Get(state,"LobbyType"))!="Scenario"||Convert.ToString(LiveReader.Get(scenario,"Name"))!="5454584")throw new InvalidDataException("OnlyScenario5454584");
    // Read effective server policy and actual EOS session bookkeeping; no protection/auth calls or hooks.
    var eos=LiveReader.Get(room,"_eosAntiCheatService")??throw new InvalidDataException("SessionPolicyUnknown");
-   var auth=LiveReader.Get(LiveReader.Get(eos,"_eosOpenIdAuthService")!,"_authorizationService")!;
-   var connection=LiveReader.Get(room,"Connection")!;
+   var openId=LiveReader.Get(eos,"_eosOpenIdAuthService")??throw new InvalidDataException("SessionPolicyUnknown");
+   var auth=LiveReader.Get(openId,"_authorizationService")??throw new InvalidDataException("SessionPolicyUnknown");
+   var connection=LiveReader.Get(room,"Connection")??throw new InvalidDataException("ScenarioSessionNotReady");
+   var api=LiveReader.Get(connection,"Api")??throw new InvalidDataException("ScenarioSessionNotReady");
+   var transport=LiveReader.Get(api,"Transport")??throw new InvalidDataException("ScenarioSessionNotReady");
    bool bound=retained!=null&&Convert.ToInt32(LiveReader.Get(state,"WaitingRoomId"))==retainedLobby&&Convert.ToInt32(LiveReader.Get(state,"HostId"))==retainedHost;
    var verdict=ScenarioGate.Evaluate(new(true,ProtectedScenario(),Convert.ToBoolean(LiveReader.Get(auth,"IsLogged")),ContainsScenario(LiveReader.Get(auth,"ActiveLobbyTypes")!),bound,
-    Convert.ToBoolean(LiveReader.Get(LiveReader.Get(LiveReader.Get(connection,"Api")!,"Transport")!,"IsConnected")),Convert.ToBoolean(LiveReader.Get(connection,"IsRecordPlaying")),
+    Convert.ToBoolean(LiveReader.Get(transport,"IsConnected")),Convert.ToBoolean(LiveReader.Get(connection,"IsRecordPlaying")),
     LiveReader.Get(eos,"_roomService")!=null,Convert.ToBoolean(LiveReader.Get(eos,"IsIntegrityViolated")),Convert.ToString(LiveReader.Get(state,"LobbyType"))!,
     Convert.ToString(LiveReader.Get(LiveReader.Get(state,"ScenarioMeta")!,"Name"))!,Convert.ToInt32(LiveReader.Get(state,"Status")),Convert.ToInt64(LiveReader.Get(state,"FightId"))));
    if(verdict!="AllowedScenario")throw new InvalidDataException(verdict);
@@ -34,8 +38,8 @@ public sealed class NativeContext : IDisposable
    }
   }
   var lobby=Volatile.Read(ref lobbyService);if(lobby==null){retained=null;return null;}
-  var ls=LiveReader.Get(lobby,"State");if(ls==null){retained=null;return null;}var opts=LiveReader.Get(ls,"Options")!;
-  if(Convert.ToString(LiveReader.Get(opts,"LobbyType"))!="Scenario"||!Convert.ToBoolean(LiveReader.Get(opts,"IsPrivate"))||Convert.ToString(LiveReader.Get(LiveReader.Get(ls,"ScenarioMeta")!,"Name"))!="5454584"){retained=null;return null;}
+  var ls=LiveReader.Get(lobby,"State");if(ls==null){retained=null;return null;}var opts=LiveReader.Get(ls,"Options");var scenarioMeta=LiveReader.Get(ls,"ScenarioMeta");if(opts==null||scenarioMeta==null){retained=null;return null;}
+  if(Convert.ToString(LiveReader.Get(opts,"LobbyType"))!="Scenario"||!Convert.ToBoolean(LiveReader.Get(opts,"IsPrivate"))||Convert.ToString(LiveReader.Get(scenarioMeta,"Name"))!="5454584"){retained=null;return null;}
   var id=Convert.ToInt32(LiveReader.Get(lobby,"LobbyId"));if(id<=0)return null;
   if(ProtectedScenario())throw new InvalidDataException("ProtectedSession_ModDisabled");
   retainedLobby=id;retainedHost=Convert.ToInt32(LiveReader.Get(ls,"HostId"));

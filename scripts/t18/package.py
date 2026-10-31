@@ -28,7 +28,7 @@ for name in ('DynamicFrontline.Steam.Tests','DynamicFrontline.Rc2.Tests','Dynami
 tree('scripts/poc030/interop-jit-probe',{'.cs','.csproj'})
 for suffix in ('.dll','.deps.json','.runtimeconfig.json'):copy('scripts/poc030/interop-jit-probe/bin/Release/net6.0/interop-jit-probe'+suffix)
 commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
-(stage/'BUILD.json').write_text(json.dumps({'Version':'0.4.0-T18-full-debug3','Protocol':'df18-world-4','Commit':commit,'RuntimeValidated':False,'NativeEffects':False,'Transport':'SteamNetworkingMessages + ephemeral ECDH/HMAC','Map':'Airbase/5454584','FirstRun':'LoadReadProbe','Interop':'Generate locally; not distributed'},indent=2),encoding='utf-8')
+(stage/'BUILD.json').write_text(json.dumps({'Version':'0.4.0-T18-full-debug4','Protocol':'df18-world-4','Commit':commit,'RuntimeValidated':False,'NativeEffects':False,'Transport':'SteamNetworkingMessages + ephemeral ECDH/HMAC','Map':'Airbase/5454584','FirstRun':'LoadReadProbe','Interop':'Generate locally; not distributed'},indent=2),encoding='utf-8')
 (stage/'START_HERE.txt').write_text('Read docs/t18/INSTALL_GUIDE_LAUNCHER.md. Candidate: real Steam/game test not run.\nSame archive for both Steam friends. No manual IP, role, certificate or session key.\nNo automatic installation or launch. No native gameplay effects.\n',encoding='utf-8')
 entries=[{'Path':str(p.relative_to(stage)).replace('\\','/'),'SHA256':hashlib.sha256(p.read_bytes()).hexdigest().upper()} for p in sorted(stage.rglob('*')) if p.is_file()]
 (stage/'SHA256_INVENTORY.json').write_text(json.dumps(entries,indent=2),encoding='utf-8')

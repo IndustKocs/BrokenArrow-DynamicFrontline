@@ -129,6 +129,21 @@ Test("Radmin peers are pinned independently of HMAC identity",()=>{
  Reject(()=>EndpointPolicy.VerifyRadminPeer("A",System.Net.IPAddress.Parse(EndpointPolicy.RadminA)));
 });
 
+Test("Loader cfg formatting requires original receipt hash and exact schema",()=>{
+ string cfg="[Il2CppAssemblyGenerator]\nGameAssemblyHash = \"ABCD\"\nDeobfuscationRegex = \"\"\nUnityVersion = \"6000.3.24\"\nDumperVersion = \"2022.1.0-pre-release.21\"\nDumperSCRSVersion = \"2022.1.0-pre-release.21\"\nOldFiles = [\"A.dll\",\"B.dll\"]";
+ string file=Path.Combine(sandbox,"cfg-original.txt");File.WriteAllText(file,cfg);string hash=DevInstall.Hash(file);
+ string formatted=cfg.Replace("[\"A.dll\",\"B.dll\"]","[ \"A.dll\", \"B.dll\", ]").Replace("\n","\r\n")+"\r\n\r\n";
+ Assert(LoaderConfigFormatting.Matches(formatted,hash));Assert(!LoaderConfigFormatting.Matches(formatted.Replace("ABCD","ABCE"),hash));Assert(!LoaderConfigFormatting.Matches(formatted+"Unknown = true",hash));Assert(!LoaderConfigFormatting.Matches(formatted.Replace("B.dll","A.dll"),hash));
+ foreach(bool crash in new[]{false,true}){
+  string target=Path.Combine(sandbox,"cfg-format-"+crash);var entry=new InstallFile(LoaderConfigFormatting.Relative,file,hash,FileCategory.SharedLoaderConfig);string dest=Path.Combine(target,entry.Relative);
+  using(var init=new DevInstall(target,true,true))init.Apply([entry]);File.WriteAllText(dest,formatted);
+  using(var verify=new DevInstall(target,true,true))Assert(verify.Verify().Conflicts.Length==0);
+  if(crash){try{using var update=new DevInstall(target,true,true,phase=>{if(phase=="before-receipt")throw new IOException("fixture");});update.Apply([entry]);}catch(IOException){}using var recover=new DevInstall(target,true,true);Assert(recover.Recover().Conflicts.Length==0);Assert(File.ReadAllText(dest)==formatted);}
+  else{using var update=new DevInstall(target,true,true);update.Apply([entry]);Assert(update.Verify().Conflicts.Length==0);}
+  File.WriteAllText(dest,formatted);using var remove=new DevInstall(target,true,true);Assert(remove.Remove().Conflicts.Length==0);Assert(!File.Exists(dest));
+ }
+});
+
 AdditionalRc2Tests.Run(Test,Assert,Reject,output,files,sandbox);
 GeometryOracleTests.Run(Test,Assert);
 File.WriteAllText(Path.Combine(output,"results.json"),JsonSerializer.Serialize(new{count=results.Count,failed,results},new JsonSerializerOptions{WriteIndented=true}));Console.WriteLine($"TOTAL {results.Count}; FAILED {failed}");return failed==0?0:1;
