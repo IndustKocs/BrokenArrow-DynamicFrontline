@@ -16,7 +16,8 @@ public static class LauncherUpdate {
   if(!System.Text.RegularExpressions.Regex.IsMatch(repository,"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"))throw new InvalidDataException("Invalid release repository");
   var parser=new JavaScriptSerializer{MaxJsonLength=4*1024*1024};
   var releases=parser.Deserialize<List<Dictionary<string,object>>>(text);
-  var release=releases.FirstOrDefault(r=>!(bool)r["draft"]&&(prereleases||!(bool)r["prerelease"]));
+  var release=releases.Where(r=>!(bool)r["draft"]&&(prereleases||!(bool)r["prerelease"]))
+   .OrderByDescending(r=>DateTimeOffset.Parse((string)r["published_at"],System.Globalization.CultureInfo.InvariantCulture)).FirstOrDefault();
   if(release==null)throw new InvalidDataException("No published launcher release");
   var assets=((System.Collections.IEnumerable)release["assets"]).Cast<Dictionary<string,object>>().Where(a=>(string)a["name"]=="DynamicFrontlineLauncher.exe").ToArray();
   if(assets.Length!=1)throw new InvalidDataException("Release must contain one launcher");
@@ -53,7 +54,7 @@ public static class LauncherUpdate {
   if((bool)cfg["Private"])throw new InvalidOperationException("Automatic launcher updates require the public release channel");
   string repository=(string)cfg["Repository"];
   if(!System.Text.RegularExpressions.Regex.IsMatch(repository,"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"))throw new InvalidDataException("Invalid repository");
-  var asset=Select(Encoding.UTF8.GetString(Download("https://api.github.com/repos/"+repository+"/releases?per_page=20",4*1024*1024)),repository,(bool)cfg["IncludePrerelease"]);
+  var asset=Select(Encoding.UTF8.GetString(Download("https://api.github.com/repos/"+repository+"/releases?per_page=100",4*1024*1024)),repository,(bool)cfg["IncludePrerelease"]);
   if(Hash(executable)==asset.Hash)return null;
   return Cache(workspace,asset,Download(asset.Url,64*1024*1024));
  }

@@ -7,7 +7,7 @@ class UpdaterTests {
  static int count;
  static void Check(bool b){if(!b)throw new Exception("Assertion failed at "+count);count++;}
  static void Reject(Action a){bool rejected=false;try{a();}catch{rejected=true;}Check(rejected);}
- static string Json(string hash,string url,long size,bool draft=false,bool prerelease=true){return new JavaScriptSerializer().Serialize(new[]{new{draft=draft,prerelease=prerelease,assets=new[]{new{name="DynamicFrontlineLauncher.exe",digest="sha256:"+hash,browser_download_url=url,size=size}}}});}
+ static string Json(string hash,string url,long size,bool draft=false,bool prerelease=true){return new JavaScriptSerializer().Serialize(new[]{new{draft=draft,prerelease=prerelease,published_at="2026-10-31T13:41:53Z",assets=new[]{new{name="DynamicFrontlineLauncher.exe",digest="sha256:"+hash,browser_download_url=url,size=size}}}});}
  static int Main(string[] args){try{
   string repo="IndustKocs/BrokenArrow-DynamicFrontline",url="https://github.com/"+repo+"/releases/download/test/DynamicFrontlineLauncher.exe";
   string executable=Path.GetFullPath(args[0]),root=Path.GetFullPath(args[1]);Directory.CreateDirectory(root);
@@ -17,6 +17,10 @@ class UpdaterTests {
   Check(!Directory.Exists(Path.Combine(root,"GameLogs"))&&!Directory.Exists(Path.Combine(root,"UserData")));
   byte[] bytes=File.ReadAllBytes(executable);string hash=LauncherUpdate.Hash(executable);
   var asset=LauncherUpdate.Select(Json(hash,url,bytes.Length),repo,true);Check(asset.Hash==hash);
+  string older=Json(hash,url,bytes.Length),newer=Json(hash,url.Replace("/test/","/newer/"),bytes.Length).Replace("13:41:53Z","13:51:10Z");
+  string shuffled="["+older.Substring(1,older.Length-2)+","+newer.Substring(1,newer.Length-2)+"]";
+  Check(LauncherUpdate.Select(shuffled,repo,true).Url.Contains("/newer/"));
+
   Reject(()=>LauncherUpdate.Select(Json(hash,url,bytes.Length,true),repo,true));
   Reject(()=>LauncherUpdate.Select(Json(hash,url,bytes.Length),repo,false));
   Check(LauncherUpdate.Select(Json(hash,url,bytes.Length,false,false),repo,false).Hash==hash);

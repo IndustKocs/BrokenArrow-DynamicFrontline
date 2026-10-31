@@ -34,8 +34,8 @@ try {
   if($channel.Repository -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$'){throw 'GitHub Releases repository is not configured; bundled installation remains available'}
   if($channel.Private -and !$env:DF_GITHUB_TOKEN){throw 'Private Releases: enter a read-only GitHub token, or install the bundled version without a token'}
   $headers=@{'User-Agent'='DynamicFrontlineLauncher';'Accept'='application/vnd.github+json'};if($env:DF_GITHUB_TOKEN){$headers.Authorization='Bearer '+$env:DF_GITHUB_TOKEN}
-  $releases=Invoke-RestMethod -Uri ('https://api.github.com/repos/'+$channel.Repository+'/releases') -Headers $headers
-  $release=$releases|Where-Object {!$_.draft -and ($channel.IncludePrerelease -or !$_.prerelease)}|Select-Object -First 1
+  $releases=Invoke-RestMethod -Uri ('https://api.github.com/repos/'+$channel.Repository+'/releases?per_page=100') -Headers $headers
+  $release=$releases|Where-Object {!$_.draft -and ($channel.IncludePrerelease -or !$_.prerelease)}|Sort-Object { [DateTimeOffset]::Parse($_.published_at,[Globalization.CultureInfo]::InvariantCulture) } -Descending|Select-Object -First 1
   if(!$release){throw 'No compatible published release'}
   $asset=@($release.assets|Where-Object name -eq $channel.AssetName)
   if($asset.Count -ne 1 -or $asset[0].digest -notmatch '^sha256:[a-fA-F0-9]{64}$'){throw 'Release asset requires a GitHub SHA256 digest'}
