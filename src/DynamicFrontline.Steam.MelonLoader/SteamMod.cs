@@ -28,7 +28,7 @@ public sealed class SteamMod : MelonMod
  {
   phase="InteropGate";InteropGate.VerifyLoaded(Path.Combine(dir,"interop-provenance.json"),descriptor!,global::MelonLoader.Utils.MelonEnvironment.Il2CppAssembliesDirectory);interopReady=true;
   phase="LobbyHooks";context?.Dispose();context=new();try{context.Install();}catch{context.Dispose();context=null;throw;}
-  initialized=true;phase="Waiting";status="Waiting for private Scenario 5454584";LoggerInstance.Msg("DF interop and lobby hooks ready");
+  initialized=true;phase="Waiting";status="Waiting for private Scenario 5454584";LoggerInstance.Msg("DF interop verified; Connect/Dispose handlers registered; native lobby observation pending");
 
  }
  public override void OnUpdate()
@@ -39,8 +39,8 @@ public sealed class SteamMod : MelonMod
    if(!initialized){if(clock.Elapsed.TotalSeconds<nextRetry)return;nextRetry=clock.Elapsed.TotalSeconds+1;try{InitializeBindings();}catch(Exception e){status="Bindings waiting: "+phase;ReportFault(phase,e);FlushLogs();if(clock.Elapsed.TotalSeconds>60)throw;}return;}
    if(!enabled){FlushLogs();return;}
    if(clock.Elapsed.TotalSeconds>=nextContext){nextContext=clock.Elapsed.TotalSeconds+.5;phase="NativeContext.Read";var native=context!.Read();
-    if(native==null){ResetAll();status="Waiting for private Scenario 5454584 lobby";FlushLogs();return;}
-    if(scope!=native.Key){ResetAll();scope=native.Key;steam??=new();discovery=new(steam,scope,native.Host,compatibility);events.Add("Lobby","Native private Scenario observed; discovering Steam companion");}
+    if(native==null){ResetAll();status=context.HasCapturedLobby?"Lobby service observed; waiting for private Scenario 5454584":"Waiting for native lobby Connect event; create or join private Scenario 5454584";FlushLogs();return;}
+    if(scope!=native.Key){LoggerInstance.Msg("DF private Scenario lobby observed and validated");ResetAll();scope=native.Key;steam??=new();discovery=new(steam,scope,native.Host,compatibility);events.Add("Lobby","Native private Scenario observed; discovering Steam companion");}
     if(fight!=native.FightId){ResetWorld();fight=native.FightId;events.Add("Match",native.InMatch?"Native match entered":"Returned to lobby");}
     if(!native.InMatch){latest=null;observer?.Fail(SourceState.NoSession,"InLobby");}
    }
@@ -87,7 +87,7 @@ public sealed class SteamMod : MelonMod
    hud??=new();using var frame=hud.BeginFrame();
    hud.FullDebug=discovery?.FullDebug==true;
    var view=observer?.View;var own=latest?.Owned;var unit=own?.Length>0?own[hud.Selected%own.Length]:null;var prediction=unit==null?null:view?.Projection?.Own.FirstOrDefault(u=>u.Key.Uid==unit.NetworkId);var delta=unit==null?null:view?.Display?.Forecast.FirstOrDefault(u=>u.Unit==unit.NetworkId);
-   hud.Box(16,16,820,176,$"Dynamic Frontline full-debug5 | {(hud.FullDebug?"FULL DEBUG — HIDDEN DATA SHARED":"TEAM SAFE")} | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
+   hud.Box(16,16,820,176,$"Dynamic Frontline full-debug6 | {(hud.FullDebug?"FULL DEBUG — HIDDEN DATA SHARED":"TEAM SAFE")} | {status}\nPeer: {discovery?.PeerLabel??"None"} / roster {discovery?.PeerRosterConfirmed} | Sync: {view?.Status??"Waiting"} | Mode: {discovery?.Mode??"LoadReadProbe"} | native effects OFF | Relay-only (ICE disabled)\n"+
     (unit==null?"Own roster not yet available":$"Own count {own!.Length}; HUD selection #{unit.NetworkId} ({unit.Definition}): ACTUAL stress {unit.Stress:F1}/{unit.MaxStress:F1}; HP {unit.Hp:F1}/{unit.MaxHp:F1}")+"\n"+
     (prediction==null?"Encirclement forecast unavailable":$"FORECAST: {prediction.State}; tau {prediction.Tau:F1}s; penalty delta {(delta?.Delta is double value?value.ToString("F2"):"UNKNOWN")}")+"\n"+
     $"Notices: {string.Join(", ",view?.Projection?.Notices.Select(n=>n.Kind)??[])} | {string.Join("; ",view?.Blockers??[])}\nGameLog: {gameLog?.State??"Unity binding unavailable"} / {events.SinkState}; backup ON. Private Scenario 5454584 only.");

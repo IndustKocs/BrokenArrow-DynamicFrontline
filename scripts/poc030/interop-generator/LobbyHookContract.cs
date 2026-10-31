@@ -11,7 +11,7 @@ static class LobbyHookContract
    all.Add((t.FullName,m.Name?.ToString()??"",rva));
   }
   var counts=all.Where(x=>x.Rva!=null).GroupBy(x=>x.Rva!).ToDictionary(g=>g.Key,g=>g.Count());
-  foreach(var name in rejectOldGetter?new[]{"get_State"}:new[]{".ctor","Connect","Dispose"}){
+  foreach(var name in rejectOldGetter?new[]{"get_State"}:new[]{"Connect","Dispose"}){
    var targets=all.Where(x=>x.Type==type&&x.Name==name).ToArray();
    if(targets.Length!=1||targets[0].Rva is not string rva||rva=="0x0"||!counts.TryGetValue(rva,out int n)||n!=1)
     throw new InvalidDataException("UnsafeSharedOrMissingLobbyHook:"+name);

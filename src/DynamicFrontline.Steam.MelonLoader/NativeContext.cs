@@ -8,12 +8,13 @@ public sealed class NativeContext : IDisposable
 {
  const string LobbyType="BrokenArrow.Client.Ecs.GNetwork.Services.Lobby.NetworkLobbyService";
  static object? lobbyService;readonly HarmonyLib.Harmony harmony=new("DynamicFrontline.T18.LobbyObserver");NativeScenario? retained;int retainedLobby,retainedHost;
+ public bool HasCapturedLobby=>Volatile.Read(ref lobbyService)!=null;
  public void Install(){
   var type=LiveReader.Resolve(LobbyType);
   // get_State is a folded native getter shared by 1540 methods in the supported build.
   // Never detour it: unrelated instances would be marshalled as NetworkLobbyService.
   var capture=new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Capture),BindingFlags.Static|BindingFlags.NonPublic));
-  harmony.Patch(type.GetConstructors().Single(c=>c.GetParameters().Length==7),postfix:capture);
+  // Constructors fall back to managed patching in this runtime; observe Connect only.
   harmony.Patch(type.GetMethod("Connect")??throw new MissingMethodException("Lobby.Connect"),postfix:capture);
   harmony.Patch(type.GetMethod("Dispose")??throw new MissingMethodException("Lobby.Dispose"),prefix:new HarmonyMethod(typeof(NativeContext).GetMethod(nameof(Closed),BindingFlags.Static|BindingFlags.NonPublic)));
  }

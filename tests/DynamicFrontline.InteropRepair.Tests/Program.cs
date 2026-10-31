@@ -9,7 +9,8 @@ Console.WriteLine("PASS: built plugin MelonGame matches observed runtime identit
 var hooks=plugin.GetAllTypes().Single(t=>t.Name=="NativeContext").Methods.Single(m=>m.Name=="Install");
 var literals=hooks.CilMethodBody!.Instructions.Select(i=>i.Operand as string).Where(x=>x!=null).ToArray();
 if(literals.Contains("get_State")||literals.Contains("Initialize")||!literals.Contains("Connect")||!literals.Contains("Dispose"))throw new Exception("Unsafe lobby hook regression");
-Console.WriteLine("PASS: compiled lobby hooks exclude folded getter and Initialize.");
+if(hooks.CilMethodBody.Instructions.Any(i=>i.Operand is IMethodDescriptor m&&m.Name=="GetConstructors"))throw new Exception("Unsupported native constructor hook regression");
+Console.WriteLine("PASS: compiled lobby hooks exclude constructors, folded getter and Initialize.");
 var temp=Path.Combine(Path.GetFullPath(args[0]),Guid.NewGuid().ToString("N"));Directory.CreateDirectory(temp);
 var source=ModuleDefinition.FromFile(Assembly.GetExecutingAssembly().Location);
 foreach(var method in source.GetAllTypes().Single(t=>t.Name=="Fixture").Methods) {

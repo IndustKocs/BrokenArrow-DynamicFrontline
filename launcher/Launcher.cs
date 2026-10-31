@@ -58,7 +58,7 @@ public sealed class LauncherForm:Form {
   LabelAt(settings,"Запуск через Steam: Anti-Cheat Disabled",26,630,428,28,10,Gold,true);
   var back=StyledButton("Готово",26,680,428,40,true);back.Click+=(sender,e)=>{settings.Hide();home.Show();home.BringToFront();};settings.Controls.Add(back);settings.Hide();
   FormClosing+=(sender,e)=>{if(busy){e.Cancel=true;MessageBox.Show("Дождитесь завершения операции. При аварии используйте восстановление.");}};
-  if(preview){path.Text=@"D:\SteamLibrary\steamapps\common\broken_arrow";state.Text="Установлена · full-debug5\nПриватный Scenario · LoadReadProbe";primary.Text="ОБНОВИТЬ МОД";log.Text="Готов к работе.\r\nПроверка файлов доступна перед тестом.";return;}
+  if(preview){path.Text=@"D:\SteamLibrary\steamapps\common\broken_arrow";state.Text="Установлена · full-debug6\nПриватный Scenario · LoadReadProbe";primary.Text="ОБНОВИТЬ МОД";log.Text="Готов к работе.\r\nПроверка файлов доступна перед тестом.";return;}
   workspace=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"DynamicFrontlineLauncher");
   Safe(workspace);Directory.CreateDirectory(workspace);var version=HashResource("package.zip").Substring(0,16);tools=Path.Combine(workspace,"launcher-"+version);Directory.CreateDirectory(tools);Safe(tools);
   foreach(var name in new[]{"bootstrap.ps1","controller.ps1","release-channel.json"})Extract(name,Path.Combine(tools,name));
