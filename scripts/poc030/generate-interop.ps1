@@ -15,10 +15,14 @@ $driver=Join-Path $root 'scripts/poc030/interop-generator/bin/Release/net6.0/int
 if(!(Test-Path $driver)){throw 'Build supplied interop-generator project with LoaderDirectory property first'}
 & $DotnetPath $driver $LoaderDirectory (Join-Path $out 'dummy') (Join-Path $game 'GameAssembly.dll') (Join-Path $out 'wrappers') $UnityBaseDirectory > (Join-Path $out 'generator.log')
 if($LASTEXITCODE){throw 'Interop generation failed'}
+$jit=Join-Path $root 'scripts/poc030/interop-jit-probe/bin/Release/net6.0/interop-jit-probe.dll'
+& $DotnetPath $jit (Join-Path $out 'wrappers') $LoaderDirectory
+if($LASTEXITCODE){throw 'Interop JIT preflight failed; game not launched'}
 & $DotnetPath $driver verify (Join-Path $out 'wrappers') (Join-Path $out 'bindings.json') $LoaderDirectory
 if($LASTEXITCODE){throw 'Binding inspection failed'}
 & (Join-Path $PSScriptRoot 'preflight-runtime.ps1') -GameRoot $GameRoot | Out-Null
 $hashes=[ordered]@{};Get-ChildItem (Join-Path $out 'wrappers') -File|Sort-Object Name|ForEach-Object {$hashes[$_.Name]=(Get-FileHash $_.FullName).Hash}
 $expected.Options.UnityBaseLibraries='6000.3.24 exact official dependencies';$expected.Options.NoXrefCache=$false
+$expected.Options | Add-Member -NotePropertyName PointerNameRepair -NotePropertyValue 'element-renderer-plus-pointer-suffix-v1' -Force
 $expected.Wrappers=$hashes;$expected|ConvertTo-Json -Depth 8|Set-Content (Join-Path $out 'interop-provenance.json')
 'Generated locally only. Use RC2 transaction plan; installation and game launch require separate consent.'

@@ -5,7 +5,7 @@ using DynamicFrontline.Poc030;
 using DynamicFrontline.Frontline.Rules023;
 using MelonLoader;
 [assembly:MelonInfo(typeof(DynamicFrontline.Steam.MelonLoader.SteamMod),"DynamicFrontline T18 Steam Preview","0.4.0","DynamicFrontline")]
-[assembly:MelonGame("Steel Balalaika Studio","Broken Arrow")]
+[assembly:MelonGame("SteelBalalaikaStudio","BrokenArrow")]
 [assembly:MelonOptionalDependencies("UnityEngine.CoreModule","UnityEngine.IMGUIModule","UnityEngine.InputLegacyModule")]
 namespace DynamicFrontline.Steam.MelonLoader;
 public sealed class SteamMod : MelonMod
