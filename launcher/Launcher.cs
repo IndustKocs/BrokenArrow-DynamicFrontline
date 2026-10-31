@@ -12,12 +12,12 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Microsoft.Win32;
 [assembly:AssemblyTitle("Dynamic Frontline Launcher")]
-[assembly:AssemblyVersion("0.4.0.0")]
+[assembly:AssemblyVersion("0.4.1.0")]
 public sealed class LauncherForm:Form {
  TextBox path=new TextBox(),log=new TextBox(),token=new TextBox();Label state=new Label();FlowLayoutPanel actions=new FlowLayoutPanel();ProgressBar progress=new ProgressBar();CheckBox keep=new CheckBox();bool busy;string activeSecret="";string workspace,package,tools;JavaScriptSerializer json=new JavaScriptSerializer();
  static string Root=Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
- public LauncherForm(bool preview){
-  Text="Dynamic Frontline Launcher · 0.4.0";ClientSize=new Size(780,560);MinimumSize=new Size(796,600);Font=new Font("Segoe UI",10);BackColor=Color.FromArgb(24,28,34);ForeColor=Color.WhiteSmoke;
+ public LauncherForm(bool preview,bool skipUpdate=false){
+  Text="Dynamic Frontline Launcher · 0.4.1";ClientSize=new Size(780,560);MinimumSize=new Size(796,600);Font=new Font("Segoe UI",10);BackColor=Color.FromArgb(24,28,34);ForeColor=Color.WhiteSmoke;
   var title=new Label{Text="DYNAMIC FRONTLINE",Font=new Font("Segoe UI",20,FontStyle.Bold),Left=24,Top=18,Width=700,Height=42};Controls.Add(title);
   Controls.Add(new Label{Text="Приватный Scenario · установщик и обслуживание",Left=26,Top=64,Width=700,Height=28});
   path.SetBounds(26,106,610,30);Controls.Add(path);var browse=new Button{Text="Папка…",Left=644,Top=104,Width=108,Height=32};browse.Click+=(s,e)=>{using(var d=new FolderBrowserDialog()){if(d.ShowDialog()==DialogResult.OK)path.Text=d.SelectedPath;}};Controls.Add(browse);
@@ -36,6 +36,19 @@ public sealed class LauncherForm:Form {
   foreach(var name in new[]{"bootstrap.ps1","controller.ps1","release-channel.json"})Extract(name,Path.Combine(tools,name));
   package=Path.Combine(tools,"package-"+Guid.NewGuid().ToString("N"));if(!Directory.Exists(package)){string z=Path.Combine(tools,"package.zip");Extract("package.zip",z);ZipFile.ExtractToDirectory(z,package);}
   path.Text=FindGame();RefreshState();
+  if(!skipUpdate)Shown+=async(s,e)=>await UpdateLauncher();
+ }
+ async Task UpdateLauncher(){
+  busy=true;Enabled=false;state.Text="Проверка обновлений лаунчера…";progress.Style=ProgressBarStyle.Marquee;
+  try{
+   var successor=await Task.Run(()=>LauncherUpdate.Prepare(workspace,Assembly.GetExecutingAssembly().Location,File.ReadAllText(Path.Combine(tools,"release-channel.json"))));
+   if(successor!=null){LauncherUpdate.Safe(successor);string hash=LauncherUpdate.Hash(successor);if(Path.GetFileName(Path.GetDirectoryName(successor))!=hash)throw new IOException("Update cache identity mismatch");
+    Process.Start(new ProcessStartInfo{FileName=successor,Arguments="--verified-update "+hash,UseShellExecute=false,WorkingDirectory=Path.GetDirectoryName(successor)});
+    busy=false;Close();return;
+   }
+   Append("Лаунчер актуален. Сборка мода обновляется кнопкой «Обновить».");
+  }catch(Exception){Append("Автообновление лаунчера недоступно или не прошло проверку. Текущая версия сохранена; проверка файлов, удаление и восстановление доступны. Повторите запуск позже.");}
+  finally{busy=false;if(!IsDisposed){Enabled=true;progress.Style=ProgressBarStyle.Blocks;RefreshState();}}
  }
  static void Safe(string p){for(p=Path.GetFullPath(p);!string.IsNullOrEmpty(p);p=Path.GetDirectoryName(p))if((Directory.Exists(p)||File.Exists(p))&&(File.GetAttributes(p)&FileAttributes.ReparsePoint)!=0)throw new IOException("Reparse path refused");}
  static string HashResource(string n){using(var f=Assembly.GetExecutingAssembly().GetManifestResourceStream(n))using(var sha=System.Security.Cryptography.SHA256.Create())return BitConverter.ToString(sha.ComputeHash(f)).Replace("-","");}
@@ -64,5 +77,5 @@ public sealed class LauncherForm:Form {
    MessageBox.Show(code==0?"Операция завершена. Игра не запускалась.":"Операция остановлена. Подробности в журнале. При прерванной установке нажмите «Восстановить после сбоя».");RefreshState();
   }catch(Exception e){MessageBox.Show(e.Message);}finally{busy=false;actions.Enabled=true;path.Enabled=true;token.Enabled=true;activeSecret="";progress.Style=ProgressBarStyle.Blocks;}
  }
- [STAThread]public static void Main(string[] args){Application.EnableVisualStyles();Application.SetCompatibleTextRenderingDefault(false);try{if(args.Length==2&&args[0]=="--self-check"){File.WriteAllText(args[1],new JavaScriptSerializer().Serialize(new{GameFound=!string.IsNullOrEmpty(FindGame()),EmbeddedPackageSha256=HashResource("package.zip"),GameStarted=false}));return;}bool preview=args.Length==2&&args[0]=="--preview";using(var f=new LauncherForm(preview)){if(preview){f.Show();Application.DoEvents();using(var b=new Bitmap(f.Width,f.Height)){f.DrawToBitmap(b,new Rectangle(0,0,b.Width,b.Height));b.Save(Path.GetFullPath(args[1]));}return;}Application.Run(f);}}catch(Exception e){MessageBox.Show("Лаунчер остановлен: "+e.Message);}}
+ [STAThread]public static void Main(string[] args){Application.EnableVisualStyles();Application.SetCompatibleTextRenderingDefault(false);try{if(args.Length==2&&args[0]=="--self-check"){File.WriteAllText(args[1],new JavaScriptSerializer().Serialize(new{GameFound=!string.IsNullOrEmpty(FindGame()),EmbeddedPackageSha256=HashResource("package.zip"),GameStarted=false}));return;}bool preview=args.Length==2&&args[0]=="--preview";using(var f=new LauncherForm(preview,args.Length==2&&args[0]=="--verified-update"&&args[1]==LauncherUpdate.Hash(Assembly.GetExecutingAssembly().Location))){if(preview){f.Show();Application.DoEvents();using(var b=new Bitmap(f.Width,f.Height)){f.DrawToBitmap(b,new Rectangle(0,0,b.Width,b.Height));b.Save(Path.GetFullPath(args[1]));}return;}Application.Run(f);}}catch(Exception e){MessageBox.Show("Лаунчер остановлен: "+e.Message);}}
 }
