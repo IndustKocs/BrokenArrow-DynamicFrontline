@@ -1,0 +1,28 @@
+{
+  "Version": "full-debug7",
+  "GameInstalled": false,
+  "GameStarted": false,
+  "Suites": {
+    "Steam": 95,
+    "RC2": 59,
+    "RC1": 44,
+    "Simulation023": 72
+  },
+  "Sandbox": {
+    "Scope": "Offline sandbox; not game or GitHub",
+    "ScenarioInstalledAndRemoved": true,
+    "Install": true,
+    "Verify": true,
+    "IdempotentUpdate": true,
+    "NoConsentRejected": true,
+    "CorruptionDetected": true,
+    "Remove": true,
+    "ForeignFilePreserved": true,
+    "GameStarted": false
+  },
+  "AuthorIdenticalBorrowed": true,
+  "AuthorConflictingBlocked": true,
+  "AuthorEditsPreservedOnRemoval": true,
+  "EditedOwnedPairPreserved": true,
+  "FreshAndUpdateInterruptedRecovery": true
+}

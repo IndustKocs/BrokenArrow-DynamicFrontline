@@ -12,14 +12,14 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using Microsoft.Win32;
 [assembly:AssemblyTitle("Dynamic Frontline Launcher")]
-[assembly:AssemblyVersion("0.4.3.0")]
+[assembly:AssemblyVersion("0.4.4.0")]
 public sealed class LauncherForm:Form {
  TextBox path=new TextBox(),log=new TextBox(),token=new TextBox();Label state=new Label();FlowLayoutPanel actions=new FlowLayoutPanel();ProgressBar progress=new ProgressBar();CheckBox keep=new CheckBox();bool busy;string activeSecret="";string workspace,package,tools;JavaScriptSerializer json=new JavaScriptSerializer();
  Panel home=new Panel(),settings=new Panel();Button primary;string primaryAction="Install";
  static readonly Color Gold=Color.FromArgb(231,166,48),Surface=Color.FromArgb(35,39,44),Muted=Color.FromArgb(157,168,181);
  static string Root=Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
  public LauncherForm(bool preview,bool skipUpdate=false){
-  Text="Dynamic Frontline Launcher · 0.4.3";ClientSize=new Size(480,746);FormBorderStyle=FormBorderStyle.FixedSingle;MaximizeBox=false;StartPosition=FormStartPosition.CenterScreen;AutoScaleMode=AutoScaleMode.Dpi;Font=new Font("Segoe UI",10);BackColor=Color.FromArgb(27,30,33);ForeColor=Color.WhiteSmoke;
+  Text="Dynamic Frontline Launcher · 0.4.4";ClientSize=new Size(480,746);FormBorderStyle=FormBorderStyle.FixedSingle;MaximizeBox=false;StartPosition=FormStartPosition.CenterScreen;AutoScaleMode=AutoScaleMode.Dpi;Font=new Font("Segoe UI",10);BackColor=Color.FromArgb(27,30,33);ForeColor=Color.WhiteSmoke;
   home.AutoScroll=true;settings.AutoScroll=true;home.Dock=DockStyle.Fill;settings.Dock=DockStyle.Fill;Controls.Add(settings);Controls.Add(home);
   LabelAt(home,"BROKEN ARROW",104,26,330,22,9,Gold,true);
   LabelAt(home,"Dynamic Frontline",102,48,354,38,21,Color.WhiteSmoke,true);
@@ -41,7 +41,7 @@ public sealed class LauncherForm:Form {
   log.SetBounds(26,530,428,110);log.Multiline=true;log.ReadOnly=true;log.ScrollBars=ScrollBars.Vertical;log.BorderStyle=BorderStyle.None;log.Font=new Font("Segoe UI",9);log.BackColor=Color.FromArgb(22,25,28);log.ForeColor=Muted;home.Controls.Add(log);
   var options=StyledButton("Настройки",26,658,152,36,false);options.Click+=(sender,e)=>{if(!busy){home.Hide();settings.Show();settings.BringToFront();}};home.Controls.Add(options);
   var collect=StyledButton("Экспорт диагностики",186,658,268,36,false);collect.Click+=async(sender,e)=>await Run("Collect");home.Controls.Add(collect);
-  LabelAt(home,"Лаунчер не запускает игру · 0.4.3",26,708,428,22,9,Muted,false);
+  LabelAt(home,"Лаунчер не запускает игру · 0.4.4",26,708,428,22,9,Muted,false);
   LabelAt(settings,"Настройки",26,24,428,42,23,Color.WhiteSmoke,true);
   LabelAt(settings,"ПАПКА BROKEN ARROW",26,88,428,22,9,Muted,true);
   path.SetBounds(26,118,428,28);path.BackColor=Surface;path.ForeColor=Color.WhiteSmoke;path.BorderStyle=BorderStyle.FixedSingle;settings.Controls.Add(path);
@@ -58,7 +58,7 @@ public sealed class LauncherForm:Form {
   LabelAt(settings,"Запуск через Steam: Anti-Cheat Disabled",26,630,428,28,10,Gold,true);
   var back=StyledButton("Готово",26,680,428,40,true);back.Click+=(sender,e)=>{settings.Hide();home.Show();home.BringToFront();};settings.Controls.Add(back);settings.Hide();
   FormClosing+=(sender,e)=>{if(busy){e.Cancel=true;MessageBox.Show("Дождитесь завершения операции. При аварии используйте восстановление.");}};
-  if(preview){path.Text=@"D:\SteamLibrary\steamapps\common\broken_arrow";state.Text="Установлена · full-debug6\nПриватный Scenario · LoadReadProbe";primary.Text="ОБНОВИТЬ МОД";log.Text="Готов к работе.\r\nПроверка файлов доступна перед тестом.";return;}
+  if(preview){path.Text=@"D:\SteamLibrary\steamapps\common\broken_arrow";state.Text="Установлена · full-debug7\nПриватный Scenario · LoadReadProbe";primary.Text="ОБНОВИТЬ МОД";log.Text="Готов к работе.\r\nПроверка файлов доступна перед тестом.";return;}
   workspace=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"DynamicFrontlineLauncher");
   Safe(workspace);Directory.CreateDirectory(workspace);var version=HashResource("package.zip").Substring(0,16);tools=Path.Combine(workspace,"launcher-"+version);Directory.CreateDirectory(tools);Safe(tools);
   foreach(var name in new[]{"bootstrap.ps1","controller.ps1","release-channel.json"})Extract(name,Path.Combine(tools,name));

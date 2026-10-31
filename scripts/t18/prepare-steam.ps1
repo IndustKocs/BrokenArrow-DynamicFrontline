@@ -11,6 +11,7 @@ $files=[Collections.Generic.List[object]]::new()
 function AddFile($relative,$source,$category){$files.Add([ordered]@{Relative=$relative;Source=[IO.Path]::GetFullPath($source);Sha256=(Get-FileHash -LiteralPath $source).Hash;Category=$category;ReplaceApprovedHash=$null})}
 $payload=Join-Path $root 'payload'
 if(!(Test-Path -LiteralPath $payload)){$payload=Join-Path $root 'src/DynamicFrontline.Steam.MelonLoader/bin/Release/net6.0'}
+foreach($name in @('5454584.bascr','meta.json')){AddFile ("Scenarios/5454584/"+$name) (Join-Path $root ("assets/scenarios/5454584/"+$name)) 8}
 AddFile 'Mods/DynamicFrontline.Steam.MelonLoader.dll' (Join-Path $payload 'DynamicFrontline.Steam.MelonLoader.dll') 0
 foreach($name in @('Core','Frontline','GameAdapter','Integration','Poc030','Steam')){AddFile "UserLibs/DynamicFrontline.$name.dll" (Join-Path $payload "DynamicFrontline.$name.dll") 0}
 AddFile 'UserData/DynamicFrontlineSteam/compatibility.json' (Join-Path $root 'config/poc030/compatibility.json') 0

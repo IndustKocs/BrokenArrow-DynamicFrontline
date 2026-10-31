@@ -131,6 +131,42 @@ Test("Workshop scenario discovery preserves source hashes and refuses conflicts"
  File.AppendAllText(Path.Combine(local,"5454584.bascr"),"different");Reject(()=>m.VerifyLocalSources(root));
 });
 
+Test("Scenario transaction owns only new files, updates and removes pair",()=>{
+ var root=Path.Combine(sandbox,"scenario-new");var source=Path.Combine(sandbox,"scenario-source");Directory.CreateDirectory(source);
+ var files=new[]{"5454584.bascr","meta.json"}.Select(n=>{var p=Path.Combine(source,n);File.WriteAllText(p,"v1"+n);return new InstallFile("Scenarios/5454584/"+n,p,DevInstall.Hash(p),FileCategory.ScenarioPayload);}).ToArray();
+ using var install=new DevInstall(root,true,true);Reject(()=>install.Apply(files.Take(1).ToArray()));Reject(()=>install.Apply(files.Select(f=>f with{Category=FileCategory.BorrowedScenario}).ToArray()));install.Apply(files);Assert(install.Verify().Conflicts.Length==0);
+ foreach(var f in files)File.WriteAllText(f.Source,"v2"+f.Relative);files=files.Select(f=>f with{Sha256=DevInstall.Hash(f.Source)}).ToArray();install.Apply(files);
+ Assert(files.All(f=>DevInstall.Hash(Path.Combine(root,f.Relative))==f.Sha256));Assert(install.Remove(false).Conflicts.Length==0);Assert(files.All(f=>!File.Exists(Path.Combine(root,f.Relative))));
+});
+Test("Identical author scenario stays borrowed across update and removal",()=>{
+ var root=Path.Combine(sandbox,"scenario-author");var source=Path.Combine(sandbox,"scenario-author-source");Directory.CreateDirectory(source);
+ var files=new[]{"5454584.bascr","meta.json"}.Select(n=>{var p=Path.Combine(source,n);File.WriteAllText(p,"author"+n);var dest=Path.Combine(root,"Scenarios/5454584",n);Directory.CreateDirectory(Path.GetDirectoryName(dest)!);File.Copy(p,dest);return new InstallFile("Scenarios/5454584/"+n,p,DevInstall.Hash(p),FileCategory.ScenarioPayload);}).ToArray();
+ using var install=new DevInstall(root,true,true);Assert(install.Apply(files).Preserved.Length==2);install.Apply(files);
+ File.AppendAllText(files[0].Source,"new-release");var changed=files.Select(f=>f with{Sha256=DevInstall.Hash(f.Source)}).ToArray();Reject(()=>install.Apply(changed));
+ File.AppendAllText(Path.Combine(root,files[0].Relative),"author-edit");var hash=DevInstall.Hash(Path.Combine(root,files[0].Relative));Assert(install.Verify().Conflicts.Length==1);Assert(install.Remove(false).Preserved.Length==2);Assert(DevInstall.Hash(Path.Combine(root,files[0].Relative))==hash&&File.Exists(Path.Combine(root,files[1].Relative)));
+});
+Test("Scenario foreign or incomplete pair blocks before payload writes",()=>{
+ foreach(bool incomplete in new[]{true,false}){
+ var root=Path.Combine(sandbox,"scenario-conflict-"+incomplete);var source=Path.Combine(sandbox,"scenario-conflict-source-"+incomplete);Directory.CreateDirectory(source);
+ var files=new[]{"5454584.bascr","meta.json"}.Select(n=>{var p=Path.Combine(source,n);File.WriteAllText(p,"package"+n);return new InstallFile("Scenarios/5454584/"+n,p,DevInstall.Hash(p),FileCategory.ScenarioPayload);}).ToArray();
+ var dest=Path.Combine(root,files[0].Relative);Directory.CreateDirectory(Path.GetDirectoryName(dest)!);File.WriteAllText(dest,"author");if(!incomplete)File.WriteAllText(Path.Combine(root,files[1].Relative),"author-meta");
+ using var install=new DevInstall(root,true,true);Reject(()=>install.Apply(files));Assert(File.ReadAllText(dest)=="author");Assert(!File.Exists(Path.Combine(root,"UserData/DynamicFrontline030/.rc2/journal.json")));
+ }
+});
+Test("Edited installed scenario preserves both files on removal",()=>{
+ var root=Path.Combine(sandbox,"scenario-edit");var files=new[]{"5454584.bascr","meta.json"}.Select(n=>new InstallFile("Scenarios/5454584/"+n,Path.GetFullPath("assets/scenarios/5454584/"+n),DevInstall.Hash("assets/scenarios/5454584/"+n),FileCategory.ScenarioPayload)).ToArray();
+ using var install=new DevInstall(root,true,true);install.Apply(files);File.AppendAllText(Path.Combine(root,files[0].Relative),"edit");Reject(()=>install.Apply(files));Assert(install.Remove(false).Conflicts.Length==2);Assert(files.All(f=>File.Exists(Path.Combine(root,f.Relative))));
+});
+Test("Interrupted scenario update restores complete original pair",()=>{
+ var root=Path.Combine(sandbox,"scenario-recovery");var source=Path.Combine(sandbox,"scenario-recovery-source");Directory.CreateDirectory(source);
+ var files=new[]{"5454584.bascr","meta.json"}.Select(n=>{var p=Path.Combine(source,n);File.WriteAllText(p,"v1"+n);return new InstallFile("Scenarios/5454584/"+n,p,DevInstall.Hash(p),FileCategory.ScenarioPayload);}).ToArray();
+ using(var install=new DevInstall(root,true,true,p=>{if(p=="after-replace:"+files[0].Relative)throw new IOException("Injected fresh-install interruption");}))Reject(()=>install.Apply(files));
+ using(var install=new DevInstall(root,true,true)){Assert(install.Recover().Conflicts.Length==0);Assert(files.All(f=>!File.Exists(Path.Combine(root,f.Relative))));install.Apply(files);}var before=files.Select(f=>f.Sha256).ToArray();foreach(var f in files)File.WriteAllText(f.Source,"v2"+f.Relative);var update=files.Select(f=>f with{Sha256=DevInstall.Hash(f.Source)}).ToArray();
+ using(var install=new DevInstall(root,true,true,p=>{if(p=="after-replace:"+files[0].Relative)throw new IOException("Injected scenario interruption");}))Reject(()=>install.Apply(update));
+ using(var install=new DevInstall(root,true,true)){Assert(install.Recover().Conflicts.Length==0);Assert(install.Verify().Conflicts.Length==0);}
+ for(int n=0;n<2;n++)Assert(DevInstall.Hash(Path.Combine(root,files[n].Relative))==before[n]);
+});
+
 Test("Radmin requires opt-in and exact coordinator and role",()=>{
  var c=new ProbeConfig(false,false,"NetworkProbe","fixture","A",true,EndpointPolicy.RadminA,47617,"");Reject(()=>EndpointPolicy.Validate(c));
  foreach(var role in new[]{"A","B"})Assert(EndpointPolicy.Validate(c with{Role=role,RadminPair=true}).ToString()==EndpointPolicy.RadminA);

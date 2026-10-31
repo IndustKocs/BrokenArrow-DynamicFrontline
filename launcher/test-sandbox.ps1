@@ -12,11 +12,17 @@ function Run($action,$expected=0){$r.Action=$action;$request=Join-Path $root ($a
  if(($expected -eq 0 -and $LASTEXITCODE -ne 0) -or ($expected -ne 0 -and $LASTEXITCODE -eq 0)){throw "$action unexpected exit $LASTEXITCODE; inspect local test log"}
 }
 $r.Consent=$false;Run 'Install' 1;$r.Consent=$true
-Run 'Install';Run 'Verify';Run 'Update'
+Run 'Install';Run 'Verify'
+foreach($name in @('5454584.bascr','meta.json')){
+ $installed=Join-Path $game ("Scenarios/5454584/"+$name);$source=Join-Path $Package ("assets/scenarios/5454584/"+$name)
+ if((Get-FileHash -LiteralPath $installed).Hash -ne (Get-FileHash -LiteralPath $source).Hash){throw 'Bundled scenario mismatch'}
+}
+Run 'Update'
 $dll=Join-Path $game 'Mods/DynamicFrontline.Steam.MelonLoader.dll';$bytes=[IO.File]::ReadAllBytes($dll)
 try{[IO.File]::WriteAllText($dll,'CORRUPT TEST');Run 'Verify' 1}finally{[IO.File]::WriteAllBytes($dll,$bytes)}
 Run 'Verify';Run 'Remove'
+foreach($name in @('5454584.bascr','meta.json')){if(Test-Path -LiteralPath (Join-Path $game ("Scenarios/5454584/"+$name))){throw 'Owned scenario remains after removal'}}
 if(Test-Path -LiteralPath $dll){throw 'Owned plugin remains after removal'}
 if((Get-Content -LiteralPath $sentinel -Raw).Trim() -ne 'UNRELATED'){throw 'Unrelated file changed'}
-[ordered]@{Scope='Offline sandbox; not game or GitHub';Install=$true;Verify=$true;IdempotentUpdate=$true;NoConsentRejected=$true;CorruptionDetected=$true;Remove=$true;ForeignFilePreserved=$true;GameStarted=$false}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $root 'summary.json') -Encoding utf8
+[ordered]@{Scope='Offline sandbox; not game or GitHub';ScenarioInstalledAndRemoved=$true;Install=$true;Verify=$true;IdempotentUpdate=$true;NoConsentRejected=$true;CorruptionDetected=$true;Remove=$true;ForeignFilePreserved=$true;GameStarted=$false}|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $root 'summary.json') -Encoding utf8
 Get-Content -LiteralPath (Join-Path $root 'summary.json')

@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text.Json;
 namespace DynamicFrontline.Poc030;
-public enum FileCategory { ImmutablePayload, VerifiedGeneratedInterop, MutableUserConfig, SharedInteropCache, SharedLoaderConfig, InteropBootstrap, RetiredInteropCache, PinnedLoader }
+public enum FileCategory { ImmutablePayload, VerifiedGeneratedInterop, MutableUserConfig, SharedInteropCache, SharedLoaderConfig, InteropBootstrap, RetiredInteropCache, PinnedLoader, ScenarioPayload, BorrowedScenario }
 public sealed record InstallFile(string Relative,string Source,string Sha256,FileCategory Category,string? ReplaceApprovedHash=null);
 public sealed record InstalledFile(string Relative,string Sha256,FileCategory Category,string? OriginalHash=null);
 public sealed record InstallReceipt(int Schema,string Target,InstalledFile[] Files);
@@ -36,6 +36,7 @@ public sealed class DevInstall : IDisposable
     }
     public static bool Allowed(string p,FileCategory category)=>category switch
     {
+        FileCategory.ScenarioPayload or FileCategory.BorrowedScenario=>p is "Scenarios/5454584/5454584.bascr" or "Scenarios/5454584/meta.json",
         FileCategory.PinnedLoader=>PinnedLoader.Files.ContainsKey(p),
         FileCategory.ImmutablePayload=>p=="Mods/DynamicFrontline.Poc030.MelonLoader.dll"||p=="Mods/DynamicFrontline.Steam.MelonLoader.dll"||p.StartsWith("UserLibs/DynamicFrontline.",StringComparison.Ordinal)&&p.EndsWith(".dll",StringComparison.Ordinal)&&p.Count(c=>c=='/')==1&&!p.Contains('\\')||p=="UserData/DynamicFrontline030/compatibility.json"||p=="UserData/DynamicFrontlineSteam/compatibility.json"||p=="UserData/DynamicFrontlineSteam/map.json"||p=="UserData/DynamicFrontlineSteam/profiles.json",
         FileCategory.MutableUserConfig=>p=="UserData/DynamicFrontline030/probe.json",
@@ -73,11 +74,22 @@ public sealed class DevInstall : IDisposable
         if(File.Exists(JournalPath))throw new InvalidDataException("Recover pending operation first");
         if(package.Length==0||package.Select(f=>f.Relative).Distinct(StringComparer.OrdinalIgnoreCase).Count()!=package.Length)throw new InvalidDataException("Invalid package");
         var receipt=Receipt();var next=new List<InstalledFile>();var plans=new List<FilePlan>();var op=Guid.NewGuid().ToString("N");var staging=Path.Combine(control,op);var preserved=new List<string>();
+        var scenario=package.Where(f=>f.Category==FileCategory.ScenarioPayload).ToArray();
+        if(package.Any(f=>f.Category==FileCategory.BorrowedScenario))throw new InvalidDataException("BorrowedScenario is receipt-only");
+        if(scenario.Length>0){
+            if(scenario.Length!=2||!scenario.Any(f=>f.Relative=="Scenarios/5454584/5454584.bascr")||!scenario.Any(f=>f.Relative=="Scenarios/5454584/meta.json"))throw new InvalidDataException("Complete scenario pair required");
+            bool author=scenario.Any(f=>File.Exists(Inside(f.Relative))&&!((receipt?.Files.Any(r=>r.Relative==f.Relative&&r.Category==FileCategory.ScenarioPayload))??false))||scenario.Any(f=>receipt?.Files.Any(r=>r.Relative==f.Relative&&r.Category==FileCategory.BorrowedScenario)==true);
+            if(author&&scenario.Any(f=>!File.Exists(Inside(f.Relative))||Hash(Inside(f.Relative))!=f.Sha256))throw new InvalidDataException("AuthorScenario5454584Preserved_ConflictingOrIncompleteCopy");
+        }
         foreach(var f in package)
         {
             if(f.Category==FileCategory.PinnedLoader&&PinnedLoader.Files.GetValueOrDefault(f.Relative)!=f.Sha256)throw new InvalidDataException("UnpinnedLoader");
             if(!Allowed(f.Relative,f.Category)||!File.Exists(f.Source)||Hash(f.Source)!=f.Sha256)throw new InvalidDataException("Package integrity/path mismatch");
             var dest=Inside(f.Relative);string? before=File.Exists(dest)?Hash(dest):null;var own=receipt?.Files.SingleOrDefault(x=>x.Relative==f.Relative);
+            if(f.Category==FileCategory.ScenarioPayload&&before!=null&&(own==null||own.Category==FileCategory.BorrowedScenario)){
+                if(before!=f.Sha256)throw new InvalidDataException("AuthorScenario5454584Preserved");
+                next.Add(new(f.Relative,before,FileCategory.BorrowedScenario));preserved.Add(f.Relative);continue;
+            }
             if(before!=null&&f.Category==FileCategory.MutableUserConfig){using var cfg=JsonDocument.Parse(File.ReadAllText(dest));if(!cfg.RootElement.TryGetProperty("Mode",out _))throw new InvalidDataException("Config migration required");preserved.Add(f.Relative);next.Add(new(f.Relative,before,f.Category));continue;}
             bool shared=f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader;
             if(before!=null&&(own==null||!MatchesOwned(own,dest))&&!(shared&&own==null&&f.ReplaceApprovedHash==before))throw new InvalidDataException("Foreign/changed file preserved: "+f.Relative);
@@ -109,9 +121,13 @@ public sealed class DevInstall : IDisposable
     public InstallResult Remove(bool preserveSettings=true)
     {
         if(File.Exists(JournalPath))throw new InvalidDataException("Recover pending operation first");var receipt=Receipt()??throw new InvalidDataException("Missing receipt; no guessed deletion");var op=Guid.NewGuid().ToString("N");var plans=new List<FilePlan>();var keep=new List<InstalledFile>();var conflicts=new List<string>();
+        var borrowed=new List<string>();
+        bool scenarioConflict=receipt.Files.Any(f=>f.Category==FileCategory.ScenarioPayload&&!MatchesOwned(f,Inside(f.Relative)));
         bool cacheConflict=receipt.Files.Any(f=>(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)&&File.Exists(Inside(f.Relative))&&!MatchesOwned(f,Inside(f.Relative)));
         foreach(var f in receipt.Files)
         {
+            if(f.Category==FileCategory.BorrowedScenario){borrowed.Add(f.Relative);continue;}
+            if(f.Category==FileCategory.ScenarioPayload&&scenarioConflict){keep.Add(f);conflicts.Add(f.Relative);continue;}
             var dest=Inside(f.Relative);if(f.Category==FileCategory.MutableUserConfig){if(preserveSettings){keep.Add(f);continue;}if(File.Exists(dest))plans.Add(new(f.Relative,Hash(dest),null,Path.Combine(control,op,plans.Count+".stage"),Path.Combine(control,op,plans.Count+".backup"),f.Category));continue;}
             if(cacheConflict&&(f.Category is FileCategory.SharedInteropCache or FileCategory.SharedLoaderConfig or FileCategory.InteropBootstrap or FileCategory.RetiredInteropCache or FileCategory.PinnedLoader)){keep.Add(f);conflicts.Add(f.Relative);continue;}
             bool retired=f.Category==FileCategory.RetiredInteropCache;
@@ -122,7 +138,7 @@ public sealed class DevInstall : IDisposable
         }
         var journal=new InstallJournal(2,op,root,false,receipt,new(2,root,keep.ToArray()),plans.ToArray());Atomic(JournalPath,journal,op);fault?.Invoke("prepared");Directory.CreateDirectory(Path.Combine(control,op));
         foreach(var p in plans){var dest=Inside(p.Relative);if((File.Exists(dest)?Hash(dest):null)!=p.Before)throw new InvalidDataException("Remove target changed");if(p.After!=null){using(var from=File.OpenRead(Original(p.After)))using(var stage=new FileStream(p.Stage,FileMode.CreateNew,FileAccess.Write,FileShare.None)){from.CopyTo(stage);stage.Flush(true);}if(p.Before!=null)File.Copy(dest,p.Backup);File.Move(p.Stage,dest,true);}else File.Move(dest,p.Backup);fault?.Invoke("after-remove:"+p.Relative);}
-        Atomic(ReceiptPath,journal.AfterReceipt,op);fault?.Invoke("after-receipt");Atomic(JournalPath,journal with{Committed=true},op);Cleanup(journal);return new(root,"RemovedOwnedUnchangedFiles",keep.Where(f=>f.Category==FileCategory.MutableUserConfig).Select(f=>f.Relative).ToArray(),conflicts.ToArray());
+        Atomic(ReceiptPath,journal.AfterReceipt,op);fault?.Invoke("after-receipt");Atomic(JournalPath,journal with{Committed=true},op);Cleanup(journal);return new(root,"RemovedOwnedUnchangedFiles",keep.Where(f=>f.Category==FileCategory.MutableUserConfig).Select(f=>f.Relative).Concat(borrowed).ToArray(),conflicts.ToArray());
     }
     public InstallResult Recover()
     {
